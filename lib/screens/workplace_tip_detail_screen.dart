@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import '../models/workplace_tip.dart';
+import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
 
 class WorkplaceTipDetailScreen extends StatelessWidget {
@@ -10,48 +12,56 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '직장생활 팁',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
-          ),
-        ),
-        backgroundColor: Color(0xFFEBF0F5),
-        elevation: 0,
-        iconTheme: IconThemeData(color: Color(0xFF4F5A67)),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.share),
-            onPressed: () => _shareTip(context),
-            tooltip: '팁 공유',
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildHeader(),
-            SizedBox(height: 24),
-            _buildContentSection(),
-            if (tip.keyPoints.isNotEmpty) ...[
-              SizedBox(height: 24),
-              _buildKeyPointsSection(),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return Scaffold(
+          backgroundColor: themeProvider.backgroundColor,
+          appBar: AppBar(
+            title: Text(
+              '직장생활 팁',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: themeProvider.textColor,
+              ),
+            ),
+            backgroundColor: themeProvider.backgroundColor,
+            elevation: 0,
+            iconTheme: IconThemeData(color: themeProvider.textColor),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.share),
+                onPressed: () => _shareTip(context),
+                tooltip: '팁 공유',
+              ),
             ],
-            SizedBox(height: 24),
-            _buildCategorySection(),
-          ],
-        ),
-      ),
+          ),
+          body: SingleChildScrollView(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(themeProvider),
+                SizedBox(height: 24),
+                _buildContentSection(themeProvider),
+                if (tip.keyPoints.isNotEmpty) ...[
+                  SizedBox(height: 24),
+                  _buildKeyPointsSection(themeProvider),
+                ],
+                SizedBox(height: 24),
+                _buildCategorySection(themeProvider),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(ThemeProvider themeProvider) {
     return NeumorphicContainer(
+      backgroundColor: themeProvider.cardColor,
+      shadowColor: themeProvider.shadowColor,
+      highlightColor: themeProvider.highlightColor,
       child: Padding(
         padding: EdgeInsets.all(20.0),
         child: Column(
@@ -82,7 +92,7 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF4F5A67),
+                          color: themeProvider.textColor,
                         ),
                       ),
                       SizedBox(height: 4),
@@ -134,7 +144,7 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContentSection() {
+  Widget _buildContentSection(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -143,18 +153,21 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 12),
         NeumorphicContainer(
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Text(
               tip.content,
               style: TextStyle(
                 fontSize: 16,
-                color: Color(0xFF4F5A67),
+                color: themeProvider.textColor,
                 height: 1.6,
               ),
             ),
@@ -164,7 +177,7 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildKeyPointsSection() {
+  Widget _buildKeyPointsSection(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -173,11 +186,14 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 12),
         NeumorphicContainer(
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Column(
@@ -196,7 +212,7 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF4F5A67),
+                        color: themeProvider.textColor,
                       ),
                     ),
                   ],
@@ -231,7 +247,7 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
                             point,
                             style: TextStyle(
                               fontSize: 15,
-                              color: Color(0xFF4F5A67),
+                              color: themeProvider.textColor,
                               height: 1.5,
                             ),
                           ),
@@ -248,7 +264,7 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategorySection() {
+  Widget _buildCategorySection(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -257,11 +273,14 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 12),
         NeumorphicContainer(
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Row(
@@ -284,7 +303,7 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
                   tip.category.displayName,
                   style: TextStyle(
                     fontSize: 16,
-                    color: Color(0xFF4F5A67),
+                    color: themeProvider.textColor,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

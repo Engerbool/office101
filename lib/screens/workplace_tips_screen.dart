@@ -2,72 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/workplace_tip.dart';
 import '../providers/term_provider.dart';
+import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
 import 'workplace_tip_detail_screen.dart';
 
 class WorkplaceTipsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<TermProvider>(
-        builder: (context, termProvider, child) {
-          return SingleChildScrollView(
+    return Consumer2<TermProvider, ThemeProvider>(
+      builder: (context, termProvider, themeProvider, child) {
+        return Scaffold(
+          backgroundColor: themeProvider.backgroundColor,
+          body: SingleChildScrollView(
             padding: EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildIntroSection(),
-                SizedBox(height: 24),
-                _buildCategoriesSection(termProvider),
+                _buildCategoriesSection(termProvider, themeProvider),
               ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildIntroSection() {
-    return NeumorphicContainer(
-      child: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.lightbulb,
-                  color: Color(0xFFFFCA28),
-                  size: 28,
-                ),
-                SizedBox(width: 12),
-                Text(
-                  '직장생활 꿀팁',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF4F5A67),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 12),
-            Text(
-              '신입사원을 위한 실무 노하우와 꿀팁들을 모았습니다.\n성공적인 직장생활을 위한 가이드를 확인해보세요.',
-              style: TextStyle(
-                fontSize: 16,
-                color: Color(0xFF4F5A67).withOpacity(0.8),
-                height: 1.5,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
-  Widget _buildCategoriesSection(TermProvider termProvider) {
+  Widget _buildCategoriesSection(TermProvider termProvider, ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -77,7 +38,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
           
           return Column(
             children: [
-              _buildCategoryCard(category, tips),
+              _buildCategoryCard(category, tips, themeProvider),
               SizedBox(height: 16),
             ],
           );
@@ -86,8 +47,11 @@ class WorkplaceTipsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryCard(TipCategory category, List<WorkplaceTip> tips) {
+  Widget _buildCategoryCard(TipCategory category, List<WorkplaceTip> tips, ThemeProvider themeProvider) {
     return NeumorphicContainer(
+      backgroundColor: themeProvider.cardColor,
+      shadowColor: themeProvider.shadowColor,
+      highlightColor: themeProvider.highlightColor,
       child: Padding(
         padding: EdgeInsets.all(20.0),
         child: Column(
@@ -118,14 +82,14 @@ class WorkplaceTipsScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF4F5A67),
+                          color: themeProvider.textColor,
                         ),
                       ),
                       Text(
                         '${tips.length}개 팁',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Color(0xFF4F5A67).withOpacity(0.6),
+                          color: themeProvider.subtitleColor.withOpacity(0.6),
                         ),
                       ),
                     ],
@@ -134,14 +98,14 @@ class WorkplaceTipsScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 16),
-            ...tips.map((tip) => _buildTipItem(tip)).toList(),
+            ...tips.map((tip) => _buildTipItem(tip, themeProvider)).toList(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTipItem(WorkplaceTip tip) {
+  Widget _buildTipItem(WorkplaceTip tip, ThemeProvider themeProvider) {
     return Builder(
       builder: (context) => GestureDetector(
         onTap: () {
@@ -156,10 +120,10 @@ class WorkplaceTipsScreen extends StatelessWidget {
           margin: EdgeInsets.only(bottom: 12),
           padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Color(0xFFEBF0F5),
+            color: themeProvider.backgroundColor,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: Color(0xFF4F5A67).withOpacity(0.1),
+              color: themeProvider.dividerColor.withOpacity(0.3),
             ),
           ),
           child: Column(
@@ -173,7 +137,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF4F5A67),
+                        color: themeProvider.textColor,
                       ),
                     ),
                   ),
@@ -200,7 +164,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
                 tip.content,
                 style: TextStyle(
                   fontSize: 14,
-                  color: Color(0xFF4F5A67).withOpacity(0.7),
+                  color: themeProvider.subtitleColor.withOpacity(0.7),
                   height: 1.4,
                 ),
                 maxLines: 3,

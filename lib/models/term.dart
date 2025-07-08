@@ -25,6 +25,9 @@ class Term extends HiveObject {
   @HiveField(6)
   bool userAdded;
 
+  @HiveField(7)
+  bool isBookmarked;
+
   Term({
     required this.termId,
     required this.category,
@@ -33,6 +36,7 @@ class Term extends HiveObject {
     required this.example,
     required this.tags,
     this.userAdded = false,
+    this.isBookmarked = false,
   });
 
   factory Term.fromJson(Map<String, dynamic> json) {
@@ -47,6 +51,7 @@ class Term extends HiveObject {
       example: json['example'],
       tags: List<String>.from(json['tags'] ?? []),
       userAdded: json['user_added'] ?? false,
+      isBookmarked: json['is_bookmarked'] ?? false,
     );
   }
 
@@ -59,6 +64,7 @@ class Term extends HiveObject {
       'example': example,
       'tags': tags,
       'user_added': userAdded,
+      'is_bookmarked': isBookmarked,
     };
   }
 }
@@ -85,6 +91,9 @@ enum TermCategory {
 
   @HiveField(6)
   other, // 기타
+
+  @HiveField(7)
+  bookmarked, // 북마크
 }
 
 extension TermCategoryExtension on TermCategory {
@@ -104,6 +113,8 @@ extension TermCategoryExtension on TermCategory {
         return '커뮤니케이션';
       case TermCategory.other:
         return '기타';
+      case TermCategory.bookmarked:
+        return '북마크';
     }
   }
 
@@ -123,6 +134,8 @@ extension TermCategoryExtension on TermCategory {
         return 'assets/images/communication.png';
       case TermCategory.other:
         return 'assets/images/other.png';
+      case TermCategory.bookmarked:
+        return 'assets/images/bookmark.png';
     }
   }
 }

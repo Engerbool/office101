@@ -28,6 +28,7 @@ class TermProvider extends ChangeNotifier {
   }
 
   Future<void> loadData() async {
+    print('TermProvider: Starting to load data');
     _isLoading = true;
     notifyListeners();
 
@@ -36,6 +37,14 @@ class TermProvider extends ChangeNotifier {
       _emailTemplates = DatabaseService.getAllEmailTemplates();
       _workplaceTips = DatabaseService.getAllWorkplaceTips();
       _filteredTerms = _allTerms;
+      
+      print('TermProvider: Data loaded successfully - ${_allTerms.length} terms');
+      if (_allTerms.isNotEmpty) {
+        print('TermProvider: First few terms:');
+        for (int i = 0; i < 3 && i < _allTerms.length; i++) {
+          print('  - ${_allTerms[i].term}');
+        }
+      }
       
       _isLoading = false;
       notifyListeners();
@@ -108,6 +117,20 @@ class TermProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> toggleBookmark(String termId) async {
+    try {
+      final termIndex = _allTerms.indexWhere((term) => term.termId == termId);
+      if (termIndex != -1) {
+        _allTerms[termIndex].isBookmarked = !_allTerms[termIndex].isBookmarked;
+        await DatabaseService.updateTerm(_allTerms[termIndex]);
+        _applyFilters();
+        notifyListeners();
+      }
+    } catch (e) {
+      print('Error toggling bookmark: $e');
+    }
+  }
+
   List<EmailTemplate> getEmailTemplatesByCategory(EmailCategory category) {
     return _emailTemplates.where((template) => template.category == category).toList();
   }
@@ -117,6 +140,9 @@ class TermProvider extends ChangeNotifier {
   }
 
   List<Term> getTermsByCategory(TermCategory category) {
+    if (category == TermCategory.bookmarked) {
+      return _allTerms.where((term) => term.isBookmarked).toList();
+    }
     return _allTerms.where((term) => term.category == category).toList();
   }
 

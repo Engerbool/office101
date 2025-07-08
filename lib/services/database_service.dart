@@ -11,6 +11,7 @@ class DatabaseService {
   static late Box<WorkplaceTip> _tipBox;
 
   static Future<void> initialize() async {
+    print('DatabaseService: Starting initialization');
     Hive.registerAdapter(TermAdapter());
     Hive.registerAdapter(TermCategoryAdapter());
     Hive.registerAdapter(EmailTemplateAdapter());
@@ -22,7 +23,9 @@ class DatabaseService {
     _emailBox = await Hive.openBox<EmailTemplate>('email_templates');
     _tipBox = await Hive.openBox<WorkplaceTip>('workplace_tips');
 
+    print('DatabaseService: Boxes opened, loading initial data');
     await _loadInitialData();
+    print('DatabaseService: Initialization complete, terms count: ${_termBox.length}');
   }
 
   static Future<void> _loadInitialData() async {
@@ -84,7 +87,9 @@ class DatabaseService {
 
   // Term operations
   static List<Term> getAllTerms() {
-    return _termBox.values.toList();
+    final terms = _termBox.values.toList();
+    print('DatabaseService: getAllTerms called, returning ${terms.length} terms');
+    return terms;
   }
 
   static List<Term> getTermsByCategory(TermCategory category) {
@@ -106,6 +111,10 @@ class DatabaseService {
 
   static Future<void> deleteTerm(String termId) async {
     await _termBox.delete(termId);
+  }
+
+  static Future<void> updateTerm(Term term) async {
+    await _termBox.put(term.termId, term);
   }
 
   // Email template operations

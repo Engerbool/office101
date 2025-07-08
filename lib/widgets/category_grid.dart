@@ -99,6 +99,8 @@ class CategoryGrid extends StatelessWidget {
         return Icons.chat_bubble;
       case TermCategory.other:
         return Icons.more_horiz;
+      case TermCategory.bookmarked:
+        return Icons.bookmark;
     }
   }
 
@@ -118,6 +120,8 @@ class CategoryGrid extends StatelessWidget {
         return Color(0xFFFFCA28);
       case TermCategory.other:
         return Color(0xFF78909C);
+      case TermCategory.bookmarked:
+        return Color(0xFFFFCA28);
     }
   }
 }

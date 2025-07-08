@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import '../models/email_template.dart';
+import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
 
 class EmailTemplateDetailScreen extends StatelessWidget {
@@ -10,50 +12,58 @@ class EmailTemplateDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '이메일 템플릿',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return Scaffold(
+          backgroundColor: themeProvider.backgroundColor,
+          appBar: AppBar(
+            title: Text(
+              '이메일 템플릿',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: themeProvider.textColor,
+              ),
+            ),
+            backgroundColor: themeProvider.backgroundColor,
+            elevation: 0,
+            iconTheme: IconThemeData(color: themeProvider.textColor),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.copy),
+                onPressed: () => _copyTemplate(context),
+                tooltip: '템플릿 복사',
+              ),
+            ],
           ),
-        ),
-        backgroundColor: Color(0xFFEBF0F5),
-        elevation: 0,
-        iconTheme: IconThemeData(color: Color(0xFF4F5A67)),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.copy),
-            onPressed: () => _copyTemplate(context),
-            tooltip: '템플릿 복사',
+          body: SingleChildScrollView(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(themeProvider),
+                SizedBox(height: 24),
+                _buildSituationSection(themeProvider),
+                SizedBox(height: 24),
+                _buildSubjectSection(themeProvider),
+                SizedBox(height: 24),
+                _buildBodySection(themeProvider),
+                SizedBox(height: 24),
+                _buildTipsSection(themeProvider),
+                SizedBox(height: 24),
+                _buildCopyButton(context, themeProvider),
+              ],
+            ),
           ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildHeader(),
-            SizedBox(height: 24),
-            _buildSituationSection(),
-            SizedBox(height: 24),
-            _buildSubjectSection(),
-            SizedBox(height: 24),
-            _buildBodySection(),
-            SizedBox(height: 24),
-            _buildTipsSection(),
-            SizedBox(height: 24),
-            _buildCopyButton(context),
-          ],
-        ),
-      ),
+        );
+      },
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(ThemeProvider themeProvider) {
     return NeumorphicContainer(
+      backgroundColor: themeProvider.cardColor,
+      shadowColor: themeProvider.shadowColor,
+      highlightColor: themeProvider.highlightColor,
       child: Padding(
         padding: EdgeInsets.all(20.0),
         child: Column(
@@ -84,7 +94,7 @@ class EmailTemplateDetailScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF4F5A67),
+                          color: themeProvider.textColor,
                         ),
                       ),
                       SizedBox(height: 4),
@@ -114,7 +124,7 @@ class EmailTemplateDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSituationSection() {
+  Widget _buildSituationSection(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -123,11 +133,14 @@ class EmailTemplateDetailScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 12),
         NeumorphicContainer(
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Row(
@@ -144,7 +157,7 @@ class EmailTemplateDetailScreen extends StatelessWidget {
                     template.situation,
                     style: TextStyle(
                       fontSize: 16,
-                      color: Color(0xFF4F5A67),
+                      color: themeProvider.textColor,
                       height: 1.6,
                     ),
                   ),
@@ -157,7 +170,7 @@ class EmailTemplateDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSubjectSection() {
+  Widget _buildSubjectSection(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -166,11 +179,14 @@ class EmailTemplateDetailScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 12),
         NeumorphicContainer(
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Row(
@@ -186,7 +202,7 @@ class EmailTemplateDetailScreen extends StatelessWidget {
                     template.subject,
                     style: TextStyle(
                       fontSize: 16,
-                      color: Color(0xFF4F5A67),
+                      color: themeProvider.textColor,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -199,7 +215,7 @@ class EmailTemplateDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBodySection() {
+  Widget _buildBodySection(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -208,11 +224,14 @@ class EmailTemplateDetailScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 12),
         NeumorphicContainer(
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Column(
@@ -231,7 +250,7 @@ class EmailTemplateDetailScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF4F5A67),
+                        color: themeProvider.textColor,
                       ),
                     ),
                   ],
@@ -241,17 +260,17 @@ class EmailTemplateDetailScreen extends StatelessWidget {
                   width: double.infinity,
                   padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Color(0xFFFFFFFF),
+                    color: themeProvider.backgroundColor,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: Color(0xFF4F5A67).withOpacity(0.1),
+                      color: themeProvider.dividerColor.withOpacity(0.3),
                     ),
                   ),
                   child: Text(
                     template.body,
                     style: TextStyle(
                       fontSize: 14,
-                      color: Color(0xFF4F5A67),
+                      color: themeProvider.textColor,
                       height: 1.6,
                       fontFamily: 'monospace',
                     ),
@@ -265,7 +284,7 @@ class EmailTemplateDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTipsSection() {
+  Widget _buildTipsSection(ThemeProvider themeProvider) {
     if (template.tips.isEmpty) return SizedBox();
 
     return Column(
@@ -276,11 +295,14 @@ class EmailTemplateDetailScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 12),
         NeumorphicContainer(
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Column(
@@ -299,7 +321,7 @@ class EmailTemplateDetailScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF4F5A67),
+                        color: themeProvider.textColor,
                       ),
                     ),
                   ],
@@ -337,7 +359,7 @@ class EmailTemplateDetailScreen extends StatelessWidget {
                             tip,
                             style: TextStyle(
                               fontSize: 14,
-                              color: Color(0xFF4F5A67),
+                              color: themeProvider.textColor,
                               height: 1.5,
                             ),
                           ),
@@ -354,12 +376,15 @@ class EmailTemplateDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCopyButton(BuildContext context) {
+  Widget _buildCopyButton(BuildContext context, ThemeProvider themeProvider) {
     return Container(
       width: double.infinity,
       child: GestureDetector(
         onTap: () => _copyTemplate(context),
         child: NeumorphicContainer(
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Row(

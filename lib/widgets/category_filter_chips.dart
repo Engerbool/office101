@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/term.dart';
 import '../providers/term_provider.dart';
+import '../providers/theme_provider.dart';
 import 'neumorphic_container.dart';
 
 class CategoryFilterChips extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<TermProvider>(
-      builder: (context, termProvider, child) {
+    return Consumer2<TermProvider, ThemeProvider>(
+      builder: (context, termProvider, themeProvider, child) {
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -16,6 +17,7 @@ class CategoryFilterChips extends StatelessWidget {
               _buildFilterChip(
                 context,
                 termProvider,
+                themeProvider,
                 '전체',
                 null,
                 termProvider.selectedCategory == null,
@@ -27,6 +29,7 @@ class CategoryFilterChips extends StatelessWidget {
                     _buildFilterChip(
                       context,
                       termProvider,
+                      themeProvider,
                       category.displayName,
                       category,
                       termProvider.selectedCategory == category,
@@ -45,6 +48,7 @@ class CategoryFilterChips extends StatelessWidget {
   Widget _buildFilterChip(
     BuildContext context,
     TermProvider termProvider,
+    ThemeProvider themeProvider,
     String label,
     TermCategory? category,
     bool isSelected,
@@ -55,21 +59,40 @@ class CategoryFilterChips extends StatelessWidget {
       },
       child: AnimatedContainer(
         duration: Duration(milliseconds: 200),
-        child: NeumorphicContainer(
-          isPressed: isSelected,
-          borderRadius: 20,
-          depth: isSelected ? 2 : 4,
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                color: isSelected 
-                    ? _getCategoryColor(category)
-                    : Color(0xFF4F5A67).withOpacity(0.7),
-              ),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          decoration: BoxDecoration(
+            color: isSelected ? Color(0xFF5A8DEE) : themeProvider.cardColor,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: isSelected
+                ? [
+                    BoxShadow(
+                      color: Color(0xFF5A8DEE).withOpacity(0.3),
+                      offset: Offset(0, 2),
+                      blurRadius: 8,
+                    ),
+                  ]
+                : [
+                    BoxShadow(
+                      color: themeProvider.shadowColor.withOpacity(0.3),
+                      offset: Offset(2, 2),
+                      blurRadius: 4,
+                    ),
+                    BoxShadow(
+                      color: themeProvider.highlightColor.withOpacity(0.8),
+                      offset: Offset(-2, -2),
+                      blurRadius: 4,
+                    ),
+                  ],
+          ),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              color: isSelected 
+                  ? Colors.white
+                  : themeProvider.textColor.withOpacity(0.7),
             ),
           ),
         ),
@@ -95,6 +118,8 @@ class CategoryFilterChips extends StatelessWidget {
         return Color(0xFFFFCA28);
       case TermCategory.other:
         return Color(0xFF78909C);
+      case TermCategory.bookmarked:
+        return Color(0xFFFFCA28);
     }
   }
 }

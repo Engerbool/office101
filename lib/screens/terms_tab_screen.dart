@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/term_provider.dart';
+import '../providers/theme_provider.dart';
 import '../models/term.dart';
 import '../widgets/neumorphic_container.dart';
 import '../widgets/search_bar_widget.dart';
+import '../widgets/autocomplete_search_bar.dart';
 import '../widgets/category_filter_chips.dart';
 import '../widgets/term_list_widget.dart';
 import 'term_search_screen.dart';
+import 'term_detail_screen.dart';
 import 'add_term_screen.dart';
 
 class TermsTabScreen extends StatefulWidget {
@@ -25,38 +28,37 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<TermProvider>(
-        builder: (context, termProvider, child) {
-          if (termProvider.isLoading) {
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF5A8DEE)),
-              ),
-            );
-          }
-
-          return SingleChildScrollView(
-            padding: EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(child: _buildQuickSearchSection(context)),
-                    SizedBox(width: 12),
-                    _buildAddButton(context),
-                  ],
+    return Consumer2<TermProvider, ThemeProvider>(
+      builder: (context, termProvider, themeProvider, child) {
+        return Scaffold(
+          backgroundColor: themeProvider.backgroundColor,
+          body: termProvider.isLoading
+              ? Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF5A8DEE)),
+                  ),
+                )
+              : SingleChildScrollView(
+                  padding: EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(child: _buildQuickSearchSection(context, themeProvider)),
+                          SizedBox(width: 12),
+                          _buildAddButton(context, themeProvider),
+                        ],
+                      ),
+                      SizedBox(height: 16),
+                      CategoryFilterChips(),
+                      SizedBox(height: 24),
+                      _buildFilteredTermsSection(termProvider),
+                    ],
+                  ),
                 ),
-                SizedBox(height: 16),
-                CategoryFilterChips(),
-                SizedBox(height: 24),
-                _buildFilteredTermsSection(termProvider),
-              ],
-            ),
-          );
-        },
-      ),
+        );
+      },
     );
   }
 
@@ -100,8 +102,8 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
     );
   }
 
-  Widget _buildQuickSearchSection(BuildContext context) {
-    return SearchBarWidget(
+  Widget _buildQuickSearchSection(BuildContext context, ThemeProvider themeProvider) {
+    return AutocompleteSearchBar(
       controller: _searchController,
       onSearch: (query) {
         Navigator.push(
@@ -111,11 +113,20 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
           ),
         );
       },
+      onTermSelected: (term) {
+        // 용어가 선택되면 상세 화면으로 이동
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TermDetailScreen(term: term),
+          ),
+        );
+      },
       hintText: '궁금한 용어를 검색해보세요...',
     );
   }
 
-  Widget _buildAddButton(BuildContext context) {
+  Widget _buildAddButton(BuildContext context, ThemeProvider themeProvider) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -125,6 +136,9 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
       },
       child: NeumorphicContainer(
         borderRadius: 20,
+        backgroundColor: themeProvider.cardColor,
+        shadowColor: themeProvider.shadowColor,
+        highlightColor: themeProvider.highlightColor,
         child: Container(
           width: 48,
           height: 48,

@@ -24,13 +24,14 @@ class TermAdapter extends TypeAdapter<Term> {
       example: fields[4] as String,
       tags: (fields[5] as List).cast<String>(),
       userAdded: fields[6] as bool,
+      isBookmarked: fields[7] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Term obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.termId)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class TermAdapter extends TypeAdapter<Term> {
       ..writeByte(5)
       ..write(obj.tags)
       ..writeByte(6)
-      ..write(obj.userAdded);
+      ..write(obj.userAdded)
+      ..writeByte(7)
+      ..write(obj.isBookmarked);
   }
 
   @override
@@ -79,6 +82,8 @@ class TermCategoryAdapter extends TypeAdapter<TermCategory> {
         return TermCategory.communication;
       case 6:
         return TermCategory.other;
+      case 7:
+        return TermCategory.bookmarked;
       default:
         return TermCategory.approval;
     }
@@ -107,6 +112,9 @@ class TermCategoryAdapter extends TypeAdapter<TermCategory> {
         break;
       case TermCategory.other:
         writer.writeByte(6);
+        break;
+      case TermCategory.bookmarked:
+        writer.writeByte(7);
         break;
     }
   }

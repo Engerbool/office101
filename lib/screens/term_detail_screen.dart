@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import '../models/term.dart';
+import '../providers/term_provider.dart';
+import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
 
 class TermDetailScreen extends StatelessWidget {
@@ -10,55 +13,76 @@ class TermDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '용어 상세',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return Scaffold(
+          backgroundColor: themeProvider.backgroundColor,
+          appBar: AppBar(
+            title: Text(
+              '용어 상세',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: themeProvider.textColor,
+              ),
+            ),
+            backgroundColor: themeProvider.backgroundColor,
+            elevation: 0,
+            iconTheme: IconThemeData(color: themeProvider.textColor),
+            actions: [
+              Consumer<TermProvider>(
+                builder: (context, termProvider, child) {
+                  return IconButton(
+                    icon: Icon(
+                      term.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                      color: term.isBookmarked ? Color(0xFFFFCA28) : themeProvider.textColor,
+                    ),
+                    onPressed: () {
+                      termProvider.toggleBookmark(term.termId);
+                    },
+                  );
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.share),
+                onPressed: () => _shareTerm(context),
+              ),
+            ],
           ),
-        ),
-        backgroundColor: Color(0xFFEBF0F5),
-        elevation: 0,
-        iconTheme: IconThemeData(color: Color(0xFF4F5A67)),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.share),
-            onPressed: () => _shareTerm(context),
+          body: SingleChildScrollView(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildTermHeader(themeProvider),
+                SizedBox(height: 24),
+                _buildDefinitionSection(themeProvider),
+                if (term.example.isNotEmpty) ...[
+                  SizedBox(height: 24),
+                  _buildExampleSection(themeProvider),
+                ],
+                if (term.tags.isNotEmpty) ...[
+                  SizedBox(height: 24),
+                  _buildTagsSection(themeProvider),
+                ],
+                SizedBox(height: 24),
+                _buildCategorySection(themeProvider),
+                if (term.userAdded) ...[
+                  SizedBox(height: 24),
+                  _buildUserAddedBadge(themeProvider),
+                ],
+              ],
+            ),
           ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildTermHeader(),
-            SizedBox(height: 24),
-            _buildDefinitionSection(),
-            if (term.example.isNotEmpty) ...[
-              SizedBox(height: 24),
-              _buildExampleSection(),
-            ],
-            if (term.tags.isNotEmpty) ...[
-              SizedBox(height: 24),
-              _buildTagsSection(),
-            ],
-            SizedBox(height: 24),
-            _buildCategorySection(),
-            if (term.userAdded) ...[
-              SizedBox(height: 24),
-              _buildUserAddedBadge(),
-            ],
-          ],
-        ),
-      ),
+        );
+      },
     );
   }
 
-  Widget _buildTermHeader() {
+  Widget _buildTermHeader(ThemeProvider themeProvider) {
     return NeumorphicContainer(
+      backgroundColor: themeProvider.cardColor,
+      shadowColor: themeProvider.shadowColor,
+      highlightColor: themeProvider.highlightColor,
       child: Padding(
         padding: EdgeInsets.all(20.0),
         child: Row(
@@ -69,7 +93,7 @@ class TermDetailScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF4F5A67),
+                  color: themeProvider.textColor,
                 ),
               ),
             ),
@@ -94,7 +118,7 @@ class TermDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDefinitionSection() {
+  Widget _buildDefinitionSection(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -103,18 +127,21 @@ class TermDetailScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 12),
         NeumorphicContainer(
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Text(
               term.definition,
               style: TextStyle(
                 fontSize: 16,
-                color: Color(0xFF4F5A67),
+                color: themeProvider.textColor,
                 height: 1.6,
               ),
             ),
@@ -124,7 +151,7 @@ class TermDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildExampleSection() {
+  Widget _buildExampleSection(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -133,11 +160,14 @@ class TermDetailScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 12),
         NeumorphicContainer(
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Row(
@@ -154,7 +184,7 @@ class TermDetailScreen extends StatelessWidget {
                     term.example,
                     style: TextStyle(
                       fontSize: 16,
-                      color: Color(0xFF4F5A67),
+                      color: themeProvider.textColor,
                       fontStyle: FontStyle.italic,
                       height: 1.6,
                     ),
@@ -168,7 +198,7 @@ class TermDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTagsSection() {
+  Widget _buildTagsSection(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -177,11 +207,14 @@ class TermDetailScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 12),
         NeumorphicContainer(
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Wrap(
@@ -191,14 +224,14 @@ class TermDetailScreen extends StatelessWidget {
                 return Container(
                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
-                    color: Color(0xFF4F5A67).withOpacity(0.1),
+                    color: themeProvider.textColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Text(
                     '#$tag',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Color(0xFF4F5A67).withOpacity(0.8),
+                      color: themeProvider.textColor.withOpacity(0.8),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -211,7 +244,7 @@ class TermDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategorySection() {
+  Widget _buildCategorySection(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -220,11 +253,14 @@ class TermDetailScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 12),
         NeumorphicContainer(
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Row(
@@ -247,7 +283,7 @@ class TermDetailScreen extends StatelessWidget {
                   term.category.displayName,
                   style: TextStyle(
                     fontSize: 16,
-                    color: Color(0xFF4F5A67),
+                    color: themeProvider.textColor,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -259,8 +295,11 @@ class TermDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildUserAddedBadge() {
+  Widget _buildUserAddedBadge(ThemeProvider themeProvider) {
     return NeumorphicContainer(
+      backgroundColor: themeProvider.cardColor,
+      shadowColor: themeProvider.shadowColor,
+      highlightColor: themeProvider.highlightColor,
       child: Padding(
         padding: EdgeInsets.all(20.0),
         child: Row(
@@ -322,6 +361,8 @@ ${term.example.isNotEmpty ? '예시: ${term.example}' : ''}
         return Icons.chat_bubble;
       case TermCategory.other:
         return Icons.more_horiz;
+      case TermCategory.bookmarked:
+        return Icons.bookmark;
     }
   }
 
@@ -341,6 +382,8 @@ ${term.example.isNotEmpty ? '예시: ${term.example}' : ''}
         return Color(0xFFFFCA28);
       case TermCategory.other:
         return Color(0xFF78909C);
+      case TermCategory.bookmarked:
+        return Color(0xFFFFCA28);
     }
   }
 }

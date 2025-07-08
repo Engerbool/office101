@@ -4,13 +4,17 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'services/database_service.dart';
 import 'providers/term_provider.dart';
+import 'providers/theme_provider.dart';
 import 'screens/main_navigation_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
+  print('Main: Starting app initialization');
   await Hive.initFlutter();
+  print('Main: Hive initialized');
   await DatabaseService.initialize();
+  print('Main: DatabaseService initialized');
   
   runApp(MyApp());
 }
@@ -21,17 +25,26 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => TermProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
-      child: MaterialApp(
-        title: '직장생활은 처음이라',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          textTheme: GoogleFonts.notoSansKrTextTheme(
-            Theme.of(context).textTheme,
-          ),
-          scaffoldBackgroundColor: Color(0xFFEBF0F5),
-        ),
-        home: MainNavigationScreen(),
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp(
+            title: '직장생활은 처음이라',
+            theme: themeProvider.lightTheme.copyWith(
+              textTheme: GoogleFonts.notoSansKrTextTheme(
+                themeProvider.lightTheme.textTheme,
+              ),
+            ),
+            darkTheme: themeProvider.darkTheme.copyWith(
+              textTheme: GoogleFonts.notoSansKrTextTheme(
+                themeProvider.darkTheme.textTheme,
+              ),
+            ),
+            themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+            home: MainNavigationScreen(),
+          );
+        },
       ),
     );
   }

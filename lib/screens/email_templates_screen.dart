@@ -2,31 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/email_template.dart';
 import '../providers/term_provider.dart';
+import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
 import 'email_template_detail_screen.dart';
 
 class EmailTemplatesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<TermProvider>(
-        builder: (context, termProvider, child) {
-          return SingleChildScrollView(
+    return Consumer2<TermProvider, ThemeProvider>(
+      builder: (context, termProvider, themeProvider, child) {
+        return Scaffold(
+          backgroundColor: themeProvider.backgroundColor,
+          body: SingleChildScrollView(
             padding: EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildCategoriesSection(termProvider),
+                _buildCategoriesSection(termProvider, themeProvider),
               ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 
 
-  Widget _buildCategoriesSection(TermProvider termProvider) {
+  Widget _buildCategoriesSection(TermProvider termProvider, ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -36,7 +38,7 @@ class EmailTemplatesScreen extends StatelessWidget {
           
           return Column(
             children: [
-              _buildCategoryCard(category, templates),
+              _buildCategoryCard(category, templates, themeProvider),
               SizedBox(height: 16),
             ],
           );
@@ -45,8 +47,11 @@ class EmailTemplatesScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryCard(EmailCategory category, List<EmailTemplate> templates) {
+  Widget _buildCategoryCard(EmailCategory category, List<EmailTemplate> templates, ThemeProvider themeProvider) {
     return NeumorphicContainer(
+      backgroundColor: themeProvider.cardColor,
+      shadowColor: themeProvider.shadowColor,
+      highlightColor: themeProvider.highlightColor,
       child: Padding(
         padding: EdgeInsets.all(20.0),
         child: Column(
@@ -77,14 +82,14 @@ class EmailTemplatesScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF4F5A67),
+                          color: themeProvider.textColor,
                         ),
                       ),
                       Text(
                         '${templates.length}개 템플릿',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Color(0xFF4F5A67).withOpacity(0.6),
+                          color: themeProvider.subtitleColor.withOpacity(0.6),
                         ),
                       ),
                     ],
@@ -93,14 +98,14 @@ class EmailTemplatesScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 16),
-            ...templates.map((template) => _buildTemplateItem(template)).toList(),
+            ...templates.map((template) => _buildTemplateItem(template, themeProvider)).toList(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTemplateItem(EmailTemplate template) {
+  Widget _buildTemplateItem(EmailTemplate template, ThemeProvider themeProvider) {
     return Builder(
       builder: (context) => GestureDetector(
         onTap: () {
@@ -115,10 +120,10 @@ class EmailTemplatesScreen extends StatelessWidget {
           margin: EdgeInsets.only(bottom: 12),
           padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Color(0xFFEBF0F5),
+            color: themeProvider.backgroundColor,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: Color(0xFF4F5A67).withOpacity(0.1),
+              color: themeProvider.dividerColor.withOpacity(0.3),
             ),
           ),
           child: Column(
@@ -129,7 +134,7 @@ class EmailTemplatesScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF4F5A67),
+                  color: themeProvider.textColor,
                 ),
               ),
               SizedBox(height: 8),
@@ -137,7 +142,7 @@ class EmailTemplatesScreen extends StatelessWidget {
                 template.situation,
                 style: TextStyle(
                   fontSize: 14,
-                  color: Color(0xFF4F5A67).withOpacity(0.7),
+                  color: themeProvider.subtitleColor.withOpacity(0.7),
                   height: 1.4,
                 ),
                 maxLines: 2,

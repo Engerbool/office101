@@ -7,6 +7,9 @@ class NeumorphicContainer extends StatelessWidget {
   final EdgeInsets? margin;
   final double depth;
   final bool isPressed;
+  final Color? backgroundColor;
+  final Color? shadowColor;
+  final Color? highlightColor;
 
   const NeumorphicContainer({
     Key? key,
@@ -16,41 +19,44 @@ class NeumorphicContainer extends StatelessWidget {
     this.margin,
     this.depth = 4.0,
     this.isPressed = false,
+    this.backgroundColor,
+    this.shadowColor,
+    this.highlightColor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final shadowColor = Color(0xFFA6B4C4);
-    final highlightColor = Color(0xFFFFFFFF);
-    final baseColor = Color(0xFFEBF0F5);
+    final effectiveShadowColor = shadowColor ?? Color(0xFFA6B4C4);
+    final effectiveHighlightColor = highlightColor ?? Color(0xFFFFFFFF);
+    final effectiveBackgroundColor = backgroundColor ?? Color(0xFFEBF0F5);
 
     return Container(
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-        color: baseColor,
+        color: effectiveBackgroundColor,
         borderRadius: BorderRadius.circular(borderRadius),
         boxShadow: isPressed
             ? [
                 BoxShadow(
-                  color: shadowColor.withOpacity(0.2),
+                  color: effectiveShadowColor.withOpacity(0.2),
                   offset: Offset(2, 2),
                   blurRadius: depth,
                 ),
                 BoxShadow(
-                  color: highlightColor.withOpacity(0.7),
+                  color: effectiveHighlightColor.withOpacity(0.7),
                   offset: Offset(-2, -2),
                   blurRadius: depth,
                 ),
               ]
             : [
                 BoxShadow(
-                  color: shadowColor.withOpacity(0.3),
+                  color: effectiveShadowColor.withOpacity(0.3),
                   offset: Offset(depth, depth),
                   blurRadius: depth * 2,
                 ),
                 BoxShadow(
-                  color: highlightColor.withOpacity(0.8),
+                  color: effectiveHighlightColor.withOpacity(0.8),
                   offset: Offset(-depth, -depth),
                   blurRadius: depth * 2,
                 ),

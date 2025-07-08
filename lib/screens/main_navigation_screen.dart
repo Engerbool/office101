@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/term_provider.dart';
+import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
 import 'terms_tab_screen.dart';
 import 'email_templates_screen.dart';
 import 'workplace_tips_screen.dart';
+import 'settings_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   @override
@@ -23,27 +25,33 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       TermsTabScreen(),
       EmailTemplatesScreen(),
       WorkplaceTipsScreen(),
+      SettingsScreen(),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _screens,
-      ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return Scaffold(
+          backgroundColor: themeProvider.backgroundColor,
+          body: IndexedStack(
+            index: _currentIndex,
+            children: _screens,
+          ),
+          bottomNavigationBar: _buildBottomNavigationBar(themeProvider),
+        );
+      },
     );
   }
 
-  Widget _buildBottomNavigationBar() {
+  Widget _buildBottomNavigationBar(ThemeProvider themeProvider) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xFFEBF0F5),
+        color: themeProvider.backgroundColor,
         boxShadow: [
           BoxShadow(
-            color: Color(0xFFA6B4C4).withOpacity(0.3),
+            color: themeProvider.shadowColor.withOpacity(0.3),
             offset: Offset(0, -2),
             blurRadius: 8,
           ),
@@ -57,22 +65,32 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildNavItem(
+                themeProvider: themeProvider,
                 index: 0,
                 icon: Icons.book,
                 label: '용어사전',
                 color: Color(0xFF5A8DEE),
               ),
               _buildNavItem(
+                themeProvider: themeProvider,
                 index: 1,
                 icon: Icons.email,
                 label: '이메일',
                 color: Color(0xFF42A5F5),
               ),
               _buildNavItem(
+                themeProvider: themeProvider,
                 index: 2,
                 icon: Icons.lightbulb,
                 label: '꿀팁',
                 color: Color(0xFFFFCA28),
+              ),
+              _buildNavItem(
+                themeProvider: themeProvider,
+                index: 3,
+                icon: Icons.settings,
+                label: '설정',
+                color: Color(0xFF8E8E93),
               ),
             ],
           ),
@@ -82,6 +100,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   }
 
   Widget _buildNavItem({
+    required ThemeProvider themeProvider,
     required int index,
     required IconData icon,
     required String label,
@@ -101,6 +120,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           isPressed: isSelected,
           borderRadius: 20,
           depth: isSelected ? 2 : 4,
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
           child: Container(
             width: 80,
             height: 64,
@@ -110,7 +132,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 Icon(
                   icon,
                   size: 24,
-                  color: isSelected ? color : Color(0xFF4F5A67).withOpacity(0.6),
+                  color: isSelected ? color : themeProvider.textColor.withOpacity(0.6),
                 ),
                 SizedBox(height: 4),
                 Text(
@@ -118,7 +140,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                    color: isSelected ? color : Color(0xFF4F5A67).withOpacity(0.6),
+                    color: isSelected ? color : themeProvider.textColor.withOpacity(0.6),
                   ),
                 ),
               ],

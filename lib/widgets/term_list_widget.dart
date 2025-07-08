@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/term.dart';
+import '../providers/term_provider.dart';
+import '../providers/theme_provider.dart';
 import '../screens/term_detail_screen.dart';
 import 'neumorphic_container.dart';
 
@@ -17,24 +20,31 @@ class TermListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (terms.isEmpty) {
-      return _buildEmptyState();
-    }
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        if (terms.isEmpty) {
+          return _buildEmptyState(themeProvider);
+        }
 
-    return ListView.separated(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: terms.length,
-      separatorBuilder: (context, index) => SizedBox(height: 12),
-      itemBuilder: (context, index) {
-        final term = terms[index];
-        return _buildTermCard(context, term);
+        return ListView.separated(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: terms.length,
+          separatorBuilder: (context, index) => SizedBox(height: 12),
+          itemBuilder: (context, index) {
+            final term = terms[index];
+            return _buildTermCard(context, term, themeProvider);
+          },
+        );
       },
     );
   }
 
-  Widget _buildEmptyState() {
+  Widget _buildEmptyState(ThemeProvider themeProvider) {
     return NeumorphicContainer(
+      backgroundColor: themeProvider.cardColor,
+      shadowColor: themeProvider.shadowColor,
+      highlightColor: themeProvider.highlightColor,
       child: Padding(
         padding: EdgeInsets.all(32.0),
         child: Column(
@@ -42,7 +52,7 @@ class TermListWidget extends StatelessWidget {
             Icon(
               Icons.search_off,
               size: 64,
-              color: Color(0xFF4F5A67).withOpacity(0.3),
+              color: themeProvider.textColor.withOpacity(0.3),
             ),
             SizedBox(height: 16),
             Text(
@@ -50,7 +60,7 @@ class TermListWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF4F5A67),
+                color: themeProvider.textColor,
               ),
             ),
             SizedBox(height: 8),
@@ -58,7 +68,7 @@ class TermListWidget extends StatelessWidget {
               '다른 검색어를 시도해보세요',
               style: TextStyle(
                 fontSize: 14,
-                color: Color(0xFF4F5A67).withOpacity(0.6),
+                color: themeProvider.subtitleColor.withOpacity(0.6),
               ),
             ),
           ],
@@ -67,7 +77,7 @@ class TermListWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildTermCard(BuildContext context, Term term) {
+  Widget _buildTermCard(BuildContext context, Term term, ThemeProvider themeProvider) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -78,6 +88,9 @@ class TermListWidget extends StatelessWidget {
         );
       },
       child: NeumorphicContainer(
+        backgroundColor: themeProvider.cardColor,
+        shadowColor: themeProvider.shadowColor,
+        highlightColor: themeProvider.highlightColor,
         child: Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
@@ -91,7 +104,7 @@ class TermListWidget extends StatelessWidget {
                       style: TextStyle(
                         fontSize: isCompact ? 16 : 18,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF4F5A67),
+                        color: themeProvider.textColor,
                       ),
                     ),
                   ),
@@ -117,6 +130,8 @@ class TermListWidget extends StatelessWidget {
                       ),
                     ),
                   ],
+                  Spacer(),
+                  _buildBookmarkButton(term, themeProvider),
                 ],
               ),
               SizedBox(height: 8),
@@ -124,7 +139,7 @@ class TermListWidget extends StatelessWidget {
                 term.definition,
                 style: TextStyle(
                   fontSize: isCompact ? 13 : 14,
-                  color: Color(0xFF4F5A67).withOpacity(0.8),
+                  color: themeProvider.subtitleColor.withOpacity(0.8),
                   height: 1.4,
                 ),
                 maxLines: isCompact ? 2 : null,
@@ -152,7 +167,7 @@ class TermListWidget extends StatelessWidget {
                           term.example,
                           style: TextStyle(
                             fontSize: 13,
-                            color: Color(0xFF4F5A67).withOpacity(0.7),
+                            color: themeProvider.subtitleColor.withOpacity(0.7),
                             fontStyle: FontStyle.italic,
                           ),
                         ),
@@ -170,14 +185,14 @@ class TermListWidget extends StatelessWidget {
                     return Container(
                       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Color(0xFF4F5A67).withOpacity(0.1),
+                        color: themeProvider.textColor.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
                         '#$tag',
                         style: TextStyle(
                           fontSize: 11,
-                          color: Color(0xFF4F5A67).withOpacity(0.7),
+                          color: themeProvider.textColor.withOpacity(0.7),
                         ),
                       ),
                     );
@@ -225,6 +240,26 @@ class TermListWidget extends StatelessWidget {
         return Color(0xFFFFCA28);
       case TermCategory.other:
         return Color(0xFF78909C);
+      case TermCategory.bookmarked:
+        return Color(0xFFFFCA28);
     }
+  }
+
+  Widget _buildBookmarkButton(Term term, ThemeProvider themeProvider) {
+    return Builder(
+      builder: (context) => GestureDetector(
+        onTap: () {
+          Provider.of<TermProvider>(context, listen: false).toggleBookmark(term.termId);
+        },
+        child: Container(
+          padding: EdgeInsets.all(8),
+          child: Icon(
+            term.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+            color: term.isBookmarked ? Color(0xFFFFCA28) : themeProvider.textColor.withOpacity(0.5),
+            size: 20,
+          ),
+        ),
+      ),
+    );
   }
 }
