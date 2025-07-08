@@ -1,0 +1,35 @@
+{
+    "name": "직장생활은 처음이라",
+    "short_name": "직장생활",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#EBF0F5",
+    "theme_color": "#5A8DEE",
+    "description": "신입사원을 위한 용어사전 및 업무 가이드",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}

@@ -1,0 +1,108 @@
+{
+  "terms": [
+    {
+      "term_id": "approval_001",
+      "category": "approval",
+      "term": "상신",
+      "definition": "회사의 업무나 안건을 상급자에게 보고하여 승인을 요청하는 일",
+      "example": "이번 프로젝트 예산안을 팀장님께 상신하겠습니다.",
+      "tags": ["결재", "승인", "보고"]
+    },
+    {
+      "term_id": "approval_002",
+      "category": "approval",
+      "term": "재가",
+      "definition": "상급자가 하급자의 보고나 제안을 승인하는 일",
+      "example": "부장님의 재가를 받아 프로젝트를 진행하겠습니다.",
+      "tags": ["승인", "허가", "결재"]
+    },
+    {
+      "term_id": "approval_003",
+      "category": "approval",
+      "term": "결재",
+      "definition": "공문서나 중요한 업무에 대해 책임자가 최종 승인하는 절차",
+      "example": "이 계약서는 대표이사의 결재가 필요합니다.",
+      "tags": ["승인", "서명", "최종확인"]
+    },
+    {
+      "term_id": "business_001",
+      "category": "business",
+      "term": "KPI",
+      "definition": "Key Performance Indicator의 줄임말로 핵심성과지표를 의미",
+      "example": "이번 분기 KPI 달성률이 95%입니다.",
+      "tags": ["성과", "지표", "목표"]
+    },
+    {
+      "term_id": "business_002",
+      "category": "business",
+      "term": "벤치마킹",
+      "definition": "다른 회사의 우수한 사례나 성과를 참고하여 자사에 적용하는 것",
+      "example": "경쟁사의 마케팅 전략을 벤치마킹해보겠습니다.",
+      "tags": ["참고", "분석", "비교"]
+    },
+    {
+      "term_id": "marketing_001",
+      "category": "marketing",
+      "term": "리드",
+      "definition": "잠재 고객이나 영업 기회를 의미하는 마케팅 용어",
+      "example": "이번 캠페인으로 50개의 새로운 리드를 확보했습니다.",
+      "tags": ["고객", "영업", "기회"]
+    },
+    {
+      "term_id": "marketing_002",
+      "category": "marketing",
+      "term": "컨버전",
+      "definition": "방문자나 잠재고객이 실제 고객으로 전환되는 것",
+      "example": "웹사이트의 컨버전율이 3%로 증가했습니다.",
+      "tags": ["전환", "고객", "성과"]
+    },
+    {
+      "term_id": "it_001",
+      "category": "it",
+      "term": "배포",
+      "definition": "개발한 소프트웨어를 실제 서비스 환경에 적용하는 과정",
+      "example": "새로운 기능을 내일 배포할 예정입니다.",
+      "tags": ["개발", "출시", "업데이트"]
+    },
+    {
+      "term_id": "it_002",
+      "category": "it",
+      "term": "버그",
+      "definition": "소프트웨어의 오류나 결함을 의미하는 용어",
+      "example": "로그인 기능에서 버그가 발견되었습니다.",
+      "tags": ["오류", "결함", "수정"]
+    },
+    {
+      "term_id": "hr_001",
+      "category": "hr",
+      "term": "온보딩",
+      "definition": "새로 입사한 직원이 회사에 적응할 수 있도록 돕는 교육 과정",
+      "example": "신입사원들의 온보딩 프로그램이 다음 주에 시작됩니다.",
+      "tags": ["교육", "적응", "신입"]
+    },
+    {
+      "term_id": "hr_002",
+      "category": "hr",
+      "term": "1on1",
+      "definition": "상사와 부하직원이 일대일로 진행하는 정기적인 면담",
+      "example": "매월 첫째 주에 팀장님과 1on1 미팅이 있습니다.",
+      "tags": ["면담", "소통", "피드백"]
+    },
+    {
+      "term_id": "communication_001",
+      "category": "communication",
+      "term": "브리핑",
+      "definition": "중요한 정보나 상황을 간단명료하게 보고하는 것",
+      "example": "회의 전에 프로젝트 현황을 브리핑해드리겠습니다.",
+      "tags": ["보고", "요약", "설명"]
+    },
+    {
+      "term_id": "communication_002",
+      "category": "communication",
+      "term": "에스컬레이션",
+      "definition": "문제나 이슈를 상위 관리자에게 보고하여 해결을 요청하는 것",
+      "example": "이 문제는 에스컬레이션이 필요할 것 같습니다.",
+      "tags": ["보고", "상승", "해결"]
+    }
+  ]
+}
