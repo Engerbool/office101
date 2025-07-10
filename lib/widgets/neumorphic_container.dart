@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/theme_provider.dart';
 
 class NeumorphicContainer extends StatelessWidget {
   final Widget child;
@@ -26,9 +28,10 @@ class NeumorphicContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveShadowColor = shadowColor ?? Color(0xFFA6B4C4);
-    final effectiveHighlightColor = highlightColor ?? Color(0xFFFFFFFF);
-    final effectiveBackgroundColor = backgroundColor ?? Color(0xFFEBF0F5);
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final effectiveShadowColor = shadowColor ?? themeProvider.shadowColor;
+    final effectiveHighlightColor = highlightColor ?? themeProvider.highlightColor;
+    final effectiveBackgroundColor = backgroundColor ?? themeProvider.cardColor;
 
     return Container(
       margin: margin,

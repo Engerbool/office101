@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/term_provider.dart';
@@ -8,6 +9,8 @@ import '../widgets/search_bar_widget.dart';
 import '../widgets/autocomplete_search_bar.dart';
 import '../widgets/category_filter_chips.dart';
 import '../widgets/term_list_widget.dart';
+import '../widgets/index_scroll_bar.dart';
+import '../utils/korean_sort_utils.dart';
 import 'term_search_screen.dart';
 import 'term_detail_screen.dart';
 import 'add_term_screen.dart';
@@ -19,11 +22,84 @@ class TermsTabScreen extends StatefulWidget {
 
 class _TermsTabScreenState extends State<TermsTabScreen> {
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+  final GlobalKey _termsListKey = GlobalKey();
+  
+  bool _showIndexBar = false;
+  Map<String, GlobalKey> _indexKeys = {};
+  Map<String, List<Term>> _groupedTerms = {};
+  List<String> _availableIndexes = [];
+  Timer? _hideTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+    
+    // 인덱스별 GlobalKey 생성
+    for (String index in KoreanSortUtils.indexList) {
+      _indexKeys[index] = GlobalKey();
+    }
+    
+    // 초기 상태에서 인덱스 바는 이미 true로 설정됨
+  }
 
   @override
   void dispose() {
     _searchController.dispose();
+    _scrollController.dispose();
+    _hideTimer?.cancel();
     super.dispose();
+  }
+
+  void _onScroll() {
+    if (!_scrollController.hasClients) return;
+    
+    // 스크롤 중이면 인덱스 바 표시
+    if (!_showIndexBar) {
+      setState(() {
+        _showIndexBar = true;
+      });
+    }
+    
+    // 기존 타이머 취소
+    _hideTimer?.cancel();
+    
+    // 3초 후 인덱스 바 숨기기
+    _hideTimer = Timer(Duration(seconds: 3), () {
+      if (mounted) {
+        setState(() {
+          _showIndexBar = false;
+        });
+      }
+    });
+  }
+
+  void _scrollToIndex(String index) {
+    final key = _indexKeys[index];
+    if (key?.currentContext != null) {
+      Scrollable.ensureVisible(
+        key!.currentContext!,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+    
+    // 인덱스 클릭 시에도 타이머 리셋
+    _hideTimer?.cancel();
+    _hideTimer = Timer(Duration(seconds: 1), () {
+      if (mounted) {
+        setState(() {
+          _showIndexBar = false;
+        });
+      }
+    });
+  }
+
+  void _updateGroupedTerms(List<Term> terms) {
+    final sortedTerms = KoreanSortUtils.sortTermsKoreanEnglish(terms);
+    _groupedTerms = KoreanSortUtils.groupTermsByIndex(sortedTerms);
+    _availableIndexes = _groupedTerms.keys.toList();
   }
 
   @override
@@ -38,24 +114,37 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
                     valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF5A8DEE)),
                   ),
                 )
-              : SingleChildScrollView(
-                  padding: EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
+              : Stack(
+                  children: [
+                    SingleChildScrollView(
+                      controller: _scrollController,
+                      padding: EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(child: _buildQuickSearchSection(context, themeProvider)),
-                          SizedBox(width: 12),
-                          _buildAddButton(context, themeProvider),
+                          Row(
+                            children: [
+                              Expanded(child: _buildQuickSearchSection(context, themeProvider)),
+                              SizedBox(width: 12),
+                              _buildAddButton(context, themeProvider),
+                            ],
+                          ),
+                          SizedBox(height: 16),
+                          CategoryFilterChips(),
+                          SizedBox(height: 24),
+                          _buildFilteredTermsSection(termProvider),
                         ],
                       ),
-                      SizedBox(height: 16),
-                      CategoryFilterChips(),
-                      SizedBox(height: 24),
-                      _buildFilteredTermsSection(termProvider),
-                    ],
-                  ),
+                    ),
+                    // 인덱스 스크롤바 (용어가 있을 때만 표시)
+                    if (_availableIndexes.isNotEmpty)
+                      IndexScrollBar(
+                        scrollController: _scrollController,
+                        availableIndexes: _availableIndexes,
+                        onIndexSelected: _scrollToIndex,
+                        isVisible: _showIndexBar,
+                      ),
+                  ],
                 ),
         );
       },
@@ -165,10 +254,45 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
       return SizedBox();
     }
 
-    return TermListWidget(
-      terms: termsToShow,
-      isCompact: true,
-      showCategory: termProvider.selectedCategory == null,
+    // 용어들을 한글-영어 순으로 정렬하고 인덱스별로 그룹화
+    _updateGroupedTerms(termsToShow);
+
+    return Column(
+      key: _termsListKey,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: _buildIndexedTermsList(termProvider),
+    );
+  }
+
+  List<Widget> _buildIndexedTermsList(TermProvider termProvider) {
+    List<Widget> widgets = [];
+    
+    // 인덱스 순서대로 정렬
+    final sortedIndexes = _availableIndexes.toList()
+      ..sort((a, b) {
+        final aIndex = KoreanSortUtils.indexList.indexOf(a);
+        final bIndex = KoreanSortUtils.indexList.indexOf(b);
+        return aIndex.compareTo(bIndex);
+      });
+
+    for (String index in sortedIndexes) {
+      final termsForIndex = _groupedTerms[index];
+      if (termsForIndex != null && termsForIndex.isNotEmpty) {
+        widgets.add(_buildIndexSection(index, termsForIndex, termProvider));
+      }
+    }
+
+    return widgets;
+  }
+
+  Widget _buildIndexSection(String index, List<Term> terms, TermProvider termProvider) {
+    return Container(
+      key: _indexKeys[index],
+      child: TermListWidget(
+        terms: terms,
+        isCompact: true,
+        showCategory: termProvider.selectedCategory == null,
+      ),
     );
   }
 }

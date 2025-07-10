@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/term.dart';
 import '../providers/term_provider.dart';
+import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
 
 class AddTermScreen extends StatefulWidget {
@@ -29,18 +30,20 @@ class _AddTermScreenState extends State<AddTermScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(
           '용어 추가',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
-        backgroundColor: Color(0xFFEBF0F5),
+        backgroundColor: themeProvider.backgroundColor,
         elevation: 0,
-        iconTheme: IconThemeData(color: Color(0xFF4F5A67)),
+        iconTheme: IconThemeData(color: themeProvider.textColor),
         actions: [
           TextButton(
             onPressed: _saveTerm,
@@ -55,6 +58,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
           ),
         ],
       ),
+      backgroundColor: themeProvider.backgroundColor,
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Form(
@@ -62,19 +66,19 @@ class _AddTermScreenState extends State<AddTermScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildInfoCard(),
+              _buildInfoCard(themeProvider),
               SizedBox(height: 24),
-              _buildTermField(),
+              _buildTermField(themeProvider),
               SizedBox(height: 16),
-              _buildDefinitionField(),
+              _buildDefinitionField(themeProvider),
               SizedBox(height: 16),
-              _buildExampleField(),
+              _buildExampleField(themeProvider),
               SizedBox(height: 16),
-              _buildCategoryField(),
+              _buildCategoryField(themeProvider),
               SizedBox(height: 16),
-              _buildTagsField(),
+              _buildTagsField(themeProvider),
               SizedBox(height: 32),
-              _buildSaveButton(),
+              _buildSaveButton(themeProvider),
             ],
           ),
         ),
@@ -82,7 +86,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
     );
   }
 
-  Widget _buildInfoCard() {
+  Widget _buildInfoCard(ThemeProvider themeProvider) {
     return NeumorphicContainer(
       child: Padding(
         padding: EdgeInsets.all(20.0),
@@ -99,7 +103,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
                 '새로운 용어를 추가하여 나만의 사전을 만들어보세요!',
                 style: TextStyle(
                   fontSize: 16,
-                  color: Color(0xFF4F5A67),
+                  color: themeProvider.textColor,
                   height: 1.4,
                 ),
               ),
@@ -110,7 +114,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
     );
   }
 
-  Widget _buildTermField() {
+  Widget _buildTermField(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -119,7 +123,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 8),
@@ -131,13 +135,13 @@ class _AddTermScreenState extends State<AddTermScreen> {
               decoration: InputDecoration(
                 hintText: '용어를 입력하세요',
                 hintStyle: TextStyle(
-                  color: Color(0xFF4F5A67).withOpacity(0.5),
+                  color: themeProvider.textColor.withOpacity(0.5),
                 ),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.all(16),
               ),
               style: TextStyle(
-                color: Color(0xFF4F5A67),
+                color: themeProvider.textColor,
                 fontSize: 16,
               ),
               validator: (value) {
@@ -153,7 +157,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
     );
   }
 
-  Widget _buildDefinitionField() {
+  Widget _buildDefinitionField(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -162,7 +166,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 8),
@@ -175,13 +179,13 @@ class _AddTermScreenState extends State<AddTermScreen> {
               decoration: InputDecoration(
                 hintText: '용어의 정의를 입력하세요',
                 hintStyle: TextStyle(
-                  color: Color(0xFF4F5A67).withOpacity(0.5),
+                  color: themeProvider.textColor.withOpacity(0.5),
                 ),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.all(16),
               ),
               style: TextStyle(
-                color: Color(0xFF4F5A67),
+                color: themeProvider.textColor,
                 fontSize: 16,
                 height: 1.4,
               ),
@@ -198,7 +202,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
     );
   }
 
-  Widget _buildExampleField() {
+  Widget _buildExampleField(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -207,7 +211,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 8),
@@ -220,13 +224,13 @@ class _AddTermScreenState extends State<AddTermScreen> {
               decoration: InputDecoration(
                 hintText: '용어를 사용한 예시를 입력하세요 (선택사항)',
                 hintStyle: TextStyle(
-                  color: Color(0xFF4F5A67).withOpacity(0.5),
+                  color: themeProvider.textColor.withOpacity(0.5),
                 ),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.all(16),
               ),
               style: TextStyle(
-                color: Color(0xFF4F5A67),
+                color: themeProvider.textColor,
                 fontSize: 16,
                 height: 1.4,
               ),
@@ -237,7 +241,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
     );
   }
 
-  Widget _buildCategoryField() {
+  Widget _buildCategoryField(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -246,7 +250,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 8),
@@ -260,17 +264,17 @@ class _AddTermScreenState extends State<AddTermScreen> {
                 contentPadding: EdgeInsets.symmetric(vertical: 12),
               ),
               style: TextStyle(
-                color: Color(0xFF4F5A67),
+                color: themeProvider.textColor,
                 fontSize: 16,
               ),
-              dropdownColor: Color(0xFFEBF0F5),
+              dropdownColor: themeProvider.cardColor,
               items: TermCategory.values.map((category) {
                 return DropdownMenuItem(
                   value: category,
                   child: Text(
                     category.displayName,
                     style: TextStyle(
-                      color: Color(0xFF4F5A67),
+                      color: themeProvider.textColor,
                     ),
                   ),
                 );
@@ -287,7 +291,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
     );
   }
 
-  Widget _buildTagsField() {
+  Widget _buildTagsField(ThemeProvider themeProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -296,7 +300,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF4F5A67),
+            color: themeProvider.textColor,
           ),
         ),
         SizedBox(height: 8),
@@ -308,13 +312,13 @@ class _AddTermScreenState extends State<AddTermScreen> {
               decoration: InputDecoration(
                 hintText: '태그를 쉼표로 구분하여 입력하세요 (예: 업무, 보고)',
                 hintStyle: TextStyle(
-                  color: Color(0xFF4F5A67).withOpacity(0.5),
+                  color: themeProvider.textColor.withOpacity(0.5),
                 ),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.all(16),
               ),
               style: TextStyle(
-                color: Color(0xFF4F5A67),
+                color: themeProvider.textColor,
                 fontSize: 16,
               ),
             ),
@@ -324,7 +328,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
     );
   }
 
-  Widget _buildSaveButton() {
+  Widget _buildSaveButton(ThemeProvider themeProvider) {
     return Container(
       width: double.infinity,
       child: GestureDetector(
