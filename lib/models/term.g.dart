@@ -81,8 +81,10 @@ class TermCategoryAdapter extends TypeAdapter<TermCategory> {
       case 5:
         return TermCategory.communication;
       case 6:
-        return TermCategory.other;
+        return TermCategory.time;
       case 7:
+        return TermCategory.other;
+      case 8:
         return TermCategory.bookmarked;
       default:
         return TermCategory.approval;
@@ -110,11 +112,14 @@ class TermCategoryAdapter extends TypeAdapter<TermCategory> {
       case TermCategory.communication:
         writer.writeByte(5);
         break;
-      case TermCategory.other:
+      case TermCategory.time:
         writer.writeByte(6);
         break;
-      case TermCategory.bookmarked:
+      case TermCategory.other:
         writer.writeByte(7);
+        break;
+      case TermCategory.bookmarked:
+        writer.writeByte(8);
         break;
     }
   }

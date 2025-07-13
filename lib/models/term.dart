@@ -90,9 +90,12 @@ enum TermCategory {
   communication, // 커뮤니케이션
 
   @HiveField(6)
-  other, // 기타
+  time, // 시간/일정
 
   @HiveField(7)
+  other, // 기타
+
+  @HiveField(8)
   bookmarked, // 북마크
 }
 
@@ -111,6 +114,8 @@ extension TermCategoryExtension on TermCategory {
         return '인사(HR)/조직문화';
       case TermCategory.communication:
         return '커뮤니케이션';
+      case TermCategory.time:
+        return '시간/일정';
       case TermCategory.other:
         return '기타';
       case TermCategory.bookmarked:
@@ -132,6 +137,8 @@ extension TermCategoryExtension on TermCategory {
         return 'assets/images/hr.png';
       case TermCategory.communication:
         return 'assets/images/communication.png';
+      case TermCategory.time:
+        return 'assets/images/time.png';
       case TermCategory.other:
         return 'assets/images/other.png';
       case TermCategory.bookmarked:

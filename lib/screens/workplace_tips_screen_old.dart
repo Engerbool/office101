@@ -108,16 +108,15 @@ class WorkplaceTipsScreen extends StatelessWidget {
                     onPressed: () {
                       Provider.of<TermProvider>(context, listen: false).retryLoadData();
                     },
-                    icon: Icon(
-                      Icons.refresh,
+                  icon: Icon(
+                    Icons.refresh,
+                    color: Color(0xFF5A8DEE),
+                  ),
+                  label: Text(
+                    '다시 시도',
+                    style: TextStyle(
                       color: Color(0xFF5A8DEE),
-                    ),
-                    label: Text(
-                      '다시 시도',
-                      style: TextStyle(
-                        color: Color(0xFF5A8DEE),
-                        fontWeight: FontWeight.bold,
-                      ),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -213,39 +212,35 @@ class WorkplaceTipsScreen extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: _getPriorityColor(tip.priority.toString()).withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                  Expanded(
                     child: Text(
-                      _getPriorityText(tip.priority.toString()),
+                      tip.title,
                       style: TextStyle(
-                        fontSize: 10,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: _getPriorityColor(tip.priority.toString()),
+                        color: themeProvider.textColor,
                       ),
                     ),
                   ),
-                  Spacer(),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 12,
-                    color: Color(0xFF5A8DEE),
-                  ),
+                  if (tip.priority == 1)
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFF7043).withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        '중요',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Color(0xFFFF7043),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                 ],
               ),
               SizedBox(height: 8),
-              Text(
-                tip.title,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: themeProvider.textColor,
-                ),
-              ),
-              SizedBox(height: 6),
               Text(
                 tip.content,
                 style: TextStyle(
@@ -253,8 +248,38 @@ class WorkplaceTipsScreen extends StatelessWidget {
                   color: themeProvider.subtitleColor.withOpacity(0.7),
                   height: 1.4,
                 ),
-                maxLines: 2,
+                maxLines: 3,
                 overflow: TextOverflow.ellipsis,
+              ),
+              if (tip.keyPoints.isNotEmpty) ...[
+                SizedBox(height: 12),
+                Text(
+                  '주요 포인트: ${tip.keyPoints.take(2).join(', ')}${tip.keyPoints.length > 2 ? '...' : ''}',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF5A8DEE),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+              SizedBox(height: 8),
+              Row(
+                children: [
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: 12,
+                    color: Color(0xFF5A8DEE),
+                  ),
+                  SizedBox(width: 4),
+                  Text(
+                    '자세히 보기',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF5A8DEE),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -268,13 +293,13 @@ class WorkplaceTipsScreen extends StatelessWidget {
       case TipCategory.schedule:
         return Icons.schedule;
       case TipCategory.report:
-        return Icons.assignment;
+        return Icons.assignment_turned_in;
       case TipCategory.meeting:
-        return Icons.meeting_room;
+        return Icons.groups;
       case TipCategory.communication:
-        return Icons.chat_bubble_outline;
+        return Icons.forum;
       case TipCategory.general:
-        return Icons.lightbulb_outline;
+        return Icons.work;
     }
   }
 
@@ -287,33 +312,9 @@ class WorkplaceTipsScreen extends StatelessWidget {
       case TipCategory.meeting:
         return Color(0xFF66BB6A);
       case TipCategory.communication:
-        return Color(0xFFFF7043);
+        return Color(0xFFFFCA28);
       case TipCategory.general:
         return Color(0xFF78909C);
-    }
-  }
-
-  String _getPriorityText(String priority) {
-    switch (priority) {
-      case '2':
-        return '필수';
-      case '1':
-        return '권장';
-      case '0':
-      default:
-        return '참고';
-    }
-  }
-
-  Color _getPriorityColor(String priority) {
-    switch (priority) {
-      case '2':
-        return Colors.red;
-      case '1':
-        return Colors.orange;
-      case '0':
-      default:
-        return Colors.green;
     }
   }
 }

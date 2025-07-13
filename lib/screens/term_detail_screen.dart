@@ -359,6 +359,8 @@ ${term.example.isNotEmpty ? '예시: ${term.example}' : ''}
         return Icons.people;
       case TermCategory.communication:
         return Icons.chat_bubble;
+      case TermCategory.time:
+        return Icons.schedule;
       case TermCategory.other:
         return Icons.more_horiz;
       case TermCategory.bookmarked:
@@ -380,6 +382,8 @@ ${term.example.isNotEmpty ? '예시: ${term.example}' : ''}
         return Color(0xFFAB47BC);
       case TermCategory.communication:
         return Color(0xFFFFCA28);
+      case TermCategory.time:
+        return Color(0xFFEF5350);
       case TermCategory.other:
         return Color(0xFF78909C);
       case TermCategory.bookmarked:

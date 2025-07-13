@@ -14,7 +14,6 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   path_provider: ^2.0.15
-  google_fonts: ^6.1.0
   provider: ^6.0.5
 
 dev_dependencies:
@@ -28,4 +27,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/data/
+    - assets/data/terms/
     - assets/images/
+    - assets/LICENSE.txt

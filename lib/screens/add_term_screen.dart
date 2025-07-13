@@ -4,6 +4,7 @@ import '../models/term.dart';
 import '../providers/term_provider.dart';
 import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
+import '../widgets/error_display_widget.dart';
 
 class AddTermScreen extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
   final _tagsController = TextEditingController();
   
   TermCategory _selectedCategory = TermCategory.other;
+  bool _isSaving = false;
 
   @override
   void dispose() {
@@ -45,17 +47,31 @@ class _AddTermScreenState extends State<AddTermScreen> {
         elevation: 0,
         iconTheme: IconThemeData(color: themeProvider.textColor),
         actions: [
-          TextButton(
-            onPressed: _saveTerm,
-            child: Text(
-              '저장',
-              style: TextStyle(
-                color: Color(0xFF5A8DEE),
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-          ),
+          _isSaving
+              ? Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: Center(
+                    child: SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF5A8DEE)),
+                      ),
+                    ),
+                  ),
+                )
+              : TextButton(
+                  onPressed: _saveTerm,
+                  child: Text(
+                    '저장',
+                    style: TextStyle(
+                      color: Color(0xFF5A8DEE),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
         ],
       ),
       backgroundColor: themeProvider.backgroundColor,
@@ -332,27 +348,47 @@ class _AddTermScreenState extends State<AddTermScreen> {
     return Container(
       width: double.infinity,
       child: GestureDetector(
-        onTap: _saveTerm,
+        onTap: _isSaving ? null : _saveTerm,
         child: NeumorphicContainer(
           child: Container(
             padding: EdgeInsets.all(20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.save,
-                  color: Color(0xFF5A8DEE),
-                  size: 24,
-                ),
-                SizedBox(width: 12),
-                Text(
-                  '용어 저장하기',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF5A8DEE),
+                if (_isSaving) ...[
+                  SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF5A8DEE)),
+                    ),
                   ),
-                ),
+                  SizedBox(width: 12),
+                  Text(
+                    '저장 중...',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: themeProvider.textColor.withOpacity(0.6),
+                    ),
+                  ),
+                ] else ...[
+                  Icon(
+                    Icons.save,
+                    color: Color(0xFF5A8DEE),
+                    size: 24,
+                  ),
+                  SizedBox(width: 12),
+                  Text(
+                    '용어 저장하기',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF5A8DEE),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -362,57 +398,80 @@ class _AddTermScreenState extends State<AddTermScreen> {
   }
 
   void _saveTerm() async {
-    if (!_formKey.currentState!.validate()) {
+    if (!_formKey.currentState!.validate() || _isSaving) {
       return;
     }
 
-    // 태그 처리
-    List<String> tags = [];
-    if (_tagsController.text.trim().isNotEmpty) {
-      tags = _tagsController.text
-          .split(',')
-          .map((tag) => tag.trim())
-          .where((tag) => tag.isNotEmpty)
-          .toList();
-    }
-
-    // 고유 ID 생성
-    final termId = 'user_${DateTime.now().millisecondsSinceEpoch}';
-
-    // Term 객체 생성
-    final newTerm = Term(
-      termId: termId,
-      category: _selectedCategory,
-      term: _termController.text.trim(),
-      definition: _definitionController.text.trim(),
-      example: _exampleController.text.trim(),
-      tags: tags,
-      userAdded: true,
-    );
+    setState(() {
+      _isSaving = true;
+    });
 
     try {
-      // 용어 저장
-      await Provider.of<TermProvider>(context, listen: false).addTerm(newTerm);
+      // Input validation
+      final termText = _termController.text.trim();
+      final definitionText = _definitionController.text.trim();
       
-      // 성공 메시지 표시
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('용어가 성공적으로 추가되었습니다!'),
-          backgroundColor: Color(0xFF5A8DEE),
-          duration: Duration(seconds: 2),
-        ),
+      if (termText.isEmpty) {
+        showErrorSnackBar(context, '용어를 입력해주세요.');
+        return;
+      }
+      
+      if (definitionText.isEmpty) {
+        showErrorSnackBar(context, '정의를 입력해주세요.');
+        return;
+      }
+
+      // 태그 처리
+      List<String> tags = [];
+      if (_tagsController.text.trim().isNotEmpty) {
+        tags = _tagsController.text
+            .split(',')
+            .map((tag) => tag.trim())
+            .where((tag) => tag.isNotEmpty)
+            .toList();
+      }
+
+      // 고유 ID 생성
+      final termId = 'user_${DateTime.now().millisecondsSinceEpoch}';
+
+      // Term 객체 생성
+      final newTerm = Term(
+        termId: termId,
+        category: _selectedCategory,
+        term: termText,
+        definition: definitionText,
+        example: _exampleController.text.trim(),
+        tags: tags,
+        userAdded: true,
       );
 
-      // 화면 닫기
-      Navigator.pop(context);
+      // 용어 저장
+      final termProvider = Provider.of<TermProvider>(context, listen: false);
+      final success = await termProvider.addTerm(newTerm);
+      
+      if (success) {
+        // 성공 메시지 표시
+        showSuccessSnackBar(context, '용어가 성공적으로 추가되었습니다!');
+        
+        // 화면 닫기
+        Navigator.pop(context);
+      } else {
+        // TermProvider에서 오류 메시지를 처리함
+        if (termProvider.hasError && termProvider.errorMessage != null) {
+          showErrorSnackBar(context, termProvider.errorMessage!);
+        } else {
+          showErrorSnackBar(context, '용어 추가에 실패했습니다.');
+        }
+      }
     } catch (e) {
-      // 에러 메시지 표시
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('용어 추가 중 오류가 발생했습니다: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
+      // 예상치 못한 에러
+      showErrorSnackBar(context, '예상치 못한 오류가 발생했습니다.');
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isSaving = false;
+        });
+      }
     }
   }
 }

@@ -1,0 +1,3228 @@
+{
+  "terms": [
+    {
+      "term_id": "approval_001",
+      "category": "approval",
+      "term": "상신",
+      "definition": "회사의 업무나 안건을 상급자에게 보고하여 승인을 요청하는 일",
+      "example": "이번 프로젝트 예산안을 팀장님께 상신하겠습니다.",
+      "tags": ["결재", "승인", "보고"]
+    },
+    {
+      "term_id": "approval_002",
+      "category": "approval",
+      "term": "재가",
+      "definition": "상급자가 하급자의 보고나 제안을 승인하는 일",
+      "example": "부장님의 재가를 받아 프로젝트를 진행하겠습니다.",
+      "tags": ["승인", "허가", "결재"]
+    },
+    {
+      "term_id": "approval_003",
+      "category": "approval",
+      "term": "결재",
+      "definition": "공문서나 중요한 업무에 대해 책임자가 최종 승인하는 절차",
+      "example": "이 계약서는 대표이사의 결재가 필요합니다.",
+      "tags": ["승인", "서명", "최종확인"]
+    },
+    {
+      "term_id": "business_001",
+      "category": "business",
+      "term": "KPI",
+      "definition": "Key Performance Indicator의 줄임말로 핵심성과지표를 의미",
+      "example": "이번 분기 KPI 달성률이 95%입니다.",
+      "tags": ["성과", "지표", "목표"]
+    },
+    {
+      "term_id": "business_002",
+      "category": "business",
+      "term": "벤치마킹",
+      "definition": "다른 회사의 우수한 사례나 성과를 참고하여 자사에 적용하는 것",
+      "example": "경쟁사의 마케팅 전략을 벤치마킹해보겠습니다.",
+      "tags": ["참고", "분석", "비교"]
+    },
+    {
+      "term_id": "marketing_001",
+      "category": "marketing",
+      "term": "리드",
+      "definition": "잠재 고객이나 영업 기회를 의미하는 마케팅 용어",
+      "example": "이번 캠페인으로 50개의 새로운 리드를 확보했습니다.",
+      "tags": ["고객", "영업", "기회"]
+    },
+    {
+      "term_id": "marketing_002",
+      "category": "marketing",
+      "term": "컨버전",
+      "definition": "방문자나 잠재고객이 실제 고객으로 전환되는 것",
+      "example": "웹사이트의 컨버전율이 3%로 증가했습니다.",
+      "tags": ["전환", "고객", "성과"]
+    },
+    {
+      "term_id": "it_001",
+      "category": "it",
+      "term": "배포",
+      "definition": "개발한 소프트웨어를 실제 서비스 환경에 적용하는 과정",
+      "example": "새로운 기능을 내일 배포할 예정입니다.",
+      "tags": ["개발", "출시", "업데이트"]
+    },
+    {
+      "term_id": "it_002",
+      "category": "it",
+      "term": "버그",
+      "definition": "소프트웨어의 오류나 결함을 의미하는 용어",
+      "example": "로그인 기능에서 버그가 발견되었습니다.",
+      "tags": ["오류", "결함", "수정"]
+    },
+    {
+      "term_id": "hr_001",
+      "category": "hr",
+      "term": "온보딩",
+      "definition": "새로 입사한 직원이 회사에 적응할 수 있도록 돕는 교육 과정",
+      "example": "신입사원들의 온보딩 프로그램이 다음 주에 시작됩니다.",
+      "tags": ["교육", "적응", "신입"]
+    },
+    {
+      "term_id": "hr_002",
+      "category": "hr",
+      "term": "1on1",
+      "definition": "상사와 부하직원이 일대일로 진행하는 정기적인 면담",
+      "example": "매월 첫째 주에 팀장님과 1on1 미팅이 있습니다.",
+      "tags": ["면담", "소통", "피드백"]
+    },
+    {
+      "term_id": "communication_001",
+      "category": "communication",
+      "term": "브리핑",
+      "definition": "중요한 정보나 상황을 간단명료하게 보고하는 것",
+      "example": "회의 전에 프로젝트 현황을 브리핑해드리겠습니다.",
+      "tags": ["보고", "요약", "설명"]
+    },
+    {
+      "term_id": "communication_002",
+      "category": "communication",
+      "term": "에스컬레이션",
+      "definition": "문제나 이슈를 상위 관리자에게 보고하여 해결을 요청하는 것",
+      "example": "이 문제는 에스컬레이션이 필요할 것 같습니다.",
+      "tags": ["보고", "상승", "해결"]
+    },
+    {
+      "term_id": "approval_004",
+      "category": "approval",
+      "term": "시말서",
+      "definition": "자신의 과실을 인정하고 일이 일어난 사유를 기재한 문서",
+      "example": "김대리는 납기 지연에 대한 시말서를 작성하여 제출했다.",
+      "tags": ["과실", "사유서", "문서"]
+    },
+    {
+      "term_id": "approval_005",
+      "category": "approval",
+      "term": "경위서",
+      "definition": "사건이나 사고 발생 시 그 시작부터 끝까지의 과정을 작성한 문서",
+      "example": "이번 프로젝트의 문제 발생 경위서를 작성하여 보고했다.",
+      "tags": ["사건", "보고서", "문서"]
+    },
+    {
+      "term_id": "approval_006",
+      "category": "approval",
+      "term": "품의서",
+      "definition": "결재권자에게 업무를 승인해 줄 것을 요청하는 문서",
+      "example": "새로운 장비 구매를 위한 품의서를 작성하여 상신했다.",
+      "tags": ["요청", "승인", "문서"]
+    },
+    {
+      "term_id": "approval_007",
+      "category": "approval",
+      "term": "결재",
+      "definition": "상사가 안건에 대해 검토 및 허가, 승인하는 과정을 의미",
+      "example": "부장님께서는 제출된 보고서를 결재하셨다.",
+      "tags": ["검토", "허가", "승인"]
+    },
+    {
+      "term_id": "business_003",
+      "category": "business",
+      "term": "결제",
+      "definition": "대금을 주고받아 거래 관계를 끝맺는 것으로 돈과 관련된 용어",
+      "example": "이번 달 카드 대금 결제일이 다가왔다.",
+      "tags": ["대금", "거래", "돈"]
+    },
+    {
+      "term_id": "approval_008",
+      "category": "approval",
+      "term": "상신",
+      "definition": "상사에게 의견이나 사정을 글이나 말로 보고하는 것",
+      "example": "신규 사업 계획을 상사에게 상신했다.",
+      "tags": ["보고", "의견", "상사"]
+    },
+    {
+      "term_id": "approval_009",
+      "category": "approval",
+      "term": "품의",
+      "definition": "회사에서 부서 결정권자에게 의견을 서면화하여 기안하고 승인받는 일련의 절차",
+      "example": "해외 출장을 가기 위해 품의를 올렸다.",
+      "tags": ["기안", "승인", "절차"]
+    },
+    {
+      "term_id": "approval_010",
+      "category": "approval",
+      "term": "재가",
+      "definition": "결재권을 가지고 있는 자에게 안건을 허락하여 승인",
+      "example": "사장님의 재가가 떨어져 프로젝트를 진행할 수 있게 되었다.",
+      "tags": ["결재권", "허락", "승인"]
+    },
+    {
+      "term_id": "communication_003",
+      "category": "communication",
+      "term": "컨펌(Confirm)",
+      "definition": "회사에서 작성하는 문서나 업무를 상사에게 확인 또는 승인받는 것",
+      "example": "회의록 내용을 팀장님께 컨펌받았다.",
+      "tags": ["확인", "승인", "상사"]
+    },
+    {
+      "term_id": "approval_011",
+      "category": "approval",
+      "term": "기안",
+      "definition": "사업이나 활동 계획의 초안을 만들거나 그 초안을 뜻함",
+      "example": "신규 마케팅 캠페인 기안을 작성 중이다.",
+      "tags": ["초안", "계획", "문서"]
+    },
+    {
+      "term_id": "approval_012",
+      "category": "approval",
+      "term": "결재선",
+      "definition": "결재가 이루어지는 과정이나 절차를 말함",
+      "example": "이 문서는 결재선이 복잡해서 시간이 오래 걸린다.",
+      "tags": ["결재", "과정", "절차"]
+    },
+    {
+      "term_id": "approval_013",
+      "category": "approval",
+      "term": "선결",
+      "definition": "결재선에 따라 문서 전달(기안자 팀장 본부장 대표)하는 가장 일반적인 결재 방식",
+      "example": "이 보고서는 선결 방식으로 진행될 예정이다.",
+      "tags": ["결재", "결재선", "방식"]
+    },
+    {
+      "term_id": "approval_014",
+      "category": "approval",
+      "term": "전결",
+      "definition": "중간관리자가 결재하는 것으로, 최종 결재권자의 부담을 줄여주며 반복적이고 일상적인 내용에 사용",
+      "example": "소액 지출은 팀장님 전결로 처리된다.",
+      "tags": ["결재", "중간관리자", "권한"]
+    },
+    {
+      "term_id": "approval_015",
+      "category": "approval",
+      "term": "대결",
+      "definition": "대신하여 결재하는 것. 보통 담당자가 부재중(휴가, 휴직, 출장 등)인 경우 사용",
+      "example": "부장님께서 출장 중이셔서 차장님께서 대결하셨다.",
+      "tags": ["결재", "대신", "부재중"]
+    },
+    {
+      "term_id": "approval_016",
+      "category": "approval",
+      "term": "후결",
+      "definition": "최종 결재권자가 결재하기 전에 미리 업무를 진행하는 것. 보통 가벼운 업무에 적용",
+      "example": "급한 건이라 일단 후결로 진행하고 나중에 정식 결재를 받았다.",
+      "tags": ["결재", "선진행", "업무"]
+    },
+    {
+      "term_id": "approval_017",
+      "category": "approval",
+      "term": "반려",
+      "definition": "주로 윗사람이나 상급 기관에 제출한 문서를 처리하지 않고 되돌려주는 것",
+      "example": "제출된 기안서가 내용 미비로 반려되었다.",
+      "tags": ["거절", "문서", "반환"]
+    },
+    {
+      "term_id": "approval_018",
+      "category": "approval",
+      "term": "후열",
+      "definition": "결재가 완료된 뒤 따로 결재를 살펴보는 것. 전결이나 선결 권한 행사로 인해 결재 권한을 행사하지 못한 인원들이 승인 또는 반려 처리되지 않고 후열 처리됨",
+      "example": "결재가 완료된 문서는 후열로 확인했다.",
+      "tags": ["결재완료", "확인", "열람"]
+    },
+    {
+      "term_id": "approval_019",
+      "category": "approval",
+      "term": "승인",
+      "definition": "결재 문서에서 제안된 내용이나 요청사항을 검토한 후, 적절하다고 판단되면 자신의 결재 차례 이를 허가하는 행위",
+      "example": "프로젝트 예산이 최종 승인되었다.",
+      "tags": ["허가", "결재", "문서"]
+    },
+    {
+      "term_id": "approval_020",
+      "category": "approval",
+      "term": "보류",
+      "definition": "상신된 문서에 대해 '승인' 혹은 '반려' 결정을 내리기 어려울 경우 결재를 잠시 중지시켜 문서를 보류처리하는 것",
+      "example": "해당 안건은 추가 검토가 필요하여 보류되었다.",
+      "tags": ["중지", "결재", "검토"]
+    },
+    {
+      "term_id": "approval_021",
+      "category": "approval",
+      "term": "수신",
+      "definition": "내부 결재를 완료된 후 다른 부서에게 그 결재 문서를 넘겨 그 부서에서 결재가 최종 완결되는 경우에 사용",
+      "example": "해당 문서는 인사팀으로 수신되었다.",
+      "tags": ["문서전달", "부서협조", "결재완료"]
+    },
+    {
+      "term_id": "approval_022",
+      "category": "approval",
+      "term": "협조 결재",
+      "definition": "수신 부서로 업무 협조를 요청할 때 사용되는 결재 유형",
+      "example": "마케팅 부서에 협조 결재를 요청했다.",
+      "tags": ["업무협조", "요청", "결재"]
+    },
+    {
+      "term_id": "approval_023",
+      "category": "approval",
+      "term": "합의",
+      "definition": "타 부서와의 협력이 필요하거나 동의를 얻어야 할 경우 합의자가 행하는 결재 방식",
+      "example": "유관 부서와의 합의를 거쳐 최종 결정을 내렸다.",
+      "tags": ["협력", "동의", "결재"]
+    },
+    {
+      "term_id": "approval_024",
+      "category": "approval",
+      "term": "열람",
+      "definition": "결재 문서가 상신되는 시점부터 종결되기까지 열람자가 해당 문서를 조회할 수 있는 것",
+      "example": "해당 문서는 열람 권한이 있는 직원만 볼 수 있다.",
+      "tags": ["조회", "문서", "권한"]
+    },
+    {
+      "term_id": "approval_025",
+      "category": "approval",
+      "term": "공람",
+      "definition": "결재 문서가 종결된 이후부터 공람자가 해당 문서를 조회할 수 있는 것",
+      "example": "결재 완료된 문서는 전체 공람되었다.",
+      "tags": ["조회", "공유", "결재완료"]
+    },
+    {
+      "term_id": "time_001",
+      "category": "time",
+      "term": "전일",
+      "definition": "하루 전날",
+      "example": "전일 회의록을 확인해 주세요.",
+      "tags": ["어제", "시간", "날짜"]
+    },
+    {
+      "term_id": "time_002",
+      "category": "time",
+      "term": "작일",
+      "definition": "하루 전 날 (어제)",
+      "example": "작일 업무 보고서를 제출했다.",
+      "tags": ["어제", "시간", "날짜"]
+    },
+    {
+      "term_id": "time_003",
+      "category": "time",
+      "term": "금일",
+      "definition": "오늘",
+      "example": "금일 중으로 업무를 마무리할 예정이다.",
+      "tags": ["오늘", "시간", "날짜"]
+    },
+    {
+      "term_id": "time_004",
+      "category": "time",
+      "term": "당일",
+      "definition": "오늘 or 일이 있는 바로 그날",
+      "example": "회의는 당일 진행될 예정이다.",
+      "tags": ["오늘", "시간", "날짜"]
+    },
+    {
+      "term_id": "time_005",
+      "category": "time",
+      "term": "전주",
+      "definition": "지난 주",
+      "example": "전주 실적을 분석했다.",
+      "tags": ["지난주", "시간", "주간"]
+    },
+    {
+      "term_id": "time_006",
+      "category": "time",
+      "term": "작주",
+      "definition": "지난 주",
+      "example": "작주에 있었던 미팅 내용을 정리했다.",
+      "tags": ["지난주", "시간", "주간"]
+    },
+    {
+      "term_id": "time_007",
+      "category": "time",
+      "term": "금주",
+      "definition": "이번 주",
+      "example": "금주 내로 프로젝트를 완료해야 한다.",
+      "tags": ["이번주", "시간", "주간"]
+    },
+    {
+      "term_id": "time_008",
+      "category": "time",
+      "term": "당주",
+      "definition": "이번 주",
+      "example": "당주 업무 계획을 세웠다.",
+      "tags": ["이번주", "시간", "주간"]
+    },
+    {
+      "term_id": "time_009",
+      "category": "time",
+      "term": "전월",
+      "definition": "지난 달",
+      "example": "전월 매출이 목표치를 달성했다.",
+      "tags": ["지난달", "시간", "월간"]
+    },
+    {
+      "term_id": "time_010",
+      "category": "time",
+      "term": "작월",
+      "definition": "지난 달",
+      "example": "작월에 진행된 캠페인 결과를 보고했다.",
+      "tags": ["지난달", "시간", "월간"]
+    },
+    {
+      "term_id": "time_011",
+      "category": "time",
+      "term": "금월",
+      "definition": "이번 달",
+      "example": "금월 목표 달성을 위해 노력 중이다.",
+      "tags": ["이번달", "시간", "월간"]
+    },
+    {
+      "term_id": "time_012",
+      "category": "time",
+      "term": "당월",
+      "definition": "이번 달",
+      "example": "당월 실적을 중간 점검했다.",
+      "tags": ["이번달", "시간", "월간"]
+    },
+    {
+      "term_id": "time_013",
+      "category": "time",
+      "term": "전년",
+      "definition": "지난 해",
+      "example": "전년 대비 매출이 증가했다.",
+      "tags": ["지난해", "시간", "연간"]
+    },
+    {
+      "term_id": "time_014",
+      "category": "time",
+      "term": "작년",
+      "definition": "지난 해",
+      "example": "작년에 입사한 신입사원이다.",
+      "tags": ["지난해", "시간", "연간"]
+    },
+    {
+      "term_id": "time_015",
+      "category": "time",
+      "term": "금년",
+      "definition": "올해",
+      "example": "금년 사업 계획을 발표했다.",
+      "tags": ["올해", "시간", "연간"]
+    },
+    {
+      "term_id": "time_016",
+      "category": "time",
+      "term": "당년",
+      "definition": "올해",
+      "example": "당년 목표 달성을 위해 최선을 다하고 있다.",
+      "tags": ["올해", "시간", "연간"]
+    },
+    {
+      "term_id": "time_017",
+      "category": "time",
+      "term": "차주",
+      "definition": "다음 주",
+      "example": "차주에 미팅이 예정되어 있다.",
+      "tags": ["다음주", "시간", "주간"]
+    },
+    {
+      "term_id": "time_018",
+      "category": "time",
+      "term": "명주",
+      "definition": "다음 주",
+      "example": "명주까지 보고서를 제출해야 한다.",
+      "tags": ["다음주", "시간", "주간"]
+    },
+    {
+      "term_id": "time_019",
+      "category": "time",
+      "term": "내주",
+      "definition": "다음 주",
+      "example": "내주에 있을 워크숍 준비를 시작했다.",
+      "tags": ["다음주", "시간", "주간"]
+    },
+    {
+      "term_id": "time_020",
+      "category": "time",
+      "term": "익주",
+      "definition": "다음 주",
+      "example": "익주에 최종 발표가 있다.",
+      "tags": ["다음주", "시간", "주간"]
+    },
+    {
+      "term_id": "time_021",
+      "category": "time",
+      "term": "차월",
+      "definition": "다음 달",
+      "example": "차월부터 새로운 프로젝트가 시작된다.",
+      "tags": ["다음달", "시간", "월간"]
+    },
+    {
+      "term_id": "time_022",
+      "category": "time",
+      "term": "명월",
+      "definition": "다음 달",
+      "example": "명월에 있을 정기 평가를 준비 중이다.",
+      "tags": ["다음달", "시간", "월간"]
+    },
+    {
+      "term_id": "time_023",
+      "category": "time",
+      "term": "내월",
+      "definition": "다음 달",
+      "example": "내월부터 새로운 시스템이 도입된다.",
+      "tags": ["다음달", "시간", "월간"]
+    },
+    {
+      "term_id": "time_024",
+      "category": "time",
+      "term": "익월",
+      "definition": "다음 달",
+      "example": "익월에 해외 출장이 예정되어 있다.",
+      "tags": ["다음달", "시간", "월간"]
+    },
+    {
+      "term_id": "time_025",
+      "category": "time",
+      "term": "차년",
+      "definition": "다음 해",
+      "example": "차년도 사업 계획을 수립했다.",
+      "tags": ["다음해", "시간", "연간"]
+    },
+    {
+      "term_id": "time_026",
+      "category": "time",
+      "term": "명년",
+      "definition": "다음 해",
+      "example": "명년에 있을 신제품 출시를 준비 중이다.",
+      "tags": ["다음해", "시간", "연간"]
+    },
+    {
+      "term_id": "time_027",
+      "category": "time",
+      "term": "내년",
+      "definition": "다음 해",
+      "example": "내년에는 더 좋은 성과를 낼 것이다.",
+      "tags": ["다음해", "시간", "연간"]
+    },
+    {
+      "term_id": "time_028",
+      "category": "time",
+      "term": "익년",
+      "definition": "다음 해",
+      "example": "익년에 있을 정기 인사를 앞두고 있다.",
+      "tags": ["다음해", "시간", "연간"]
+    },
+    {
+      "term_id": "time_029",
+      "category": "time",
+      "term": "익일",
+      "definition": "다음 날",
+      "example": "익일 오전까지 자료를 보내드리겠습니다.",
+      "tags": ["내일", "시간", "날짜"]
+    },
+    {
+      "term_id": "time_030",
+      "category": "time",
+      "term": "연도",
+      "definition": "사무나 회계 결산 따위의 처리를 위해 편의상 구분한 1년 동안의 기간",
+      "example": "2024 연도 결산 보고서를 작성했다.",
+      "tags": ["회계", "결산", "기간"]
+    },
+    {
+      "term_id": "communication_004",
+      "category": "communication",
+      "term": "CC (Carbon Copy)",
+      "definition": "참조. 본래 수신인 외에 추가로 다른 수신인을 지정해 발신하는 것",
+      "example": "팀장님께 보고서를 보내면서 팀원들에게 CC를 걸었다.",
+      "tags": ["이메일", "참조", "공유"]
+    },
+    {
+      "term_id": "communication_005",
+      "category": "communication",
+      "term": "BCC (Blind Carbon Copy)",
+      "definition": "숨은 참조. BCC에 포함된 이에게는 메일 내용이 공유되지만 CC와 달리 이메일 수신인에게 숨은 참조 수신인의 이메일 주소는 보이지 않는 것",
+      "example": "전체 공지 메일을 보낼 때 관련 부서장들을 BCC에 추가했다.",
+      "tags": ["이메일", "숨은참조", "보안"]
+    },
+    {
+      "term_id": "communication_006",
+      "category": "communication",
+      "term": "ASAP (As Soon As Possible)",
+      "definition": "가능한 최대한 빨리. 아삽, 에셉, 에이셉 등으로 불림",
+      "example": "이 자료는 ASAP으로 처리해야 한다.",
+      "tags": ["긴급", "요청", "빠르게"]
+    },
+    {
+      "term_id": "communication_007",
+      "category": "communication",
+      "term": "러프하게",
+      "definition": "구체적인 내용이 포함되지 않은, 대략적이고 포괄적인 형태",
+      "example": "일단 러프하게 아이디어를 스케치해 보자.",
+      "tags": ["대략", "개요", "초안"]
+    },
+    {
+      "term_id": "business_004",
+      "category": "business",
+      "term": "린하게",
+      "definition": "업무를 잘게 나누어 군더더기 없이 효율적으로 진행하는 것",
+      "example": "린하게 업무를 처리하여 시간을 절약했다.",
+      "tags": ["효율", "낭비제거", "업무방식"]
+    },
+    {
+      "term_id": "business_005",
+      "category": "business",
+      "term": "펜딩 (Pending)",
+      "definition": "진행하던 업무를 잠시 보류하는 것",
+      "example": "해당 안건은 현재 펜딩 상태이다.",
+      "tags": ["보류", "중단", "대기"]
+    },
+    {
+      "term_id": "business_006",
+      "category": "business",
+      "term": "픽스 (Fix)",
+      "definition": "최종 결정을 그대로 진행하는 것",
+      "example": "회의에서 결정된 사항은 픽스되었다.",
+      "tags": ["확정", "결정", "최종"]
+    },
+    {
+      "term_id": "communication_008",
+      "category": "communication",
+      "term": "아젠다 (Agenda)",
+      "definition": "회의 안건, 수행해야 할 업무 내용을 정리한 항목",
+      "example": "오늘 회의 아젠다를 미리 공유했다.",
+      "tags": ["회의", "안건", "의제"]
+    },
+    {
+      "term_id": "communication_009",
+      "category": "communication",
+      "term": "팔로우업 (Follow-up)",
+      "definition": "업무의 진행 상황을 지속적으로 확인하고 관리하면서 진행 내용을 상사와 팀원들에게 공유하는 것",
+      "example": "고객 문의에 대한 팔로우업을 철저히 했다.",
+      "tags": ["후속조치", "진행상황", "관리"]
+    },
+    {
+      "term_id": "business_007",
+      "category": "business",
+      "term": "어레인지 (Arrange)",
+      "definition": "업무 상황과 문맥에 따라 다양하게 해석. 미팅을 추진하거나 자료를 정리해 전달하는 것",
+      "example": "다음 주 미팅 일정을 어레인지했다.",
+      "tags": ["준비", "정리", "조정"]
+    },
+    {
+      "term_id": "hr_003",
+      "category": "hr",
+      "term": "TFT (Task Force Team)",
+      "definition": "특정 프로젝트를 위해 임시로 꾸려진 팀",
+      "example": "신제품 개발을 위해 TFT가 구성되었다.",
+      "tags": ["임시조직", "프로젝트", "팀"]
+    },
+    {
+      "term_id": "hr_004",
+      "category": "hr",
+      "term": "PM (Project Manager)",
+      "definition": "프로젝트 진행 전반을 책임지는 사람",
+      "example": "이번 프로젝트의 PM은 김대리이다.",
+      "tags": ["프로젝트관리자", "책임자", "역할"]
+    },
+    {
+      "term_id": "hr_005",
+      "category": "hr",
+      "term": "R&R (Role & Responsibility)",
+      "definition": "역할과 책임. 팀 내에서 자신에게 주어진 역할을 성실히 수행하는 것",
+      "example": "각 팀원의 R&R을 명확히 하여 업무 효율을 높였다.",
+      "tags": ["역할", "책임", "업무분장"]
+    },
+    {
+      "term_id": "business_008",
+      "category": "business",
+      "term": "마일스톤 (Milestone)",
+      "definition": "이정표. 단기적 실적 목표나 사업 계획. 프로젝트 진행 시 특기할만한 사건",
+      "example": "프로젝트의 첫 번째 마일스톤을 달성했다.",
+      "tags": ["이정표", "목표", "프로젝트"]
+    },
+    {
+      "term_id": "communication_010",
+      "category": "communication",
+      "term": "컨센서스 (Consensus)",
+      "definition": "동의, 합의",
+      "example": "팀원들 간의 컨센서스를 통해 최종 결정을 내렸다.",
+      "tags": ["합의", "동의", "의사결정"]
+    },
+    {
+      "term_id": "business_009",
+      "category": "business",
+      "term": "퇴청",
+      "definition": "관청에서 근무를 마치고 퇴근",
+      "example": "오늘은 일찍 퇴청할 예정이다.",
+      "tags": ["퇴근", "업무종료", "관공서"]
+    },
+    {
+      "term_id": "business_010",
+      "category": "business",
+      "term": "포괄",
+      "definition": "일정한 대상, 현상을 어떤 범위에 모두 넣음",
+      "example": "이 계약은 모든 비용을 포괄한다.",
+      "tags": ["포함", "범위", "전체"]
+    },
+    {
+      "term_id": "communication_011",
+      "category": "communication",
+      "term": "표제",
+      "definition": "메일 제목",
+      "example": "메일 표제를 명확하게 작성해 주세요.",
+      "tags": ["이메일", "제목", "작성"]
+    },
+    {
+      "term_id": "communication_012",
+      "category": "communication",
+      "term": "필히",
+      "definition": "꼭, 무슨 일이 있어도",
+      "example": "이 서류는 필히 제출해야 한다.",
+      "tags": ["필수", "의무", "강조"]
+    },
+    {
+      "term_id": "communication_013",
+      "category": "communication",
+      "term": "하기",
+      "definition": "아래 내용",
+      "example": "하기 내용을 참고해 주세요.",
+      "tags": ["아래", "참고", "문서"]
+    },
+    {
+      "term_id": "hr_006",
+      "category": "hr",
+      "term": "근로자",
+      "definition": "직업의 종류를 불문하고 사업 또는 사업장에서 임금을 목적으로 근로를 제공하는자",
+      "example": "모든 근로자는 근로기준법의 보호를 받는다.",
+      "tags": ["직원", "노동", "임금"]
+    },
+    {
+      "term_id": "hr_007",
+      "category": "hr",
+      "term": "정규직 근로자",
+      "definition": "고용계약에 업무 종료 날짜가 없는 근로자",
+      "example": "그는 3개월 수습 기간을 거쳐 정규직 근로자로 전환되었다.",
+      "tags": ["고용형태", "정규직", "계약"]
+    },
+    {
+      "term_id": "hr_008",
+      "category": "hr",
+      "term": "비정규직 근로자",
+      "definition": "고용계약에 업무 종료 날짜가 있는 근로자",
+      "example": "비정규직 근로자의 처우 개선이 필요하다.",
+      "tags": ["고용형태", "비정규직", "계약"]
+    },
+    {
+      "term_id": "hr_009",
+      "category": "hr",
+      "term": "한시적 근로자",
+      "definition": "기간제근로자, 계약반복 갱신근로자, 비자발적이고 비경제적사유로 계속 근무를 기대할 수 없는 근로자",
+      "example": "이 프로젝트는 한시적 근로자를 채용하여 진행될 예정이다.",
+      "tags": ["기간제", "계약직", "고용형태"]
+    },
+    {
+      "term_id": "hr_010",
+      "category": "hr",
+      "term": "시간제 근로자",
+      "definition": "1주에 36시간 미만근로, 근로시간이 다른 근로자의 소정근로시간보다 짧은 근로자",
+      "example": "시간제 근로자도 4대 보험에 가입할 수 있다.",
+      "tags": ["파트타임", "단시간근로", "고용형태"]
+    },
+    {
+      "term_id": "hr_011",
+      "category": "hr",
+      "term": "비전형 근로자",
+      "definition": "파견근로자, 용역근로자, 가정내근로자, 일일근로자",
+      "example": "비전형 근로자의 고용 안정성 문제가 대두되고 있다.",
+      "tags": ["파견", "용역", "고용형태"]
+    },
+    {
+      "term_id": "hr_012",
+      "category": "hr",
+      "term": "단시간 근로자",
+      "definition": "1주 동안의 소정근로시간이 그 사업장에서 같은 종류의 업무에 종사하는 통상 근로자의 1주간 소정근로시간보다 짧은 근로자",
+      "example": "단시간 근로자도 퇴직금을 받을 수 있다.",
+      "tags": ["파트타임", "소정근로시간", "고용형태"]
+    },
+    {
+      "term_id": "hr_013",
+      "category": "hr",
+      "term": "인사관리",
+      "definition": "조직의 목표달성을 위한 인적자원의 확보, 개발, 보상, 유지를 여러 환경적 조건과 관련하여 계획, 조직, 지휘, 조정, 통제, 관리하는 체계",
+      "example": "인사관리는 기업의 핵심 역량 중 하나이다.",
+      "tags": ["인적자원", "HRM", "조직관리"]
+    },
+    {
+      "term_id": "hr_014",
+      "category": "hr",
+      "term": "직무 (JOB)",
+      "definition": "조직의 구성원이 맡고 있는 담당업무",
+      "example": "그의 직무는 마케팅 전략 수립이다.",
+      "tags": ["업무", "담당", "역할"]
+    },
+    {
+      "term_id": "hr_015",
+      "category": "hr",
+      "term": "직급 (JOB Grade)",
+      "definition": "조직원의 직장내의 지위, 레벨",
+      "example": "그는 과장 직급으로 승진했다.",
+      "tags": ["지위", "레벨", "승진"]
+    },
+    {
+      "term_id": "hr_016",
+      "category": "hr",
+      "term": "직책 (RESPONSIBILITY, DUTY)",
+      "definition": "어떤 직무를 수행함에 있어 권한과 책임을 동반하는 역할",
+      "example": "팀장이라는 직책은 막중한 책임감을 요구한다.",
+      "tags": ["역할", "권한", "책임"]
+    },
+    {
+      "term_id": "hr_017",
+      "category": "hr",
+      "term": "직함 (Title)",
+      "definition": "맡고 있는 직급이나 직위, 직책의 이름, 호칭",
+      "example": "그의 정식 직함은 이사이다.",
+      "tags": ["호칭", "직위", "명칭"]
+    },
+    {
+      "term_id": "hr_018",
+      "category": "hr",
+      "term": "인사마감일",
+      "definition": "경영과 인사담당자가 모든 직원의 업무와 인사 사항을 최종 처리하는 마감일",
+      "example": "이번 달 인사마감일은 25일이다.",
+      "tags": ["마감일", "인사", "처리"]
+    },
+    {
+      "term_id": "business_011",
+      "category": "business",
+      "term": "생산성",
+      "definition": "일정한 기간 동안 생산한 제품, 서비스 혹은 결과물의 양과 품질에 비례해 제품 혹은 서비스를 만들어 내는 능력",
+      "example": "생산성 향상을 위해 새로운 시스템을 도입했다.",
+      "tags": ["효율", "성과", "능력"]
+    },
+    {
+      "term_id": "hr_019",
+      "category": "hr",
+      "term": "직원감독",
+      "definition": "상급자가 직속 부하직원의 업무 수행 상황과 직무 수행 능력을 감시하고 지도하는 일",
+      "example": "팀장은 팀원들의 업무를 직원감독하고 피드백을 제공했다.",
+      "tags": ["관리", "지도", "피드백"]
+    },
+    {
+      "term_id": "hr_020",
+      "category": "hr",
+      "term": "인사문제",
+      "definition": "기업이나 조직에서 발생하는 인사 관련 문제",
+      "example": "최근 인사문제로 인해 직원들의 불만이 많다.",
+      "tags": ["인사", "문제", "갈등"]
+    },
+    {
+      "term_id": "hr_021",
+      "category": "hr",
+      "term": "경력개발",
+      "definition": "직원 개인이 자기 발전을 위해 자신의 역량을 성장시키고 경력을 개발하는 것",
+      "example": "회사는 직원들의 경력개발을 위한 다양한 프로그램을 지원한다.",
+      "tags": ["역량", "성장", "개발"]
+    },
+    {
+      "term_id": "hr_022",
+      "category": "hr",
+      "term": "초과근무수당",
+      "definition": "직원이 정해진 근무시간 내에서 초과로 근무한 것에 대한 보상금",
+      "example": "야근 시에는 초과근무수당이 지급된다.",
+      "tags": ["야근", "수당", "보상"]
+    },
+    {
+      "term_id": "business_012",
+      "category": "business",
+      "term": "원리금",
+      "definition": "대출 등에서 원금과 이자를 합친 총 금액",
+      "example": "매달 대출 원리금을 상환하고 있다.",
+      "tags": ["대출", "원금", "이자"]
+    },
+    {
+      "term_id": "hr_023",
+      "category": "hr",
+      "term": "국내근로자",
+      "definition": "해당 국가 내에서 근로하는 국민직원",
+      "example": "국내근로자 채용을 확대할 계획이다.",
+      "tags": ["채용", "국민", "직원"]
+    },
+    {
+      "term_id": "hr_024",
+      "category": "hr",
+      "term": "인사총무",
+      "definition": "인사, 경리, 총무, 시설 관리 같은 조직 전반적인 관리를 담당하는 부서 또는 직무",
+      "example": "인사총무팀에서 모든 행정 업무를 처리한다.",
+      "tags": ["총무", "인사", "관리부서"]
+    },
+    {
+      "term_id": "hr_025",
+      "category": "hr",
+      "term": "기술자격증",
+      "definition": "직무 수행에 필요한 기술적인 자격을 증명하기 위해 시험을 통과한 증서",
+      "example": "그는 여러 기술자격증을 보유하고 있다.",
+      "tags": ["자격증", "기술", "증명"]
+    },
+    {
+      "term_id": "hr_026",
+      "category": "hr",
+      "term": "인사정보시스템",
+      "definition": "기업이나 조직에서 직원의 정보 관리를 위한 컴퓨터 시스템",
+      "example": "인사정보시스템을 통해 직원들의 정보를 효율적으로 관리한다.",
+      "tags": ["HRIS", "시스템", "정보관리"]
+    },
+    {
+      "term_id": "hr_027",
+      "category": "hr",
+      "term": "평가지표",
+      "definition": "직원의 업무 성과를 평가하기 위해 사용하는 기준",
+      "example": "새로운 평가지표를 도입하여 객관적인 평가를 실시했다.",
+      "tags": ["성과평가", "기준", "지표"]
+    },
+    {
+      "term_id": "hr_028",
+      "category": "hr",
+      "term": "출근부",
+      "definition": "직원들의 출근 여부와 출근 시간을 기록하는 부서 또는 문서",
+      "example": "매일 아침 출근부에 서명해야 한다.",
+      "tags": ["근태", "기록", "출근"]
+    },
+    {
+      "term_id": "hr_029",
+      "category": "hr",
+      "term": "인사교육",
+      "definition": "조직 내 직원들의 역량과 업무 능력을 향상시키기 위한 교육",
+      "example": "신입사원들을 위한 인사교육이 진행되었다.",
+      "tags": ["교육", "역량강화", "훈련"]
+    },
+    {
+      "term_id": "hr_030",
+      "category": "hr",
+      "term": "수습직원",
+      "definition": "새로 입사한 직원이 일정 기간 동안 수습기간을 거쳐 확정적으로 채용되기 전의 신입 직원",
+      "example": "수습직원 기간 동안 열심히 배우고 있다.",
+      "tags": ["신입", "수습", "채용"]
+    },
+    {
+      "term_id": "hr_031",
+      "category": "hr",
+      "term": "친화적인 분위기",
+      "definition": "조직 내에서 사회적 환경이나 문화가 다르더라도 서로 이해하고 존중하는 분위기",
+      "example": "우리 회사는 친화적인 분위기에서 자유롭게 소통한다.",
+      "tags": ["조직문화", "소통", "분위기"]
+    },
+    {
+      "term_id": "hr_032",
+      "category": "hr",
+      "term": "인사결재관리",
+      "definition": "직원의 입사, 휴가, 수당 등 인사 문제에 대한 결재를 관리하는 부서나 시스템",
+      "example": "인사결재관리 시스템을 통해 휴가 신청이 간편해졌다.",
+      "tags": ["결재", "관리", "인사시스템"]
+    },
+    {
+      "term_id": "hr_033",
+      "category": "hr",
+      "term": "사내훈련",
+      "definition": "기업 내부에서 직원들의 역량과 능력을 향상시키기 위한 자체 교육",
+      "example": "사내훈련 프로그램을 통해 실무 역량을 강화했다.",
+      "tags": ["교육", "훈련", "역량강화"]
+    },
+    {
+      "term_id": "hr_034",
+      "category": "hr",
+      "term": "인사전문가",
+      "definition": "기업이나 조직에서 인사 업무를 전문적으로 처리하고 조언하는 인사 관련 전문가",
+      "example": "인사전문가의 조언을 받아 인사 제도를 개선했다.",
+      "tags": ["HR", "전문가", "인사담당자"]
+    },
+    {
+      "term_id": "hr_035",
+      "category": "hr",
+      "term": "명세서",
+      "definition": "직원들의 급여 내역이나 지출 내역 등을 자세하게 기술한 문서",
+      "example": "매달 급여 명세서를 확인한다.",
+      "tags": ["급여", "문서", "내역"]
+    },
+    {
+      "term_id": "hr_036",
+      "category": "hr",
+      "term": "인사영역",
+      "definition": "인사 관리에 사용되는 전반적인 영역",
+      "example": "인사영역은 채용, 교육, 평가, 보상 등으로 구성된다.",
+      "tags": ["인사", "분야", "관리"]
+    },
+    {
+      "term_id": "hr_037",
+      "category": "hr",
+      "term": "계약직",
+      "definition": "일정 기간 동안 제한적으로 고용되는 직원",
+      "example": "그는 1년 계약직으로 근무하고 있다.",
+      "tags": ["고용형태", "비정규직", "계약"]
+    },
+    {
+      "term_id": "hr_038",
+      "category": "hr",
+      "term": "인적자원",
+      "definition": "기업이나 조직에서 보유하고 있는 인력 자원을 말합니다.",
+      "example": "인적자원은 기업의 가장 중요한 자산이다.",
+      "tags": ["인력", "자원", "HR"]
+    },
+    {
+      "term_id": "hr_039",
+      "category": "hr",
+      "term": "인력개발",
+      "definition": "직원의 역량을 향상시켜 기업의 경쟁력을 강화하기 위한 교육 및 개발 제도를 말합니다.",
+      "example": "인력개발 프로그램을 통해 직원들의 전문성을 높였다.",
+      "tags": ["교육", "개발", "역량"]
+    },
+    {
+      "term_id": "business_013",
+      "category": "business",
+      "term": "방침수립",
+      "definition": "기업이나 조직에서 추구하는 방향성을 정하고 이를 실현하기 위한 계획을 수립하는 것을 말합니다.",
+      "example": "새로운 경영 방침수립을 위해 워크숍을 진행했다.",
+      "tags": ["전략", "계획", "정책"]
+    },
+    {
+      "term_id": "hr_040",
+      "category": "hr",
+      "term": "사내규정",
+      "definition": "조직 내에서 근무하는 직원들이 지켜야 할 규정을 말합니다.",
+      "example": "사내규정을 준수하여 업무에 임해야 한다.",
+      "tags": ["규정", "정책", "준수사항"]
+    },
+    {
+      "term_id": "hr_041",
+      "category": "hr",
+      "term": "인적성검사",
+      "definition": "직원의 인적성, 성격, 재능, 능력, 특성 등을 검사하는 시험을 말합니다.",
+      "example": "신입사원 채용 시 인적성검사를 실시한다.",
+      "tags": ["채용", "검사", "평가"]
+    },
+    {
+      "term_id": "hr_042",
+      "category": "hr",
+      "term": "인사유지",
+      "definition": "조직 내에서 충분한 수의 근로자를 유지하는 것을 말합니다.",
+      "example": "인사유지를 위해 직원 복지 향상에 힘쓰고 있다.",
+      "tags": ["인력유지", "이직방지", "복지"]
+    },
+    {
+      "term_id": "hr_043",
+      "category": "hr",
+      "term": "퇴직금",
+      "definition": "직원이 퇴사할 때 받는 보상금을 말합니다.",
+      "example": "퇴직금은 근로자의 중요한 권리이다.",
+      "tags": ["퇴사", "보상", "급여"]
+    },
+    {
+      "term_id": "hr_044",
+      "category": "hr",
+      "term": "급여체계",
+      "definition": "직원의 역량과 업무 성과에 따라 급여를 지급하는 제도를 말합니다.",
+      "example": "새로운 급여체계를 도입하여 직원들의 만족도를 높였다.",
+      "tags": ["임금", "보상", "제도"]
+    },
+    {
+      "term_id": "hr_045",
+      "category": "hr",
+      "term": "승진",
+      "definition": "직원이 기존 직급보다 상위 직급으로 승급하는 것을 말합니다.",
+      "example": "그는 이번 인사에서 대리로 승진했다.",
+      "tags": ["진급", "직급", "인사"]
+    },
+    {
+      "term_id": "hr_046",
+      "category": "hr",
+      "term": "인사위원회",
+      "definition": "기업이나 조직에서 인사과 업무를 총괄적으로 책임지는 부서나 위원회를 말합니다.",
+      "example": "인사위원회에서 징계 안건을 심의했다.",
+      "tags": ["위원회", "인사", "결정"]
+    },
+    {
+      "term_id": "hr_047",
+      "category": "hr",
+      "term": "인재",
+      "definition": "조직이나 기업에서 필요로 하는 인적 자원을 말합니다.",
+      "example": "우리 회사는 창의적인 인재를 찾고 있다.",
+      "tags": ["핵심인력", "채용", "인적자원"]
+    },
+    {
+      "term_id": "business_014",
+      "category": "business",
+      "term": "인허가",
+      "definition": "기업이나 조직에서 인원을 고용하거나 제품 이용을 위해 필요한 법적인 승인을 말합니다.",
+      "example": "사업 확장을 위해 정부의 인허가를 받았다.",
+      "tags": ["승인", "규제", "법률"]
+    },
+    {
+      "term_id": "hr_048",
+      "category": "hr",
+      "term": "채용절차",
+      "definition": "기업이나 조직에서 채용을 위해 거치는 절차를 말합니다.",
+      "example": "채용절차는 서류 전형, 면접, 최종 합격 순으로 진행된다.",
+      "tags": ["채용", "프로세스", "선발"]
+    },
+    {
+      "term_id": "marketing_003",
+      "category": "marketing",
+      "term": "프로모션",
+      "definition": "제품이나 서비스의 홍보 이벤트를 말합니다.",
+      "example": "신제품 출시 기념 프로모션을 진행했다.",
+      "tags": ["이벤트", "홍보", "판촉"]
+    },
+    {
+      "term_id": "business_015",
+      "category": "business",
+      "term": "자원봉사",
+      "definition": "개인이나 기업이 시간이나 노력, 물질 등의 자원으로 사회적 가치를 창출하는 지원 활동을 말합니다.",
+      "example": "주말에 자원봉사 활동에 참여했다.",
+      "tags": ["사회공헌", "봉사", "CSR"]
+    },
+    {
+      "term_id": "hr_049",
+      "category": "hr",
+      "term": "신입사원",
+      "definition": "새로 입사한 직원을 말합니다.",
+      "example": "신입사원 교육을 통해 회사에 적응하고 있다.",
+      "tags": ["신입", "채용", "직원"]
+    },
+    {
+      "term_id": "hr_050",
+      "category": "hr",
+      "term": "이직",
+      "definition": "다른 회사나 조직으로 이전하는 것을 말합니다.",
+      "example": "그는 더 좋은 기회를 찾아 이직을 결정했다.",
+      "tags": ["퇴사", "경력", "전환"]
+    },
+    {
+      "term_id": "hr_051",
+      "category": "hr",
+      "term": "전직원",
+      "definition": "기업이나 조직에서 정규로 근무하는 모든 직원을 말합니다.",
+      "example": "전직원이 참여하는 워크숍이 개최되었다.",
+      "tags": ["직원", "전체", "조직"]
+    },
+    {
+      "term_id": "hr_052",
+      "category": "hr",
+      "term": "인센티브",
+      "definition": "직원의 성과에 따라 추가 보상을 지급하는 제도 또는 그에 대한 보상을 말합니다.",
+      "example": "목표 달성 시 인센티브가 지급된다.",
+      "tags": ["성과급", "보상", "동기부여"]
+    },
+    {
+      "term_id": "business_016",
+      "category": "business",
+      "term": "계약서",
+      "definition": "기업과 직원 간 또는 기업과 거래처 간에 작성된 계약 문서를 말합니다.",
+      "example": "계약서를 꼼꼼히 검토한 후 서명했다.",
+      "tags": ["문서", "계약", "법률"]
+    },
+    {
+      "term_id": "hr_053",
+      "category": "hr",
+      "term": "임금체불",
+      "definition": "직원의 근로 대가인 임금을 정당한 시기에 지급하지 않는 것을 말합니다.",
+      "example": "임금체불 문제로 노동청에 신고했다.",
+      "tags": ["임금", "급여", "체불"]
+    },
+    {
+      "term_id": "hr_054",
+      "category": "hr",
+      "term": "사내교육",
+      "definition": "조직 내에서 직원들이 업무 능력을 강화하거나 직무 수행을 위한 교육을 말합니다.",
+      "example": "매주 사내교육을 통해 새로운 기술을 습득한다.",
+      "tags": ["교육", "훈련", "역량강화"]
+    },
+    {
+      "term_id": "hr_055",
+      "category": "hr",
+      "term": "석직",
+      "definition": "기존의 급여보다 상승된 금액을 직원에게 지급하는 것을 말합니다.",
+      "example": "그는 뛰어난 성과로 석직을 받았다.",
+      "tags": ["임금인상", "급여", "보상"]
+    },
+    {
+      "term_id": "hr_056",
+      "category": "hr",
+      "term": "불성실직원",
+      "definition": "직원의 성실하지 않은 태도로 인해 업무에 지장을 초래하는 경우를 말합니다.",
+      "example": "불성실직원에 대한 징계 절차가 진행되었다.",
+      "tags": ["근태", "징계", "직원"]
+    },
+    {
+      "term_id": "hr_057",
+      "category": "hr",
+      "term": "인사분야",
+      "definition": "인사 관리에 포함된 전반적인 분야를 말합니다.",
+      "example": "인사분야 전문성을 강화하기 위해 노력하고 있다.",
+      "tags": ["인사", "HR", "분야"]
+    },
+    {
+      "term_id": "hr_058",
+      "category": "hr",
+      "term": "평가",
+      "definition": "직원의 성과나 역량을 정량적·정성적으로 측정하여 평가하는 것을 말합니다.",
+      "example": "연말 평가는 객관적인 지표를 바탕으로 이루어진다.",
+      "tags": ["성과평가", "역량평가", "측정"]
+    },
+    {
+      "term_id": "hr_059",
+      "category": "hr",
+      "term": "전배(전환 배치)",
+      "definition": "동일 사업장 내에서 직종의 변경없이 근로자의 업무 위치를 바꿔주는 것",
+      "example": "그는 영업팀에서 마케팅팀으로 전배되었다.",
+      "tags": ["인사이동", "배치전환", "부서이동"]
+    },
+    {
+      "term_id": "hr_060",
+      "category": "hr",
+      "term": "전보(전직)",
+      "definition": "다른 직종의 업무를 부여하는 것",
+      "example": "그는 해외 지사로 전보 발령을 받았다.",
+      "tags": ["인사이동", "직무변경", "발령"]
+    },
+    {
+      "term_id": "hr_061",
+      "category": "hr",
+      "term": "전근",
+      "definition": "직종 변경없이 지역을 달리하는 사업장으로 이동 배치하는 것",
+      "example": "지방으로 전근을 가게 되어 이사를 준비 중이다.",
+      "tags": ["인사이동", "지역이동", "발령"]
+    },
+    {
+      "term_id": "hr_062",
+      "category": "hr",
+      "term": "전출",
+      "definition": "근로자가 원래 종사하던 기업에서의 근로자 지위를 그대로 유지하면서 일정 기간 동안 다른 기업으로 이동해 그 기업의 지휘, 명령을 받는 인사 이동",
+      "example": "그는 계열사로 전출되어 새로운 업무를 맡게 되었다.",
+      "tags": ["인사이동", "계열사", "파견"]
+    },
+    {
+      "term_id": "hr_063",
+      "category": "hr",
+      "term": "전적",
+      "definition": "근로자가 속한 원래 기업으로부터 다른 기업으로 옮겨서 해당 기업 업무에 종사하게 하는 것",
+      "example": "그는 자회사로 전적하여 근무하게 되었다.",
+      "tags": ["인사이동", "계열사", "이동"]
+    },
+    {
+      "term_id": "hr_064",
+      "category": "hr",
+      "term": "파견",
+      "definition": "원래 소속 기업에서 임금을 받으면서 일정 기간에 다른 기업에서 그 기업의 업무에 종사하다가 다시 원 기업으로 복귀하는 조건부 이동 배치",
+      "example": "그는 6개월간 해외 지사로 파견되었다.",
+      "tags": ["인사이동", "외부근무", "복귀"]
+    },
+    {
+      "term_id": "hr_065",
+      "category": "hr",
+      "term": "대기발령",
+      "definition": "보직 해임 혹은 직위 해제라고도 불리며, 업무상 필요성이나 징계 목적으로 업무를 부여하는 것이 적합하지 않아 해당 근로자의 근로 제공 의무를 일시적으로 중단시키는 것",
+      "example": "그는 비위 사실로 인해 대기발령을 받았다.",
+      "tags": ["징계", "보직해임", "인사조치"]
+    },
+    {
+      "term_id": "hr_066",
+      "category": "hr",
+      "term": "휴직",
+      "definition": "일시적인 사정으로 직무를 일정 기간 떠나 있는 것",
+      "example": "육아 휴직을 신청하여 아이를 돌보고 있다.",
+      "tags": ["휴가", "근무중단", "복지"]
+    },
+    {
+      "term_id": "marketing_004",
+      "category": "marketing",
+      "term": "KPI (Key Performance Indicator)",
+      "definition": "핵심 성과 지표",
+      "example": "이번 프로젝트의 KPI는 매출 10% 증가이다.",
+      "tags": ["성과", "지표", "목표"]
+    },
+    {
+      "term_id": "marketing_005",
+      "category": "marketing",
+      "term": "OKR (Objective Key Results)",
+      "definition": "목표 및 핵심 결과 지표",
+      "example": "팀의 OKR을 설정하고 목표 달성을 위해 노력했다.",
+      "tags": ["목표", "성과", "지표"]
+    },
+    {
+      "term_id": "marketing_006",
+      "category": "marketing",
+      "term": "MAU (Monthly Active User)",
+      "definition": "월간 활성 사용자",
+      "example": "우리 서비스의 MAU가 꾸준히 증가하고 있다.",
+      "tags": ["사용자", "지표", "분석"]
+    },
+    {
+      "term_id": "marketing_007",
+      "category": "marketing",
+      "term": "DAU (Daily Active Users)",
+      "definition": "일일 활성 유저",
+      "example": "DAU를 높이기 위한 마케팅 전략을 수립했다.",
+      "tags": ["사용자", "지표", "분석"]
+    },
+    {
+      "term_id": "marketing_008",
+      "category": "marketing",
+      "term": "ROAS (Return on Advertising Spend)",
+      "definition": "지불한 광고비 대비 생성된 총 매출 금액",
+      "example": "이번 광고 캠페인의 ROAS가 매우 높게 나왔다.",
+      "tags": ["광고", "수익률", "성과"]
+    },
+    {
+      "term_id": "marketing_009",
+      "category": "marketing",
+      "term": "CPA (Cost per Action)",
+      "definition": "광고주가 설정한 값과 일치하는 행동(action)을 유저가 한 건수에 따른 광고 비용",
+      "example": "CPA를 낮추기 위해 광고 효율을 개선했다.",
+      "tags": ["광고", "비용", "성과"]
+    },
+    {
+      "term_id": "marketing_010",
+      "category": "marketing",
+      "term": "CPC (Cost per Click)",
+      "definition": "클릭 단가",
+      "example": "CPC가 너무 높아서 광고 예산을 조정했다.",
+      "tags": ["광고", "비용", "클릭"]
+    },
+    {
+      "term_id": "marketing_011",
+      "category": "marketing",
+      "term": "CPI (Cost per Install)",
+      "definition": "설치당 비용",
+      "example": "모바일 앱 CPI를 낮추기 위한 전략을 논의했다.",
+      "tags": ["광고", "비용", "앱설치"]
+    },
+    {
+      "term_id": "marketing_012",
+      "category": "marketing",
+      "term": "CAC (Customer Acquisition Cost)",
+      "definition": "고객 획득 비용",
+      "example": "CAC를 줄이는 것이 마케팅의 핵심 목표 중 하나이다.",
+      "tags": ["고객", "비용", "획득"]
+    },
+    {
+      "term_id": "marketing_013",
+      "category": "marketing",
+      "term": "LTV (Life Time Value)",
+      "definition": "고객 생애 가치",
+      "example": "LTV를 높이기 위해 고객 유지 전략을 강화했다.",
+      "tags": ["고객", "가치", "분석"]
+    },
+    {
+      "term_id": "marketing_014",
+      "category": "marketing",
+      "term": "CTR (Click Through Rate)",
+      "definition": "클릭률",
+      "example": "광고 배너의 CTR을 높이기 위해 디자인을 변경했다.",
+      "tags": ["광고", "클릭률", "성과"]
+    },
+    {
+      "term_id": "marketing_015",
+      "category": "marketing",
+      "term": "CVR (Conversion Rate)",
+      "definition": "전환율",
+      "example": "웹사이트 CVR을 높이기 위해 사용자 경험을 개선했다.",
+      "tags": ["전환율", "성과", "분석"]
+    },
+    {
+      "term_id": "marketing_016",
+      "category": "marketing",
+      "term": "퍼스트 파티 데이터 (First-party data)",
+      "definition": "기업의 홈페이지 혹은 자사 채널을 통해 기업이 직접적으로 수집한 고객의 데이터",
+      "example": "퍼스트 파티 데이터를 활용하여 맞춤형 마케팅을 진행했다.",
+      "tags": ["데이터", "고객정보", "자사데이터"]
+    },
+    {
+      "term_id": "marketing_017",
+      "category": "marketing",
+      "term": "세컨드 파티 데이터 (Second-party data)",
+      "definition": "우리 기업이 아닌, 다른 기업이 수집한 고객의 데이터",
+      "example": "세컨드 파티 데이터를 구매하여 고객 분석에 활용했다.",
+      "tags": ["데이터", "고객정보", "파트너데이터"]
+    },
+    {
+      "term_id": "marketing_018",
+      "category": "marketing",
+      "term": "서드파티 데이터 (3rd-party data)",
+      "definition": "다른 소스로부터 간접적으로 수집된 데이터",
+      "example": "서드파티 데이터는 개인 정보 보호 문제로 인해 활용이 제한적이다.",
+      "tags": ["데이터", "고객정보", "외부데이터"]
+    },
+    {
+      "term_id": "marketing_019",
+      "category": "marketing",
+      "term": "ROI (Return On Investment)",
+      "definition": "투자한 금액 대비 합당한 수익을 내고 있는지 확인하는 지표",
+      "example": "이번 투자의 ROI를 분석하여 다음 투자 계획을 세웠다.",
+      "tags": ["투자수익률", "성과", "분석"]
+    },
+    {
+      "term_id": "marketing_020",
+      "category": "marketing",
+      "term": "리텐션 (Retention)",
+      "definition": "고객 유지",
+      "example": "고객 리텐션을 높이기 위한 다양한 이벤트를 기획했다.",
+      "tags": ["고객유지", "재방문", "충성도"]
+    },
+    {
+      "term_id": "marketing_021",
+      "category": "marketing",
+      "term": "퍼널 (Funnel)",
+      "definition": "소비자를 고객으로 이끌어 내는 과정",
+      "example": "마케팅 퍼널의 각 단계별 전환율을 분석했다.",
+      "tags": ["고객여정", "전환과정", "분석"]
+    },
+    {
+      "term_id": "marketing_022",
+      "category": "marketing",
+      "term": "AARRR",
+      "definition": "고객의 제품(서비스) 이용 흐름을 5가지의 뚜렷한 단계(Acquisition, Activation, Retention, Revenue, Referral)로 구분함으로써 서비스의 현 상황을 분석하고 부족한 단계를 파악할 수 있게 하는 분석 프레임 워크",
+      "example": "AARRR 모델을 적용하여 서비스 성장 단계를 분석했다.",
+      "tags": ["해적지표", "분석프레임워크", "성장해킹"]
+    },
+    {
+      "term_id": "marketing_023",
+      "category": "marketing",
+      "term": "Acquisition",
+      "definition": "AARRR 모델의 첫 번째 단계로, 신규 고객이 '유입' 된 단계",
+      "example": "Acquisition 단계에서 고객 유입을 늘리기 위한 전략을 세웠다.",
+      "tags": ["고객획득", "유입", "AARRR"]
+    },
+    {
+      "term_id": "marketing_024",
+      "category": "marketing",
+      "term": "Activation",
+      "definition": "AARRR 모델의 두 번째 단계로, 고객이 처음으로 서비스의 주요 기능을 활용해 '활성화' 된 단계",
+      "example": "Activation 단계에서 고객들이 서비스를 적극적으로 사용하도록 유도했다.",
+      "tags": ["활성화", "첫경험", "AARRR"]
+    },
+    {
+      "term_id": "marketing_025",
+      "category": "marketing",
+      "term": "Retention",
+      "definition": "AARRR 모델의 세 번째 단계로, 지속적으로 고객이 서비스를 이용하는 고객이 '유지' 된 단계",
+      "example": "Retention 단계에서 고객 이탈을 방지하기 위한 노력을 기울였다.",
+      "tags": ["고객유지", "재방문", "AARRR"]
+    },
+    {
+      "term_id": "marketing_026",
+      "category": "marketing",
+      "term": "Revenue",
+      "definition": "AARRR 모델의 네 번째 단계로, 고객이 우리 제품 및 서비스에 금액을 지불해 '매출' 이 나는 단계",
+      "example": "Revenue 단계에서 매출 증대를 위한 프로모션을 진행했다.",
+      "tags": ["매출", "수익", "AARRR"]
+    },
+    {
+      "term_id": "marketing_027",
+      "category": "marketing",
+      "term": "Referral",
+      "definition": "AARRR 모델의 다섯 번째 단계로, 서비스를 이용한 고객이 만족하여 다른 사람에게 제품을 '추천'을 하는 단계",
+      "example": "Referral 단계에서 바이럴 마케팅을 통해 신규 고객을 유치했다.",
+      "tags": ["추천", "바이럴", "AARRR"]
+    },
+    {
+      "term_id": "marketing_028",
+      "category": "marketing",
+      "term": "고객 구매 여정 (Consumer Decision Journey, CDJ)",
+      "definition": "고객이 브랜드를 처음 발견하고 인식해 제품을 실제로 구매하기까지의 모든 과정",
+      "example": "고객 구매 여정을 분석하여 각 단계별 마케팅 전략을 수립했다.",
+      "tags": ["고객여정", "구매과정", "CDJ"]
+    },
+    {
+      "term_id": "marketing_029",
+      "category": "marketing",
+      "term": "고객 페르소나 (Customer Persona)",
+      "definition": "우리 브랜드의 타겟 고객을 더 잘 이해하기 위해 인구 특성, 행동 패턴 등 구체적으로 그려지는 가상의 고객 프로파일",
+      "example": "새로운 제품 개발을 위해 상세한 고객 페르소나를 설정했다.",
+      "tags": ["페르소나", "타겟고객", "프로파일"]
+    },
+    {
+      "term_id": "marketing_030",
+      "category": "marketing",
+      "term": "PV (Page View)",
+      "definition": "고객이 웹페이지를 방문하고 조회한 횟수",
+      "example": "웹사이트 PV가 급증하여 서버 증설을 검토 중이다.",
+      "tags": ["페이지뷰", "웹분석", "트래픽"]
+    },
+    {
+      "term_id": "marketing_031",
+      "category": "marketing",
+      "term": "UV (Unique Visitor)",
+      "definition": "페이지 순방문자 수",
+      "example": "캠페인 진행 후 UV가 크게 늘었다.",
+      "tags": ["순방문자", "웹분석", "트래픽"]
+    },
+    {
+      "term_id": "marketing_032",
+      "category": "marketing",
+      "term": "랜딩페이지 (Landing Page)",
+      "definition": "CTA 버튼, 광고, 마케팅 캠페인을 통해 유입된 고객들이 처음 도달하게 되는, 전환을 목적으로 설계된 페이지",
+      "example": "광고 클릭 시 연결되는 랜딩페이지의 디자인을 개선했다.",
+      "tags": ["웹페이지", "전환", "마케팅"]
+    },
+    {
+      "term_id": "marketing_033",
+      "category": "marketing",
+      "term": "CTA (Call To Action)",
+      "definition": "구매, 알림 신청 등 어떠한 비즈니스 목표를 달성하기 위해 고객에게 행동(action)을 유도하는 버튼 혹은 배너",
+      "example": "웹사이트에 명확한 CTA 버튼을 추가하여 전환율을 높였다.",
+      "tags": ["행동유도", "버튼", "전환"]
+    },
+    {
+      "term_id": "marketing_034",
+      "category": "marketing",
+      "term": "도달률 (Reach)",
+      "definition": "콘텐츠가 몇 명의 고객들에게 도달되었는지에 대한 비율",
+      "example": "소셜 미디어 캠페인의 도달률이 높게 나타났다.",
+      "tags": ["콘텐츠", "노출", "성과"]
+    },
+    {
+      "term_id": "marketing_035",
+      "category": "marketing",
+      "term": "이탈률 (Bounce Rate)",
+      "definition": "고객들이 기업의 비즈니스 목적을 달성하거나 설계된 전체를 체험하기 전에 해당 페이지를 떠난 비율",
+      "example": "웹사이트 이탈률을 줄이기 위해 콘텐츠를 개선했다.",
+      "tags": ["웹분석", "사용자행동", "이탈"]
+    },
+    {
+      "term_id": "marketing_036",
+      "category": "marketing",
+      "term": "타겟팅 (Targeting)",
+      "definition": "특정 고객 세그먼트를 위한 마케팅 전략을 세우는 것",
+      "example": "20대 여성을 타겟팅하여 새로운 제품을 출시했다.",
+      "tags": ["고객세분화", "전략", "마케팅"]
+    },
+    {
+      "term_id": "marketing_037",
+      "category": "marketing",
+      "term": "세그멘테이션 (Segmentation)",
+      "definition": "고객들을 비슷한 성향과 지리, 인구통계학적 등의 특성을 가진 그룹으로 세분화해 분류하는 작업",
+      "example": "고객 세그멘테이션을 통해 맞춤형 마케팅 메시지를 전달했다.",
+      "tags": ["고객분류", "세분화", "타겟팅"]
+    },
+    {
+      "term_id": "marketing_038",
+      "category": "marketing",
+      "term": "포지셔닝 (Positioning)",
+      "definition": "비슷한 제품들과 다른 우리 브랜드의 차별화되는 포인트를 명확하게 드러내, 고객의 인식 속에 자리 잡는 전략",
+      "example": "프리미엄 브랜드로 포지셔닝하여 시장 경쟁력을 확보했다.",
+      "tags": ["브랜딩", "차별화", "전략"]
+    },
+    {
+      "term_id": "marketing_039",
+      "category": "marketing",
+      "term": "USP (Unique Selling Point)",
+      "definition": "판매 가치 제안",
+      "example": "우리 제품의 USP는 뛰어난 내구성이다.",
+      "tags": ["차별점", "강점", "가치제안"]
+    },
+    {
+      "term_id": "marketing_040",
+      "category": "marketing",
+      "term": "MRR (Money Recurring Revenue)",
+      "definition": "월간 반복 매출",
+      "example": "구독 서비스의 MRR이 꾸준히 증가하고 있다.",
+      "tags": ["매출", "구독", "지표"]
+    },
+    {
+      "term_id": "marketing_041",
+      "category": "marketing",
+      "term": "오가닉 트래픽 (Organic Traffic)",
+      "definition": "자연유입 트래픽",
+      "example": "SEO를 통해 오가닉 트래픽을 늘렸다.",
+      "tags": ["트래픽", "자연유입", "SEO"]
+    },
+    {
+      "term_id": "marketing_042",
+      "category": "marketing",
+      "term": "인텐트 마케팅 (Intent Marketing)",
+      "definition": "고객이 원하는 구매 의도(인텐트)를 정확히 이해해서 니즈에 부합하는 제품을 추천하는 마케팅 전략",
+      "example": "인텐트 마케팅을 통해 고객의 숨겨진 니즈를 파악했다.",
+      "tags": ["고객의도", "니즈", "마케팅전략"]
+    },
+    {
+      "term_id": "marketing_043",
+      "category": "marketing",
+      "term": "온드 미디어 (Owned Media)",
+      "definition": "기업 홈페이지, SNS, 모바일 어플 등 기업이 직접 소유해 통제가 가능한 매체",
+      "example": "온드 미디어를 활용하여 브랜드 메시지를 효과적으로 전달했다.",
+      "tags": ["미디어", "자사채널", "콘텐츠"]
+    },
+    {
+      "term_id": "marketing_044",
+      "category": "marketing",
+      "term": "페이드 미디어 (Paid Media)",
+      "definition": "TV 광고, 옥외 광고, 검색 광고 등 광고비를 집행해야 하는 유료 매체",
+      "example": "페이드 미디어를 통해 단기간에 높은 노출 효과를 얻었다.",
+      "tags": ["미디어", "유료광고", "광고"]
+    },
+    {
+      "term_id": "marketing_045",
+      "category": "marketing",
+      "term": "언드 미디어 (Earned Media)",
+      "definition": "검색 엔진 및 포털 사이트, 커뮤니티, SNS 채널 등 제3자에 의해 운영되고 콘텐츠가 생산되는 매체",
+      "example": "언드 미디어를 통해 자연스러운 바이럴 마케팅 효과를 얻었다.",
+      "tags": ["미디어", "바이럴", "평판"]
+    },
+    {
+      "term_id": "marketing_046",
+      "category": "marketing",
+      "term": "타겟팅 광고 (Targeting Advertising/target-marketing)",
+      "definition": "특정 고객 세그먼트를 대상으로 그들만을 위해 집중적으로 진행하는 광고",
+      "example": "연령대별 타겟팅 광고를 통해 효율적인 마케팅을 진행했다.",
+      "tags": ["광고", "타겟팅", "고객세분화"]
+    },
+    {
+      "term_id": "marketing_047",
+      "category": "marketing",
+      "term": "리타겟팅 광고 (Retargeting Advertising)",
+      "definition": "사용자의 쿠키를 활용해 제품을 검색했거나 광고를 이미 접한 대상에게 다시 광고가 노출될 수 있도록 진행하는 광고",
+      "example": "리타겟팅 광고를 통해 잠재 고객의 구매를 유도했다.",
+      "tags": ["광고", "리마케팅", "재노출"]
+    },
+    {
+      "term_id": "marketing_048",
+      "category": "marketing",
+      "term": "CRM (Customer Relationship Management)",
+      "definition": "고객 관계 관리",
+      "example": "CRM 시스템을 도입하여 고객 데이터를 통합 관리한다.",
+      "tags": ["고객관리", "데이터", "시스템"]
+    },
+    {
+      "term_id": "marketing_049",
+      "category": "marketing",
+      "term": "VOC (Voice of Customer)",
+      "definition": "고객의 소리",
+      "example": "VOC를 적극적으로 수렴하여 제품 개선에 반영했다.",
+      "tags": ["고객의견", "피드백", "개선"]
+    },
+    {
+      "term_id": "marketing_050",
+      "category": "marketing",
+      "term": "리드 (Lead)",
+      "definition": "제품 혹은 서비스를 현재 이용하진 않지만 관심을 갖고 있는 잠재 고객",
+      "example": "웹사이트를 통해 새로운 리드를 확보했다.",
+      "tags": ["잠재고객", "영업기회", "확보"]
+    },
+    {
+      "term_id": "marketing_051",
+      "category": "marketing",
+      "term": "CPL (Cost per Lead)",
+      "definition": "리드당 비용",
+      "example": "CPL을 낮추기 위해 리드 확보 채널을 다각화했다.",
+      "tags": ["광고비용", "리드", "성과"]
+    },
+    {
+      "term_id": "marketing_052",
+      "category": "marketing",
+      "term": "SQL (Sales Qualified Lead)",
+      "definition": "영업 적격 리드",
+      "example": "SQL을 영업팀에 전달하여 실제 계약으로 이어지도록 했다.",
+      "tags": ["리드", "영업", "자격"]
+    },
+    {
+      "term_id": "marketing_053",
+      "category": "marketing",
+      "term": "MQL (Marketing Qualified Lead)",
+      "definition": "마케팅 적격 리드",
+      "example": "MQL을 대상으로 추가 마케팅 활동을 진행했다.",
+      "tags": ["리드", "마케팅", "자격"]
+    },
+    {
+      "term_id": "marketing_054",
+      "category": "marketing",
+      "term": "CPM (Cost Per Mille)",
+      "definition": "1000번 노출 당 비용",
+      "example": "CPM이 낮은 광고 채널을 선택하여 효율을 높였다.",
+      "tags": ["광고비용", "노출", "성과"]
+    },
+    {
+      "term_id": "marketing_055",
+      "category": "marketing",
+      "term": "컨버젼 (Conversion)",
+      "definition": "전환, 마케팅 캠페인의 결과로 고객이 구매, 앱 다운로드, 메일링 리스트 가입 등의 특정한 기대 행동을 완료 하는 것",
+      "example": "광고 클릭 후 구매까지의 컨버젼율을 분석했다.",
+      "tags": ["전환", "성과", "행동"]
+    },
+    {
+      "term_id": "marketing_056",
+      "category": "marketing",
+      "term": "ROAS (Return On Ads Spending)",
+      "definition": "광고 수익률",
+      "example": "ROAS가 높은 광고 소재를 집중적으로 활용했다.",
+      "tags": ["광고", "수익률", "성과"]
+    },
+    {
+      "term_id": "marketing_057",
+      "category": "marketing",
+      "term": "SEO (Search Engine Optimization)",
+      "definition": "검색엔진최적화",
+      "example": "웹사이트 SEO를 강화하여 검색 엔진 노출 순위를 높였다.",
+      "tags": ["검색엔진", "최적화", "마케팅"]
+    },
+    {
+      "term_id": "marketing_058",
+      "category": "marketing",
+      "term": "테크니컬 SEO",
+      "definition": "웹사이트가 SERP 순위 향상을 위해 구조적인 개선을 하는 단계",
+      "example": "테크니컬 SEO를 통해 웹사이트 로딩 속도를 개선했다.",
+      "tags": ["SEO", "기술적최적화", "웹사이트"]
+    },
+    {
+      "term_id": "marketing_059",
+      "category": "marketing",
+      "term": "콘텐츠 SEO",
+      "definition": "검색 유저들의 의도에 맞는 콘텐츠를 제작 하는 과정",
+      "example": "고객의 검색 의도를 파악하여 콘텐츠 SEO를 진행했다.",
+      "tags": ["SEO", "콘텐츠", "키워드"]
+    },
+    {
+      "term_id": "marketing_060",
+      "category": "marketing",
+      "term": "리드 (Lead)",
+      "definition": "여러 마케팅 활동이나 기존 고객의 재구매 내지 추천 등으로 만들어진 영업 건수",
+      "example": "이번 달에 100건의 새로운 리드를 창출했다.",
+      "tags": ["영업기회", "잠재고객", "성과"]
+    },
+    {
+      "term_id": "marketing_061",
+      "category": "marketing",
+      "term": "오퍼 (Offer)",
+      "definition": "제안",
+      "example": "고객에게 맞춤형 오퍼를 제공했다.",
+      "tags": ["제안", "영업", "고객"]
+    },
+    {
+      "term_id": "marketing_062",
+      "category": "marketing",
+      "term": "기회 (Opportunity)",
+      "definition": "영업 기회",
+      "example": "새로운 시장 진출은 큰 영업 기회가 될 것이다.",
+      "tags": ["영업", "기회", "시장"]
+    },
+    {
+      "term_id": "marketing_063",
+      "category": "marketing",
+      "term": "컨택 포인트 (Contact Point)",
+      "definition": "고객과의 접점",
+      "example": "고객 컨택 포인트를 늘려 고객과의 소통을 강화했다.",
+      "tags": ["고객접점", "소통", "채널"]
+    },
+    {
+      "term_id": "marketing_064",
+      "category": "marketing",
+      "term": "대시보드 (Dashboard)",
+      "definition": "주요 지표를 한눈에 볼 수 있도록 시각화한 화면",
+      "example": "영업 실적 대시보드를 통해 현재 상황을 파악했다.",
+      "tags": ["데이터시각화", "지표", "보고"]
+    },
+    {
+      "term_id": "marketing_065",
+      "category": "marketing",
+      "term": "랜딩 페이지 (Landing Page)",
+      "definition": "광고를 클릭했을 때 처음으로 도달하는 페이지",
+      "example": "캠페인별로 최적화된 랜딩 페이지를 제작했다.",
+      "tags": ["웹페이지", "광고", "전환"]
+    },
+    {
+      "term_id": "marketing_066",
+      "category": "marketing",
+      "term": "콜투액션 (Call to Action)",
+      "definition": "고객의 행동을 유도하는 문구 또는 버튼",
+      "example": "웹사이트에 명확한 콜투액션을 배치하여 구매를 유도했다.",
+      "tags": ["CTA", "행동유도", "버튼"]
+    },
+    {
+      "term_id": "marketing_067",
+      "category": "marketing",
+      "term": "YoY (Year-over-Year)",
+      "definition": "전년 대비",
+      "example": "이번 분기 매출은 YoY 20% 성장했다.",
+      "tags": ["성과비교", "전년대비", "지표"]
+    },
+    {
+      "term_id": "marketing_068",
+      "category": "marketing",
+      "term": "Account",
+      "definition": "B2B 고객, 즉 기업 고객",
+      "example": "주요 Account 관리에 집중하여 매출을 증대시켰다.",
+      "tags": ["B2B", "기업고객", "영업"]
+    },
+    {
+      "term_id": "marketing_069",
+      "category": "marketing",
+      "term": "Prospect",
+      "definition": "잠재 고객 중 구매 가능성이 높은 고객",
+      "example": "이번 박람회에서 많은 Prospect를 확보했다.",
+      "tags": ["잠재고객", "영업", "리드"]
+    },
+    {
+      "term_id": "marketing_070",
+      "category": "marketing",
+      "term": "Win Probability",
+      "definition": "수주 확률",
+      "example": "이 프로젝트의 Win Probability는 70% 이상이다.",
+      "tags": ["수주", "확률", "영업"]
+    },
+    {
+      "term_id": "marketing_071",
+      "category": "marketing",
+      "term": "Conversion",
+      "definition": "전환",
+      "example": "웹사이트 방문자가 실제 구매로 이어지는 Conversion율을 높여야 한다.",
+      "tags": ["전환율", "성과", "구매"]
+    },
+    {
+      "term_id": "marketing_072",
+      "category": "marketing",
+      "term": "BANT (Budget, Authority, Need, Timing)",
+      "definition": "예산, 권한, 필요, 타이밍. 잠재 고객의 자격을 검증하는 기준",
+      "example": "BANT 기준에 따라 잠재 고객을 분류했다.",
+      "tags": ["리드검증", "영업", "기준"]
+    },
+    {
+      "term_id": "marketing_073",
+      "category": "marketing",
+      "term": "CPQ (Configure, Price, Quote)",
+      "definition": "구성, 가격, 견적",
+      "example": "CPQ 시스템을 도입하여 견적 생성 시간을 단축했다.",
+      "tags": ["견적", "영업자동화", "시스템"]
+    },
+    {
+      "term_id": "marketing_074",
+      "category": "marketing",
+      "term": "고객 세그먼트 (Customer Segment)",
+      "definition": "시장을 세분화했을 때, 브랜드가 타겟으로 하는 핵심 고객군",
+      "example": "10대 여성 고객 세그먼트를 대상으로 한 마케팅 전략을 수립했다.",
+      "tags": ["고객세분화", "타겟", "시장"]
+    },
+    {
+      "term_id": "marketing_075",
+      "category": "marketing",
+      "term": "포지셔닝 (Positioning)",
+      "definition": "브랜드가 고객에게 인지되는 이미지와 위치",
+      "example": "친환경 브랜드로 포지셔닝하여 기업 이미지를 제고했다.",
+      "tags": ["브랜딩", "이미지", "전략"]
+    },
+    {
+      "term_id": "marketing_076",
+      "category": "marketing",
+      "term": "PLC (Product Life Cycle)",
+      "definition": "제품 수명 주기",
+      "example": "제품 수명 주기를 고려하여 신제품 개발 계획을 세웠다.",
+      "tags": ["제품", "수명주기", "전략"]
+    },
+    {
+      "term_id": "marketing_077",
+      "category": "marketing",
+      "term": "판매계획 (Sales Plan)",
+      "definition": "판매 목표 및 전략",
+      "example": "다음 분기 판매계획을 수립하여 팀원들과 공유했다.",
+      "tags": ["영업", "계획", "목표"]
+    },
+    {
+      "term_id": "marketing_078",
+      "category": "marketing",
+      "term": "실적관리 (Performance Management)",
+      "definition": "영업 실적 관리",
+      "example": "실적관리를 통해 영업팀의 성과를 분석하고 개선 방안을 모색했다.",
+      "tags": ["성과관리", "영업", "분석"]
+    },
+    {
+      "term_id": "marketing_079",
+      "category": "marketing",
+      "term": "신규거래처 (New Customer)",
+      "definition": "새로운 고객사",
+      "example": "이번 달에 5개의 신규거래처를 확보했다.",
+      "tags": ["고객", "영업", "신규"]
+    },
+    {
+      "term_id": "marketing_080",
+      "category": "marketing",
+      "term": "기회 팀",
+      "definition": "세일즈 기회에 대해 함께 작업하는 사용자 집합",
+      "example": "대형 프로젝트 수주를 위해 기회 팀을 구성했다.",
+      "tags": ["영업", "팀", "협업"]
+    },
+    {
+      "term_id": "marketing_081",
+      "category": "marketing",
+      "term": "프로모션 (Promotion)",
+      "definition": "가격 할인 혹은 판촉 증정을 통해 매출을 늘리는 활동",
+      "example": "연말 프로모션을 통해 매출을 크게 늘렸다.",
+      "tags": ["판촉", "할인", "이벤트"]
+    },
+    {
+      "term_id": "marketing_082",
+      "category": "marketing",
+      "term": "엔드매대 (END 매대)",
+      "definition": "매장 진열대 끝 부분",
+      "example": "신제품을 엔드매대에 진열하여 고객들의 눈길을 끌었다.",
+      "tags": ["유통", "진열", "매장"]
+    },
+    {
+      "term_id": "business_017",
+      "category": "business",
+      "term": "매출총이익",
+      "definition": "회사의 수익과 매출 원가 간의 차이",
+      "example": "매출총이익이 증가하여 기업의 수익성이 개선되었다.",
+      "tags": ["회계", "수익", "이익"]
+    },
+    {
+      "term_id": "marketing_083",
+      "category": "marketing",
+      "term": "조직 (Org)",
+      "definition": "세일즈포스에서 조직의 데이터, 기능, 사용자 등을 관리하는 단위",
+      "example": "세일즈포스 Org 설정을 통해 사용자 권한을 관리했다.",
+      "tags": ["세일즈포스", "CRM", "관리"]
+    },
+    {
+      "term_id": "marketing_084",
+      "category": "marketing",
+      "term": "360도 고객 보기(View)",
+      "definition": "고객이 제품을 구매하고 서비스를 받기 위해 회사에 연락하는 데 사용할 수 있는 다양한 접점의 데이터를 집계하는 종합적인 보기",
+      "example": "360도 고객 보기를 통해 고객의 모든 정보를 한눈에 파악할 수 있었다.",
+      "tags": ["고객분석", "데이터통합", "CRM"]
+    },
+    {
+      "term_id": "marketing_085",
+      "category": "marketing",
+      "term": "교차 판매(Cross-selling)",
+      "definition": "고객이 원래 구매하고자 했던 품목 외에 다른 제품이나 서비스를 구매하도록 유도하는 것",
+      "example": "기존 고객에게 교차 판매를 통해 추가 매출을 올렸다.",
+      "tags": ["영업전략", "매출증대", "판매"]
+    },
+    {
+      "term_id": "marketing_086",
+      "category": "marketing",
+      "term": "고객 확보 비용(CAC)",
+      "definition": "신규 고객을 유입 경로로 이동시키기 위한 노력에 지출된 모든 비용 등 신규 고객을 확보하는 데 드는 비용",
+      "example": "고객 확보 비용을 줄이기 위해 온라인 광고 효율을 높였다.",
+      "tags": ["마케팅비용", "고객획득", "지표"]
+    },
+    {
+      "term_id": "marketing_087",
+      "category": "marketing",
+      "term": "고객 이탈",
+      "definition": "비즈니스에서 고객을 잃는 것",
+      "example": "고객 이탈을 막기 위해 고객 만족도 향상에 힘쓰고 있다.",
+      "tags": ["이탈", "고객관리", "문제"]
+    },
+    {
+      "term_id": "marketing_088",
+      "category": "marketing",
+      "term": "고객 이탈률",
+      "definition": "일정 기간 동안 단골 고객으로 돌아오지 않거나 구독을 취소하지 않은 유료 고객 수",
+      "example": "고객 이탈률이 높아져서 원인을 분석 중이다.",
+      "tags": ["이탈률", "고객분석", "지표"]
+    },
+    {
+      "term_id": "marketing_089",
+      "category": "marketing",
+      "term": "고객 참여(engagement)",
+      "definition": "소비자와 기업 간의 지속적인 관계 발전은 단순한 구매 그 이상을 포함",
+      "example": "고객 참여를 유도하기 위한 이벤트를 기획했다.",
+      "tags": ["인게이지먼트", "관계", "참여"]
+    },
+    {
+      "term_id": "marketing_090",
+      "category": "marketing",
+      "term": "고객 여정 맵",
+      "definition": "고객이 귀사의 제품, 서비스 및 경험을 이용하는 과정에서 거치는 단계를 보여주는 다이어그램",
+      "example": "고객 여정 맵을 통해 고객 경험을 개선할 포인트를 찾았다.",
+      "tags": ["고객경험", "분석", "시각화"]
+    },
+    {
+      "term_id": "marketing_091",
+      "category": "marketing",
+      "term": "고객 충성도",
+      "definition": "고객이 재거래를 할 가능성",
+      "example": "고객 충성도를 높이기 위해 VIP 프로그램을 운영하고 있다.",
+      "tags": ["충성도", "재구매", "고객관계"]
+    },
+    {
+      "term_id": "marketing_092",
+      "category": "marketing",
+      "term": "고객 집착(obsession)",
+      "definition": "고객이 목표를 더 잘 달성할 수 있도록 제품 및 서비스를 만들거나 조정하는 데 중점을 두는 사고방식 또는 접근 방식",
+      "example": "고객 집착을 통해 고객 만족도를 극대화했다.",
+      "tags": ["고객중심", "사고방식", "만족도"]
+    },
+    {
+      "term_id": "marketing_093",
+      "category": "marketing",
+      "term": "고객 페르소나",
+      "definition": "구매자 페르소나라고도 하며, 대규모 잠재 고객의 핵심 특성을 나타내는 반가상의 원형",
+      "example": "고객 페르소나를 기반으로 맞춤형 제품을 개발했다.",
+      "tags": ["페르소나", "타겟고객", "분석"]
+    },
+    {
+      "term_id": "marketing_094",
+      "category": "marketing",
+      "term": "고객 유지",
+      "definition": "고객이 특정 기간 동안 비즈니스에 머무르는 비율",
+      "example": "고객 유지를 위해 정기적인 고객 관리가 필요하다.",
+      "tags": ["리텐션", "고객관리", "비율"]
+    },
+    {
+      "term_id": "marketing_095",
+      "category": "marketing",
+      "term": "고객 추적(tracking)",
+      "definition": "비즈니스 소유자가 고객과 고객의 행동에 대한 세부 정보를 파악하기 위한 방법",
+      "example": "웹사이트 고객 추적을 통해 사용자 행동 패턴을 분석했다.",
+      "tags": ["사용자분석", "데이터", "추적"]
+    },
+    {
+      "term_id": "marketing_096",
+      "category": "marketing",
+      "term": "고객 세분화",
+      "definition": "인구 통계나 구매 행동과 같은 공통된 특성을 기반으로 고객을 카테고리로 나누는 것",
+      "example": "고객 세분화를 통해 각 그룹에 맞는 마케팅 전략을 수립했다.",
+      "tags": ["세그멘테이션", "타겟팅", "분류"]
+    },
+    {
+      "term_id": "marketing_097",
+      "category": "marketing",
+      "term": "고객 가치",
+      "definition": "제품 또는 서비스를 가능한 대안과 비교하기 위한 방법으로 제품 또는 서비스의 가치를 측정하는 척도",
+      "example": "고객 가치를 높이기 위해 제품의 품질을 향상시켰다.",
+      "tags": ["가치", "측정", "비교"]
+    },
+    {
+      "term_id": "marketing_098",
+      "category": "marketing",
+      "term": "수요 창출(Demand generation)",
+      "definition": "브랜드 인지도와 관심을 활용하여 양질의 리드를 생성하는 마케팅 전략",
+      "example": "새로운 캠페인을 통해 수요 창출에 성공했다.",
+      "tags": ["리드생성", "마케팅전략", "인지도"]
+    },
+    {
+      "term_id": "marketing_099",
+      "category": "marketing",
+      "term": "드립 캠페인",
+      "definition": "이메일 드립 캠페인은 자동화된 영업 활동의 한 유형",
+      "example": "드립 캠페인을 통해 잠재 고객에게 지속적으로 정보를 제공했다.",
+      "tags": ["이메일마케팅", "자동화", "캠페인"]
+    },
+    {
+      "term_id": "marketing_100",
+      "category": "marketing",
+      "term": "CRM 캠페인",
+      "definition": "잠재 고객, 리드 또는 기존 고객과의 관계를 발전시키기 위해 만든 이니셔티브 또는 활동",
+      "example": "CRM 캠페인을 통해 고객과의 관계를 강화했다.",
+      "tags": ["CRM", "캠페인", "고객관계"]
+    },
+    {
+      "term_id": "marketing_101",
+      "category": "marketing",
+      "term": "이메일 시퀀스",
+      "definition": "사전 정의된 기준에 따라 잠재 고객을 유료 고객으로 전환하는 일반적인 목표에 따라 대상에게 전송되는 일련의 이메일",
+      "example": "이메일 시퀀스를 통해 잠재 고객을 육성했다.",
+      "tags": ["이메일마케팅", "자동화", "시퀀스"]
+    },
+    {
+      "term_id": "marketing_102",
+      "category": "marketing",
+      "term": "퍼널 인바운드 마케팅",
+      "definition": "잠재 고객이 경쟁사보다 한 회사를 선택하는 일련의 단계",
+      "example": "퍼널 인바운드 마케팅 전략을 통해 고객 유입을 늘렸다.",
+      "tags": ["인바운드마케팅", "퍼널", "전략"]
+    },
+    {
+      "term_id": "marketing_103",
+      "category": "marketing",
+      "term": "핫 리드",
+      "definition": "제품이나 서비스를 구매하기로 결정하기 위해 약간의 자극이 필요한 잠재고객",
+      "example": "핫 리드를 대상으로 집중적인 영업 활동을 펼쳤다.",
+      "tags": ["리드", "잠재고객", "영업"]
+    },
+    {
+      "term_id": "marketing_104",
+      "category": "marketing",
+      "term": "라스트 터치 어트리뷰션(Last touch attribution)",
+      "definition": "전환 경로에서 가장 최근의 클릭 또는 방문에 전환에 대한 크레딧을 100% 부여하는 마케팅 어트리뷰션 모델의 한 유형",
+      "example": "라스트 터치 어트리뷰션 모델을 사용하여 광고 성과를 분석했다.",
+      "tags": ["성과측정", "기여도분석", "모델"]
+    },
+    {
+      "term_id": "marketing_105",
+      "category": "marketing",
+      "term": "리드 전환",
+      "definition": "행동 자동화, 리타겟팅, 이메일 등의 육성 활동을 통해 리드를 고객으로 전환하는 것",
+      "example": "리드 전환율을 높이기 위해 CRM 시스템을 활용했다.",
+      "tags": ["전환", "리드", "육성"]
+    },
+    {
+      "term_id": "marketing_106",
+      "category": "marketing",
+      "term": "리드 소스",
+      "definition": "리드가 회사를 처음 발견하는 채널",
+      "example": "다양한 리드 소스를 통해 잠재 고객을 확보했다.",
+      "tags": ["유입경로", "채널", "리드"]
+    },
+    {
+      "term_id": "marketing_107",
+      "category": "marketing",
+      "term": "온프레미스 CRM",
+      "definition": "온사이트 CRM이라고도 하며, 회사 서버에 구매하여 설치한 CRM",
+      "example": "온프레미스 CRM은 초기 구축 비용이 높지만 보안성이 뛰어나다.",
+      "tags": ["CRM", "설치형", "시스템"]
+    },
+    {
+      "term_id": "marketing_108",
+      "category": "marketing",
+      "term": "기회 관리(Opportunity management)",
+      "definition": "영업 파이프라인에서 거래를 구성하고 모니터링하는 프로세스",
+      "example": "기회 관리를 통해 영업 파이프라인을 효율적으로 운영했다.",
+      "tags": ["영업관리", "파이프라인", "프로세스"]
+    },
+    {
+      "term_id": "marketing_109",
+      "category": "marketing",
+      "term": "예측 행동 모델링",
+      "definition": "고객의 미래 행동을 예측하기 위해 과거 및 거래 데이터에 수학적, 통계적 기법을 적용하는 작업",
+      "example": "예측 행동 모델링을 통해 고객 이탈을 사전에 예측했다.",
+      "tags": ["데이터분석", "예측모델", "고객행동"]
+    },
+    {
+      "term_id": "marketing_110",
+      "category": "marketing",
+      "term": "원시 리드(Raw leads)",
+      "definition": "콘텐츠 다운로드, 소셜 미디어 참여, 웨비나, 전시회 등의 마케팅 활동을 통해 생성된 필터링되지 않고, 차별화되지 않으며, 자격이 없는 연락처",
+      "example": "원시 리드를 대상으로 추가적인 검증 작업을 진행했다.",
+      "tags": ["리드", "초기데이터", "검증"]
+    },
+    {
+      "term_id": "marketing_111",
+      "category": "marketing",
+      "term": "영업 캠페인",
+      "definition": "캠페인은 일반적으로 짧은 기간 동안 특정 제품 및 서비스에 대한 수요를 창출하기 위한 활동",
+      "example": "새로운 영업 캠페인을 통해 매출 증대를 목표로 했다.",
+      "tags": ["캠페인", "영업", "수요창출"]
+    },
+    {
+      "term_id": "it_003",
+      "category": "it",
+      "term": "CDC 솔루션 (Change Data Capture)",
+      "definition": "마지막으로 추출한 이후 변경된 데이터만 골라내는 기술",
+      "example": "CDC 솔루션을 도입하여 데이터 동기화 효율을 높였다.",
+      "tags": ["데이터", "변경추적", "동기화"]
+    },
+    {
+      "term_id": "it_004",
+      "category": "it",
+      "term": "개방형 데이터 (Open Data)",
+      "definition": "필요로 하는 이들에게 무료로 공개하는 데이터",
+      "example": "정부는 공공 데이터를 개방형 데이터로 제공하고 있다.",
+      "tags": ["데이터", "공개", "공공데이터"]
+    },
+    {
+      "term_id": "it_005",
+      "category": "it",
+      "term": "칸반 보드 (Kanban Board, 간반 보드)",
+      "definition": "소프트웨어 개발 방법론 중 하나 (todo - in progress - done)",
+      "example": "칸반 보드를 활용하여 프로젝트 진행 상황을 시각적으로 관리했다.",
+      "tags": ["애자일", "프로젝트관리", "시각화"]
+    },
+    {
+      "term_id": "it_006",
+      "category": "it",
+      "term": "스크럼 (Scrum)",
+      "definition": "소프트웨어 개발 방법론 중 하나 (애자일 개발 프로세스에 해당, 특정 기능에 대한 계획-개발-테스트-기능구현 주기(스프린트, Sprint)를 활용한 방법론)",
+      "example": "스크럼 방식으로 프로젝트를 진행하여 빠른 피드백을 반영했다.",
+      "tags": ["애자일", "개발방법론", "스프린트"]
+    },
+    {
+      "term_id": "it_007",
+      "category": "it",
+      "term": "물류 PDA (Personal Digital Assistant)",
+      "definition": "개인 (휴대) 정보 단말기, 터치 스크린 방식의 핸드폰처럼 작고 가벼운 컴퓨터 (요새 사라지는 추세)",
+      "example": "물류 창고에서 PDA를 사용하여 재고를 관리한다.",
+      "tags": ["단말기", "물류", "재고관리"]
+    },
+    {
+      "term_id": "it_008",
+      "category": "it",
+      "term": "DCPM",
+      "definition": "Dynamic CPM (CPM: Cost Per Mille, 1천 뷰 노출당 비용)",
+      "example": "DCPM을 통해 광고 노출 효율을 최적화했다.",
+      "tags": ["광고", "CPM", "최적화"]
+    },
+    {
+      "term_id": "it_009",
+      "category": "it",
+      "term": "DCMS",
+      "definition": "Digital Contents Management System, 디지털 콘텐츠 관리 시스템 (e북, 오디오북, 동영상북 등 다양한 형태의 디지털 콘텐츠를 하나의 플랫폼에서 서비스 할 수 있도록, 디지털 콘텐츠의 불법 복제 및 유통을 방지해 저작권을 보호하고 콘텐츠의 표준화된 플랫폼을 구축해 안정적인 통합 서비스 환경을 제공)",
+      "example": "DCMS를 구축하여 다양한 디지털 콘텐츠를 효율적으로 관리한다.",
+      "tags": ["콘텐츠관리", "DRM", "시스템"]
+    },
+    {
+      "term_id": "it_010",
+      "category": "it",
+      "term": "EDI",
+      "definition": "Electronic Data Interchange, 전자 데이터 교환 (협력사 포털, 협력사끼리 정보 주고 받는 시스템)",
+      "example": "협력사와의 EDI 시스템을 통해 주문 및 배송 정보를 교환한다.",
+      "tags": ["데이터교환", "시스템", "협력사"]
+    },
+    {
+      "term_id": "it_011",
+      "category": "it",
+      "term": "DW",
+      "definition": "Data Warehouse (분산 되어있는 각각의 데이터 베이스 관리 시스템들을 통합하여 관리, 중앙 저장소 역할)",
+      "example": "DW를 구축하여 기업의 모든 데이터를 통합 분석한다.",
+      "tags": ["데이터웨어하우스", "데이터통합", "분석"]
+    },
+    {
+      "term_id": "it_012",
+      "category": "it",
+      "term": "SSO",
+      "definition": "Single Sign-On, 통합 인증 (한 번의 로그인으로 여러 개의 다른 사이트들도 로그인 없이 이용하는 방법(자동 접속))",
+      "example": "SSO 시스템을 도입하여 사용자 편의성을 높였다.",
+      "tags": ["통합인증", "로그인", "보안"]
+    },
+    {
+      "term_id": "it_013",
+      "category": "it",
+      "term": "SLO",
+      "definition": "Sign LogOn (SSO와 다르게 시스템 각각이 개별 쿠키나 세션을 가지고 인증, 계정 정보가 하나의 시스템에 존재하고, 각각의 시스템에는 서로 별도의 인증 부분이 존재)",
+      "example": "SLO 방식은 각 시스템별로 독립적인 인증을 제공한다.",
+      "tags": ["개별인증", "로그인", "보안"]
+    },
+    {
+      "term_id": "it_014",
+      "category": "it",
+      "term": "EAM",
+      "definition": "Enterprise Access Management (통합 인증, 권한 관리 시스템, SSO 시스템에 권한 관리, 자원 관리 등이 포함된 개념)",
+      "example": "EAM 솔루션을 통해 기업의 접근 권한을 통합 관리한다.",
+      "tags": ["접근관리", "권한관리", "보안"]
+    },
+    {
+      "term_id": "it_015",
+      "category": "it",
+      "term": "SMS",
+      "definition": "System Management System, 시스템 관리 시스템 (cf. SI/SM의 SM, 여러 지역에 분산되어 있는 각각의 서버/프로그램을 통합적으로 관리해주는 시스템)",
+      "example": "SMS를 통해 분산된 시스템들을 효율적으로 관리한다.",
+      "tags": ["시스템관리", "모니터링", "통합"]
+    },
+    {
+      "term_id": "it_016",
+      "category": "it",
+      "term": "SI",
+      "definition": "System Integration (전산시스템을 필요로 하는 곳으로부터 하청을 받아, 시스템의 기획/개발/유지보수/운영 등을 대신 해주는 업종)",
+      "example": "SI 업체에 새로운 시스템 개발을 의뢰했다.",
+      "tags": ["시스템통합", "개발", "아웃소싱"]
+    },
+    {
+      "term_id": "it_017",
+      "category": "it",
+      "term": "EAI",
+      "definition": "Enterprise Application Integration, 기업 응용 프로그램 통합 (기업 내 필요한 여러 어플리케이션이 있을텐데, 이런 각종 애플리케이션 간에 상호 연동이 가능하도록 통합하는 솔루션)",
+      "example": "EAI를 통해 서로 다른 시스템 간의 데이터 연동을 구현했다.",
+      "tags": ["애플리케이션통합", "연동", "미들웨어"]
+    },
+    {
+      "term_id": "it_018",
+      "category": "it",
+      "term": "Meta Data",
+      "definition": "데이터에 대한 데이터 (데이터에 관한 구조화된 데이터로, 다른 데이터를 설명해 주는 데이터)",
+      "example": "이미지 파일에는 촬영 시간, 장소 등의 메타 데이터가 포함되어 있다.",
+      "tags": ["데이터", "설명", "정보"]
+    },
+    {
+      "term_id": "it_019",
+      "category": "it",
+      "term": "PMO",
+      "definition": "Project Management Office, 프로젝트 관리 조직 (프로젝트 업무 범위 내에서 프로젝트를 관장하고 조정 관리하는 다양한 책임이 부과된 주체)",
+      "example": "PMO에서 프로젝트의 전반적인 진행 상황을 관리한다.",
+      "tags": ["프로젝트관리", "조직", "관리"]
+    },
+    {
+      "term_id": "it_020",
+      "category": "it",
+      "term": "AS-IS/TO-BE",
+      "definition": "AS-IS분석: '있는 그대로”, 현재 업무 프로세스에 대한 분석, TO-BE분석: '미래의', 미래에 개선될 업무 프로세스에 대한 분석",
+      "example": "AS-IS 분석을 통해 현재 문제점을 파악하고 TO-BE 모델을 설계했다.",
+      "tags": ["분석", "프로세스", "개선"]
+    },
+    {
+      "term_id": "it_021",
+      "category": "it",
+      "term": "MDM",
+      "definition": "Mobile Device Management, 모바일 단말 관리 (모바일 기기의 보안을 향상시켜 비즈니스 용도로 사용하기 적합하게 하는 앱)",
+      "example": "MDM 솔루션을 도입하여 기업 모바일 기기의 보안을 강화했다.",
+      "tags": ["모바일보안", "단말관리", "보안"]
+    },
+    {
+      "term_id": "it_022",
+      "category": "it",
+      "term": "CIMS",
+      "definition": "Computer Integrated Manufacturing System, 컴퓨터 통합 생산 시스템 (생산에 관련된 모든 활동을 컴퓨터나 주변 기술을 구사하여 통합함으로써 필요한 질과 양의 정보를 제 시간에 맞추어 생성 전달하고, 각 부문간의 의사 소통 및 의사 결정을 원할, 신속 그리고 효율적으로 행함으로써, 현 생산 시스템의 업무에 내재하고 있는 과제의 해결을 도모하고, 기업 전체를 탄력성 있고 효율적으로 움직이도록 하는 시스템)",
+      "example": "CIMS를 통해 생산 공정을 자동화하고 효율을 높였다.",
+      "tags": ["생산관리", "자동화", "시스템"]
+    },
+    {
+      "term_id": "it_023",
+      "category": "it",
+      "term": "batch (배치)",
+      "definition": "batch processing: 일괄 처리 (개별적으로 어떤 요청이 있을 때마다 실시간으로 통신하는 것이 아닌 한꺼번에 일괄적으로 대량 건을 처리)",
+      "example": "대량의 데이터를 배치 처리하여 시스템 부하를 줄였다.",
+      "tags": ["일괄처리", "데이터처리", "성능"]
+    },
+    {
+      "term_id": "it_024",
+      "category": "it",
+      "term": "I/F",
+      "definition": "Interface, 인터페이스",
+      "example": "시스템 간 I/F 연동 작업을 진행했다.",
+      "tags": ["인터페이스", "연동", "시스템"]
+    },
+    {
+      "term_id": "it_025",
+      "category": "it",
+      "term": "어플리케이션 아키텍처 (AA)",
+      "definition": "어플리케이션을 설계하고 구축하는 데 사용하는 패턴과 기술을 설명",
+      "example": "새로운 어플리케이션 아키텍처를 설계하여 확장성을 확보했다.",
+      "tags": ["아키텍처", "설계", "개발"]
+    },
+    {
+      "term_id": "it_026",
+      "category": "it",
+      "term": "API",
+      "definition": "Application Program Interface, 응용프로그램 인터페이스 (운영체계나 다른 응용프로그램에게 처리요구를 할 수 있도록 컴퓨터 운영체제나 다른 응용프로그램에 의해 미리 정해진 특별한 메소드/언어/메시지형식)",
+      "example": "외부 서비스와 연동하기 위해 API를 사용했다.",
+      "tags": ["API", "인터페이스", "연동"]
+    },
+    {
+      "term_id": "it_027",
+      "category": "it",
+      "term": "WAS",
+      "definition": "Web Application Server (웹서버에 사용자가 요구하는 내용(동적인 내용)을 실행시켜주는 코드를 추가해주는 것)",
+      "example": "WAS를 통해 웹 애플리케이션을 안정적으로 운영한다.",
+      "tags": ["서버", "웹", "미들웨어"]
+    },
+    {
+      "term_id": "it_028",
+      "category": "it",
+      "term": "JSP",
+      "definition": "Java 기반의 웹개발 언어",
+      "example": "JSP를 사용하여 동적인 웹 페이지를 개발했다.",
+      "tags": ["Java", "웹개발", "언어"]
+    },
+    {
+      "term_id": "it_029",
+      "category": "it",
+      "term": "PHP",
+      "definition": "웹개발 언어",
+      "example": "PHP로 개발된 웹사이트를 유지보수하고 있다.",
+      "tags": ["웹개발", "언어", "서버사이드"]
+    },
+    {
+      "term_id": "it_030",
+      "category": "it",
+      "term": "CS 프로그래밍",
+      "definition": "Client & Server 프로그래밍",
+      "example": "CS 프로그래밍을 통해 클라이언트와 서버 간의 통신을 구현했다.",
+      "tags": ["클라이언트서버", "개발", "네트워크"]
+    },
+    {
+      "term_id": "it_031",
+      "category": "it",
+      "term": "Hexagonal architecture",
+      "definition": "(= Port & Adapter architecture): 육각형 안쪽에 도메인과 관련된 비즈니스 로직이 들어가고, 육각형 바깥에 도메인과 상관이 없는 기술적인 부분들이 위치하는 아키텍처 패턴",
+      "example": "Hexagonal architecture를 적용하여 비즈니스 로직과 인프라를 분리했다.",
+      "tags": ["아키텍처", "설계패턴", "개발"]
+    },
+    {
+      "term_id": "it_032",
+      "category": "it",
+      "term": "RFP (Request for Proposal)",
+      "definition": "클라이언트가 SI 업체에 제안 요구사항을 정리한 문서",
+      "example": "새로운 시스템 구축을 위한 RFP를 발송했다.",
+      "tags": ["제안요청서", "문서", "SI"]
+    },
+    {
+      "term_id": "it_033",
+      "category": "it",
+      "term": "범위 (Scope)",
+      "definition": "프로젝트의 작업 범위",
+      "example": "프로젝트 범위를 명확히 설정하여 불필요한 작업을 줄였다.",
+      "tags": ["프로젝트관리", "범위", "계획"]
+    },
+    {
+      "term_id": "it_034",
+      "category": "it",
+      "term": "마일스톤 (Milestone)",
+      "definition": "프로젝트의 주요 단계나 목표",
+      "example": "프로젝트의 주요 마일스톤을 달성하여 진척도를 확인했다.",
+      "tags": ["프로젝트관리", "목표", "이정표"]
+    },
+    {
+      "term_id": "it_035",
+      "category": "it",
+      "term": "킥오프 (Kickoff)",
+      "definition": "프로젝트 시작 회의",
+      "example": "다음 주에 새로운 프로젝트 킥오프 미팅이 있다.",
+      "tags": ["프로젝트관리", "회의", "시작"]
+    },
+    {
+      "term_id": "it_036",
+      "category": "it",
+      "term": "WBS (Work Breakdown Structure)",
+      "definition": "작업 분할 구조 (프로젝트의 모든 작업을 계층적으로 분할한 구조)",
+      "example": "WBS를 작성하여 프로젝트의 각 작업을 세분화했다.",
+      "tags": ["프로젝트관리", "작업분류", "계획"]
+    },
+    {
+      "term_id": "it_037",
+      "category": "it",
+      "term": "UAT (User Acceptance Test)",
+      "definition": "사용자 인수 테스트 (사용자가 시스템이 요구사항을 충족하는지 확인하는 테스트)",
+      "example": "UAT를 통해 최종 사용자로부터 시스템의 적합성을 확인했다.",
+      "tags": ["테스트", "QA", "사용자"]
+    },
+    {
+      "term_id": "it_038",
+      "category": "it",
+      "term": "SLA (Service Level Agreement)",
+      "definition": "SI 업체가 시스템을 어떻게 지원할 것인지 정의한 계약",
+      "example": "SLA를 통해 서비스 품질을 보장받았다.",
+      "tags": ["서비스수준협약", "계약", "품질"]
+    },
+    {
+      "term_id": "it_039",
+      "category": "it",
+      "term": "클라이언트/서버",
+      "definition": "클라이언트는 서비스에 접속해 데이터를 요청하는 사용자, 서버는 데이터를 주는 컴퓨터/프로그램",
+      "example": "클라이언트/서버 구조로 시스템을 개발했다.",
+      "tags": ["네트워크", "구조", "개발"]
+    },
+    {
+      "term_id": "it_040",
+      "category": "it",
+      "term": "API (Application Programming Interface)",
+      "definition": "서로 다른 프로그램에서 요청과 응답을 주고 받을 수 있게 만든 체계",
+      "example": "외부 API를 연동하여 새로운 기능을 추가했다.",
+      "tags": ["API", "연동", "인터페이스"]
+    },
+    {
+      "term_id": "it_041",
+      "category": "it",
+      "term": "컴포넌트",
+      "definition": "서비스 내 이용자와 상호작용하는 형태로 특정 기능을 수행할 수 있는 최소한의 단위",
+      "example": "재사용 가능한 컴포넌트를 개발하여 개발 효율을 높였다.",
+      "tags": ["개발", "UI", "재사용"]
+    },
+    {
+      "term_id": "it_042",
+      "category": "it",
+      "term": "QA (Quality Assurance)",
+      "definition": "품질보증 (프로젝트 시작과 마무리까지 모든 과정이 기획한대로 되었는지 확인, 사용자 입장에서의 동작 점검하는 총체적 테스트)",
+      "example": "QA팀에서 제품의 품질을 철저히 검증했다.",
+      "tags": ["품질보증", "테스트", "검증"]
+    },
+    {
+      "term_id": "it_043",
+      "category": "it",
+      "term": "스테이징 서버",
+      "definition": "회사 내부에서 사용하는 개발 서버 (실제 운영 서버와 비슷한 환경이며, QA 및 개발 테스트는 스테이징 서버에서 진행)",
+      "example": "새로운 기능은 스테이징 서버에서 먼저 테스트한다.",
+      "tags": ["서버", "테스트환경", "개발"]
+    },
+    {
+      "term_id": "it_044",
+      "category": "it",
+      "term": "운영 서버",
+      "definition": "실제 서비스되고 있는 운영 중인 서버",
+      "example": "운영 서버에 문제가 발생하여 긴급 복구 작업을 진행했다.",
+      "tags": ["서버", "실서비스", "운영"]
+    },
+    {
+      "term_id": "it_045",
+      "category": "it",
+      "term": "버그",
+      "definition": "소프트웨어에서 발생하는 오류나 오작동",
+      "example": "프로그램에서 예상치 못한 버그가 발생했다.",
+      "tags": ["오류", "결함", "디버깅"]
+    },
+    {
+      "term_id": "it_046",
+      "category": "it",
+      "term": "500에러",
+      "definition": "접속중인 홈페이지 서버 내부의 오류로 발생하는 에러",
+      "example": "웹사이트 접속 시 500에러가 발생하여 원인을 파악 중이다.",
+      "tags": ["서버오류", "에러", "문제"]
+    },
+    {
+      "term_id": "it_047",
+      "category": "it",
+      "term": "배포 (Deploy) / 릴리즈(Release)",
+      "definition": "테스트가 완료된 서비스 또는 기능이 최종 사용자에게 전달하는 과정",
+      "example": "새로운 버전의 소프트웨어를 배포했다.",
+      "tags": ["출시", "릴리즈", "업데이트"]
+    },
+    {
+      "term_id": "it_048",
+      "category": "it",
+      "term": "메타데이터 (Metadata)",
+      "definition": "'데이터에 대한 데이터', 즉 다른 데이터를 설명해 주는 데이터",
+      "example": "사진 파일에는 촬영 날짜, 카메라 모델 등의 메타데이터가 포함되어 있다.",
+      "tags": ["데이터", "정보", "설명"]
+    },
+    {
+      "term_id": "it_049",
+      "category": "it",
+      "term": "네트워크",
+      "definition": "컴퓨터들이 그물처럼 서로 긴밀하게 연결되어 데이터를 주고받을 수 있는 통신망",
+      "example": "안정적인 네트워크 환경 구축이 중요하다.",
+      "tags": ["통신", "인프라", "연결"]
+    },
+    {
+      "term_id": "it_050",
+      "category": "it",
+      "term": "프로그램",
+      "definition": "컴퓨터에 특정 작업을 수행하도록 지시하는 일련의 명령어",
+      "example": "새로운 프로그램을 개발하여 업무 효율을 높였다.",
+      "tags": ["소프트웨어", "코드", "명령어"]
+    },
+    {
+      "term_id": "it_051",
+      "category": "it",
+      "term": "코드",
+      "definition": "프로그램을 작성하는데 사용되는 언어로 작성된 텍스트",
+      "example": "작성된 코드를 검토하여 오류를 수정했다.",
+      "tags": ["프로그래밍", "소스코드", "텍스트"]
+    },
+    {
+      "term_id": "it_052",
+      "category": "it",
+      "term": "게임 엔진",
+      "definition": "게임의 핵심 기능을 제공하는 소프트웨어 플랫폼",
+      "example": "유니티 게임 엔진을 사용하여 게임을 개발했다.",
+      "tags": ["게임개발", "플랫폼", "소프트웨어"]
+    },
+    {
+      "term_id": "it_053",
+      "category": "it",
+      "term": "애자일 (Agile)",
+      "definition": "소프트웨어 개발 방법론 중 하나로, 유연하고 빠르게 개발하는 방식",
+      "example": "애자일 방법론을 도입하여 개발 속도를 높였다.",
+      "tags": ["개발방법론", "스크럼", "유연성"]
+    },
+    {
+      "term_id": "it_054",
+      "category": "it",
+      "term": "린 (Lean)",
+      "definition": "낭비를 최소화하고 효율성을 극대화하는 생산 방식",
+      "example": "린 생산 방식을 통해 제조 비용을 절감했다.",
+      "tags": ["개발방법론", "효율성", "낭비제거"]
+    },
+    {
+      "term_id": "it_055",
+      "category": "it",
+      "term": "피쳐 (Features)",
+      "definition": "제품이나 서비스의 특정 기능",
+      "example": "새로운 피쳐를 추가하여 사용자 편의성을 높였다.",
+      "tags": ["기능", "제품", "서비스"]
+    },
+    {
+      "term_id": "it_056",
+      "category": "it",
+      "term": "피져빌리티 (Feasibility)",
+      "definition": "실현 가능성",
+      "example": "프로젝트의 피져빌리티를 검토하여 성공 가능성을 판단했다.",
+      "tags": ["타당성", "가능성", "검토"]
+    },
+    {
+      "term_id": "it_057",
+      "category": "it",
+      "term": "피델리티 (Fidelity)",
+      "definition": "충실도, 정확성",
+      "example": "높은 피델리티의 프로토타입을 제작하여 사용자 테스트를 진행했다.",
+      "tags": ["프로토타입", "정확도", "UI"]
+    },
+    {
+      "term_id": "it_058",
+      "category": "it",
+      "term": "VOC (Voice of Customers)",
+      "definition": "고객의 소리",
+      "example": "VOC를 분석하여 제품 개선에 반영했다.",
+      "tags": ["고객피드백", "요구사항", "분석"]
+    },
+    {
+      "term_id": "it_059",
+      "category": "it",
+      "term": "CTA (Call To Action)",
+      "definition": "행동 유도 (사용자에게 특정 행동을 유도하는 메시지나 버튼)",
+      "example": "웹사이트에 명확한 CTA를 배치하여 전환율을 높였다.",
+      "tags": ["UI", "UX", "행동유도"]
+    },
+    {
+      "term_id": "it_060",
+      "category": "it",
+      "term": "인프라",
+      "definition": "시스템을 운영하기 위한 기반 환경 (서버, 네트워크, 데이터베이스 등)",
+      "example": "안정적인 서비스 제공을 위해 인프라를 확장했다.",
+      "tags": ["서버", "네트워크", "기반"]
+    },
+    {
+      "term_id": "it_061",
+      "category": "it",
+      "term": "CI/CD",
+      "definition": "지속적 통합/지속적 배포 (개발부터 배포까지의 과정을 자동화하는 방법론)",
+      "example": "CI/CD 파이프라인을 구축하여 개발 생산성을 높였다.",
+      "tags": ["자동화", "배포", "DevOps"]
+    },
+    {
+      "term_id": "it_062",
+      "category": "it",
+      "term": "DevOps",
+      "definition": "개발(Development)과 운영(Operations)의 합성어로, 개발과 운영을 통합하여 효율성을 높이는 문화 및 방법론",
+      "example": "DevOps 문화를 도입하여 개발팀과 운영팀의 협업을 강화했다.",
+      "tags": ["개발문화", "자동화", "협업"]
+    },
+    {
+      "term_id": "it_063",
+      "category": "it",
+      "term": "프레임워크",
+      "definition": "소프트웨어 개발을 위한 기본적인 구조나 틀",
+      "example": "스프링 프레임워크를 사용하여 웹 애플리케이션을 개발했다.",
+      "tags": ["개발", "구조", "라이브러리"]
+    },
+    {
+      "term_id": "it_064",
+      "category": "it",
+      "term": "파싱 (Parsing)",
+      "definition": "데이터에서 필요한 정보를 추출하는 과정",
+      "example": "웹 페이지에서 필요한 정보를 파싱하여 데이터베이스에 저장했다.",
+      "tags": ["데이터처리", "분석", "추출"]
+    },
+    {
+      "term_id": "it_065",
+      "category": "it",
+      "term": "프론트엔드 (FE, Front-end) / 백엔드 (BE, Back-end)",
+      "definition": "프론트엔드는 사용자에게 보여지는 부분, 백엔드는 사용자에게 보여지지 않는 서버 및 데이터베이스 부분",
+      "example": "프론트엔드 개발자와 백엔드 개발자가 협업하여 서비스를 구축했다.",
+      "tags": ["웹개발", "클라이언트", "서버"]
+    },
+    {
+      "term_id": "it_066",
+      "category": "it",
+      "term": "HTML/CSS / 자바스크립트",
+      "definition": "웹 개발에 사용되는 언어들",
+      "example": "HTML, CSS, 자바스크립트를 사용하여 웹 페이지를 만들었다.",
+      "tags": ["웹개발", "프론트엔드", "언어"]
+    },
+    {
+      "term_id": "it_067",
+      "category": "it",
+      "term": "서버/DB/SQL",
+      "definition": "서버는 데이터를 제공하는 컴퓨터, DB는 데이터를 저장하는 곳, SQL은 데이터베이스를 조작하는 언어",
+      "example": "서버에 데이터를 저장하고 SQL을 사용하여 DB를 관리한다.",
+      "tags": ["백엔드", "데이터베이스", "인프라"]
+    },
+    {
+      "term_id": "it_068",
+      "category": "it",
+      "term": "리팩토링",
+      "definition": "코드의 기능을 바꾸지 않으면서 코드의 가독성을 높이고 수정하기 쉽게 만드는 과정",
+      "example": "코드 리팩토링을 통해 유지보수성을 높였다.",
+      "tags": ["코드개선", "개발", "유지보수"]
+    },
+    {
+      "term_id": "it_069",
+      "category": "it",
+      "term": "빌드 (Build)",
+      "definition": "소프트웨어 개발 과정 중 컴파일, 링크, 패키징 등의 작업을 통해 실행 가능한 프로그램을 생성하는 과정",
+      "example": "새로운 버전의 소프트웨어를 빌드하여 테스트를 진행했다.",
+      "tags": ["개발", "컴파일", "프로그램"]
+    },
+    {
+      "term_id": "it_070",
+      "category": "it",
+      "term": "컴파일러",
+      "definition": "프로그래머가 작성한 코드를 기계가 이해할 수 있는 기계어로 바꾸어 주는 프로그램",
+      "example": "C++ 컴파일러를 사용하여 소스 코드를 실행 파일로 변환했다.",
+      "tags": ["프로그래밍", "언어", "변환"]
+    },
+    {
+      "term_id": "it_071",
+      "category": "it",
+      "term": "IDE (Integrated Development Environment)",
+      "definition": "통합 개발 환경 (소스 코드 작성, 디버깅, Git, 컴파일 등의 작업을 한 곳에서 할 수 있도록 만든 프로그램)",
+      "example": "Visual Studio Code는 인기 있는 IDE 중 하나이다.",
+      "tags": ["개발도구", "에디터", "프로그래밍"]
+    },
+    {
+      "term_id": "it_072",
+      "category": "it",
+      "term": "SSO (Single Sign On)",
+      "definition": "통합 인증 (한 번의 로그인으로 여러 개의 다른 시스템에 접근할 수 있는 시스템)",
+      "example": "SSO를 통해 여러 서비스에 편리하게 로그인할 수 있다.",
+      "tags": ["인증", "로그인", "보안"]
+    },
+    {
+      "term_id": "it_073",
+      "category": "it",
+      "term": "Batching",
+      "definition": "여러 작업 또는 데이터 처리 요청을 그룹화하여 한 번에 처리하는 방법",
+      "example": "데이터베이스에 대량의 데이터를 Batching하여 처리했다.",
+      "tags": ["일괄처리", "데이터처리", "성능"]
+    },
+    {
+      "term_id": "it_074",
+      "category": "it",
+      "term": "Rendering",
+      "definition": "사용자 인터페이스를 화면에 그려내는 과정",
+      "example": "웹 브라우저는 HTML을 파싱하여 화면에 렌더링한다.",
+      "tags": ["UI", "프론트엔드", "웹"]
+    },
+    {
+      "term_id": "business_018",
+      "category": "business",
+      "term": "각출",
+      "definition": "각자의 비용을 각자 지불하는 것",
+      "example": "점심 식사 비용은 각출하기로 했다.",
+      "tags": ["비용", "지불", "더치페이"]
+    },
+    {
+      "term_id": "business_019",
+      "category": "business",
+      "term": "갹출",
+      "definition": "같은 목적을 위해 여러 사람이 돈을 나눠 내는 것",
+      "example": "회식 비용은 갹출하여 마련했다.",
+      "tags": ["비용", "분담", "모금"]
+    },
+    {
+      "term_id": "business_020",
+      "category": "business",
+      "term": "검토",
+      "definition": "어떤 내용이나 사실을 분석하고 확인함",
+      "example": "제출된 보고서를 꼼꼼히 검토했다.",
+      "tags": ["확인", "분석", "보고"]
+    },
+    {
+      "term_id": "business_021",
+      "category": "business",
+      "term": "격무",
+      "definition": "몹시 고된 업무",
+      "example": "격무에 시달려 건강이 나빠졌다.",
+      "tags": ["업무", "과로", "노동"]
+    },
+    {
+      "term_id": "business_022",
+      "category": "business",
+      "term": "격일",
+      "definition": "하루를 거름",
+      "example": "격일로 출근하여 업무를 처리한다.",
+      "tags": ["근무", "일정", "주기"]
+    },
+    {
+      "term_id": "business_023",
+      "category": "business",
+      "term": "공란",
+      "definition": "비워둔 칸",
+      "example": "신청서의 공란 없이 모두 작성해 주세요.",
+      "tags": ["문서", "작성", "빈칸"]
+    },
+    {
+      "term_id": "business_024",
+      "category": "business",
+      "term": "공제",
+      "definition": "받을 몫에서 일정한 금액을 뺌",
+      "example": "세금 공제를 받아 소득세를 절감했다.",
+      "tags": ["세금", "차감", "회계"]
+    },
+    {
+      "term_id": "communication_014",
+      "category": "communication",
+      "term": "구두",
+      "definition": "입으로 하는 말",
+      "example": "구두로 지시받은 내용을 문서로 정리했다.",
+      "tags": ["말", "보고", "지시"]
+    },
+    {
+      "term_id": "communication_015",
+      "category": "communication",
+      "term": "귀사",
+      "definition": "주로 편지글에서 상대방의 회사를 높여 이르는 말",
+      "example": "귀사의 무궁한 발전을 기원합니다.",
+      "tags": ["존칭", "회사", "문서"]
+    },
+    {
+      "term_id": "time_031",
+      "category": "time",
+      "term": "금번",
+      "definition": "이번",
+      "example": "금번 프로젝트는 성공적으로 마무리되었다.",
+      "tags": ["이번", "시간", "현재"]
+    },
+    {
+      "term_id": "business_025",
+      "category": "business",
+      "term": "기재",
+      "definition": "문서에 기록하다",
+      "example": "개인 정보를 정확히 기재해 주세요.",
+      "tags": ["작성", "기록", "문서"]
+    },
+    {
+      "term_id": "business_026",
+      "category": "business",
+      "term": "납기",
+      "definition": "고객에게 주문받은 물품이나 결과물을 가져다줘야 하는 마감 기한",
+      "example": "납기를 맞추기 위해 야근을 했다.",
+      "tags": ["마감", "기한", "납품"]
+    },
+    {
+      "term_id": "hr_067",
+      "category": "hr",
+      "term": "노무",
+      "definition": "노동 또는 노동과 관련된 사무",
+      "example": "노무 관리는 기업 경영의 중요한 부분이다.",
+      "tags": ["노동", "인사", "사무"]
+    },
+    {
+      "term_id": "communication_016",
+      "category": "communication",
+      "term": "노티(Notice)",
+      "definition": "알리다, 공지하다",
+      "example": "회의 시간 변경을 팀원들에게 노티했다.",
+      "tags": ["공지", "알림", "전달"]
+    },
+    {
+      "term_id": "business_027",
+      "category": "business",
+      "term": "누락",
+      "definition": "기입되거나 처리되어야 하는 내용이 빠지다",
+      "example": "보고서에 중요한 내용이 누락되었다.",
+      "tags": ["실수", "빠짐", "오류"]
+    },
+    {
+      "term_id": "business_028",
+      "category": "business",
+      "term": "당기순이익",
+      "definition": "일정 회계기간동안 발생한 전체 수익에서 비용을 차감한 금액",
+      "example": "이번 분기 당기순이익이 크게 증가했다.",
+      "tags": ["회계", "이익", "재무"]
+    },
+    {
+      "term_id": "communication_017",
+      "category": "communication",
+      "term": "당사",
+      "definition": "바로 그 회사, 또는 바로 이 회사",
+      "example": "당사는 고객 만족을 최우선으로 한다.",
+      "tags": ["자사", "회사", "문서"]
+    },
+    {
+      "term_id": "business_029",
+      "category": "business",
+      "term": "대금",
+      "definition": "물건의 값으로 치르는 돈",
+      "example": "제품 대금을 지불했다.",
+      "tags": ["돈", "지불", "거래"]
+    },
+    {
+      "term_id": "business_030",
+      "category": "business",
+      "term": "대외비",
+      "definition": "외부에 알리지 않기로 한 비밀",
+      "example": "이 문서는 대외비이므로 외부에 유출해서는 안 된다.",
+      "tags": ["보안", "비밀", "문서"]
+    },
+    {
+      "term_id": "communication_018",
+      "category": "communication",
+      "term": "더블체크(Double check)",
+      "definition": "오류가 없는지 재확인하는 것",
+      "example": "중요한 서류는 반드시 더블체크해야 한다.",
+      "tags": ["확인", "검토", "재확인"]
+    },
+    {
+      "term_id": "time_032",
+      "category": "time",
+      "term": "데드라인(Deadline)",
+      "definition": "마감일",
+      "example": "보고서 제출 데드라인이 내일이다.",
+      "tags": ["마감", "기한", "일정"]
+    },
+    {
+      "term_id": "business_031",
+      "category": "business",
+      "term": "도메인(Domain)",
+      "definition": "비즈니스가 속한 산업 분야, 영역, 환경 전반을 일컫는 말 또는 인터넷 주소(URL)의 일부",
+      "example": "우리 회사는 IT 도메인에서 선두를 달리고 있다.",
+      "tags": ["분야", "산업", "영역"]
+    },
+    {
+      "term_id": "time_033",
+      "category": "time",
+      "term": "듀데이트(Due date)",
+      "definition": "마감 기한",
+      "example": "과제 듀데이트를 놓치지 않도록 주의해야 한다.",
+      "tags": ["마감", "기한", "일정"]
+    },
+    {
+      "term_id": "business_032",
+      "category": "business",
+      "term": "디벨롭(Develop)",
+      "definition": "발전시키다, 구체화하다",
+      "example": "아이디어를 더욱 디벨롭하여 구체적인 계획을 세웠다.",
+      "tags": ["발전", "개선", "구체화"]
+    },
+    {
+      "term_id": "business_033",
+      "category": "business",
+      "term": "램프업(Ramp up)",
+      "definition": "생산 능력 등을 늘리다",
+      "example": "신제품 출시를 위해 생산량을 램프업했다.",
+      "tags": ["생산", "증가", "확대"]
+    },
+    {
+      "term_id": "communication_019",
+      "category": "communication",
+      "term": "랩업(Wrap up)",
+      "definition": "회고",
+      "example": "프로젝트 랩업 미팅을 통해 성과를 공유했다.",
+      "tags": ["마무리", "회고", "회의"]
+    },
+    {
+      "term_id": "communication_020",
+      "category": "communication",
+      "term": "러프(Rough)",
+      "definition": "거친, 대략적인",
+      "example": "러프한 스케치만으로도 아이디어를 전달할 수 있었다.",
+      "tags": ["대략", "초안", "개요"]
+    },
+    {
+      "term_id": "it_075",
+      "category": "it",
+      "term": "레거시(Legacy)",
+      "definition": "현재까지 쓰이는 낡은 기존 시스템 또는 현재 체계에 영향을 미치는 과거의 시스템",
+      "example": "레거시 시스템을 현대화하는 작업이 필요하다.",
+      "tags": ["기존시스템", "노후화", "유산"]
+    },
+    {
+      "term_id": "business_034",
+      "category": "business",
+      "term": "레슨런(Lesson learned)",
+      "definition": "성공 또는 실패의 경험을 통해 교훈을 얻는 것",
+      "example": "이번 프로젝트의 레슨런을 통해 다음 프로젝트에 반영할 점을 찾았다.",
+      "tags": ["교훈", "경험", "회고"]
+    },
+    {
+      "term_id": "communication_021",
+      "category": "communication",
+      "term": "레퍼런스(Reference)",
+      "definition": "참고 자료",
+      "example": "보고서 작성 시 다양한 레퍼런스를 참고했다.",
+      "tags": ["참고", "자료", "인용"]
+    },
+    {
+      "term_id": "business_035",
+      "category": "business",
+      "term": "로우데이터(Raw data)",
+      "definition": "가공하지 않은 원본 자료",
+      "example": "로우데이터를 분석하여 유의미한 정보를 추출했다.",
+      "tags": ["데이터", "원본", "분석"]
+    },
+    {
+      "term_id": "business_036",
+      "category": "business",
+      "term": "룩앤필(Look & Feel)",
+      "definition": "제품의 겉모양이나 인터페이스 등 눈에 보이는 시각적 요소",
+      "example": "새로운 웹사이트의 룩앤필이 사용자들에게 좋은 반응을 얻었다.",
+      "tags": ["디자인", "UI", "경험"]
+    },
+    {
+      "term_id": "business_037",
+      "category": "business",
+      "term": "리소스(Resource)",
+      "definition": "인력, 시간, 돈 등 업무에 투입되는 자원",
+      "example": "프로젝트에 필요한 리소스를 확보하는 것이 중요하다.",
+      "tags": ["자원", "인력", "예산"]
+    },
+    {
+      "term_id": "business_038",
+      "category": "business",
+      "term": "리스트업(List up)",
+      "definition": "데이터를 목록화하는 것",
+      "example": "회의 안건을 리스트업하여 공유했다.",
+      "tags": ["목록", "정리", "작성"]
+    },
+    {
+      "term_id": "business_039",
+      "category": "business",
+      "term": "린(Lean)",
+      "definition": "군살이 없는, 낭비 없이 효율적인 운영 방식을 가리킨다",
+      "example": "린 경영을 통해 불필요한 비용을 절감했다.",
+      "tags": ["효율", "낭비제거", "경영"]
+    },
+    {
+      "term_id": "it_076",
+      "category": "it",
+      "term": "릴리즈(Release)",
+      "definition": "발표, 배포, 출시",
+      "example": "새로운 소프트웨어 버전이 릴리즈되었다.",
+      "tags": ["배포", "출시", "소프트웨어"]
+    },
+    {
+      "term_id": "it_077",
+      "category": "it",
+      "term": "마이그레이션(Migration)",
+      "definition": "데이터 등을 새로운 운영 체계로 옮겨가는 과정",
+      "example": "기존 시스템의 데이터를 새로운 시스템으로 마이그레이션했다.",
+      "tags": ["데이터이전", "시스템", "전환"]
+    },
+    {
+      "term_id": "business_040",
+      "category": "business",
+      "term": "마켓(Market)",
+      "definition": "시장",
+      "example": "새로운 마켓 진출을 위해 시장 조사를 진행했다.",
+      "tags": ["시장", "비즈니스", "경쟁"]
+    },
+    {
+      "term_id": "business_041",
+      "category": "business",
+      "term": "마켓쉐어/마켓셰어(Market share)",
+      "definition": "시장점유율",
+      "example": "우리 회사의 마켓쉐어가 꾸준히 증가하고 있다.",
+      "tags": ["시장점유율", "경쟁", "성과"]
+    },
+    {
+      "term_id": "business_042",
+      "category": "business",
+      "term": "맨먼스(Man/Month)",
+      "definition": "한 사람이 한 달 동안 수행할 수 있는 작업량",
+      "example": "이 프로젝트는 10 맨먼스가 소요될 것으로 예상된다.",
+      "tags": ["공수", "프로젝트관리", "작업량"]
+    },
+    {
+      "term_id": "business_043",
+      "category": "business",
+      "term": "미수금",
+      "definition": "아직 거둬들이지 못한 돈",
+      "example": "미수금을 회수하기 위해 노력하고 있다.",
+      "tags": ["회계", "채권", "돈"]
+    },
+    {
+      "term_id": "business_044",
+      "category": "business",
+      "term": "바텀업(Bottom up)",
+      "definition": "실무자가 업무를 기획해 윗선에 보고하여 일을 진행하는 방식. 탑다운과 반대 개념",
+      "example": "바텀업 방식으로 아이디어를 수렴하여 새로운 프로젝트를 시작했다.",
+      "tags": ["의사결정", "상향식", "업무방식"]
+    },
+    {
+      "term_id": "business_045",
+      "category": "business",
+      "term": "배상",
+      "definition": "남에게 끼친 손해를 물어주는 일",
+      "example": "고객에게 피해를 입힌 부분에 대해 배상했다.",
+      "tags": ["손해", "보상", "책임"]
+    },
+    {
+      "term_id": "business_046",
+      "category": "business",
+      "term": "백업(Back up)",
+      "definition": "파일 손상 등에 대비해 데이터를 다른 저장장치에 복사해두는 것 또는 담당자가 자리를 비우거나 일손이 부족할때 업무를 돕는 것",
+      "example": "중요한 데이터는 매일 백업해야 한다.",
+      "tags": ["데이터보관", "업무지원", "대비"]
+    },
+    {
+      "term_id": "communication_022",
+      "category": "communication",
+      "term": "별첨",
+      "definition": "서류를 따로 첨부함",
+      "example": "보고서에 관련 자료를 별첨했다.",
+      "tags": ["문서", "첨부", "자료"]
+    },
+    {
+      "term_id": "hr_068",
+      "category": "hr",
+      "term": "분장",
+      "definition": "일이나 임무를 나누어 맡음",
+      "example": "각 팀원에게 업무를 분장했다.",
+      "tags": ["업무분담", "역할", "책임"]
+    },
+    {
+      "term_id": "business_047",
+      "category": "business",
+      "term": "불출",
+      "definition": "돈이나 물품을 내줌. 주기적으로 지급되는 경우에 주로 사용된다",
+      "example": "사무용품 불출 대장을 작성했다.",
+      "tags": ["지급", "물품", "관리"]
+    },
+    {
+      "term_id": "communication_023",
+      "category": "communication",
+      "term": "붙임",
+      "definition": "글에서 빠진 것이나 참고할 내용을 뒤에 덧붙여 적은 것",
+      "example": "보고서 붙임 자료를 확인해 주세요.",
+      "tags": ["문서", "첨부", "참고"]
+    },
+    {
+      "term_id": "business_048",
+      "category": "business",
+      "term": "사안",
+      "definition": "문제가 되는 일이나 계획",
+      "example": "중요한 사안이 발생하여 긴급 회의를 소집했다.",
+      "tags": ["이슈", "안건", "문제"]
+    },
+    {
+      "term_id": "hr_069",
+      "category": "hr",
+      "term": "사일로(Silo)",
+      "definition": "팀끼리 벽을 치고 협력 소통하지 않는 현상",
+      "example": "사일로 현상을 해결하기 위해 팀 간 협업을 강화해야 한다.",
+      "tags": ["조직문화", "협업", "소통"]
+    },
+    {
+      "term_id": "communication_024",
+      "category": "communication",
+      "term": "캐치업 (Catch-up)",
+      "definition": "뒤쳐진 것을 따라잡거나 놓친 정보 등을 알아가는 과정",
+      "example": "경쟁사와의 격차를 캐치업하기 위해 노력하고 있다.",
+      "tags": ["따라잡기", "정보공유", "현황파악"]
+    },
+    {
+      "term_id": "hr_070",
+      "category": "hr",
+      "term": "R&R (Role & Responsibility)",
+      "definition": "역할과 책임. 팀 내에서 자신에게 주어진 역할을 성실히 수행하는 것",
+      "example": "각 팀원의 R&R을 명확히 하여 업무 효율을 높였다.",
+      "tags": ["역할", "책임", "업무분장"]
+    },
+    {
+      "term_id": "business_049",
+      "category": "business",
+      "term": "SCM (Supply Chain Management)",
+      "definition": "공급망 관리",
+      "example": "SCM 시스템을 도입하여 생산 효율을 높였다.",
+      "tags": ["공급망", "물류", "관리"]
+    },
+    {
+      "term_id": "business_050",
+      "category": "business",
+      "term": "SEM (Strategic Enterprise Management)",
+      "definition": "통합 경영 관리체계",
+      "example": "SEM을 통해 기업의 경영 활동을 통합적으로 관리한다.",
+      "tags": ["경영관리", "전략", "통합"]
+    },
+    {
+      "term_id": "business_051",
+      "category": "business",
+      "term": "Shared Value (공유가치)",
+      "definition": "기업과 개인 행동에 있어 조직과 구성원들에게 공유되어 있는 가치",
+      "example": "공유가치 창출을 통해 기업의 사회적 책임을 다한다.",
+      "tags": ["가치", "조직문화", "CSR"]
+    },
+    {
+      "term_id": "business_052",
+      "category": "business",
+      "term": "CSV (Creating Shared Value)",
+      "definition": "공유가치 창출",
+      "example": "CSV 경영을 통해 기업의 지속 가능한 성장을 추구한다.",
+      "tags": ["공유가치", "사회적책임", "경영"]
+    },
+    {
+      "term_id": "business_053",
+      "category": "business",
+      "term": "경영이념 (Business Ideology)",
+      "definition": "기업이 사회의 한 구성체로서 책임과 목적, 사명을 명확히 하고, 장기적으로 나아갈 방향과 행동 원칙을 포함해 조직과 구성원이 공유하고자 하는 가치와 정신을 사내외에 공식적으로 표명하여 명문화 한 것",
+      "example": "우리 회사의 경영이념은 고객 만족을 최우선으로 한다.",
+      "tags": ["철학", "가치", "비전"]
+    },
+    {
+      "term_id": "business_054",
+      "category": "business",
+      "term": "비전 (Vision)",
+      "definition": "회사가 미래의 일정시점을 가정하고, 마땅히 되어있어야 할 모습과 거기에 도달하는 시나리오를 그린 것",
+      "example": "2030년까지 글로벌 선두 기업이 되는 것이 우리의 비전이다.",
+      "tags": ["미래상", "목표", "방향"]
+    },
+    {
+      "term_id": "business_055",
+      "category": "business",
+      "term": "경영전략 (Business Strategy)",
+      "definition": "기업의 거시환경과 경쟁환경에 관련된 것으로, 각종 경쟁상황을 가정하고, 목표를 설정하여, 그 목표를 효율적으로 달성함으로써 경쟁우위를 제공유지시켜 줄 수 있는 주요한 의사결정을 하는 것",
+      "example": "새로운 경영전략을 수립하여 시장 변화에 대응했다.",
+      "tags": ["전략", "경쟁우위", "의사결정"]
+    },
+    {
+      "term_id": "business_056",
+      "category": "business",
+      "term": "전사전략 (Corporate Strategy)",
+      "definition": "회사 전체 차원에서 대처하는 방안을 수립한 전략",
+      "example": "전사전략을 통해 모든 부서가 동일한 목표를 향해 나아간다.",
+      "tags": ["전략", "회사전체", "방향"]
+    },
+    {
+      "term_id": "business_057",
+      "category": "business",
+      "term": "사업(별) 전략",
+      "definition": "사업(부문)별로 수행하는 사업의 환경적 요인 중 주로 산업환경과 시장전망을 분석하고, 경쟁사 동향을 파악하여, 시장에서 경쟁적 우위를 확보토록하며, 사업의 지속적 성장 발전을 도모하려 수립한 전략",
+      "example": "각 사업부별 전략을 수립하여 시장 경쟁력을 강화했다.",
+      "tags": ["전략", "사업부", "경쟁력"]
+    },
+    {
+      "term_id": "business_058",
+      "category": "business",
+      "term": "기능(별) 전략",
+      "definition": "회사의 주요 업무기능별로 각 분야에서 전사전략과 사업(별)전략을 실행하는 데 있어 효과적으로 기여하고, 운용하는 방안을 수립한 전략",
+      "example": "마케팅 기능별 전략을 통해 고객 유입을 늘렸다.",
+      "tags": ["전략", "기능", "실행"]
+    },
+    {
+      "term_id": "business_059",
+      "category": "business",
+      "term": "전략(적) 경영 (Strategic Business)",
+      "definition": "기업의 경영환경과 경영의 기본원리가 시대의 상황 및 가치의 변화로 불확실하고, 무한 경쟁속에 처하게 되어 장기적/미래지향적 관점에서 기업외부의 환경과 경쟁자를 반드시 생각하고, 경쟁우위를 지속적으로 유지시키며, 확대되어가는 기업의 이념과 사명을 다하고, 비전성취를 위하여 경영자가 경영 의사결정의 완급을 조절하고, 경영의 패턴과 방식을 상황에 따라 조정하는 등 전략적 사고에 입각하여 경영을 하는 것",
+      "example": "전략적 경영을 통해 기업의 지속 가능한 성장을 이끌어냈다.",
+      "tags": ["경영", "전략", "의사결정"]
+    },
+    {
+      "term_id": "business_060",
+      "category": "business",
+      "term": "EC (Engineering Constructor)화",
+      "definition": "건설산업의 전략특성을 총괄적으로 표현한 것으로, 건설 사업수행 全 Process를 사업영역으로 참여토록 하는 것",
+      "example": "EC화를 통해 건설 사업의 전 과정을 통합 관리한다.",
+      "tags": ["건설", "엔지니어링", "전략"]
+    },
+    {
+      "term_id": "business_061",
+      "category": "business",
+      "term": "글로벌화 (Globalization)",
+      "definition": "기업의 활동 영역을 전 세계로 확장하는 전략",
+      "example": "글로벌화를 통해 해외 시장에서 경쟁력을 확보했다.",
+      "tags": ["해외진출", "확장", "전략"]
+    },
+    {
+      "term_id": "business_062",
+      "category": "business",
+      "term": "다각화",
+      "definition": "기업이 새로운 제품이나 서비스 시장으로 진출하여 사업 영역을 확장하는 전략",
+      "example": "사업 다각화를 통해 새로운 성장 동력을 확보했다.",
+      "tags": ["사업확장", "신사업", "전략"]
+    },
+    {
+      "term_id": "business_063",
+      "category": "business",
+      "term": "SYSTEM화",
+      "definition": "앞의 세 가지 전략(EC화, 글로벌화, 다각화)을 실행하는데 있어 회사가 내부적으로 갖추어야 할 보완 전략",
+      "example": "SYSTEM화를 통해 업무 프로세스를 표준화하고 효율을 높였다.",
+      "tags": ["시스템화", "프로세스", "전략"]
+    }
+  ]
+}

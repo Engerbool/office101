@@ -1,0 +1,268 @@
+{
+  "terms": [
+    {
+      "term_id": "approval_004",
+      "category": "approval",
+      "term": "시말서",
+      "definition": "자신의 과실을 인정하고 일이 일어난 사유를 기재한 문서",
+      "example": "김대리는 납기 지연에 대한 시말서를 작성하여 제출했다.",
+      "tags": [
+        "과실",
+        "사유서",
+        "문서"
+      ]
+    },
+    {
+      "term_id": "approval_005",
+      "category": "approval",
+      "term": "경위서",
+      "definition": "사건이나 사고 발생 시 그 시작부터 끝까지의 과정을 작성한 문서",
+      "example": "이번 프로젝트의 문제 발생 경위서를 작성하여 보고했다.",
+      "tags": [
+        "사건",
+        "보고서",
+        "문서"
+      ]
+    },
+    {
+      "term_id": "approval_006",
+      "category": "approval",
+      "term": "품의서",
+      "definition": "결재권자에게 업무를 승인해 줄 것을 요청하는 문서",
+      "example": "새로운 장비 구매를 위한 품의서를 작성하여 상신했다.",
+      "tags": [
+        "요청",
+        "승인",
+        "문서"
+      ]
+    },
+    {
+      "term_id": "approval_007",
+      "category": "approval",
+      "term": "결재",
+      "definition": "상사가 안건에 대해 검토 및 허가, 승인하는 과정을 의미",
+      "example": "부장님께서는 제출된 보고서를 결재하셨다.",
+      "tags": [
+        "검토",
+        "허가",
+        "승인"
+      ]
+    },
+    {
+      "term_id": "approval_008",
+      "category": "approval",
+      "term": "상신",
+      "definition": "상사에게 의견이나 사정을 글이나 말로 보고하는 것",
+      "example": "신규 사업 계획을 상사에게 상신했다.",
+      "tags": [
+        "보고",
+        "의견",
+        "상사"
+      ]
+    },
+    {
+      "term_id": "approval_009",
+      "category": "approval",
+      "term": "품의",
+      "definition": "회사에서 부서 결정권자에게 의견을 서면화하여 기안하고 승인받는 일련의 절차",
+      "example": "해외 출장을 가기 위해 품의를 올렸다.",
+      "tags": [
+        "기안",
+        "승인",
+        "절차"
+      ]
+    },
+    {
+      "term_id": "approval_010",
+      "category": "approval",
+      "term": "재가",
+      "definition": "결재권을 가지고 있는 자에게 안건을 허락하여 승인",
+      "example": "사장님의 재가가 떨어져 프로젝트를 진행할 수 있게 되었다.",
+      "tags": [
+        "결재권",
+        "허락",
+        "승인"
+      ]
+    },
+    {
+      "term_id": "approval_011",
+      "category": "approval",
+      "term": "기안",
+      "definition": "사업이나 활동 계획의 초안을 만들거나 그 초안을 뜻함",
+      "example": "신규 마케팅 캠페인 기안을 작성 중이다.",
+      "tags": [
+        "초안",
+        "계획",
+        "문서"
+      ]
+    },
+    {
+      "term_id": "approval_012",
+      "category": "approval",
+      "term": "결재선",
+      "definition": "결재가 이루어지는 과정이나 절차를 말함",
+      "example": "이 문서는 결재선이 복잡해서 시간이 오래 걸린다.",
+      "tags": [
+        "결재",
+        "과정",
+        "절차"
+      ]
+    },
+    {
+      "term_id": "approval_013",
+      "category": "approval",
+      "term": "선결",
+      "definition": "결재선에 따라 문서 전달(기안자 팀장 본부장 대표)하는 가장 일반적인 결재 방식",
+      "example": "이 보고서는 선결 방식으로 진행될 예정이다.",
+      "tags": [
+        "결재",
+        "결재선",
+        "방식"
+      ]
+    },
+    {
+      "term_id": "approval_014",
+      "category": "approval",
+      "term": "전결",
+      "definition": "중간관리자가 결재하는 것으로, 최종 결재권자의 부담을 줄여주며 반복적이고 일상적인 내용에 사용",
+      "example": "소액 지출은 팀장님 전결로 처리된다.",
+      "tags": [
+        "결재",
+        "중간관리자",
+        "권한"
+      ]
+    },
+    {
+      "term_id": "approval_015",
+      "category": "approval",
+      "term": "대결",
+      "definition": "대신하여 결재하는 것. 보통 담당자가 부재중(휴가, 휴직, 출장 등)인 경우 사용",
+      "example": "부장님께서 출장 중이셔서 차장님께서 대결하셨다.",
+      "tags": [
+        "결재",
+        "대신",
+        "부재중"
+      ]
+    },
+    {
+      "term_id": "approval_016",
+      "category": "approval",
+      "term": "후결",
+      "definition": "최종 결재권자가 결재하기 전에 미리 업무를 진행하는 것. 보통 가벼운 업무에 적용",
+      "example": "급한 건이라 일단 후결로 진행하고 나중에 정식 결재를 받았다.",
+      "tags": [
+        "결재",
+        "선진행",
+        "업무"
+      ]
+    },
+    {
+      "term_id": "approval_017",
+      "category": "approval",
+      "term": "반려",
+      "definition": "주로 윗사람이나 상급 기관에 제출한 문서를 처리하지 않고 되돌려주는 것",
+      "example": "제출된 기안서가 내용 미비로 반려되었다.",
+      "tags": [
+        "거절",
+        "문서",
+        "반환"
+      ]
+    },
+    {
+      "term_id": "approval_018",
+      "category": "approval",
+      "term": "후열",
+      "definition": "결재가 완료된 뒤 따로 결재를 살펴보는 것. 전결이나 선결 권한 행사로 인해 결재 권한을 행사하지 못한 인원들이 승인 또는 반려 처리되지 않고 후열 처리됨",
+      "example": "결재가 완료된 문서는 후열로 확인했다.",
+      "tags": [
+        "결재완료",
+        "확인",
+        "열람"
+      ]
+    },
+    {
+      "term_id": "approval_019",
+      "category": "approval",
+      "term": "승인",
+      "definition": "결재 문서에서 제안된 내용이나 요청사항을 검토한 후, 적절하다고 판단되면 자신의 결재 차례 이를 허가하는 행위",
+      "example": "프로젝트 예산이 최종 승인되었다.",
+      "tags": [
+        "허가",
+        "결재",
+        "문서"
+      ]
+    },
+    {
+      "term_id": "approval_020",
+      "category": "approval",
+      "term": "보류",
+      "definition": "상신된 문서에 대해 '승인' 혹은 '반려' 결정을 내리기 어려울 경우 결재를 잠시 중지시켜 문서를 보류처리하는 것",
+      "example": "해당 안건은 추가 검토가 필요하여 보류되었다.",
+      "tags": [
+        "중지",
+        "결재",
+        "검토"
+      ]
+    },
+    {
+      "term_id": "approval_021",
+      "category": "approval",
+      "term": "수신",
+      "definition": "내부 결재를 완료된 후 다른 부서에게 그 결재 문서를 넘겨 그 부서에서 결재가 최종 완결되는 경우에 사용",
+      "example": "해당 문서는 인사팀으로 수신되었다.",
+      "tags": [
+        "문서전달",
+        "부서협조",
+        "결재완료"
+      ]
+    },
+    {
+      "term_id": "approval_022",
+      "category": "approval",
+      "term": "협조 결재",
+      "definition": "수신 부서로 업무 협조를 요청할 때 사용되는 결재 유형",
+      "example": "마케팅 부서에 협조 결재를 요청했다.",
+      "tags": [
+        "업무협조",
+        "요청",
+        "결재"
+      ]
+    },
+    {
+      "term_id": "approval_023",
+      "category": "approval",
+      "term": "합의",
+      "definition": "타 부서와의 협력이 필요하거나 동의를 얻어야 할 경우 합의자가 행하는 결재 방식",
+      "example": "유관 부서와의 합의를 거쳐 최종 결정을 내렸다.",
+      "tags": [
+        "협력",
+        "동의",
+        "결재"
+      ]
+    },
+    {
+      "term_id": "approval_024",
+      "category": "approval",
+      "term": "열람",
+      "definition": "결재 문서가 상신되는 시점부터 종결되기까지 열람자가 해당 문서를 조회할 수 있는 것",
+      "example": "해당 문서는 열람 권한이 있는 직원만 볼 수 있다.",
+      "tags": [
+        "조회",
+        "문서",
+        "권한"
+      ]
+    },
+    {
+      "term_id": "approval_025",
+      "category": "approval",
+      "term": "공람",
+      "definition": "결재 문서가 종결된 이후부터 공람자가 해당 문서를 조회할 수 있는 것",
+      "example": "결재 완료된 문서는 전체 공람되었다.",
+      "tags": [
+        "조회",
+        "공유",
+        "결재완료"
+      ]
+    }
+  ]
+}

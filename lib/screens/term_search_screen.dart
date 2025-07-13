@@ -4,6 +4,7 @@ import '../providers/term_provider.dart';
 import '../providers/theme_provider.dart';
 import '../widgets/autocomplete_search_bar.dart';
 import '../widgets/term_list_widget.dart';
+import '../widgets/error_display_widget.dart';
 import '../models/term.dart';
 import 'term_detail_screen.dart';
 
@@ -83,8 +84,28 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
                   builder: (context, termProvider, child) {
                     print('TermSearchScreen: Building with ${termProvider.allTerms.length} terms, loading: ${termProvider.isLoading}');
                     
+                    // 에러 상태 체크
+                    if (termProvider.hasError) {
+                      return ErrorDisplayWidget(
+                        errorMessage: termProvider.errorMessage,
+                        onRetry: () {
+                          termProvider.clearError();
+                          if (termProvider.searchQuery.isNotEmpty) {
+                            termProvider.searchTerms(termProvider.searchQuery);
+                          } else {
+                            termProvider.retryLoadData();
+                          }
+                        },
+                      );
+                    }
+                    
                     if (termProvider.searchQuery.isEmpty) {
                       return _buildInitialState(themeProvider);
+                    }
+                    
+                    // 검색 결과가 없는 경우
+                    if (termProvider.filteredTerms.isEmpty) {
+                      return _buildNoResultsState(termProvider, themeProvider);
                     }
 
                     return Padding(
@@ -199,6 +220,89 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
             ),
           ),
       ],
+    );
+  }
+  
+  Widget _buildNoResultsState(TermProvider termProvider, ThemeProvider themeProvider) {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(32.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.search_off,
+              size: 80,
+              color: themeProvider.textColor.withOpacity(0.3),
+            ),
+            SizedBox(height: 24),
+            Text(
+              '검색 결과가 없습니다',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: themeProvider.textColor,
+              ),
+            ),
+            SizedBox(height: 12),
+            Text(
+              '"${termProvider.searchQuery}"에 대한\n검색 결과를 찾을 수 없습니다.',
+              style: TextStyle(
+                fontSize: 16,
+                color: themeProvider.subtitleColor.withOpacity(0.6),
+                height: 1.5,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 24),
+            Column(
+              children: [
+                Text(
+                  '다음을 확인해보세요:',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: themeProvider.textColor.withOpacity(0.8),
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  '• 검색어의 철자가 정확한지 확인\n• 다른 키워드로 검색\n• 더 간단한 검색어 사용',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: themeProvider.subtitleColor.withOpacity(0.6),
+                    height: 1.4,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ],
+            ),
+            SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton.icon(
+                  onPressed: () {
+                    _searchController.clear();
+                    termProvider.clearFilters();
+                  },
+                  icon: Icon(
+                    Icons.refresh,
+                    color: Color(0xFF5A8DEE),
+                  ),
+                  label: Text(
+                    '검색 초기화',
+                    style: TextStyle(
+                      color: Color(0xFF5A8DEE),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,0 +1,1300 @@
+{
+  "terms": [
+    {
+      "term_id": "marketing_001",
+      "category": "marketing",
+      "term": "리드",
+      "definition": "잠재 고객이나 영업 기회를 의미하는 마케팅 용어",
+      "example": "이번 캠페인으로 50개의 새로운 리드를 확보했습니다.",
+      "tags": [
+        "고객",
+        "영업",
+        "기회"
+      ]
+    },
+    {
+      "term_id": "marketing_002",
+      "category": "marketing",
+      "term": "컨버전",
+      "definition": "방문자나 잠재고객이 실제 고객으로 전환되는 것",
+      "example": "웹사이트의 컨버전율이 3%로 증가했습니다.",
+      "tags": [
+        "전환",
+        "고객",
+        "성과"
+      ]
+    },
+    {
+      "term_id": "marketing_003",
+      "category": "marketing",
+      "term": "프로모션",
+      "definition": "제품이나 서비스의 홍보 이벤트를 말합니다.",
+      "example": "신제품 출시 기념 프로모션을 진행했다.",
+      "tags": [
+        "이벤트",
+        "홍보",
+        "판촉"
+      ]
+    },
+    {
+      "term_id": "marketing_004",
+      "category": "marketing",
+      "term": "KPI (Key Performance Indicator)",
+      "definition": "핵심 성과 지표",
+      "example": "이번 프로젝트의 KPI는 매출 10% 증가이다.",
+      "tags": [
+        "성과",
+        "지표",
+        "목표"
+      ]
+    },
+    {
+      "term_id": "marketing_005",
+      "category": "marketing",
+      "term": "OKR (Objective Key Results)",
+      "definition": "목표 및 핵심 결과 지표",
+      "example": "팀의 OKR을 설정하고 목표 달성을 위해 노력했다.",
+      "tags": [
+        "목표",
+        "성과",
+        "지표"
+      ]
+    },
+    {
+      "term_id": "marketing_006",
+      "category": "marketing",
+      "term": "MAU (Monthly Active User)",
+      "definition": "월간 활성 사용자",
+      "example": "우리 서비스의 MAU가 꾸준히 증가하고 있다.",
+      "tags": [
+        "사용자",
+        "지표",
+        "분석"
+      ]
+    },
+    {
+      "term_id": "marketing_007",
+      "category": "marketing",
+      "term": "DAU (Daily Active Users)",
+      "definition": "일일 활성 유저",
+      "example": "DAU를 높이기 위한 마케팅 전략을 수립했다.",
+      "tags": [
+        "사용자",
+        "지표",
+        "분석"
+      ]
+    },
+    {
+      "term_id": "marketing_008",
+      "category": "marketing",
+      "term": "ROAS (Return on Advertising Spend)",
+      "definition": "지불한 광고비 대비 생성된 총 매출 금액",
+      "example": "이번 광고 캠페인의 ROAS가 매우 높게 나왔다.",
+      "tags": [
+        "광고",
+        "수익률",
+        "성과"
+      ]
+    },
+    {
+      "term_id": "marketing_009",
+      "category": "marketing",
+      "term": "CPA (Cost per Action)",
+      "definition": "광고주가 설정한 값과 일치하는 행동(action)을 유저가 한 건수에 따른 광고 비용",
+      "example": "CPA를 낮추기 위해 광고 효율을 개선했다.",
+      "tags": [
+        "광고",
+        "비용",
+        "성과"
+      ]
+    },
+    {
+      "term_id": "marketing_010",
+      "category": "marketing",
+      "term": "CPC (Cost per Click)",
+      "definition": "클릭 단가",
+      "example": "CPC가 너무 높아서 광고 예산을 조정했다.",
+      "tags": [
+        "광고",
+        "비용",
+        "클릭"
+      ]
+    },
+    {
+      "term_id": "marketing_011",
+      "category": "marketing",
+      "term": "CPI (Cost per Install)",
+      "definition": "설치당 비용",
+      "example": "모바일 앱 CPI를 낮추기 위한 전략을 논의했다.",
+      "tags": [
+        "광고",
+        "비용",
+        "앱설치"
+      ]
+    },
+    {
+      "term_id": "marketing_012",
+      "category": "marketing",
+      "term": "CAC (Customer Acquisition Cost)",
+      "definition": "고객 획득 비용",
+      "example": "CAC를 줄이는 것이 마케팅의 핵심 목표 중 하나이다.",
+      "tags": [
+        "고객",
+        "비용",
+        "획득"
+      ]
+    },
+    {
+      "term_id": "marketing_013",
+      "category": "marketing",
+      "term": "LTV (Life Time Value)",
+      "definition": "고객 생애 가치",
+      "example": "LTV를 높이기 위해 고객 유지 전략을 강화했다.",
+      "tags": [
+        "고객",
+        "가치",
+        "분석"
+      ]
+    },
+    {
+      "term_id": "marketing_014",
+      "category": "marketing",
+      "term": "CTR (Click Through Rate)",
+      "definition": "클릭률",
+      "example": "광고 배너의 CTR을 높이기 위해 디자인을 변경했다.",
+      "tags": [
+        "광고",
+        "클릭률",
+        "성과"
+      ]
+    },
+    {
+      "term_id": "marketing_015",
+      "category": "marketing",
+      "term": "CVR (Conversion Rate)",
+      "definition": "전환율",
+      "example": "웹사이트 CVR을 높이기 위해 사용자 경험을 개선했다.",
+      "tags": [
+        "전환율",
+        "성과",
+        "분석"
+      ]
+    },
+    {
+      "term_id": "marketing_016",
+      "category": "marketing",
+      "term": "퍼스트 파티 데이터 (First-party data)",
+      "definition": "기업의 홈페이지 혹은 자사 채널을 통해 기업이 직접적으로 수집한 고객의 데이터",
+      "example": "퍼스트 파티 데이터를 활용하여 맞춤형 마케팅을 진행했다.",
+      "tags": [
+        "데이터",
+        "고객정보",
+        "자사데이터"
+      ]
+    },
+    {
+      "term_id": "marketing_017",
+      "category": "marketing",
+      "term": "세컨드 파티 데이터 (Second-party data)",
+      "definition": "우리 기업이 아닌, 다른 기업이 수집한 고객의 데이터",
+      "example": "세컨드 파티 데이터를 구매하여 고객 분석에 활용했다.",
+      "tags": [
+        "데이터",
+        "고객정보",
+        "파트너데이터"
+      ]
+    },
+    {
+      "term_id": "marketing_018",
+      "category": "marketing",
+      "term": "서드파티 데이터 (3rd-party data)",
+      "definition": "다른 소스로부터 간접적으로 수집된 데이터",
+      "example": "서드파티 데이터는 개인 정보 보호 문제로 인해 활용이 제한적이다.",
+      "tags": [
+        "데이터",
+        "고객정보",
+        "외부데이터"
+      ]
+    },
+    {
+      "term_id": "marketing_019",
+      "category": "marketing",
+      "term": "ROI (Return On Investment)",
+      "definition": "투자한 금액 대비 합당한 수익을 내고 있는지 확인하는 지표",
+      "example": "이번 투자의 ROI를 분석하여 다음 투자 계획을 세웠다.",
+      "tags": [
+        "투자수익률",
+        "성과",
+        "분석"
+      ]
+    },
+    {
+      "term_id": "marketing_020",
+      "category": "marketing",
+      "term": "리텐션 (Retention)",
+      "definition": "고객 유지",
+      "example": "고객 리텐션을 높이기 위한 다양한 이벤트를 기획했다.",
+      "tags": [
+        "고객유지",
+        "재방문",
+        "충성도"
+      ]
+    },
+    {
+      "term_id": "marketing_021",
+      "category": "marketing",
+      "term": "퍼널 (Funnel)",
+      "definition": "소비자를 고객으로 이끌어 내는 과정",
+      "example": "마케팅 퍼널의 각 단계별 전환율을 분석했다.",
+      "tags": [
+        "고객여정",
+        "전환과정",
+        "분석"
+      ]
+    },
+    {
+      "term_id": "marketing_022",
+      "category": "marketing",
+      "term": "AARRR",
+      "definition": "고객의 제품(서비스) 이용 흐름을 5가지의 뚜렷한 단계(Acquisition, Activation, Retention, Revenue, Referral)로 구분함으로써 서비스의 현 상황을 분석하고 부족한 단계를 파악할 수 있게 하는 분석 프레임 워크",
+      "example": "AARRR 모델을 적용하여 서비스 성장 단계를 분석했다.",
+      "tags": [
+        "해적지표",
+        "분석프레임워크",
+        "성장해킹"
+      ]
+    },
+    {
+      "term_id": "marketing_023",
+      "category": "marketing",
+      "term": "Acquisition",
+      "definition": "AARRR 모델의 첫 번째 단계로, 신규 고객이 '유입' 된 단계",
+      "example": "Acquisition 단계에서 고객 유입을 늘리기 위한 전략을 세웠다.",
+      "tags": [
+        "고객획득",
+        "유입",
+        "AARRR"
+      ]
+    },
+    {
+      "term_id": "marketing_024",
+      "category": "marketing",
+      "term": "Activation",
+      "definition": "AARRR 모델의 두 번째 단계로, 고객이 처음으로 서비스의 주요 기능을 활용해 '활성화' 된 단계",
+      "example": "Activation 단계에서 고객들이 서비스를 적극적으로 사용하도록 유도했다.",
+      "tags": [
+        "활성화",
+        "첫경험",
+        "AARRR"
+      ]
+    },
+    {
+      "term_id": "marketing_025",
+      "category": "marketing",
+      "term": "Retention",
+      "definition": "AARRR 모델의 세 번째 단계로, 지속적으로 고객이 서비스를 이용하는 고객이 '유지' 된 단계",
+      "example": "Retention 단계에서 고객 이탈을 방지하기 위한 노력을 기울였다.",
+      "tags": [
+        "고객유지",
+        "재방문",
+        "AARRR"
+      ]
+    },
+    {
+      "term_id": "marketing_026",
+      "category": "marketing",
+      "term": "Revenue",
+      "definition": "AARRR 모델의 네 번째 단계로, 고객이 우리 제품 및 서비스에 금액을 지불해 '매출' 이 나는 단계",
+      "example": "Revenue 단계에서 매출 증대를 위한 프로모션을 진행했다.",
+      "tags": [
+        "매출",
+        "수익",
+        "AARRR"
+      ]
+    },
+    {
+      "term_id": "marketing_027",
+      "category": "marketing",
+      "term": "Referral",
+      "definition": "AARRR 모델의 다섯 번째 단계로, 서비스를 이용한 고객이 만족하여 다른 사람에게 제품을 '추천'을 하는 단계",
+      "example": "Referral 단계에서 바이럴 마케팅을 통해 신규 고객을 유치했다.",
+      "tags": [
+        "추천",
+        "바이럴",
+        "AARRR"
+      ]
+    },
+    {
+      "term_id": "marketing_028",
+      "category": "marketing",
+      "term": "고객 구매 여정 (Consumer Decision Journey, CDJ)",
+      "definition": "고객이 브랜드를 처음 발견하고 인식해 제품을 실제로 구매하기까지의 모든 과정",
+      "example": "고객 구매 여정을 분석하여 각 단계별 마케팅 전략을 수립했다.",
+      "tags": [
+        "고객여정",
+        "구매과정",
+        "CDJ"
+      ]
+    },
+    {
+      "term_id": "marketing_029",
+      "category": "marketing",
+      "term": "고객 페르소나 (Customer Persona)",
+      "definition": "우리 브랜드의 타겟 고객을 더 잘 이해하기 위해 인구 특성, 행동 패턴 등 구체적으로 그려지는 가상의 고객 프로파일",
+      "example": "새로운 제품 개발을 위해 상세한 고객 페르소나를 설정했다.",
+      "tags": [
+        "페르소나",
+        "타겟고객",
+        "프로파일"
+      ]
+    },
+    {
+      "term_id": "marketing_030",
+      "category": "marketing",
+      "term": "PV (Page View)",
+      "definition": "고객이 웹페이지를 방문하고 조회한 횟수",
+      "example": "웹사이트 PV가 급증하여 서버 증설을 검토 중이다.",
+      "tags": [
+        "페이지뷰",
+        "웹분석",
+        "트래픽"
+      ]
+    },
+    {
+      "term_id": "marketing_031",
+      "category": "marketing",
+      "term": "UV (Unique Visitor)",
+      "definition": "페이지 순방문자 수",
+      "example": "캠페인 진행 후 UV가 크게 늘었다.",
+      "tags": [
+        "순방문자",
+        "웹분석",
+        "트래픽"
+      ]
+    },
+    {
+      "term_id": "marketing_032",
+      "category": "marketing",
+      "term": "랜딩페이지 (Landing Page)",
+      "definition": "CTA 버튼, 광고, 마케팅 캠페인을 통해 유입된 고객들이 처음 도달하게 되는, 전환을 목적으로 설계된 페이지",
+      "example": "광고 클릭 시 연결되는 랜딩페이지의 디자인을 개선했다.",
+      "tags": [
+        "웹페이지",
+        "전환",
+        "마케팅"
+      ]
+    },
+    {
+      "term_id": "marketing_033",
+      "category": "marketing",
+      "term": "CTA (Call To Action)",
+      "definition": "구매, 알림 신청 등 어떠한 비즈니스 목표를 달성하기 위해 고객에게 행동(action)을 유도하는 버튼 혹은 배너",
+      "example": "웹사이트에 명확한 CTA 버튼을 추가하여 전환율을 높였다.",
+      "tags": [
+        "행동유도",
+        "버튼",
+        "전환"
+      ]
+    },
+    {
+      "term_id": "marketing_034",
+      "category": "marketing",
+      "term": "도달률 (Reach)",
+      "definition": "콘텐츠가 몇 명의 고객들에게 도달되었는지에 대한 비율",
+      "example": "소셜 미디어 캠페인의 도달률이 높게 나타났다.",
+      "tags": [
+        "콘텐츠",
+        "노출",
+        "성과"
+      ]
+    },
+    {
+      "term_id": "marketing_035",
+      "category": "marketing",
+      "term": "이탈률 (Bounce Rate)",
+      "definition": "고객들이 기업의 비즈니스 목적을 달성하거나 설계된 전체를 체험하기 전에 해당 페이지를 떠난 비율",
+      "example": "웹사이트 이탈률을 줄이기 위해 콘텐츠를 개선했다.",
+      "tags": [
+        "웹분석",
+        "사용자행동",
+        "이탈"
+      ]
+    },
+    {
+      "term_id": "marketing_036",
+      "category": "marketing",
+      "term": "타겟팅 (Targeting)",
+      "definition": "특정 고객 세그먼트를 위한 마케팅 전략을 세우는 것",
+      "example": "20대 여성을 타겟팅하여 새로운 제품을 출시했다.",
+      "tags": [
+        "고객세분화",
+        "전략",
+        "마케팅"
+      ]
+    },
+    {
+      "term_id": "marketing_037",
+      "category": "marketing",
+      "term": "세그멘테이션 (Segmentation)",
+      "definition": "고객들을 비슷한 성향과 지리, 인구통계학적 등의 특성을 가진 그룹으로 세분화해 분류하는 작업",
+      "example": "고객 세그멘테이션을 통해 맞춤형 마케팅 메시지를 전달했다.",
+      "tags": [
+        "고객분류",
+        "세분화",
+        "타겟팅"
+      ]
+    },
+    {
+      "term_id": "marketing_038",
+      "category": "marketing",
+      "term": "포지셔닝 (Positioning)",
+      "definition": "비슷한 제품들과 다른 우리 브랜드의 차별화되는 포인트를 명확하게 드러내, 고객의 인식 속에 자리 잡는 전략",
+      "example": "프리미엄 브랜드로 포지셔닝하여 시장 경쟁력을 확보했다.",
+      "tags": [
+        "브랜딩",
+        "차별화",
+        "전략"
+      ]
+    },
+    {
+      "term_id": "marketing_039",
+      "category": "marketing",
+      "term": "USP (Unique Selling Point)",
+      "definition": "판매 가치 제안",
+      "example": "우리 제품의 USP는 뛰어난 내구성이다.",
+      "tags": [
+        "차별점",
+        "강점",
+        "가치제안"
+      ]
+    },
+    {
+      "term_id": "marketing_040",
+      "category": "marketing",
+      "term": "MRR (Money Recurring Revenue)",
+      "definition": "월간 반복 매출",
+      "example": "구독 서비스의 MRR이 꾸준히 증가하고 있다.",
+      "tags": [
+        "매출",
+        "구독",
+        "지표"
+      ]
+    },
+    {
+      "term_id": "marketing_041",
+      "category": "marketing",
+      "term": "오가닉 트래픽 (Organic Traffic)",
+      "definition": "자연유입 트래픽",
+      "example": "SEO를 통해 오가닉 트래픽을 늘렸다.",
+      "tags": [
+        "트래픽",
+        "자연유입",
+        "SEO"
+      ]
+    },
+    {
+      "term_id": "marketing_042",
+      "category": "marketing",
+      "term": "인텐트 마케팅 (Intent Marketing)",
+      "definition": "고객이 원하는 구매 의도(인텐트)를 정확히 이해해서 니즈에 부합하는 제품을 추천하는 마케팅 전략",
+      "example": "인텐트 마케팅을 통해 고객의 숨겨진 니즈를 파악했다.",
+      "tags": [
+        "고객의도",
+        "니즈",
+        "마케팅전략"
+      ]
+    },
+    {
+      "term_id": "marketing_043",
+      "category": "marketing",
+      "term": "온드 미디어 (Owned Media)",
+      "definition": "기업 홈페이지, SNS, 모바일 어플 등 기업이 직접 소유해 통제가 가능한 매체",
+      "example": "온드 미디어를 활용하여 브랜드 메시지를 효과적으로 전달했다.",
+      "tags": [
+        "미디어",
+        "자사채널",
+        "콘텐츠"
+      ]
+    },
+    {
+      "term_id": "marketing_044",
+      "category": "marketing",
+      "term": "페이드 미디어 (Paid Media)",
+      "definition": "TV 광고, 옥외 광고, 검색 광고 등 광고비를 집행해야 하는 유료 매체",
+      "example": "페이드 미디어를 통해 단기간에 높은 노출 효과를 얻었다.",
+      "tags": [
+        "미디어",
+        "유료광고",
+        "광고"
+      ]
+    },
+    {
+      "term_id": "marketing_045",
+      "category": "marketing",
+      "term": "언드 미디어 (Earned Media)",
+      "definition": "검색 엔진 및 포털 사이트, 커뮤니티, SNS 채널 등 제3자에 의해 운영되고 콘텐츠가 생산되는 매체",
+      "example": "언드 미디어를 통해 자연스러운 바이럴 마케팅 효과를 얻었다.",
+      "tags": [
+        "미디어",
+        "바이럴",
+        "평판"
+      ]
+    },
+    {
+      "term_id": "marketing_046",
+      "category": "marketing",
+      "term": "타겟팅 광고 (Targeting Advertising/target-marketing)",
+      "definition": "특정 고객 세그먼트를 대상으로 그들만을 위해 집중적으로 진행하는 광고",
+      "example": "연령대별 타겟팅 광고를 통해 효율적인 마케팅을 진행했다.",
+      "tags": [
+        "광고",
+        "타겟팅",
+        "고객세분화"
+      ]
+    },
+    {
+      "term_id": "marketing_047",
+      "category": "marketing",
+      "term": "리타겟팅 광고 (Retargeting Advertising)",
+      "definition": "사용자의 쿠키를 활용해 제품을 검색했거나 광고를 이미 접한 대상에게 다시 광고가 노출될 수 있도록 진행하는 광고",
+      "example": "리타겟팅 광고를 통해 잠재 고객의 구매를 유도했다.",
+      "tags": [
+        "광고",
+        "리마케팅",
+        "재노출"
+      ]
+    },
+    {
+      "term_id": "marketing_048",
+      "category": "marketing",
+      "term": "CRM (Customer Relationship Management)",
+      "definition": "고객 관계 관리",
+      "example": "CRM 시스템을 도입하여 고객 데이터를 통합 관리한다.",
+      "tags": [
+        "고객관리",
+        "데이터",
+        "시스템"
+      ]
+    },
+    {
+      "term_id": "marketing_049",
+      "category": "marketing",
+      "term": "VOC (Voice of Customer)",
+      "definition": "고객의 소리",
+      "example": "VOC를 적극적으로 수렴하여 제품 개선에 반영했다.",
+      "tags": [
+        "고객의견",
+        "피드백",
+        "개선"
+      ]
+    },
+    {
+      "term_id": "marketing_051",
+      "category": "marketing",
+      "term": "CPL (Cost per Lead)",
+      "definition": "리드당 비용",
+      "example": "CPL을 낮추기 위해 리드 확보 채널을 다각화했다.",
+      "tags": [
+        "광고비용",
+        "리드",
+        "성과"
+      ]
+    },
+    {
+      "term_id": "marketing_052",
+      "category": "marketing",
+      "term": "SQL (Sales Qualified Lead)",
+      "definition": "영업 적격 리드",
+      "example": "SQL을 영업팀에 전달하여 실제 계약으로 이어지도록 했다.",
+      "tags": [
+        "리드",
+        "영업",
+        "자격"
+      ]
+    },
+    {
+      "term_id": "marketing_053",
+      "category": "marketing",
+      "term": "MQL (Marketing Qualified Lead)",
+      "definition": "마케팅 적격 리드",
+      "example": "MQL을 대상으로 추가 마케팅 활동을 진행했다.",
+      "tags": [
+        "리드",
+        "마케팅",
+        "자격"
+      ]
+    },
+    {
+      "term_id": "marketing_054",
+      "category": "marketing",
+      "term": "CPM (Cost Per Mille)",
+      "definition": "1000번 노출 당 비용",
+      "example": "CPM이 낮은 광고 채널을 선택하여 효율을 높였다.",
+      "tags": [
+        "광고비용",
+        "노출",
+        "성과"
+      ]
+    },
+    {
+      "term_id": "marketing_055",
+      "category": "marketing",
+      "term": "컨버젼 (Conversion)",
+      "definition": "전환, 마케팅 캠페인의 결과로 고객이 구매, 앱 다운로드, 메일링 리스트 가입 등의 특정한 기대 행동을 완료 하는 것",
+      "example": "광고 클릭 후 구매까지의 컨버젼율을 분석했다.",
+      "tags": [
+        "전환",
+        "성과",
+        "행동"
+      ]
+    },
+    {
+      "term_id": "marketing_056",
+      "category": "marketing",
+      "term": "ROAS (Return On Ads Spending)",
+      "definition": "광고 수익률",
+      "example": "ROAS가 높은 광고 소재를 집중적으로 활용했다.",
+      "tags": [
+        "광고",
+        "수익률",
+        "성과"
+      ]
+    },
+    {
+      "term_id": "marketing_057",
+      "category": "marketing",
+      "term": "SEO (Search Engine Optimization)",
+      "definition": "검색엔진최적화",
+      "example": "웹사이트 SEO를 강화하여 검색 엔진 노출 순위를 높였다.",
+      "tags": [
+        "검색엔진",
+        "최적화",
+        "마케팅"
+      ]
+    },
+    {
+      "term_id": "marketing_059",
+      "category": "marketing",
+      "term": "콘텐츠 SEO",
+      "definition": "검색 유저들의 의도에 맞는 콘텐츠를 제작 하는 과정",
+      "example": "고객의 검색 의도를 파악하여 콘텐츠 SEO를 진행했다.",
+      "tags": [
+        "SEO",
+        "콘텐츠",
+        "키워드"
+      ]
+    },
+    {
+      "term_id": "marketing_060",
+      "category": "marketing",
+      "term": "리드 (Lead)",
+      "definition": "여러 마케팅 활동이나 기존 고객의 재구매 내지 추천 등으로 만들어진 영업 건수",
+      "example": "이번 달에 100건의 새로운 리드를 창출했다.",
+      "tags": [
+        "영업기회",
+        "잠재고객",
+        "성과"
+      ]
+    },
+    {
+      "term_id": "marketing_061",
+      "category": "marketing",
+      "term": "오퍼 (Offer)",
+      "definition": "제안",
+      "example": "고객에게 맞춤형 오퍼를 제공했다.",
+      "tags": [
+        "제안",
+        "영업",
+        "고객"
+      ]
+    },
+    {
+      "term_id": "marketing_062",
+      "category": "marketing",
+      "term": "기회 (Opportunity)",
+      "definition": "영업 기회",
+      "example": "새로운 시장 진출은 큰 영업 기회가 될 것이다.",
+      "tags": [
+        "영업",
+        "기회",
+        "시장"
+      ]
+    },
+    {
+      "term_id": "marketing_063",
+      "category": "marketing",
+      "term": "컨택 포인트 (Contact Point)",
+      "definition": "고객과의 접점",
+      "example": "고객 컨택 포인트를 늘려 고객과의 소통을 강화했다.",
+      "tags": [
+        "고객접점",
+        "소통",
+        "채널"
+      ]
+    },
+    {
+      "term_id": "marketing_064",
+      "category": "marketing",
+      "term": "대시보드 (Dashboard)",
+      "definition": "주요 지표를 한눈에 볼 수 있도록 시각화한 화면",
+      "example": "영업 실적 대시보드를 통해 현재 상황을 파악했다.",
+      "tags": [
+        "데이터시각화",
+        "지표",
+        "보고"
+      ]
+    },
+    {
+      "term_id": "marketing_065",
+      "category": "marketing",
+      "term": "랜딩 페이지 (Landing Page)",
+      "definition": "광고를 클릭했을 때 처음으로 도달하는 페이지",
+      "example": "캠페인별로 최적화된 랜딩 페이지를 제작했다.",
+      "tags": [
+        "웹페이지",
+        "광고",
+        "전환"
+      ]
+    },
+    {
+      "term_id": "marketing_066",
+      "category": "marketing",
+      "term": "콜투액션 (Call to Action)",
+      "definition": "고객의 행동을 유도하는 문구 또는 버튼",
+      "example": "웹사이트에 명확한 콜투액션을 배치하여 구매를 유도했다.",
+      "tags": [
+        "CTA",
+        "행동유도",
+        "버튼"
+      ]
+    },
+    {
+      "term_id": "marketing_067",
+      "category": "marketing",
+      "term": "YoY (Year-over-Year)",
+      "definition": "전년 대비",
+      "example": "이번 분기 매출은 YoY 20% 성장했다.",
+      "tags": [
+        "성과비교",
+        "전년대비",
+        "지표"
+      ]
+    },
+    {
+      "term_id": "marketing_068",
+      "category": "marketing",
+      "term": "Account",
+      "definition": "B2B 고객, 즉 기업 고객",
+      "example": "주요 Account 관리에 집중하여 매출을 증대시켰다.",
+      "tags": [
+        "B2B",
+        "기업고객",
+        "영업"
+      ]
+    },
+    {
+      "term_id": "marketing_069",
+      "category": "marketing",
+      "term": "Prospect",
+      "definition": "잠재 고객 중 구매 가능성이 높은 고객",
+      "example": "이번 박람회에서 많은 Prospect를 확보했다.",
+      "tags": [
+        "잠재고객",
+        "영업",
+        "리드"
+      ]
+    },
+    {
+      "term_id": "marketing_070",
+      "category": "marketing",
+      "term": "Win Probability",
+      "definition": "수주 확률",
+      "example": "이 프로젝트의 Win Probability는 70% 이상이다.",
+      "tags": [
+        "수주",
+        "확률",
+        "영업"
+      ]
+    },
+    {
+      "term_id": "marketing_071",
+      "category": "marketing",
+      "term": "Conversion",
+      "definition": "전환",
+      "example": "웹사이트 방문자가 실제 구매로 이어지는 Conversion율을 높여야 한다.",
+      "tags": [
+        "전환율",
+        "성과",
+        "구매"
+      ]
+    },
+    {
+      "term_id": "marketing_072",
+      "category": "marketing",
+      "term": "BANT (Budget, Authority, Need, Timing)",
+      "definition": "예산, 권한, 필요, 타이밍. 잠재 고객의 자격을 검증하는 기준",
+      "example": "BANT 기준에 따라 잠재 고객을 분류했다.",
+      "tags": [
+        "리드검증",
+        "영업",
+        "기준"
+      ]
+    },
+    {
+      "term_id": "marketing_073",
+      "category": "marketing",
+      "term": "CPQ (Configure, Price, Quote)",
+      "definition": "구성, 가격, 견적",
+      "example": "CPQ 시스템을 도입하여 견적 생성 시간을 단축했다.",
+      "tags": [
+        "견적",
+        "영업자동화",
+        "시스템"
+      ]
+    },
+    {
+      "term_id": "marketing_074",
+      "category": "marketing",
+      "term": "고객 세그먼트 (Customer Segment)",
+      "definition": "시장을 세분화했을 때, 브랜드가 타겟으로 하는 핵심 고객군",
+      "example": "10대 여성 고객 세그먼트를 대상으로 한 마케팅 전략을 수립했다.",
+      "tags": [
+        "고객세분화",
+        "타겟",
+        "시장"
+      ]
+    },
+    {
+      "term_id": "marketing_076",
+      "category": "marketing",
+      "term": "PLC (Product Life Cycle)",
+      "definition": "제품 수명 주기",
+      "example": "제품 수명 주기를 고려하여 신제품 개발 계획을 세웠다.",
+      "tags": [
+        "제품",
+        "수명주기",
+        "전략"
+      ]
+    },
+    {
+      "term_id": "marketing_077",
+      "category": "marketing",
+      "term": "판매계획 (Sales Plan)",
+      "definition": "판매 목표 및 전략",
+      "example": "다음 분기 판매계획을 수립하여 팀원들과 공유했다.",
+      "tags": [
+        "영업",
+        "계획",
+        "목표"
+      ]
+    },
+    {
+      "term_id": "marketing_078",
+      "category": "marketing",
+      "term": "실적관리 (Performance Management)",
+      "definition": "영업 실적 관리",
+      "example": "실적관리를 통해 영업팀의 성과를 분석하고 개선 방안을 모색했다.",
+      "tags": [
+        "성과관리",
+        "영업",
+        "분석"
+      ]
+    },
+    {
+      "term_id": "marketing_079",
+      "category": "marketing",
+      "term": "신규거래처 (New Customer)",
+      "definition": "새로운 고객사",
+      "example": "이번 달에 5개의 신규거래처를 확보했다.",
+      "tags": [
+        "고객",
+        "영업",
+        "신규"
+      ]
+    },
+    {
+      "term_id": "marketing_080",
+      "category": "marketing",
+      "term": "기회 팀",
+      "definition": "세일즈 기회에 대해 함께 작업하는 사용자 집합",
+      "example": "대형 프로젝트 수주를 위해 기회 팀을 구성했다.",
+      "tags": [
+        "영업",
+        "팀",
+        "협업"
+      ]
+    },
+    {
+      "term_id": "marketing_081",
+      "category": "marketing",
+      "term": "프로모션 (Promotion)",
+      "definition": "가격 할인 혹은 판촉 증정을 통해 매출을 늘리는 활동",
+      "example": "연말 프로모션을 통해 매출을 크게 늘렸다.",
+      "tags": [
+        "판촉",
+        "할인",
+        "이벤트"
+      ]
+    },
+    {
+      "term_id": "marketing_082",
+      "category": "marketing",
+      "term": "엔드매대 (END 매대)",
+      "definition": "매장 진열대 끝 부분",
+      "example": "신제품을 엔드매대에 진열하여 고객들의 눈길을 끌었다.",
+      "tags": [
+        "유통",
+        "진열",
+        "매장"
+      ]
+    },
+    {
+      "term_id": "marketing_083",
+      "category": "marketing",
+      "term": "조직 (Org)",
+      "definition": "세일즈포스에서 조직의 데이터, 기능, 사용자 등을 관리하는 단위",
+      "example": "세일즈포스 Org 설정을 통해 사용자 권한을 관리했다.",
+      "tags": [
+        "세일즈포스",
+        "CRM",
+        "관리"
+      ]
+    },
+    {
+      "term_id": "marketing_084",
+      "category": "marketing",
+      "term": "360도 고객 보기(View)",
+      "definition": "고객이 제품을 구매하고 서비스를 받기 위해 회사에 연락하는 데 사용할 수 있는 다양한 접점의 데이터를 집계하는 종합적인 보기",
+      "example": "360도 고객 보기를 통해 고객의 모든 정보를 한눈에 파악할 수 있었다.",
+      "tags": [
+        "고객분석",
+        "데이터통합",
+        "CRM"
+      ]
+    },
+    {
+      "term_id": "marketing_085",
+      "category": "marketing",
+      "term": "교차 판매(Cross-selling)",
+      "definition": "고객이 원래 구매하고자 했던 품목 외에 다른 제품이나 서비스를 구매하도록 유도하는 것",
+      "example": "기존 고객에게 교차 판매를 통해 추가 매출을 올렸다.",
+      "tags": [
+        "영업전략",
+        "매출증대",
+        "판매"
+      ]
+    },
+    {
+      "term_id": "marketing_086",
+      "category": "marketing",
+      "term": "고객 확보 비용(CAC)",
+      "definition": "신규 고객을 유입 경로로 이동시키기 위한 노력에 지출된 모든 비용 등 신규 고객을 확보하는 데 드는 비용",
+      "example": "고객 확보 비용을 줄이기 위해 온라인 광고 효율을 높였다.",
+      "tags": [
+        "마케팅비용",
+        "고객획득",
+        "지표"
+      ]
+    },
+    {
+      "term_id": "marketing_087",
+      "category": "marketing",
+      "term": "고객 이탈",
+      "definition": "비즈니스에서 고객을 잃는 것",
+      "example": "고객 이탈을 막기 위해 고객 만족도 향상에 힘쓰고 있다.",
+      "tags": [
+        "이탈",
+        "고객관리",
+        "문제"
+      ]
+    },
+    {
+      "term_id": "marketing_088",
+      "category": "marketing",
+      "term": "고객 이탈률",
+      "definition": "일정 기간 동안 단골 고객으로 돌아오지 않거나 구독을 취소하지 않은 유료 고객 수",
+      "example": "고객 이탈률이 높아져서 원인을 분석 중이다.",
+      "tags": [
+        "이탈률",
+        "고객분석",
+        "지표"
+      ]
+    },
+    {
+      "term_id": "marketing_089",
+      "category": "marketing",
+      "term": "고객 참여(engagement)",
+      "definition": "소비자와 기업 간의 지속적인 관계 발전은 단순한 구매 그 이상을 포함",
+      "example": "고객 참여를 유도하기 위한 이벤트를 기획했다.",
+      "tags": [
+        "인게이지먼트",
+        "관계",
+        "참여"
+      ]
+    },
+    {
+      "term_id": "marketing_090",
+      "category": "marketing",
+      "term": "고객 여정 맵",
+      "definition": "고객이 귀사의 제품, 서비스 및 경험을 이용하는 과정에서 거치는 단계를 보여주는 다이어그램",
+      "example": "고객 여정 맵을 통해 고객 경험을 개선할 포인트를 찾았다.",
+      "tags": [
+        "고객경험",
+        "분석",
+        "시각화"
+      ]
+    },
+    {
+      "term_id": "marketing_091",
+      "category": "marketing",
+      "term": "고객 충성도",
+      "definition": "고객이 재거래를 할 가능성",
+      "example": "고객 충성도를 높이기 위해 VIP 프로그램을 운영하고 있다.",
+      "tags": [
+        "충성도",
+        "재구매",
+        "고객관계"
+      ]
+    },
+    {
+      "term_id": "marketing_092",
+      "category": "marketing",
+      "term": "고객 집착(obsession)",
+      "definition": "고객이 목표를 더 잘 달성할 수 있도록 제품 및 서비스를 만들거나 조정하는 데 중점을 두는 사고방식 또는 접근 방식",
+      "example": "고객 집착을 통해 고객 만족도를 극대화했다.",
+      "tags": [
+        "고객중심",
+        "사고방식",
+        "만족도"
+      ]
+    },
+    {
+      "term_id": "marketing_093",
+      "category": "marketing",
+      "term": "고객 페르소나",
+      "definition": "구매자 페르소나라고도 하며, 대규모 잠재 고객의 핵심 특성을 나타내는 반가상의 원형",
+      "example": "고객 페르소나를 기반으로 맞춤형 제품을 개발했다.",
+      "tags": [
+        "페르소나",
+        "타겟고객",
+        "분석"
+      ]
+    },
+    {
+      "term_id": "marketing_094",
+      "category": "marketing",
+      "term": "고객 유지",
+      "definition": "고객이 특정 기간 동안 비즈니스에 머무르는 비율",
+      "example": "고객 유지를 위해 정기적인 고객 관리가 필요하다.",
+      "tags": [
+        "리텐션",
+        "고객관리",
+        "비율"
+      ]
+    },
+    {
+      "term_id": "marketing_095",
+      "category": "marketing",
+      "term": "고객 추적(tracking)",
+      "definition": "비즈니스 소유자가 고객과 고객의 행동에 대한 세부 정보를 파악하기 위한 방법",
+      "example": "웹사이트 고객 추적을 통해 사용자 행동 패턴을 분석했다.",
+      "tags": [
+        "사용자분석",
+        "데이터",
+        "추적"
+      ]
+    },
+    {
+      "term_id": "marketing_096",
+      "category": "marketing",
+      "term": "고객 세분화",
+      "definition": "인구 통계나 구매 행동과 같은 공통된 특성을 기반으로 고객을 카테고리로 나누는 것",
+      "example": "고객 세분화를 통해 각 그룹에 맞는 마케팅 전략을 수립했다.",
+      "tags": [
+        "세그멘테이션",
+        "타겟팅",
+        "분류"
+      ]
+    },
+    {
+      "term_id": "marketing_097",
+      "category": "marketing",
+      "term": "고객 가치",
+      "definition": "제품 또는 서비스를 가능한 대안과 비교하기 위한 방법으로 제품 또는 서비스의 가치를 측정하는 척도",
+      "example": "고객 가치를 높이기 위해 제품의 품질을 향상시켰다.",
+      "tags": [
+        "가치",
+        "측정",
+        "비교"
+      ]
+    },
+    {
+      "term_id": "marketing_098",
+      "category": "marketing",
+      "term": "수요 창출(Demand generation)",
+      "definition": "브랜드 인지도와 관심을 활용하여 양질의 리드를 생성하는 마케팅 전략",
+      "example": "새로운 캠페인을 통해 수요 창출에 성공했다.",
+      "tags": [
+        "리드생성",
+        "마케팅전략",
+        "인지도"
+      ]
+    },
+    {
+      "term_id": "marketing_099",
+      "category": "marketing",
+      "term": "드립 캠페인",
+      "definition": "이메일 드립 캠페인은 자동화된 영업 활동의 한 유형",
+      "example": "드립 캠페인을 통해 잠재 고객에게 지속적으로 정보를 제공했다.",
+      "tags": [
+        "이메일마케팅",
+        "자동화",
+        "캠페인"
+      ]
+    },
+    {
+      "term_id": "marketing_100",
+      "category": "marketing",
+      "term": "CRM 캠페인",
+      "definition": "잠재 고객, 리드 또는 기존 고객과의 관계를 발전시키기 위해 만든 이니셔티브 또는 활동",
+      "example": "CRM 캠페인을 통해 고객과의 관계를 강화했다.",
+      "tags": [
+        "CRM",
+        "캠페인",
+        "고객관계"
+      ]
+    },
+    {
+      "term_id": "marketing_101",
+      "category": "marketing",
+      "term": "이메일 시퀀스",
+      "definition": "사전 정의된 기준에 따라 잠재 고객을 유료 고객으로 전환하는 일반적인 목표에 따라 대상에게 전송되는 일련의 이메일",
+      "example": "이메일 시퀀스를 통해 잠재 고객을 육성했다.",
+      "tags": [
+        "이메일마케팅",
+        "자동화",
+        "시퀀스"
+      ]
+    },
+    {
+      "term_id": "marketing_102",
+      "category": "marketing",
+      "term": "퍼널 인바운드 마케팅",
+      "definition": "잠재 고객이 경쟁사보다 한 회사를 선택하는 일련의 단계",
+      "example": "퍼널 인바운드 마케팅 전략을 통해 고객 유입을 늘렸다.",
+      "tags": [
+        "인바운드마케팅",
+        "퍼널",
+        "전략"
+      ]
+    },
+    {
+      "term_id": "marketing_103",
+      "category": "marketing",
+      "term": "핫 리드",
+      "definition": "제품이나 서비스를 구매하기로 결정하기 위해 약간의 자극이 필요한 잠재고객",
+      "example": "핫 리드를 대상으로 집중적인 영업 활동을 펼쳤다.",
+      "tags": [
+        "리드",
+        "잠재고객",
+        "영업"
+      ]
+    },
+    {
+      "term_id": "marketing_104",
+      "category": "marketing",
+      "term": "라스트 터치 어트리뷰션(Last touch attribution)",
+      "definition": "전환 경로에서 가장 최근의 클릭 또는 방문에 전환에 대한 크레딧을 100% 부여하는 마케팅 어트리뷰션 모델의 한 유형",
+      "example": "라스트 터치 어트리뷰션 모델을 사용하여 광고 성과를 분석했다.",
+      "tags": [
+        "성과측정",
+        "기여도분석",
+        "모델"
+      ]
+    },
+    {
+      "term_id": "marketing_105",
+      "category": "marketing",
+      "term": "리드 전환",
+      "definition": "행동 자동화, 리타겟팅, 이메일 등의 육성 활동을 통해 리드를 고객으로 전환하는 것",
+      "example": "리드 전환율을 높이기 위해 CRM 시스템을 활용했다.",
+      "tags": [
+        "전환",
+        "리드",
+        "육성"
+      ]
+    },
+    {
+      "term_id": "marketing_106",
+      "category": "marketing",
+      "term": "리드 소스",
+      "definition": "리드가 회사를 처음 발견하는 채널",
+      "example": "다양한 리드 소스를 통해 잠재 고객을 확보했다.",
+      "tags": [
+        "유입경로",
+        "채널",
+        "리드"
+      ]
+    },
+    {
+      "term_id": "marketing_107",
+      "category": "marketing",
+      "term": "온프레미스 CRM",
+      "definition": "온사이트 CRM이라고도 하며, 회사 서버에 구매하여 설치한 CRM",
+      "example": "온프레미스 CRM은 초기 구축 비용이 높지만 보안성이 뛰어나다.",
+      "tags": [
+        "CRM",
+        "설치형",
+        "시스템"
+      ]
+    },
+    {
+      "term_id": "marketing_108",
+      "category": "marketing",
+      "term": "기회 관리(Opportunity management)",
+      "definition": "영업 파이프라인에서 거래를 구성하고 모니터링하는 프로세스",
+      "example": "기회 관리를 통해 영업 파이프라인을 효율적으로 운영했다.",
+      "tags": [
+        "영업관리",
+        "파이프라인",
+        "프로세스"
+      ]
+    },
+    {
+      "term_id": "marketing_109",
+      "category": "marketing",
+      "term": "예측 행동 모델링",
+      "definition": "고객의 미래 행동을 예측하기 위해 과거 및 거래 데이터에 수학적, 통계적 기법을 적용하는 작업",
+      "example": "예측 행동 모델링을 통해 고객 이탈을 사전에 예측했다.",
+      "tags": [
+        "데이터분석",
+        "예측모델",
+        "고객행동"
+      ]
+    },
+    {
+      "term_id": "marketing_110",
+      "category": "marketing",
+      "term": "원시 리드(Raw leads)",
+      "definition": "콘텐츠 다운로드, 소셜 미디어 참여, 웨비나, 전시회 등의 마케팅 활동을 통해 생성된 필터링되지 않고, 차별화되지 않으며, 자격이 없는 연락처",
+      "example": "원시 리드를 대상으로 추가적인 검증 작업을 진행했다.",
+      "tags": [
+        "리드",
+        "초기데이터",
+        "검증"
+      ]
+    },
+    {
+      "term_id": "marketing_111",
+      "category": "marketing",
+      "term": "영업 캠페인",
+      "definition": "캠페인은 일반적으로 짧은 기간 동안 특정 제품 및 서비스에 대한 수요를 창출하기 위한 활동",
+      "example": "새로운 영업 캠페인을 통해 매출 증대를 목표로 했다.",
+      "tags": [
+        "캠페인",
+        "영업",
+        "수요창출"
+      ]
+    }
+  ]
+}

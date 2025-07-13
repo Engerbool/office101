@@ -116,6 +116,8 @@ class CategoryFilterChips extends StatelessWidget {
         return Color(0xFFAB47BC);
       case TermCategory.communication:
         return Color(0xFFFFCA28);
+      case TermCategory.time:
+        return Color(0xFFEF5350);
       case TermCategory.other:
         return Color(0xFF78909C);
       case TermCategory.bookmarked:

@@ -26,15 +26,19 @@ class TermListWidget extends StatelessWidget {
           return _buildEmptyState(themeProvider);
         }
 
-        return ListView.separated(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: terms.length,
-          separatorBuilder: (context, index) => SizedBox(height: 12),
-          itemBuilder: (context, index) {
-            final term = terms[index];
-            return _buildTermCard(context, term, themeProvider);
-          },
+        return Column(
+          children: [
+            ...terms.asMap().entries.map((entry) {
+              final index = entry.key;
+              final term = entry.value;
+              return Column(
+                children: [
+                  _buildTermCard(context, term, themeProvider),
+                  if (index < terms.length - 1) SizedBox(height: 12),
+                ],
+              );
+            }).toList(),
+          ],
         );
       },
     );
@@ -238,6 +242,8 @@ class TermListWidget extends StatelessWidget {
         return Color(0xFFAB47BC);
       case TermCategory.communication:
         return Color(0xFFFFCA28);
+      case TermCategory.time:
+        return Color(0xFFEF5350);
       case TermCategory.other:
         return Color(0xFF78909C);
       case TermCategory.bookmarked:

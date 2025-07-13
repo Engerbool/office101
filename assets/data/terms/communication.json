@@ -1,0 +1,436 @@
+{
+  "terms": [
+    {
+      "term_id": "communication_001",
+      "category": "communication",
+      "term": "브리핑",
+      "definition": "중요한 정보나 상황을 간단명료하게 보고하는 것",
+      "example": "회의 전에 프로젝트 현황을 브리핑해드리겠습니다.",
+      "tags": [
+        "보고",
+        "요약",
+        "설명"
+      ]
+    },
+    {
+      "term_id": "communication_002",
+      "category": "communication",
+      "term": "에스컬레이션",
+      "definition": "문제나 이슈를 상위 관리자에게 보고하여 해결을 요청하는 것",
+      "example": "이 문제는 에스컬레이션이 필요할 것 같습니다.",
+      "tags": [
+        "보고",
+        "상승",
+        "해결"
+      ]
+    },
+    {
+      "term_id": "communication_003",
+      "category": "communication",
+      "term": "컨펌(Confirm)",
+      "definition": "회사에서 작성하는 문서나 업무를 상사에게 확인 또는 승인받는 것",
+      "example": "회의록 내용을 팀장님께 컨펌받았다.",
+      "tags": [
+        "확인",
+        "승인",
+        "상사"
+      ]
+    },
+    {
+      "term_id": "communication_004",
+      "category": "communication",
+      "term": "CC (Carbon Copy)",
+      "definition": "참조. 본래 수신인 외에 추가로 다른 수신인을 지정해 발신하는 것",
+      "example": "팀장님께 보고서를 보내면서 팀원들에게 CC를 걸었다.",
+      "tags": [
+        "이메일",
+        "참조",
+        "공유"
+      ]
+    },
+    {
+      "term_id": "communication_005",
+      "category": "communication",
+      "term": "BCC (Blind Carbon Copy)",
+      "definition": "숨은 참조. BCC에 포함된 이에게는 메일 내용이 공유되지만 CC와 달리 이메일 수신인에게 숨은 참조 수신인의 이메일 주소는 보이지 않는 것",
+      "example": "전체 공지 메일을 보낼 때 관련 부서장들을 BCC에 추가했다.",
+      "tags": [
+        "이메일",
+        "숨은참조",
+        "보안"
+      ]
+    },
+    {
+      "term_id": "communication_006",
+      "category": "communication",
+      "term": "ASAP (As Soon As Possible)",
+      "definition": "가능한 최대한 빨리. 아삽, 에셉, 에이셉 등으로 불림",
+      "example": "이 자료는 ASAP으로 처리해야 한다.",
+      "tags": [
+        "긴급",
+        "요청",
+        "빠르게"
+      ]
+    },
+    {
+      "term_id": "communication_007",
+      "category": "communication",
+      "term": "러프하게",
+      "definition": "구체적인 내용이 포함되지 않은, 대략적이고 포괄적인 형태",
+      "example": "일단 러프하게 아이디어를 스케치해 보자.",
+      "tags": [
+        "대략",
+        "개요",
+        "초안"
+      ]
+    },
+    {
+      "term_id": "communication_008",
+      "category": "communication",
+      "term": "아젠다 (Agenda)",
+      "definition": "회의 안건, 수행해야 할 업무 내용을 정리한 항목",
+      "example": "오늘 회의 아젠다를 미리 공유했다.",
+      "tags": [
+        "회의",
+        "안건",
+        "의제"
+      ]
+    },
+    {
+      "term_id": "communication_009",
+      "category": "communication",
+      "term": "팔로우업 (Follow-up)",
+      "definition": "업무의 진행 상황을 지속적으로 확인하고 관리하면서 진행 내용을 상사와 팀원들에게 공유하는 것",
+      "example": "고객 문의에 대한 팔로우업을 철저히 했다.",
+      "tags": [
+        "후속조치",
+        "진행상황",
+        "관리"
+      ]
+    },
+    {
+      "term_id": "communication_010",
+      "category": "communication",
+      "term": "컨센서스 (Consensus)",
+      "definition": "동의, 합의",
+      "example": "팀원들 간의 컨센서스를 통해 최종 결정을 내렸다.",
+      "tags": [
+        "합의",
+        "동의",
+        "의사결정"
+      ]
+    },
+    {
+      "term_id": "communication_011",
+      "category": "communication",
+      "term": "표제",
+      "definition": "메일 제목",
+      "example": "메일 표제를 명확하게 작성해 주세요.",
+      "tags": [
+        "이메일",
+        "제목",
+        "작성"
+      ]
+    },
+    {
+      "term_id": "communication_012",
+      "category": "communication",
+      "term": "필히",
+      "definition": "꼭, 무슨 일이 있어도",
+      "example": "이 서류는 필히 제출해야 한다.",
+      "tags": [
+        "필수",
+        "의무",
+        "강조"
+      ]
+    },
+    {
+      "term_id": "communication_013",
+      "category": "communication",
+      "term": "하기",
+      "definition": "아래 내용",
+      "example": "하기 내용을 참고해 주세요.",
+      "tags": [
+        "아래",
+        "참고",
+        "문서"
+      ]
+    },
+    {
+      "term_id": "communication_014",
+      "category": "communication",
+      "term": "구두",
+      "definition": "입으로 하는 말",
+      "example": "구두로 지시받은 내용을 문서로 정리했다.",
+      "tags": [
+        "말",
+        "보고",
+        "지시"
+      ]
+    },
+    {
+      "term_id": "communication_015",
+      "category": "communication",
+      "term": "귀사",
+      "definition": "주로 편지글에서 상대방의 회사를 높여 이르는 말",
+      "example": "귀사의 무궁한 발전을 기원합니다.",
+      "tags": [
+        "존칭",
+        "회사",
+        "문서"
+      ]
+    },
+    {
+      "term_id": "communication_016",
+      "category": "communication",
+      "term": "노티(Notice)",
+      "definition": "알리다, 공지하다",
+      "example": "회의 시간 변경을 팀원들에게 노티했다.",
+      "tags": [
+        "공지",
+        "알림",
+        "전달"
+      ]
+    },
+    {
+      "term_id": "communication_017",
+      "category": "communication",
+      "term": "당사",
+      "definition": "바로 그 회사, 또는 바로 이 회사",
+      "example": "당사는 고객 만족을 최우선으로 한다.",
+      "tags": [
+        "자사",
+        "회사",
+        "문서"
+      ]
+    },
+    {
+      "term_id": "communication_018",
+      "category": "communication",
+      "term": "더블체크(Double check)",
+      "definition": "오류가 없는지 재확인하는 것",
+      "example": "중요한 서류는 반드시 더블체크해야 한다.",
+      "tags": [
+        "확인",
+        "검토",
+        "재확인"
+      ]
+    },
+    {
+      "term_id": "communication_019",
+      "category": "communication",
+      "term": "랩업(Wrap up)",
+      "definition": "회고",
+      "example": "프로젝트 랩업 미팅을 통해 성과를 공유했다.",
+      "tags": [
+        "마무리",
+        "회고",
+        "회의"
+      ]
+    },
+    {
+      "term_id": "communication_020",
+      "category": "communication",
+      "term": "러프(Rough)",
+      "definition": "거친, 대략적인",
+      "example": "러프한 스케치만으로도 아이디어를 전달할 수 있었다.",
+      "tags": [
+        "대략",
+        "초안",
+        "개요"
+      ]
+    },
+    {
+      "term_id": "communication_021",
+      "category": "communication",
+      "term": "레퍼런스(Reference)",
+      "definition": "참고 자료",
+      "example": "보고서 작성 시 다양한 레퍼런스를 참고했다.",
+      "tags": [
+        "참고",
+        "자료",
+        "인용"
+      ]
+    },
+    {
+      "term_id": "communication_022",
+      "category": "communication",
+      "term": "별첨",
+      "definition": "서류를 따로 첨부함",
+      "example": "보고서에 관련 자료를 별첨했다.",
+      "tags": [
+        "문서",
+        "첨부",
+        "자료"
+      ]
+    },
+    {
+      "term_id": "communication_023",
+      "category": "communication",
+      "term": "붙임",
+      "definition": "글에서 빠진 것이나 참고할 내용을 뒤에 덧붙여 적은 것",
+      "example": "보고서 붙임 자료를 확인해 주세요.",
+      "tags": [
+        "문서",
+        "첨부",
+        "참고"
+      ]
+    },
+    {
+      "term_id": "communication_024",
+      "category": "communication",
+      "term": "캐치업 (Catch-up)",
+      "definition": "뒤쳐진 것을 따라잡거나 놓친 정보 등을 알아가는 과정",
+      "example": "경쟁사와의 격차를 캐치업하기 위해 노력하고 있다.",
+      "tags": [
+        "따라잡기",
+        "정보공유",
+        "현황파악"
+      ]
+    },
+    {
+      "term_id": "communication_025",
+      "category": "communication",
+      "term": "피드백 (Feedback)",
+      "definition": "상대방의 의견이나 평가를 듣고 개선점을 찾는 과정",
+      "example": "프레젠테이션 후 상사로부터 피드백을 받았다.",
+      "tags": [
+        "의견",
+        "평가",
+        "개선"
+      ]
+    },
+    {
+      "term_id": "communication_026",
+      "category": "communication",
+      "term": "리포트 (Report)",
+      "definition": "업무 진행상황이나 결과를 정리하여 보고하는 것",
+      "example": "주간 리포트를 작성해서 팀장님께 제출했다.",
+      "tags": [
+        "보고서",
+        "보고",
+        "진행상황"
+      ]
+    },
+    {
+      "term_id": "communication_027",
+      "category": "communication",
+      "term": "공유",
+      "definition": "정보나 자료를 여러 사람과 함께 나누는 것",
+      "example": "회의 자료를 팀원들과 공유했다.",
+      "tags": [
+        "나눔",
+        "정보전달",
+        "협업"
+      ]
+    },
+    {
+      "term_id": "communication_028",
+      "category": "communication",
+      "term": "멘션 (Mention)",
+      "definition": "특정 사람을 지명하거나 언급하는 것",
+      "example": "슬랙에서 담당자를 멘션해서 확인을 요청했다.",
+      "tags": [
+        "언급",
+        "지명",
+        "호출"
+      ]
+    },
+    {
+      "term_id": "communication_029",
+      "category": "communication",
+      "term": "회신",
+      "definition": "받은 메시지나 문서에 대한 답장이나 응답",
+      "example": "이메일 회신은 24시간 내에 해주세요.",
+      "tags": [
+        "답장",
+        "응답",
+        "이메일"
+      ]
+    },
+    {
+      "term_id": "communication_030",
+      "category": "communication",
+      "term": "전달사항",
+      "definition": "다른 사람에게 알려주거나 전해야 할 내용",
+      "example": "부장님의 전달사항을 팀원들에게 안내했다.",
+      "tags": [
+        "전달",
+        "안내",
+        "지시"
+      ]
+    },
+    {
+      "term_id": "communication_031",
+      "category": "communication",
+      "term": "유선",
+      "definition": "전화를 통한 연락이나 통화",
+      "example": "급한 일이라 유선으로 확인했다.",
+      "tags": [
+        "전화",
+        "통화",
+        "연락"
+      ]
+    },
+    {
+      "term_id": "communication_032",
+      "category": "communication",
+      "term": "공문",
+      "definition": "공식적인 업무에 사용하는 문서",
+      "example": "협력업체에 공문을 발송했다.",
+      "tags": [
+        "공식문서",
+        "업무",
+        "발송"
+      ]
+    },
+    {
+      "term_id": "communication_033",
+      "category": "communication",
+      "term": "회람",
+      "definition": "여러 사람에게 순서대로 돌려서 보게 하는 것",
+      "example": "새로운 규정을 부서 내 회람했다.",
+      "tags": [
+        "순환",
+        "공지",
+        "문서"
+      ]
+    },
+    {
+      "term_id": "communication_034",
+      "category": "communication",
+      "term": "수신확인",
+      "definition": "메시지나 문서를 제대로 받았다는 확인",
+      "example": "중요한 메일은 수신확인을 요청한다.",
+      "tags": [
+        "확인",
+        "수신",
+        "이메일"
+      ]
+    },
+    {
+      "term_id": "communication_035",
+      "category": "communication",
+      "term": "발신",
+      "definition": "메시지나 문서를 보내는 행위",
+      "example": "공지사항을 전 직원에게 발신했다.",
+      "tags": [
+        "발송",
+        "전송",
+        "메시지"
+      ]
+    },
+    {
+      "term_id": "communication_036",
+      "category": "communication",
+      "term": "접수",
+      "definition": "서류나 신청서를 받아들이는 것",
+      "example": "휴가 신청서를 인사팀에서 접수했다.",
+      "tags": [
+        "수령",
+        "신청",
+        "처리"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,400 @@
+{
+  "terms": [
+    {
+      "term_id": "time_001",
+      "category": "time",
+      "term": "전일",
+      "definition": "하루 전날",
+      "example": "전일 회의록을 확인해 주세요.",
+      "tags": [
+        "어제",
+        "시간",
+        "날짜"
+      ]
+    },
+    {
+      "term_id": "time_002",
+      "category": "time",
+      "term": "작일",
+      "definition": "하루 전 날 (어제)",
+      "example": "작일 업무 보고서를 제출했다.",
+      "tags": [
+        "어제",
+        "시간",
+        "날짜"
+      ]
+    },
+    {
+      "term_id": "time_003",
+      "category": "time",
+      "term": "금일",
+      "definition": "오늘",
+      "example": "금일 중으로 업무를 마무리할 예정이다.",
+      "tags": [
+        "오늘",
+        "시간",
+        "날짜"
+      ]
+    },
+    {
+      "term_id": "time_004",
+      "category": "time",
+      "term": "당일",
+      "definition": "오늘 or 일이 있는 바로 그날",
+      "example": "회의는 당일 진행될 예정이다.",
+      "tags": [
+        "오늘",
+        "시간",
+        "날짜"
+      ]
+    },
+    {
+      "term_id": "time_005",
+      "category": "time",
+      "term": "전주",
+      "definition": "지난 주",
+      "example": "전주 실적을 분석했다.",
+      "tags": [
+        "지난주",
+        "시간",
+        "주간"
+      ]
+    },
+    {
+      "term_id": "time_006",
+      "category": "time",
+      "term": "작주",
+      "definition": "지난 주",
+      "example": "작주에 있었던 미팅 내용을 정리했다.",
+      "tags": [
+        "지난주",
+        "시간",
+        "주간"
+      ]
+    },
+    {
+      "term_id": "time_007",
+      "category": "time",
+      "term": "금주",
+      "definition": "이번 주",
+      "example": "금주 내로 프로젝트를 완료해야 한다.",
+      "tags": [
+        "이번주",
+        "시간",
+        "주간"
+      ]
+    },
+    {
+      "term_id": "time_008",
+      "category": "time",
+      "term": "당주",
+      "definition": "이번 주",
+      "example": "당주 업무 계획을 세웠다.",
+      "tags": [
+        "이번주",
+        "시간",
+        "주간"
+      ]
+    },
+    {
+      "term_id": "time_009",
+      "category": "time",
+      "term": "전월",
+      "definition": "지난 달",
+      "example": "전월 매출이 목표치를 달성했다.",
+      "tags": [
+        "지난달",
+        "시간",
+        "월간"
+      ]
+    },
+    {
+      "term_id": "time_010",
+      "category": "time",
+      "term": "작월",
+      "definition": "지난 달",
+      "example": "작월에 진행된 캠페인 결과를 보고했다.",
+      "tags": [
+        "지난달",
+        "시간",
+        "월간"
+      ]
+    },
+    {
+      "term_id": "time_011",
+      "category": "time",
+      "term": "금월",
+      "definition": "이번 달",
+      "example": "금월 목표 달성을 위해 노력 중이다.",
+      "tags": [
+        "이번달",
+        "시간",
+        "월간"
+      ]
+    },
+    {
+      "term_id": "time_012",
+      "category": "time",
+      "term": "당월",
+      "definition": "이번 달",
+      "example": "당월 실적을 중간 점검했다.",
+      "tags": [
+        "이번달",
+        "시간",
+        "월간"
+      ]
+    },
+    {
+      "term_id": "time_013",
+      "category": "time",
+      "term": "전년",
+      "definition": "지난 해",
+      "example": "전년 대비 매출이 증가했다.",
+      "tags": [
+        "지난해",
+        "시간",
+        "연간"
+      ]
+    },
+    {
+      "term_id": "time_014",
+      "category": "time",
+      "term": "작년",
+      "definition": "지난 해",
+      "example": "작년에 입사한 신입사원이다.",
+      "tags": [
+        "지난해",
+        "시간",
+        "연간"
+      ]
+    },
+    {
+      "term_id": "time_015",
+      "category": "time",
+      "term": "금년",
+      "definition": "올해",
+      "example": "금년 사업 계획을 발표했다.",
+      "tags": [
+        "올해",
+        "시간",
+        "연간"
+      ]
+    },
+    {
+      "term_id": "time_016",
+      "category": "time",
+      "term": "당년",
+      "definition": "올해",
+      "example": "당년 목표 달성을 위해 최선을 다하고 있다.",
+      "tags": [
+        "올해",
+        "시간",
+        "연간"
+      ]
+    },
+    {
+      "term_id": "time_017",
+      "category": "time",
+      "term": "차주",
+      "definition": "다음 주",
+      "example": "차주에 미팅이 예정되어 있다.",
+      "tags": [
+        "다음주",
+        "시간",
+        "주간"
+      ]
+    },
+    {
+      "term_id": "time_018",
+      "category": "time",
+      "term": "명주",
+      "definition": "다음 주",
+      "example": "명주까지 보고서를 제출해야 한다.",
+      "tags": [
+        "다음주",
+        "시간",
+        "주간"
+      ]
+    },
+    {
+      "term_id": "time_019",
+      "category": "time",
+      "term": "내주",
+      "definition": "다음 주",
+      "example": "내주에 있을 워크숍 준비를 시작했다.",
+      "tags": [
+        "다음주",
+        "시간",
+        "주간"
+      ]
+    },
+    {
+      "term_id": "time_020",
+      "category": "time",
+      "term": "익주",
+      "definition": "다음 주",
+      "example": "익주에 최종 발표가 있다.",
+      "tags": [
+        "다음주",
+        "시간",
+        "주간"
+      ]
+    },
+    {
+      "term_id": "time_021",
+      "category": "time",
+      "term": "차월",
+      "definition": "다음 달",
+      "example": "차월부터 새로운 프로젝트가 시작된다.",
+      "tags": [
+        "다음달",
+        "시간",
+        "월간"
+      ]
+    },
+    {
+      "term_id": "time_022",
+      "category": "time",
+      "term": "명월",
+      "definition": "다음 달",
+      "example": "명월에 있을 정기 평가를 준비 중이다.",
+      "tags": [
+        "다음달",
+        "시간",
+        "월간"
+      ]
+    },
+    {
+      "term_id": "time_023",
+      "category": "time",
+      "term": "내월",
+      "definition": "다음 달",
+      "example": "내월부터 새로운 시스템이 도입된다.",
+      "tags": [
+        "다음달",
+        "시간",
+        "월간"
+      ]
+    },
+    {
+      "term_id": "time_024",
+      "category": "time",
+      "term": "익월",
+      "definition": "다음 달",
+      "example": "익월에 해외 출장이 예정되어 있다.",
+      "tags": [
+        "다음달",
+        "시간",
+        "월간"
+      ]
+    },
+    {
+      "term_id": "time_025",
+      "category": "time",
+      "term": "차년",
+      "definition": "다음 해",
+      "example": "차년도 사업 계획을 수립했다.",
+      "tags": [
+        "다음해",
+        "시간",
+        "연간"
+      ]
+    },
+    {
+      "term_id": "time_026",
+      "category": "time",
+      "term": "명년",
+      "definition": "다음 해",
+      "example": "명년에 있을 신제품 출시를 준비 중이다.",
+      "tags": [
+        "다음해",
+        "시간",
+        "연간"
+      ]
+    },
+    {
+      "term_id": "time_027",
+      "category": "time",
+      "term": "내년",
+      "definition": "다음 해",
+      "example": "내년에는 더 좋은 성과를 낼 것이다.",
+      "tags": [
+        "다음해",
+        "시간",
+        "연간"
+      ]
+    },
+    {
+      "term_id": "time_028",
+      "category": "time",
+      "term": "익년",
+      "definition": "다음 해",
+      "example": "익년에 있을 정기 인사를 앞두고 있다.",
+      "tags": [
+        "다음해",
+        "시간",
+        "연간"
+      ]
+    },
+    {
+      "term_id": "time_029",
+      "category": "time",
+      "term": "익일",
+      "definition": "다음 날",
+      "example": "익일 오전까지 자료를 보내드리겠습니다.",
+      "tags": [
+        "내일",
+        "시간",
+        "날짜"
+      ]
+    },
+    {
+      "term_id": "time_030",
+      "category": "time",
+      "term": "연도",
+      "definition": "사무나 회계 결산 따위의 처리를 위해 편의상 구분한 1년 동안의 기간",
+      "example": "2024 연도 결산 보고서를 작성했다.",
+      "tags": [
+        "회계",
+        "결산",
+        "기간"
+      ]
+    },
+    {
+      "term_id": "time_031",
+      "category": "time",
+      "term": "금번",
+      "definition": "이번",
+      "example": "금번 프로젝트는 성공적으로 마무리되었다.",
+      "tags": [
+        "이번",
+        "시간",
+        "현재"
+      ]
+    },
+    {
+      "term_id": "time_032",
+      "category": "time",
+      "term": "데드라인(Deadline)",
+      "definition": "마감일",
+      "example": "보고서 제출 데드라인이 내일이다.",
+      "tags": [
+        "마감",
+        "기한",
+        "일정"
+      ]
+    },
+    {
+      "term_id": "time_033",
+      "category": "time",
+      "term": "듀데이트(Due date)",
+      "definition": "마감 기한",
+      "example": "과제 듀데이트를 놓치지 않도록 주의해야 한다.",
+      "tags": [
+        "마감",
+        "기한",
+        "일정"
+      ]
+    }
+  ]
+}

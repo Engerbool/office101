@@ -73,31 +73,29 @@ class _IndexScrollBarState extends State<IndexScrollBar>
       builder: (context, child) {
         return Opacity(
           opacity: _fadeAnimation.value,
-          child: Positioned.fill(
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Container(
-                width: 32,
-                margin: EdgeInsets.only(right: 8, top: 80, bottom: 80),
-                decoration: BoxDecoration(
-                  color: Color(0xFF5A8DEE).withOpacity(0.9),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    bottomLeft: Radius.circular(16),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      blurRadius: 8,
-                      offset: Offset(-2, 0),
-                    ),
-                  ],
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Container(
+              width: 32,
+              margin: EdgeInsets.only(right: 8, top: 80, bottom: 80),
+              decoration: BoxDecoration(
+                color: Color(0xFF5A8DEE).withOpacity(0.4),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  bottomLeft: Radius.circular(16),
                 ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: _buildIndexItems(themeProvider),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: Offset(-2, 0),
                   ),
+                ],
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: _buildIndexItems(themeProvider),
                 ),
               ),
             ),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/workplace_tip.dart';
+import '../models/email_template.dart';
 import '../providers/term_provider.dart';
 import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
 import '../widgets/error_display_widget.dart';
-import 'workplace_tip_detail_screen.dart';
+import 'email_template_detail_screen.dart';
 
-class WorkplaceTipsScreen extends StatelessWidget {
+class EmailTemplatesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer2<TermProvider, ThemeProvider>(
@@ -38,28 +38,28 @@ class WorkplaceTipsScreen extends StatelessWidget {
 
 
   Widget _buildCategoriesSection(TermProvider termProvider, ThemeProvider themeProvider) {
-    // 전체 직장생활 팁이 비어있는지 확인
-    if (termProvider.workplaceTips.isEmpty && !termProvider.isLoading && !termProvider.hasError) {
-      return _buildEmptyTipsState(themeProvider);
+    // 전체 이메일 템플릿이 비어있는지 확인
+    if (termProvider.emailTemplates.isEmpty && !termProvider.isLoading && !termProvider.hasError) {
+      return _buildEmptyTemplatesState(themeProvider);
     }
     
-    final availableCategories = TipCategory.values.where((category) {
-      return termProvider.getWorkplaceTipsByCategory(category).isNotEmpty;
+    final availableCategories = EmailCategory.values.where((category) {
+      return termProvider.getEmailTemplatesByCategory(category).isNotEmpty;
     }).toList();
     
     if (availableCategories.isEmpty && !termProvider.isLoading && !termProvider.hasError) {
-      return _buildEmptyTipsState(themeProvider);
+      return _buildEmptyTemplatesState(themeProvider);
     }
     
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...availableCategories.map((category) {
-          final tips = termProvider.getWorkplaceTipsByCategory(category);
+          final templates = termProvider.getEmailTemplatesByCategory(category);
           
           return Column(
             children: [
-              _buildCategoryCard(category, tips, themeProvider),
+              _buildCategoryCard(category, templates, themeProvider),
               SizedBox(height: 16),
             ],
           );
@@ -68,7 +68,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
     );
   }
   
-  Widget _buildEmptyTipsState(ThemeProvider themeProvider) {
+  Widget _buildEmptyTemplatesState(ThemeProvider themeProvider) {
     return Center(
       child: Padding(
         padding: EdgeInsets.all(32.0),
@@ -79,13 +79,13 @@ class WorkplaceTipsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.lightbulb_outline,
+                  Icons.email_outlined,
                   size: 64,
                   color: Color(0xFF5A8DEE).withOpacity(0.6),
                 ),
                 SizedBox(height: 16),
                 Text(
-                  '직장생활 팁이 없습니다',
+                  '이메일 템플릿이 없습니다',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -108,16 +108,15 @@ class WorkplaceTipsScreen extends StatelessWidget {
                     onPressed: () {
                       Provider.of<TermProvider>(context, listen: false).retryLoadData();
                     },
-                    icon: Icon(
-                      Icons.refresh,
+                  icon: Icon(
+                    Icons.refresh,
+                    color: Color(0xFF5A8DEE),
+                  ),
+                  label: Text(
+                    '다시 시도',
+                    style: TextStyle(
                       color: Color(0xFF5A8DEE),
-                    ),
-                    label: Text(
-                      '다시 시도',
-                      style: TextStyle(
-                        color: Color(0xFF5A8DEE),
-                        fontWeight: FontWeight.bold,
-                      ),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -129,7 +128,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryCard(TipCategory category, List<WorkplaceTip> tips, ThemeProvider themeProvider) {
+  Widget _buildCategoryCard(EmailCategory category, List<EmailTemplate> templates, ThemeProvider themeProvider) {
     return NeumorphicContainer(
       backgroundColor: themeProvider.cardColor,
       shadowColor: themeProvider.shadowColor,
@@ -168,7 +167,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${tips.length}개 팁',
+                        '${templates.length}개 템플릿',
                         style: TextStyle(
                           fontSize: 14,
                           color: themeProvider.subtitleColor.withOpacity(0.6),
@@ -180,21 +179,21 @@ class WorkplaceTipsScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 16),
-            ...tips.map((tip) => _buildTipItem(tip, themeProvider)).toList(),
+            ...templates.map((template) => _buildTemplateItem(template, themeProvider)).toList(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTipItem(WorkplaceTip tip, ThemeProvider themeProvider) {
+  Widget _buildTemplateItem(EmailTemplate template, ThemeProvider themeProvider) {
     return Builder(
       builder: (context) => GestureDetector(
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => WorkplaceTipDetailScreen(tip: tip),
+              builder: (context) => EmailTemplateDetailScreen(template: template),
             ),
           );
         },
@@ -211,43 +210,17 @@ class WorkplaceTipsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: _getPriorityColor(tip.priority.toString()).withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      _getPriorityText(tip.priority.toString()),
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        color: _getPriorityColor(tip.priority.toString()),
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 12,
-                    color: Color(0xFF5A8DEE),
-                  ),
-                ],
-              ),
-              SizedBox(height: 8),
               Text(
-                tip.title,
+                template.title,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: themeProvider.textColor,
                 ),
               ),
-              SizedBox(height: 6),
+              SizedBox(height: 8),
               Text(
-                tip.content,
+                template.situation,
                 style: TextStyle(
                   fontSize: 14,
                   color: themeProvider.subtitleColor.withOpacity(0.7),
@@ -256,6 +229,25 @@ class WorkplaceTipsScreen extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
+              SizedBox(height: 8),
+              Row(
+                children: [
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: 12,
+                    color: Color(0xFF5A8DEE),
+                  ),
+                  SizedBox(width: 4),
+                  Text(
+                    '템플릿 보기',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF5A8DEE),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -263,57 +255,33 @@ class WorkplaceTipsScreen extends StatelessWidget {
     );
   }
 
-  IconData _getCategoryIcon(TipCategory category) {
+  IconData _getCategoryIcon(EmailCategory category) {
     switch (category) {
-      case TipCategory.schedule:
-        return Icons.schedule;
-      case TipCategory.report:
+      case EmailCategory.request:
+        return Icons.help_outline;
+      case EmailCategory.report:
         return Icons.assignment;
-      case TipCategory.meeting:
-        return Icons.meeting_room;
-      case TipCategory.communication:
-        return Icons.chat_bubble_outline;
-      case TipCategory.general:
-        return Icons.lightbulb_outline;
+      case EmailCategory.meeting:
+        return Icons.event;
+      case EmailCategory.apology:
+        return Icons.sentiment_very_dissatisfied;
+      case EmailCategory.general:
+        return Icons.email;
     }
   }
 
-  Color _getCategoryColor(TipCategory category) {
+  Color _getCategoryColor(EmailCategory category) {
     switch (category) {
-      case TipCategory.schedule:
+      case EmailCategory.request:
         return Color(0xFF5A8DEE);
-      case TipCategory.report:
+      case EmailCategory.report:
         return Color(0xFF42A5F5);
-      case TipCategory.meeting:
+      case EmailCategory.meeting:
         return Color(0xFF66BB6A);
-      case TipCategory.communication:
+      case EmailCategory.apology:
         return Color(0xFFFF7043);
-      case TipCategory.general:
+      case EmailCategory.general:
         return Color(0xFF78909C);
-    }
-  }
-
-  String _getPriorityText(String priority) {
-    switch (priority) {
-      case '2':
-        return '필수';
-      case '1':
-        return '권장';
-      case '0':
-      default:
-        return '참고';
-    }
-  }
-
-  Color _getPriorityColor(String priority) {
-    switch (priority) {
-      case '2':
-        return Colors.red;
-      case '1':
-        return Colors.orange;
-      case '0':
-      default:
-        return Colors.green;
     }
   }
 }

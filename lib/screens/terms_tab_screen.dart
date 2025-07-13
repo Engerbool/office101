@@ -10,6 +10,7 @@ import '../widgets/autocomplete_search_bar.dart';
 import '../widgets/category_filter_chips.dart';
 import '../widgets/term_list_widget.dart';
 import '../widgets/index_scroll_bar.dart';
+import '../widgets/error_display_widget.dart';
 import '../utils/korean_sort_utils.dart';
 import 'term_search_screen.dart';
 import 'term_detail_screen.dart';
@@ -26,10 +27,12 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
   final GlobalKey _termsListKey = GlobalKey();
   
   bool _showIndexBar = false;
+  bool _showScrollToTopButton = false;
   Map<String, GlobalKey> _indexKeys = {};
   Map<String, List<Term>> _groupedTerms = {};
   List<String> _availableIndexes = [];
   Timer? _hideTimer;
+  Timer? _hideScrollToTopTimer;
 
   @override
   void initState() {
@@ -49,11 +52,32 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
     _searchController.dispose();
     _scrollController.dispose();
     _hideTimer?.cancel();
+    _hideScrollToTopTimer?.cancel();
     super.dispose();
   }
 
   void _onScroll() {
     if (!_scrollController.hasClients) return;
+    
+    // 스크롤 위치에 따라 맨 위로 버튼 표시/숨김
+    final showScrollToTop = _scrollController.offset > 300;
+    if (_showScrollToTopButton != showScrollToTop) {
+      setState(() {
+        _showScrollToTopButton = showScrollToTop;
+      });
+      
+      if (showScrollToTop) {
+        // 맨 위로 버튼 자동 숨김 타이머 (인덱스 바와 동일하게 2초)
+        _hideScrollToTopTimer?.cancel();
+        _hideScrollToTopTimer = Timer(Duration(seconds: 2), () {
+          if (mounted) {
+            setState(() {
+              _showScrollToTopButton = false;
+            });
+          }
+        });
+      }
+    }
     
     // 스크롤 중이면 인덱스 바 표시
     if (!_showIndexBar) {
@@ -64,12 +88,14 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
     
     // 기존 타이머 취소
     _hideTimer?.cancel();
+    _hideScrollToTopTimer?.cancel();
     
-    // 3초 후 인덱스 바 숨기기
-    _hideTimer = Timer(Duration(seconds: 3), () {
+    // 2초 후 인덱스 바와 맨 위로 버튼 동시에 숨기기
+    _hideTimer = Timer(Duration(seconds: 2), () {
       if (mounted) {
         setState(() {
           _showIndexBar = false;
+          _showScrollToTopButton = false;
         });
       }
     });
@@ -96,6 +122,18 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
     });
   }
 
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+    
+    setState(() {
+      _showScrollToTopButton = false;
+    });
+  }
+
   void _updateGroupedTerms(List<Term> terms) {
     final sortedTerms = KoreanSortUtils.sortTermsKoreanEnglish(terms);
     _groupedTerms = KoreanSortUtils.groupTermsByIndex(sortedTerms);
@@ -108,44 +146,92 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
       builder: (context, termProvider, themeProvider, child) {
         return Scaffold(
           backgroundColor: themeProvider.backgroundColor,
-          body: termProvider.isLoading
-              ? Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF5A8DEE)),
-                  ),
-                )
-              : Stack(
-                  children: [
-                    SingleChildScrollView(
-                      controller: _scrollController,
-                      padding: EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+          body: LoadingErrorWidget(
+            isLoading: termProvider.isLoading,
+            errorMessage: termProvider.errorMessage,
+            onRetry: () {
+              termProvider.clearError();
+              termProvider.retryLoadData();
+            },
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  controller: _scrollController,
+                  padding: EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         children: [
-                          Row(
-                            children: [
-                              Expanded(child: _buildQuickSearchSection(context, themeProvider)),
-                              SizedBox(width: 12),
-                              _buildAddButton(context, themeProvider),
-                            ],
-                          ),
-                          SizedBox(height: 16),
-                          CategoryFilterChips(),
-                          SizedBox(height: 24),
-                          _buildFilteredTermsSection(termProvider),
+                          Expanded(child: _buildQuickSearchSection(context, themeProvider)),
+                          SizedBox(width: 12),
+                          _buildAddButton(context, themeProvider),
                         ],
                       ),
-                    ),
-                    // 인덱스 스크롤바 (용어가 있을 때만 표시)
-                    if (_availableIndexes.isNotEmpty)
-                      IndexScrollBar(
-                        scrollController: _scrollController,
-                        availableIndexes: _availableIndexes,
-                        onIndexSelected: _scrollToIndex,
-                        isVisible: _showIndexBar,
-                      ),
-                  ],
+                      SizedBox(height: 16),
+                      CategoryFilterChips(),
+                      SizedBox(height: 24),
+                      _buildFilteredTermsSection(termProvider),
+                    ],
+                  ),
                 ),
+                // 인덱스 스크롤바 (용어가 있을 때만 표시)
+                if (_availableIndexes.isNotEmpty)
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    child: IndexScrollBar(
+                      scrollController: _scrollController,
+                      availableIndexes: _availableIndexes,
+                      onIndexSelected: _scrollToIndex,
+                      isVisible: _showIndexBar,
+                    ),
+                  ),
+                
+                // 맨 위로 버튼
+                if (_showScrollToTopButton)
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 20,
+                    child: Center(
+                      child: AnimatedOpacity(
+                        opacity: _showScrollToTopButton ? 1.0 : 0.0,
+                        duration: Duration(milliseconds: 300),
+                        child: GestureDetector(
+                          onTap: _scrollToTop,
+                          child: Consumer<ThemeProvider>(
+                            builder: (context, themeProvider, child) {
+                              return Container(
+                                width: 48,
+                                height: 48,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF5A8DEE).withOpacity(0.9),
+                                  borderRadius: BorderRadius.circular(24),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      blurRadius: 8,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Icon(
+                                  Icons.keyboard_arrow_up,
+                                  color: Colors.white,
+                                  size: 28,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
         );
       },
     );
@@ -247,7 +333,12 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
     if (termProvider.selectedCategory != null) {
       termsToShow = termProvider.getTermsByCategory(termProvider.selectedCategory!);
     } else {
-      termsToShow = termProvider.getPopularTerms();
+      // 전체 카테고리 선택 시: 검색어가 있으면 필터된 결과, 없으면 모든 용어 표시
+      if (termProvider.searchQuery.isNotEmpty) {
+        termsToShow = termProvider.filteredTerms;
+      } else {
+        termsToShow = termProvider.allTerms;
+      }
     }
     
     if (termsToShow.isEmpty) {

@@ -1,0 +1,724 @@
+{
+  "terms": [
+    {
+      "term_id": "business_001",
+      "category": "business",
+      "term": "KPI",
+      "definition": "Key Performance Indicator의 줄임말로 핵심성과지표를 의미",
+      "example": "이번 분기 KPI 달성률이 95%입니다.",
+      "tags": [
+        "성과",
+        "지표",
+        "목표"
+      ]
+    },
+    {
+      "term_id": "business_002",
+      "category": "business",
+      "term": "벤치마킹",
+      "definition": "다른 회사의 우수한 사례나 성과를 참고하여 자사에 적용하는 것",
+      "example": "경쟁사의 마케팅 전략을 벤치마킹해보겠습니다.",
+      "tags": [
+        "참고",
+        "분석",
+        "비교"
+      ]
+    },
+    {
+      "term_id": "business_003",
+      "category": "business",
+      "term": "결제",
+      "definition": "대금을 주고받아 거래 관계를 끝맺는 것으로 돈과 관련된 용어",
+      "example": "이번 달 카드 대금 결제일이 다가왔다.",
+      "tags": [
+        "대금",
+        "거래",
+        "돈"
+      ]
+    },
+    {
+      "term_id": "business_004",
+      "category": "business",
+      "term": "린하게",
+      "definition": "업무를 잘게 나누어 군더더기 없이 효율적으로 진행하는 것",
+      "example": "린하게 업무를 처리하여 시간을 절약했다.",
+      "tags": [
+        "효율",
+        "낭비제거",
+        "업무방식"
+      ]
+    },
+    {
+      "term_id": "business_005",
+      "category": "business",
+      "term": "펜딩 (Pending)",
+      "definition": "진행하던 업무를 잠시 보류하는 것",
+      "example": "해당 안건은 현재 펜딩 상태이다.",
+      "tags": [
+        "보류",
+        "중단",
+        "대기"
+      ]
+    },
+    {
+      "term_id": "business_006",
+      "category": "business",
+      "term": "픽스 (Fix)",
+      "definition": "최종 결정을 그대로 진행하는 것",
+      "example": "회의에서 결정된 사항은 픽스되었다.",
+      "tags": [
+        "확정",
+        "결정",
+        "최종"
+      ]
+    },
+    {
+      "term_id": "business_007",
+      "category": "business",
+      "term": "어레인지 (Arrange)",
+      "definition": "업무 상황과 문맥에 따라 다양하게 해석. 미팅을 추진하거나 자료를 정리해 전달하는 것",
+      "example": "다음 주 미팅 일정을 어레인지했다.",
+      "tags": [
+        "준비",
+        "정리",
+        "조정"
+      ]
+    },
+    {
+      "term_id": "business_008",
+      "category": "business",
+      "term": "마일스톤 (Milestone)",
+      "definition": "이정표. 단기적 실적 목표나 사업 계획. 프로젝트 진행 시 특기할만한 사건",
+      "example": "프로젝트의 첫 번째 마일스톤을 달성했다.",
+      "tags": [
+        "이정표",
+        "목표",
+        "프로젝트"
+      ]
+    },
+    {
+      "term_id": "business_009",
+      "category": "business",
+      "term": "퇴청",
+      "definition": "관청에서 근무를 마치고 퇴근",
+      "example": "오늘은 일찍 퇴청할 예정이다.",
+      "tags": [
+        "퇴근",
+        "업무종료",
+        "관공서"
+      ]
+    },
+    {
+      "term_id": "business_010",
+      "category": "business",
+      "term": "포괄",
+      "definition": "일정한 대상, 현상을 어떤 범위에 모두 넣음",
+      "example": "이 계약은 모든 비용을 포괄한다.",
+      "tags": [
+        "포함",
+        "범위",
+        "전체"
+      ]
+    },
+    {
+      "term_id": "business_011",
+      "category": "business",
+      "term": "생산성",
+      "definition": "일정한 기간 동안 생산한 제품, 서비스 혹은 결과물의 양과 품질에 비례해 제품 혹은 서비스를 만들어 내는 능력",
+      "example": "생산성 향상을 위해 새로운 시스템을 도입했다.",
+      "tags": [
+        "효율",
+        "성과",
+        "능력"
+      ]
+    },
+    {
+      "term_id": "business_012",
+      "category": "business",
+      "term": "원리금",
+      "definition": "대출 등에서 원금과 이자를 합친 총 금액",
+      "example": "매달 대출 원리금을 상환하고 있다.",
+      "tags": [
+        "대출",
+        "원금",
+        "이자"
+      ]
+    },
+    {
+      "term_id": "business_013",
+      "category": "business",
+      "term": "방침수립",
+      "definition": "기업이나 조직에서 추구하는 방향성을 정하고 이를 실현하기 위한 계획을 수립하는 것을 말합니다.",
+      "example": "새로운 경영 방침수립을 위해 워크숍을 진행했다.",
+      "tags": [
+        "전략",
+        "계획",
+        "정책"
+      ]
+    },
+    {
+      "term_id": "business_014",
+      "category": "business",
+      "term": "인허가",
+      "definition": "기업이나 조직에서 인원을 고용하거나 제품 이용을 위해 필요한 법적인 승인을 말합니다.",
+      "example": "사업 확장을 위해 정부의 인허가를 받았다.",
+      "tags": [
+        "승인",
+        "규제",
+        "법률"
+      ]
+    },
+    {
+      "term_id": "business_015",
+      "category": "business",
+      "term": "자원봉사",
+      "definition": "개인이나 기업이 시간이나 노력, 물질 등의 자원으로 사회적 가치를 창출하는 지원 활동을 말합니다.",
+      "example": "주말에 자원봉사 활동에 참여했다.",
+      "tags": [
+        "사회공헌",
+        "봉사",
+        "CSR"
+      ]
+    },
+    {
+      "term_id": "business_016",
+      "category": "business",
+      "term": "계약서",
+      "definition": "기업과 직원 간 또는 기업과 거래처 간에 작성된 계약 문서를 말합니다.",
+      "example": "계약서를 꼼꼼히 검토한 후 서명했다.",
+      "tags": [
+        "문서",
+        "계약",
+        "법률"
+      ]
+    },
+    {
+      "term_id": "business_017",
+      "category": "business",
+      "term": "매출총이익",
+      "definition": "회사의 수익과 매출 원가 간의 차이",
+      "example": "매출총이익이 증가하여 기업의 수익성이 개선되었다.",
+      "tags": [
+        "회계",
+        "수익",
+        "이익"
+      ]
+    },
+    {
+      "term_id": "business_018",
+      "category": "business",
+      "term": "각출",
+      "definition": "각자의 비용을 각자 지불하는 것",
+      "example": "점심 식사 비용은 각출하기로 했다.",
+      "tags": [
+        "비용",
+        "지불",
+        "더치페이"
+      ]
+    },
+    {
+      "term_id": "business_019",
+      "category": "business",
+      "term": "갹출",
+      "definition": "같은 목적을 위해 여러 사람이 돈을 나눠 내는 것",
+      "example": "회식 비용은 갹출하여 마련했다.",
+      "tags": [
+        "비용",
+        "분담",
+        "모금"
+      ]
+    },
+    {
+      "term_id": "business_020",
+      "category": "business",
+      "term": "검토",
+      "definition": "어떤 내용이나 사실을 분석하고 확인함",
+      "example": "제출된 보고서를 꼼꼼히 검토했다.",
+      "tags": [
+        "확인",
+        "분석",
+        "보고"
+      ]
+    },
+    {
+      "term_id": "business_021",
+      "category": "business",
+      "term": "격무",
+      "definition": "몹시 고된 업무",
+      "example": "격무에 시달려 건강이 나빠졌다.",
+      "tags": [
+        "업무",
+        "과로",
+        "노동"
+      ]
+    },
+    {
+      "term_id": "business_022",
+      "category": "business",
+      "term": "격일",
+      "definition": "하루를 거름",
+      "example": "격일로 출근하여 업무를 처리한다.",
+      "tags": [
+        "근무",
+        "일정",
+        "주기"
+      ]
+    },
+    {
+      "term_id": "business_023",
+      "category": "business",
+      "term": "공란",
+      "definition": "비워둔 칸",
+      "example": "신청서의 공란 없이 모두 작성해 주세요.",
+      "tags": [
+        "문서",
+        "작성",
+        "빈칸"
+      ]
+    },
+    {
+      "term_id": "business_024",
+      "category": "business",
+      "term": "공제",
+      "definition": "받을 몫에서 일정한 금액을 뺌",
+      "example": "세금 공제를 받아 소득세를 절감했다.",
+      "tags": [
+        "세금",
+        "차감",
+        "회계"
+      ]
+    },
+    {
+      "term_id": "business_025",
+      "category": "business",
+      "term": "기재",
+      "definition": "문서에 기록하다",
+      "example": "개인 정보를 정확히 기재해 주세요.",
+      "tags": [
+        "작성",
+        "기록",
+        "문서"
+      ]
+    },
+    {
+      "term_id": "business_026",
+      "category": "business",
+      "term": "납기",
+      "definition": "고객에게 주문받은 물품이나 결과물을 가져다줘야 하는 마감 기한",
+      "example": "납기를 맞추기 위해 야근을 했다.",
+      "tags": [
+        "마감",
+        "기한",
+        "납품"
+      ]
+    },
+    {
+      "term_id": "business_027",
+      "category": "business",
+      "term": "누락",
+      "definition": "기입되거나 처리되어야 하는 내용이 빠지다",
+      "example": "보고서에 중요한 내용이 누락되었다.",
+      "tags": [
+        "실수",
+        "빠짐",
+        "오류"
+      ]
+    },
+    {
+      "term_id": "business_028",
+      "category": "business",
+      "term": "당기순이익",
+      "definition": "일정 회계기간동안 발생한 전체 수익에서 비용을 차감한 금액",
+      "example": "이번 분기 당기순이익이 크게 증가했다.",
+      "tags": [
+        "회계",
+        "이익",
+        "재무"
+      ]
+    },
+    {
+      "term_id": "business_029",
+      "category": "business",
+      "term": "대금",
+      "definition": "물건의 값으로 치르는 돈",
+      "example": "제품 대금을 지불했다.",
+      "tags": [
+        "돈",
+        "지불",
+        "거래"
+      ]
+    },
+    {
+      "term_id": "business_030",
+      "category": "business",
+      "term": "대외비",
+      "definition": "외부에 알리지 않기로 한 비밀",
+      "example": "이 문서는 대외비이므로 외부에 유출해서는 안 된다.",
+      "tags": [
+        "보안",
+        "비밀",
+        "문서"
+      ]
+    },
+    {
+      "term_id": "business_031",
+      "category": "business",
+      "term": "도메인(Domain)",
+      "definition": "비즈니스가 속한 산업 분야, 영역, 환경 전반을 일컫는 말 또는 인터넷 주소(URL)의 일부",
+      "example": "우리 회사는 IT 도메인에서 선두를 달리고 있다.",
+      "tags": [
+        "분야",
+        "산업",
+        "영역"
+      ]
+    },
+    {
+      "term_id": "business_032",
+      "category": "business",
+      "term": "디벨롭(Develop)",
+      "definition": "발전시키다, 구체화하다",
+      "example": "아이디어를 더욱 디벨롭하여 구체적인 계획을 세웠다.",
+      "tags": [
+        "발전",
+        "개선",
+        "구체화"
+      ]
+    },
+    {
+      "term_id": "business_033",
+      "category": "business",
+      "term": "램프업(Ramp up)",
+      "definition": "생산 능력 등을 늘리다",
+      "example": "신제품 출시를 위해 생산량을 램프업했다.",
+      "tags": [
+        "생산",
+        "증가",
+        "확대"
+      ]
+    },
+    {
+      "term_id": "business_034",
+      "category": "business",
+      "term": "레슨런(Lesson learned)",
+      "definition": "성공 또는 실패의 경험을 통해 교훈을 얻는 것",
+      "example": "이번 프로젝트의 레슨런을 통해 다음 프로젝트에 반영할 점을 찾았다.",
+      "tags": [
+        "교훈",
+        "경험",
+        "회고"
+      ]
+    },
+    {
+      "term_id": "business_037",
+      "category": "business",
+      "term": "리소스(Resource)",
+      "definition": "인력, 시간, 돈 등 업무에 투입되는 자원",
+      "example": "프로젝트에 필요한 리소스를 확보하는 것이 중요하다.",
+      "tags": [
+        "자원",
+        "인력",
+        "예산"
+      ]
+    },
+    {
+      "term_id": "business_038",
+      "category": "business",
+      "term": "리스트업(List up)",
+      "definition": "데이터를 목록화하는 것",
+      "example": "회의 안건을 리스트업하여 공유했다.",
+      "tags": [
+        "목록",
+        "정리",
+        "작성"
+      ]
+    },
+    {
+      "term_id": "business_039",
+      "category": "business",
+      "term": "린(Lean)",
+      "definition": "군살이 없는, 낭비 없이 효율적인 운영 방식을 가리킨다",
+      "example": "린 경영을 통해 불필요한 비용을 절감했다.",
+      "tags": [
+        "효율",
+        "낭비제거",
+        "경영"
+      ]
+    },
+    {
+      "term_id": "business_040",
+      "category": "business",
+      "term": "마켓(Market)",
+      "definition": "시장",
+      "example": "새로운 마켓 진출을 위해 시장 조사를 진행했다.",
+      "tags": [
+        "시장",
+        "비즈니스",
+        "경쟁"
+      ]
+    },
+    {
+      "term_id": "business_041",
+      "category": "business",
+      "term": "마켓쉐어/마켓셰어(Market share)",
+      "definition": "시장점유율",
+      "example": "우리 회사의 마켓쉐어가 꾸준히 증가하고 있다.",
+      "tags": [
+        "시장점유율",
+        "경쟁",
+        "성과"
+      ]
+    },
+    {
+      "term_id": "business_042",
+      "category": "business",
+      "term": "맨먼스(Man/Month)",
+      "definition": "한 사람이 한 달 동안 수행할 수 있는 작업량",
+      "example": "이 프로젝트는 10 맨먼스가 소요될 것으로 예상된다.",
+      "tags": [
+        "공수",
+        "프로젝트관리",
+        "작업량"
+      ]
+    },
+    {
+      "term_id": "business_043",
+      "category": "business",
+      "term": "미수금",
+      "definition": "아직 거둬들이지 못한 돈",
+      "example": "미수금을 회수하기 위해 노력하고 있다.",
+      "tags": [
+        "회계",
+        "채권",
+        "돈"
+      ]
+    },
+    {
+      "term_id": "business_044",
+      "category": "business",
+      "term": "바텀업(Bottom up)",
+      "definition": "실무자가 업무를 기획해 윗선에 보고하여 일을 진행하는 방식. 탑다운과 반대 개념",
+      "example": "바텀업 방식으로 아이디어를 수렴하여 새로운 프로젝트를 시작했다.",
+      "tags": [
+        "의사결정",
+        "상향식",
+        "업무방식"
+      ]
+    },
+    {
+      "term_id": "business_045",
+      "category": "business",
+      "term": "배상",
+      "definition": "남에게 끼친 손해를 물어주는 일",
+      "example": "고객에게 피해를 입힌 부분에 대해 배상했다.",
+      "tags": [
+        "손해",
+        "보상",
+        "책임"
+      ]
+    },
+    {
+      "term_id": "business_047",
+      "category": "business",
+      "term": "불출",
+      "definition": "돈이나 물품을 내줌. 주기적으로 지급되는 경우에 주로 사용된다",
+      "example": "사무용품 불출 대장을 작성했다.",
+      "tags": [
+        "지급",
+        "물품",
+        "관리"
+      ]
+    },
+    {
+      "term_id": "business_048",
+      "category": "business",
+      "term": "사안",
+      "definition": "문제가 되는 일이나 계획",
+      "example": "중요한 사안이 발생하여 긴급 회의를 소집했다.",
+      "tags": [
+        "이슈",
+        "안건",
+        "문제"
+      ]
+    },
+    {
+      "term_id": "business_049",
+      "category": "business",
+      "term": "SCM (Supply Chain Management)",
+      "definition": "공급망 관리",
+      "example": "SCM 시스템을 도입하여 생산 효율을 높였다.",
+      "tags": [
+        "공급망",
+        "물류",
+        "관리"
+      ]
+    },
+    {
+      "term_id": "business_050",
+      "category": "business",
+      "term": "SEM (Strategic Enterprise Management)",
+      "definition": "통합 경영 관리체계",
+      "example": "SEM을 통해 기업의 경영 활동을 통합적으로 관리한다.",
+      "tags": [
+        "경영관리",
+        "전략",
+        "통합"
+      ]
+    },
+    {
+      "term_id": "business_051",
+      "category": "business",
+      "term": "Shared Value (공유가치)",
+      "definition": "기업과 개인 행동에 있어 조직과 구성원들에게 공유되어 있는 가치",
+      "example": "공유가치 창출을 통해 기업의 사회적 책임을 다한다.",
+      "tags": [
+        "가치",
+        "조직문화",
+        "CSR"
+      ]
+    },
+    {
+      "term_id": "business_052",
+      "category": "business",
+      "term": "CSV (Creating Shared Value)",
+      "definition": "공유가치 창출",
+      "example": "CSV 경영을 통해 기업의 지속 가능한 성장을 추구한다.",
+      "tags": [
+        "공유가치",
+        "사회적책임",
+        "경영"
+      ]
+    },
+    {
+      "term_id": "business_053",
+      "category": "business",
+      "term": "경영이념 (Business Ideology)",
+      "definition": "기업이 사회의 한 구성체로서 책임과 목적, 사명을 명확히 하고, 장기적으로 나아갈 방향과 행동 원칙을 포함해 조직과 구성원이 공유하고자 하는 가치와 정신을 사내외에 공식적으로 표명하여 명문화 한 것",
+      "example": "우리 회사의 경영이념은 고객 만족을 최우선으로 한다.",
+      "tags": [
+        "철학",
+        "가치",
+        "비전"
+      ]
+    },
+    {
+      "term_id": "business_054",
+      "category": "business",
+      "term": "비전 (Vision)",
+      "definition": "회사가 미래의 일정시점을 가정하고, 마땅히 되어있어야 할 모습과 거기에 도달하는 시나리오를 그린 것",
+      "example": "2030년까지 글로벌 선두 기업이 되는 것이 우리의 비전이다.",
+      "tags": [
+        "미래상",
+        "목표",
+        "방향"
+      ]
+    },
+    {
+      "term_id": "business_055",
+      "category": "business",
+      "term": "경영전략 (Business Strategy)",
+      "definition": "기업의 거시환경과 경쟁환경에 관련된 것으로, 각종 경쟁상황을 가정하고, 목표를 설정하여, 그 목표를 효율적으로 달성함으로써 경쟁우위를 제공유지시켜 줄 수 있는 주요한 의사결정을 하는 것",
+      "example": "새로운 경영전략을 수립하여 시장 변화에 대응했다.",
+      "tags": [
+        "전략",
+        "경쟁우위",
+        "의사결정"
+      ]
+    },
+    {
+      "term_id": "business_056",
+      "category": "business",
+      "term": "전사전략 (Corporate Strategy)",
+      "definition": "회사 전체 차원에서 대처하는 방안을 수립한 전략",
+      "example": "전사전략을 통해 모든 부서가 동일한 목표를 향해 나아간다.",
+      "tags": [
+        "전략",
+        "회사전체",
+        "방향"
+      ]
+    },
+    {
+      "term_id": "business_057",
+      "category": "business",
+      "term": "사업(별) 전략",
+      "definition": "사업(부문)별로 수행하는 사업의 환경적 요인 중 주로 산업환경과 시장전망을 분석하고, 경쟁사 동향을 파악하여, 시장에서 경쟁적 우위를 확보토록하며, 사업의 지속적 성장 발전을 도모하려 수립한 전략",
+      "example": "각 사업부별 전략을 수립하여 시장 경쟁력을 강화했다.",
+      "tags": [
+        "전략",
+        "사업부",
+        "경쟁력"
+      ]
+    },
+    {
+      "term_id": "business_058",
+      "category": "business",
+      "term": "기능(별) 전략",
+      "definition": "회사의 주요 업무기능별로 각 분야에서 전사전략과 사업(별)전략을 실행하는 데 있어 효과적으로 기여하고, 운용하는 방안을 수립한 전략",
+      "example": "마케팅 기능별 전략을 통해 고객 유입을 늘렸다.",
+      "tags": [
+        "전략",
+        "기능",
+        "실행"
+      ]
+    },
+    {
+      "term_id": "business_059",
+      "category": "business",
+      "term": "전략(적) 경영 (Strategic Business)",
+      "definition": "기업의 경영환경과 경영의 기본원리가 시대의 상황 및 가치의 변화로 불확실하고, 무한 경쟁속에 처하게 되어 장기적/미래지향적 관점에서 기업외부의 환경과 경쟁자를 반드시 생각하고, 경쟁우위를 지속적으로 유지시키며, 확대되어가는 기업의 이념과 사명을 다하고, 비전성취를 위하여 경영자가 경영 의사결정의 완급을 조절하고, 경영의 패턴과 방식을 상황에 따라 조정하는 등 전략적 사고에 입각하여 경영을 하는 것",
+      "example": "전략적 경영을 통해 기업의 지속 가능한 성장을 이끌어냈다.",
+      "tags": [
+        "경영",
+        "전략",
+        "의사결정"
+      ]
+    },
+    {
+      "term_id": "business_060",
+      "category": "business",
+      "term": "EC (Engineering Constructor)화",
+      "definition": "건설산업의 전략특성을 총괄적으로 표현한 것으로, 건설 사업수행 全 Process를 사업영역으로 참여토록 하는 것",
+      "example": "EC화를 통해 건설 사업의 전 과정을 통합 관리한다.",
+      "tags": [
+        "건설",
+        "엔지니어링",
+        "전략"
+      ]
+    },
+    {
+      "term_id": "business_061",
+      "category": "business",
+      "term": "글로벌화 (Globalization)",
+      "definition": "기업의 활동 영역을 전 세계로 확장하는 전략",
+      "example": "글로벌화를 통해 해외 시장에서 경쟁력을 확보했다.",
+      "tags": [
+        "해외진출",
+        "확장",
+        "전략"
+      ]
+    },
+    {
+      "term_id": "business_062",
+      "category": "business",
+      "term": "다각화",
+      "definition": "기업이 새로운 제품이나 서비스 시장으로 진출하여 사업 영역을 확장하는 전략",
+      "example": "사업 다각화를 통해 새로운 성장 동력을 확보했다.",
+      "tags": [
+        "사업확장",
+        "신사업",
+        "전략"
+      ]
+    },
+    {
+      "term_id": "business_063",
+      "category": "business",
+      "term": "SYSTEM화",
+      "definition": "앞의 세 가지 전략(EC화, 글로벌화, 다각화)을 실행하는데 있어 회사가 내부적으로 갖추어야 할 보완 전략",
+      "example": "SYSTEM화를 통해 업무 프로세스를 표준화하고 효율을 높였다.",
+      "tags": [
+        "시스템화",
+        "프로세스",
+        "전략"
+      ]
+    }
+  ]
+}

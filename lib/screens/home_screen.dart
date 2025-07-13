@@ -6,6 +6,7 @@ import '../widgets/neumorphic_container.dart';
 import '../widgets/search_bar_widget.dart';
 import '../widgets/category_grid.dart';
 import '../widgets/term_list_widget.dart';
+import '../widgets/error_display_widget.dart';
 import 'term_search_screen.dart';
 import 'email_templates_screen.dart';
 import 'workplace_tips_screen.dart';
@@ -28,29 +29,29 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Consumer<TermProvider>(
         builder: (context, termProvider, child) {
-          if (termProvider.isLoading) {
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF5A8DEE)),
+          return LoadingErrorWidget(
+            isLoading: termProvider.isLoading,
+            errorMessage: termProvider.errorMessage,
+            onRetry: () {
+              termProvider.clearError();
+              termProvider.retryLoadData();
+            },
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildWelcomeSection(),
+                  SizedBox(height: 24),
+                  _buildQuickActions(context),
+                  SizedBox(height: 24),
+                  _buildSearchSection(context),
+                  SizedBox(height: 24),
+                  _buildCategoriesSection(),
+                  SizedBox(height: 24),
+                  _buildPopularTermsSection(termProvider),
+                ],
               ),
-            );
-          }
-
-          return SingleChildScrollView(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildWelcomeSection(),
-                SizedBox(height: 24),
-                _buildQuickActions(context),
-                SizedBox(height: 24),
-                _buildSearchSection(context),
-                SizedBox(height: 24),
-                _buildCategoriesSection(),
-                SizedBox(height: 24),
-                _buildPopularTermsSection(termProvider),
-              ],
             ),
           );
         },
@@ -240,6 +241,10 @@ class HomeScreen extends StatelessWidget {
   Widget _buildPopularTermsSection(TermProvider termProvider) {
     final popularTerms = termProvider.getPopularTerms();
     
+    if (termProvider.allTerms.isEmpty && !termProvider.isLoading && !termProvider.hasError) {
+      return _buildEmptyDataSection();
+    }
+    
     if (popularTerms.isEmpty) {
       return SizedBox();
     }
@@ -261,6 +266,43 @@ class HomeScreen extends StatelessWidget {
           isCompact: true,
         ),
       ],
+    );
+  }
+  
+  Widget _buildEmptyDataSection() {
+    return NeumorphicContainer(
+      child: Padding(
+        padding: EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.library_books_outlined,
+              size: 64,
+              color: Color(0xFF5A8DEE).withOpacity(0.6),
+            ),
+            SizedBox(height: 16),
+            Text(
+              '아직 용어가 없습니다',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF4F5A67),
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              '앱을 다시 시작하거나\n새로운 용어를 추가해보세요!',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 14,
+                color: Color(0xFF4F5A67).withOpacity(0.7),
+                height: 1.4,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
