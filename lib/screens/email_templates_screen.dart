@@ -56,13 +56,17 @@ class EmailTemplatesScreen extends StatelessWidget {
       children: [
         ...availableCategories.map((category) {
           final templates = termProvider.getEmailTemplatesByCategory(category);
+          final template = templates.isNotEmpty ? templates.first : null;
           
-          return Column(
-            children: [
-              _buildCategoryCard(category, templates, themeProvider),
-              SizedBox(height: 16),
-            ],
-          );
+          if (template != null) {
+            return Column(
+              children: [
+                _buildCategoryTemplateCard(category, template, themeProvider),
+                SizedBox(height: 12),
+              ],
+            );
+          }
+          return SizedBox.shrink();
         }).toList(),
       ],
     );
@@ -129,24 +133,31 @@ class EmailTemplatesScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryCard(EmailCategory category, List<EmailTemplate> templates, ThemeProvider themeProvider) {
-    return NeumorphicContainer(
-      backgroundColor: themeProvider.cardColor,
-      shadowColor: themeProvider.shadowColor,
-      highlightColor: themeProvider.highlightColor,
-      child: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+  Widget _buildCategoryTemplateCard(EmailCategory category, EmailTemplate template, ThemeProvider themeProvider) {
+    return Builder(
+      builder: (context) => GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => EmailTemplateDetailScreen(template: template),
+            ),
+          );
+        },
+        child: NeumorphicContainer(
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Row(
               children: [
                 Container(
-                  width: 40,
-                  height: 40,
+                  width: 48,
+                  height: 48,
                   decoration: BoxDecoration(
                     color: _getCategoryColor(category).withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
                     _getCategoryIcon(category),
@@ -167,94 +178,43 @@ class EmailTemplatesScreen extends StatelessWidget {
                           color: themeProvider.textColor,
                         ),
                       ),
+                      SizedBox(height: 4),
                       Text(
-                        '${templates.length}개 템플릿',
+                        template.title,
                         style: TextStyle(
                           fontSize: 14,
-                          color: themeProvider.subtitleColor.withOpacity(0.6),
+                          color: themeProvider.subtitleColor.withOpacity(0.8),
+                          fontWeight: FontWeight.w500,
                         ),
+                      ),
+                      SizedBox(height: 2),
+                      Text(
+                        template.situation,
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: themeProvider.subtitleColor.withOpacity(0.6),
+                          height: 1.3,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
                 ),
+                SizedBox(width: 8),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16,
+                  color: themeProvider.subtitleColor.withOpacity(0.4),
+                ),
               ],
             ),
-            SizedBox(height: 16),
-            ...templates.map((template) => _buildTemplateItem(template, themeProvider)).toList(),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildTemplateItem(EmailTemplate template, ThemeProvider themeProvider) {
-    return Builder(
-      builder: (context) => GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => EmailTemplateDetailScreen(template: template),
-            ),
-          );
-        },
-        child: Container(
-          margin: EdgeInsets.only(bottom: 12),
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: themeProvider.backgroundColor,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: themeProvider.dividerColor.withOpacity(0.3),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                template.title,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: themeProvider.textColor,
-                ),
-              ),
-              SizedBox(height: 8),
-              Text(
-                template.situation,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: themeProvider.subtitleColor.withOpacity(0.7),
-                  height: 1.4,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              SizedBox(height: 8),
-              Row(
-                children: [
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 12,
-                    color: Color(0xFF5A8DEE),
-                  ),
-                  SizedBox(width: 4),
-                  Text(
-                    '템플릿 보기',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF5A8DEE),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   IconData _getCategoryIcon(EmailCategory category) {
     switch (category) {

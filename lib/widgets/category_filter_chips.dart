@@ -84,7 +84,16 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
                       termProvider.selectedCategory == null,
                     ),
                     SizedBox(width: 8),
-                    ...TermCategory.values.where((category) => category != TermCategory.other).map((category) {
+                    _buildFilterChip(
+                      context,
+                      termProvider,
+                      themeProvider,
+                      '북마크',
+                      TermCategory.bookmarked,
+                      termProvider.selectedCategory == TermCategory.bookmarked,
+                    ),
+                    SizedBox(width: 8),
+                    ...TermCategory.values.where((category) => category != TermCategory.other && category != TermCategory.bookmarked).map((category) {
                       return Row(
                         children: [
                           _buildFilterChip(

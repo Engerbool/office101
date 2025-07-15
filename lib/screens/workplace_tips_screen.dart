@@ -71,22 +71,17 @@ class WorkplaceTipsScreen extends StatelessWidget {
           ),
         ),
         SizedBox(height: 24),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            childAspectRatio: 1.2,
-          ),
-          itemCount: availableCategories.length,
-          itemBuilder: (context, index) {
-            final category = availableCategories[index];
-            final tips = termProvider.getWorkplaceTipsByCategory(category);
-            return _buildCategoryGridCard(context, category, tips, themeProvider);
-          },
-        ),
+        ...availableCategories.map((category) {
+          final tips = termProvider.getWorkplaceTipsByCategory(category);
+          return Column(
+            children: [
+              Builder(
+                builder: (context) => _buildCategoryListCard(context, category, tips, themeProvider),
+              ),
+              SizedBox(height: 12),
+            ],
+          );
+        }).toList(),
       ],
     );
   }
@@ -152,7 +147,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryGridCard(BuildContext context, TipCategory category, List<WorkplaceTip> tips, ThemeProvider themeProvider) {
+  Widget _buildCategoryListCard(BuildContext context, TipCategory category, List<WorkplaceTip> tips, ThemeProvider themeProvider) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -167,9 +162,8 @@ class WorkplaceTipsScreen extends StatelessWidget {
         shadowColor: themeProvider.shadowColor,
         highlightColor: themeProvider.highlightColor,
         child: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          padding: EdgeInsets.all(16),
+          child: Row(
             children: [
               Container(
                 width: 48,
@@ -181,26 +175,37 @@ class WorkplaceTipsScreen extends StatelessWidget {
                 child: Icon(
                   _getCategoryIcon(category),
                   color: _getCategoryColor(category),
-                  size: 28,
+                  size: 24,
                 ),
               ),
-              SizedBox(height: 12),
-              Text(
-                category.displayName,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: themeProvider.textColor,
+              SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      category.displayName,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: themeProvider.textColor,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      '${tips.length}개의 꿀팁',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: themeProvider.subtitleColor.withOpacity(0.7),
+                      ),
+                    ),
+                  ],
                 ),
-                textAlign: TextAlign.center,
               ),
-              SizedBox(height: 4),
-              Text(
-                '${tips.length}개 팁',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: themeProvider.subtitleColor.withOpacity(0.6),
-                ),
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 16,
+                color: themeProvider.subtitleColor.withOpacity(0.4),
               ),
             ],
           ),

@@ -369,25 +369,6 @@ ${term.example.isNotEmpty ? '예시: ${term.example}' : ''}
   }
 
   Color _getCategoryColor() {
-    switch (term.category) {
-      case TermCategory.approval:
-        return Color(0xFF5A8DEE);
-      case TermCategory.business:
-        return Color(0xFF42A5F5);
-      case TermCategory.marketing:
-        return Color(0xFF66BB6A);
-      case TermCategory.it:
-        return Color(0xFFFF7043);
-      case TermCategory.hr:
-        return Color(0xFFAB47BC);
-      case TermCategory.communication:
-        return Color(0xFFFFCA28);
-      case TermCategory.time:
-        return Color(0xFFEF5350);
-      case TermCategory.other:
-        return Color(0xFF78909C);
-      case TermCategory.bookmarked:
-        return Color(0xFFFFCA28);
-    }
+    return Color(0xFF5A8DEE); // 모든 카테고리를 파란색으로 통일
   }
 }

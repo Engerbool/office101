@@ -529,12 +529,14 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
                           // 용어명
-                          Text(
-                            term.term,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF5A8DEE),
+                          Consumer<ThemeProvider>(
+                            builder: (context, themeProvider, child) => Text(
+                              term.term,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: themeProvider.isDarkMode ? themeProvider.textColor : Colors.black,
+                              ),
                             ),
                           ),
                           SizedBox(width: 8),
