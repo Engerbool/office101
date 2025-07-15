@@ -263,6 +263,66 @@
         "공유",
         "결재완료"
       ]
+    },
+    {
+      "term_id": "approval_023",
+      "category": "approval",
+      "term": "전결",
+      "definition": "위임받은 권한 범위 내에서 최종 결정을 내리는 것",
+      "example": "팀장 전결 사항으로 휴가 승인이 처리되었습니다.",
+      "tags": [
+        "권한",
+        "위임",
+        "결정"
+      ]
+    },
+    {
+      "term_id": "approval_024",
+      "category": "approval",
+      "term": "합의",
+      "definition": "결재 과정에서 관련 부서의 의견을 구하는 절차",
+      "example": "예산 결재 전에 재무팀과 합의 절차를 거쳤습니다.",
+      "tags": [
+        "의견",
+        "절차",
+        "협의"
+      ]
+    },
+    {
+      "term_id": "approval_025",
+      "category": "approval",
+      "term": "재가",
+      "definition": "상급자가 하급자의 결재를 다시 승인하는 것",
+      "example": "부장님의 재가를 받아야 계약이 체결됩니다.",
+      "tags": [
+        "재승인",
+        "상급자",
+        "확인"
+      ]
+    },
+    {
+      "term_id": "approval_026",
+      "category": "approval",
+      "term": "결재라인",
+      "definition": "문서가 승인되기까지 거쳐야 하는 결재자들의 순서",
+      "example": "이 건은 결재라인이 길어서 승인까지 시간이 걸릴 것 같습니다.",
+      "tags": [
+        "순서",
+        "결재자",
+        "승인과정"
+      ]
+    },
+    {
+      "term_id": "approval_027",
+      "category": "approval",
+      "term": "반려",
+      "definition": "결재 과정에서 승인을 거부하고 다시 검토하도록 돌려보내는 것",
+      "example": "서류에 오류가 있어서 반려되었습니다.",
+      "tags": [
+        "거부",
+        "재검토",
+        "수정"
+      ]
     }
   ]
 }

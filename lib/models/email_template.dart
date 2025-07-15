@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import '../utils/validation_utils.dart';
 
 part 'email_template.g.dart';
 
@@ -36,13 +37,18 @@ class EmailTemplate extends HiveObject {
   });
 
   factory EmailTemplate.fromJson(Map<String, dynamic> json) {
+    // JSON 검증
+    if (!ValidationUtils.validateEmailTemplateJson(json)) {
+      throw ArgumentError('Invalid email template JSON structure');
+    }
+    
     return EmailTemplate(
-      templateId: json['template_id'],
-      title: json['title'],
-      situation: json['situation'],
-      subject: json['subject'],
-      body: json['body'],
-      tips: List<String>.from(json['tips'] ?? []),
+      templateId: ValidationUtils.sanitizeString(json['template_id'] ?? ''),
+      title: ValidationUtils.sanitizeString(json['title'] ?? ''),
+      situation: ValidationUtils.sanitizeString(json['situation'] ?? ''),
+      subject: ValidationUtils.sanitizeString(json['subject'] ?? ''),
+      body: ValidationUtils.sanitizeString(json['body'] ?? ''),
+      tips: ValidationUtils.sanitizeStringList(json['tips'] ?? []),
       category: EmailCategory.values.firstWhere(
         (e) => e.name == json['category'],
         orElse: () => EmailCategory.general,

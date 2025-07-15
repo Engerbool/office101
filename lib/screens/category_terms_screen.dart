@@ -39,7 +39,7 @@ class CategoryTermsScreen extends StatelessWidget {
                 final categoryTerms = termProvider.getTermsByCategory(category);
                 
                 if (categoryTerms.isEmpty && !termProvider.isLoading && !termProvider.hasError) {
-                  return _buildEmptyCategoryState();
+                  return _buildEmptyCategoryState(context);
                 }
                 
                 return Padding(
@@ -121,6 +121,10 @@ class CategoryTermsScreen extends StatelessWidget {
         return Icons.people;
       case TermCategory.communication:
         return Icons.chat_bubble;
+      case TermCategory.time:
+        return Icons.access_time;
+      case TermCategory.bookmarked:
+        return Icons.bookmark;
       case TermCategory.other:
         return Icons.more_horiz;
     }
@@ -140,14 +144,16 @@ class CategoryTermsScreen extends StatelessWidget {
         return Color(0xFFAB47BC);
       case TermCategory.communication:
         return Color(0xFFFFCA28);
-      case TermCategory.other:
-        return Color(0xFF78909C);
+      case TermCategory.time:
+        return Color(0xFFEF5350);
       case TermCategory.bookmarked:
         return Color(0xFFFFB74D);
+      case TermCategory.other:
+        return Color(0xFF78909C);
     }
   }
   
-  Widget _buildEmptyCategoryState() {
+  Widget _buildEmptyCategoryState(BuildContext context) {
     return Center(
       child: Padding(
         padding: EdgeInsets.all(32.0),

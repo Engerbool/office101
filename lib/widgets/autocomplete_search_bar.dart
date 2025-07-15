@@ -253,7 +253,9 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
                             _suggestions = [];
                             _showSuggestions = false;
                           });
-                          widget.onSearch('');
+                          // X 버튼을 누를 때는 onSearch를 호출하지 않음
+                          // 단순히 텍스트만 지우고 포커스 유지
+                          _focusNode.requestFocus();
                         },
                         child: Icon(
                           Icons.clear,

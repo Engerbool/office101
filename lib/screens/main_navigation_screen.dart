@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/term_provider.dart';
 import '../providers/theme_provider.dart';
+import '../utils/haptic_utils.dart';
 import '../widgets/neumorphic_container.dart';
 import 'terms_tab_screen.dart';
 import 'email_templates_screen.dart';
@@ -109,7 +110,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     final isSelected = _currentIndex == index;
     
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        await HapticUtils.navigation();
         setState(() {
           _currentIndex = index;
         });

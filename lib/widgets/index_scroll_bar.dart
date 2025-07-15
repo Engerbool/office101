@@ -71,31 +71,34 @@ class _IndexScrollBarState extends State<IndexScrollBar>
     return AnimatedBuilder(
       animation: _fadeAnimation,
       builder: (context, child) {
-        return Opacity(
-          opacity: _fadeAnimation.value,
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: Container(
-              width: 32,
-              margin: EdgeInsets.only(right: 8, top: 80, bottom: 80),
-              decoration: BoxDecoration(
-                color: Color(0xFF5A8DEE).withOpacity(0.4),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  bottomLeft: Radius.circular(16),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 8,
-                    offset: Offset(-2, 0),
+        return IgnorePointer(
+          ignoring: !widget.isVisible,
+          child: Opacity(
+            opacity: _fadeAnimation.value,
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                width: 32,
+                margin: EdgeInsets.only(right: 8, top: 80, bottom: 80),
+                decoration: BoxDecoration(
+                  color: Color(0xFF5A8DEE).withOpacity(0.4),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    bottomLeft: Radius.circular(16),
                   ),
-                ],
-              ),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: _buildIndexItems(themeProvider),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 8,
+                      offset: Offset(-2, 0),
+                    ),
+                  ],
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: _buildIndexItems(themeProvider),
+                  ),
                 ),
               ),
             ),
@@ -142,9 +145,10 @@ class _IndexScrollBarState extends State<IndexScrollBar>
       _selectedIndex = index;
     });
     
+    // 콜백 함수 호출 (스크롤 이동 기능)
     widget.onIndexSelected(index);
     
-    // 선택 상태를 잠시 후 해제
+    // 선택 상태를 잠시 후 해제 (비주얼 피드백용)
     Future.delayed(Duration(milliseconds: 500), () {
       if (mounted) {
         setState(() {

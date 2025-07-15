@@ -935,6 +935,66 @@
         "업무지원",
         "대비"
       ]
+    },
+    {
+      "term_id": "it_079",
+      "category": "it",
+      "term": "클라우드",
+      "definition": "인터넷을 통해 IT 자원을 언제 어디서나 이용할 수 있는 서비스",
+      "example": "회사 자료를 클라우드에 저장해서 어디서든 접근할 수 있습니다.",
+      "tags": [
+        "인터넷",
+        "저장",
+        "서비스"
+      ]
+    },
+    {
+      "term_id": "it_080",
+      "category": "it",
+      "term": "VPN",
+      "definition": "Virtual Private Network의 약자로 공용 네트워크를 통해 안전한 연결을 만드는 기술",
+      "example": "재택근무 시 VPN을 통해 회사 시스템에 접속했습니다.",
+      "tags": [
+        "네트워크",
+        "보안",
+        "연결"
+      ]
+    },
+    {
+      "term_id": "it_081",
+      "category": "it",
+      "term": "SaaS",
+      "definition": "Software as a Service의 약자로 클라우드를 통해 소프트웨어를 제공하는 서비스",
+      "example": "구글 워크스페이스는 대표적인 SaaS 서비스입니다.",
+      "tags": [
+        "소프트웨어",
+        "서비스",
+        "클라우드"
+      ]
+    },
+    {
+      "term_id": "it_082",
+      "category": "it",
+      "term": "API",
+      "definition": "Application Programming Interface의 약자로 서로 다른 프로그램이 소통할 수 있게 하는 규약",
+      "example": "결제 API를 연동해서 온라인 결제 기능을 구현했습니다.",
+      "tags": [
+        "프로그래밍",
+        "연동",
+        "규약"
+      ]
+    },
+    {
+      "term_id": "it_083",
+      "category": "it",
+      "term": "레거시",
+      "definition": "오래된 기술이나 시스템을 의미하며, 유지보수가 어려운 경우가 많음",
+      "example": "레거시 시스템을 새로운 기술로 교체할 계획입니다.",
+      "tags": [
+        "구식",
+        "시스템",
+        "유지보수"
+      ]
     }
   ]
 }

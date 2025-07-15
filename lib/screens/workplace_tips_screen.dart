@@ -5,7 +5,7 @@ import '../providers/term_provider.dart';
 import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
 import '../widgets/error_display_widget.dart';
-import 'workplace_tip_detail_screen.dart';
+import 'category_tips_screen.dart';
 
 class WorkplaceTipsScreen extends StatelessWidget {
   @override
@@ -54,16 +54,39 @@ class WorkplaceTipsScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ...availableCategories.map((category) {
-          final tips = termProvider.getWorkplaceTipsByCategory(category);
-          
-          return Column(
-            children: [
-              _buildCategoryCard(category, tips, themeProvider),
-              SizedBox(height: 16),
-            ],
-          );
-        }).toList(),
+        Text(
+          '카테고리별 직장생활 꿀팁',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: themeProvider.textColor,
+          ),
+        ),
+        SizedBox(height: 8),
+        Text(
+          '궁금한 분야를 선택해서 맞춤 꿀팁을 확인해보세요',
+          style: TextStyle(
+            fontSize: 14,
+            color: themeProvider.subtitleColor.withOpacity(0.7),
+          ),
+        ),
+        SizedBox(height: 24),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            childAspectRatio: 1.2,
+          ),
+          itemCount: availableCategories.length,
+          itemBuilder: (context, index) {
+            final category = availableCategories[index];
+            final tips = termProvider.getWorkplaceTipsByCategory(category);
+            return _buildCategoryGridCard(context, category, tips, themeProvider);
+          },
+        ),
       ],
     );
   }
@@ -129,132 +152,55 @@ class WorkplaceTipsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryCard(TipCategory category, List<WorkplaceTip> tips, ThemeProvider themeProvider) {
-    return NeumorphicContainer(
-      backgroundColor: themeProvider.cardColor,
-      shadowColor: themeProvider.shadowColor,
-      highlightColor: themeProvider.highlightColor,
-      child: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: _getCategoryColor(category).withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Icon(
-                    _getCategoryIcon(category),
-                    color: _getCategoryColor(category),
-                    size: 24,
-                  ),
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        category.displayName,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: themeProvider.textColor,
-                        ),
-                      ),
-                      Text(
-                        '${tips.length}개 팁',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: themeProvider.subtitleColor.withOpacity(0.6),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 16),
-            ...tips.map((tip) => _buildTipItem(tip, themeProvider)).toList(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTipItem(WorkplaceTip tip, ThemeProvider themeProvider) {
-    return Builder(
-      builder: (context) => GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => WorkplaceTipDetailScreen(tip: tip),
-            ),
-          );
-        },
-        child: Container(
-          margin: EdgeInsets.only(bottom: 12),
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: themeProvider.backgroundColor,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: themeProvider.dividerColor.withOpacity(0.3),
-            ),
+  Widget _buildCategoryGridCard(BuildContext context, TipCategory category, List<WorkplaceTip> tips, ThemeProvider themeProvider) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CategoryTipsScreen(category: category),
           ),
+        );
+      },
+      child: NeumorphicContainer(
+        backgroundColor: themeProvider.cardColor,
+        shadowColor: themeProvider.shadowColor,
+        highlightColor: themeProvider.highlightColor,
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: _getPriorityColor(tip.priority.toString()).withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      _getPriorityText(tip.priority.toString()),
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        color: _getPriorityColor(tip.priority.toString()),
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 12,
-                    color: Color(0xFF5A8DEE),
-                  ),
-                ],
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: _getCategoryColor(category).withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  _getCategoryIcon(category),
+                  color: _getCategoryColor(category),
+                  size: 28,
+                ),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 12),
               Text(
-                tip.title,
+                category.displayName,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: themeProvider.textColor,
                 ),
+                textAlign: TextAlign.center,
               ),
-              SizedBox(height: 6),
+              SizedBox(height: 4),
               Text(
-                tip.content,
+                '${tips.length}개 팁',
                 style: TextStyle(
-                  fontSize: 14,
-                  color: themeProvider.subtitleColor.withOpacity(0.7),
-                  height: 1.4,
+                  fontSize: 12,
+                  color: themeProvider.subtitleColor.withOpacity(0.6),
                 ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
@@ -263,16 +209,19 @@ class WorkplaceTipsScreen extends StatelessWidget {
     );
   }
 
+
   IconData _getCategoryIcon(TipCategory category) {
     switch (category) {
-      case TipCategory.schedule:
-        return Icons.schedule;
-      case TipCategory.report:
+      case TipCategory.basic_attitude:
+        return Icons.person_outline;
+      case TipCategory.reporting:
         return Icons.assignment;
-      case TipCategory.meeting:
-        return Icons.meeting_room;
+      case TipCategory.todo_management:
+        return Icons.check_box_outlined;
       case TipCategory.communication:
         return Icons.chat_bubble_outline;
+      case TipCategory.self_growth:
+        return Icons.trending_up;
       case TipCategory.general:
         return Icons.lightbulb_outline;
     }
@@ -280,40 +229,19 @@ class WorkplaceTipsScreen extends StatelessWidget {
 
   Color _getCategoryColor(TipCategory category) {
     switch (category) {
-      case TipCategory.schedule:
+      case TipCategory.basic_attitude:
         return Color(0xFF5A8DEE);
-      case TipCategory.report:
+      case TipCategory.reporting:
         return Color(0xFF42A5F5);
-      case TipCategory.meeting:
+      case TipCategory.todo_management:
         return Color(0xFF66BB6A);
       case TipCategory.communication:
         return Color(0xFFFF7043);
+      case TipCategory.self_growth:
+        return Color(0xFFAB47BC);
       case TipCategory.general:
         return Color(0xFF78909C);
     }
   }
 
-  String _getPriorityText(String priority) {
-    switch (priority) {
-      case '2':
-        return '필수';
-      case '1':
-        return '권장';
-      case '0':
-      default:
-        return '참고';
-    }
-  }
-
-  Color _getPriorityColor(String priority) {
-    switch (priority) {
-      case '2':
-        return Colors.red;
-      case '1':
-        return Colors.orange;
-      case '0':
-      default:
-        return Colors.green;
-    }
-  }
 }

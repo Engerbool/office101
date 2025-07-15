@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import '../models/term.dart';
 import '../models/email_template.dart';
 import '../models/workplace_tip.dart';
 import '../services/database_service.dart';
 import '../services/error_service.dart';
+import '../utils/validation_utils.dart';
+import '../utils/korean_sort_utils.dart';
 
 class TermProvider extends ChangeNotifier {
   List<Term> _allTerms = [];
@@ -16,6 +19,19 @@ class TermProvider extends ChangeNotifier {
   bool _isLoading = true;
   String? _errorMessage;
   AppError? _lastError;
+  
+  // 성능 최적화를 위한 변수들
+  Timer? _searchDebouncer;
+  final Map<String, List<Term>> _searchCache = {};
+  final Map<TermCategory, List<Term>> _categoryCache = {};
+  String? _lastSearchQuery;
+  TermCategory? _lastSelectedCategory;
+  
+  // Progressive Loading을 위한 변수들
+  bool _isProgressiveLoading = false;
+  int _loadedItemCount = 0;
+  static const int _initialLoadCount = 10;  // 초기 로딩 수 (즉시 표시)
+  static const int _loadChunkSize = 50;     // 이후 청크 크기
 
   // Getters
   List<Term> get allTerms => _allTerms;
@@ -28,13 +44,27 @@ class TermProvider extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
   AppError? get lastError => _lastError;
   bool get hasError => _errorMessage != null;
+  bool get isProgressiveLoading => _isProgressiveLoading;
+  int get loadedItemCount => _loadedItemCount;
+  
+  // Progressive Loading용 필터링된 용어 (처음에는 제한된 개수만 반환)
+  List<Term> get progressiveFilteredTerms {
+    try {
+      if (_isProgressiveLoading && _loadedItemCount > 0 && _filteredTerms.isNotEmpty) {
+        final count = _loadedItemCount.clamp(0, _filteredTerms.length);
+        return _filteredTerms.take(count).toList();
+      }
+      return _filteredTerms;
+    } catch (e) {
+      return _filteredTerms;
+    }
+  }
 
   TermProvider() {
     loadData();
   }
 
   Future<void> loadData() async {
-    print('TermProvider: Starting to load data');
     _setLoadingState(true);
     _clearError();
 
@@ -44,8 +74,17 @@ class TermProvider extends ChangeNotifier {
       }
       
       _allTerms = DatabaseService.getAllTerms();
+      
+      // 한글-영어 순으로 정렬하여 일관된 순서 보장
+      _allTerms = KoreanSortUtils.sortTermsKoreanEnglish(_allTerms);
+      
       _emailTemplates = DatabaseService.getAllEmailTemplates();
       _workplaceTips = DatabaseService.getAllWorkplaceTips();
+      _invalidateCache();
+      
+      // 모든 카테고리를 미리 캐싱하여 즉시 응답 보장
+      await _preloadAllCategories();
+      
       _filteredTerms = _allTerms;
       
       if (_allTerms.isEmpty) {
@@ -63,9 +102,28 @@ class TermProvider extends ChangeNotifier {
 
   void searchTerms(String query) {
     try {
-      _searchQuery = query.trim();
-      _applyFilters();
+      final trimmedQuery = query.trim();
+      
+      // 디바운싱: 이전 타이머 취소
+      _searchDebouncer?.cancel();
+      
+      // 300ms 후에 실제 검색 수행
+      _searchDebouncer = Timer(Duration(milliseconds: 300), () {
+        _performSearch(trimmedQuery);
+      });
+      
       _clearError();
+    } catch (e, stackTrace) {
+      final error = ErrorService.createUnknownError(e, stackTrace);
+      ErrorService.logError(error);
+      _setError('검색 중 오류가 발생했습니다.', error);
+    }
+  }
+  
+  void _performSearch(String query) {
+    try {
+      _searchQuery = query;
+      _applyFiltersOptimized();
       notifyListeners();
     } catch (e, stackTrace) {
       final error = ErrorService.createUnknownError(e, stackTrace);
@@ -77,14 +135,131 @@ class TermProvider extends ChangeNotifier {
   void filterByCategory(TermCategory? category) {
     try {
       _selectedCategory = category;
-      _applyFilters();
+      
+      // 전체 카테고리인 경우 Progressive Loading 적용
+      if (category == null) {
+        _startProgressiveLoading(_allTerms);
+        return;
+      }
+      
+      // 캐시된 데이터가 있으면 Progressive Loading 적용
+      if (_categoryCache.containsKey(category)) {
+        _startProgressiveLoading(_categoryCache[category]!);
+        return;
+      }
+      
+      // 캐시가 없는 경우에만 필터링 수행 (북마크는 동적이므로)
+      if (category == TermCategory.bookmarked) {
+        final bookmarked = _allTerms.where((term) => term.isBookmarked).toList();
+        _categoryCache[category] = bookmarked;
+        _startProgressiveLoading(bookmarked);
+      } else {
+        // 다른 카테고리는 이미 캐시되어 있어야 함
+        _applyFiltersAsync();
+      }
+      
       _clearError();
-      notifyListeners();
     } catch (e, stackTrace) {
       final error = ErrorService.createUnknownError(e, stackTrace);
       ErrorService.logError(error);
       _setError('필터링 중 오류가 발생했습니다.', error);
     }
+  }
+
+  // Progressive Loading 시작
+  void _startProgressiveLoading(List<Term> targetTerms) {
+    try {
+      _filteredTerms = targetTerms;
+      
+      if (targetTerms.length <= _initialLoadCount) {
+        // 데이터가 적으면 즉시 모두 표시
+        _isProgressiveLoading = false;
+        _loadedItemCount = targetTerms.length;
+        _clearError();
+        notifyListeners();
+        return;
+      }
+      
+      // Progressive Loading 시작
+      _isProgressiveLoading = true;
+      _loadedItemCount = _initialLoadCount.clamp(0, targetTerms.length);
+      _clearError();
+      notifyListeners();
+      
+      // 백그라운드에서 나머지 데이터 로딩
+      _loadRemainingItemsProgressively();
+    } catch (e, stackTrace) {
+      final error = ErrorService.createUnknownError(e, stackTrace);
+      ErrorService.logError(error);
+      _setError('데이터 로딩 중 오류가 발생했습니다.', error);
+      _isProgressiveLoading = false;
+      notifyListeners();
+    }
+  }
+
+  // 나머지 아이템들을 점진적으로 로딩
+  Future<void> _loadRemainingItemsProgressively() async {
+    try {
+      int iterationCount = 0;
+      const maxIterations = 50; // 무한 루프 방지
+      
+      while (_isProgressiveLoading && 
+             _loadedItemCount < _filteredTerms.length && 
+             iterationCount < maxIterations) {
+        
+        iterationCount++;
+        
+        // Progressive Loading이 중단된 경우 루프 종료
+        if (!_isProgressiveLoading) {
+          break;
+        }
+        
+        final remainingCount = _filteredTerms.length - _loadedItemCount;
+        if (remainingCount <= 0) {
+          break;
+        }
+        
+        final nextChunkSize = remainingCount > _loadChunkSize ? _loadChunkSize : remainingCount;
+        
+        _loadedItemCount += nextChunkSize;
+        _loadedItemCount = _loadedItemCount.clamp(0, _filteredTerms.length);
+        
+        // 모든 아이템이 로드되면 Progressive Loading 종료
+        if (_loadedItemCount >= _filteredTerms.length) {
+          _isProgressiveLoading = false;
+          _loadedItemCount = _filteredTerms.length;
+          notifyListeners();
+          break;
+        }
+        
+        notifyListeners();
+        
+        // 사용자 경험을 위한 짧은 딜레이 (딜레이 감소)
+        await Future.delayed(Duration(milliseconds: 16));
+      }
+      
+      // 최대 반복 횟수에 도달한 경우 강제 종료
+      if (iterationCount >= maxIterations) {
+        _isProgressiveLoading = false;
+        _loadedItemCount = _filteredTerms.length;
+        notifyListeners();
+      }
+      
+    } catch (e, stackTrace) {
+      final error = ErrorService.createUnknownError(e, stackTrace);
+      ErrorService.logError(error);
+      _isProgressiveLoading = false;
+      _loadedItemCount = _filteredTerms.length;
+      notifyListeners();
+    }
+  }
+
+  Future<void> _applyFiltersAsync() async {
+    // UI 블로킹 방지를 위한 마이크로태스크 사용
+    await Future.microtask(() {
+      _applyFiltersOptimized();
+    });
+    notifyListeners();
   }
 
   void clearFilters() {
@@ -102,29 +277,53 @@ class TermProvider extends ChangeNotifier {
   }
 
   void _applyFilters() {
+    _applyFiltersOptimized();
+  }
+  
+  void _applyFiltersOptimized() {
     try {
-      List<Term> tempTerms = List.from(_allTerms);
+      // 캐시 키 생성
+      final cacheKey = '${_selectedCategory?.toString() ?? 'null'}_${_searchQuery}';
+      
+      // 캐시에서 확인
+      if (_searchCache.containsKey(cacheKey)) {
+        _filteredTerms = _searchCache[cacheKey]!;
+        return;
+      }
+      
+      List<Term> tempTerms = _allTerms;
 
-      // Apply category filter
+      // Apply category filter with enhanced caching
       if (_selectedCategory != null) {
-        if (_selectedCategory == TermCategory.bookmarked) {
-          tempTerms = tempTerms.where((term) => term.isBookmarked).toList();
+        if (_categoryCache.containsKey(_selectedCategory)) {
+          tempTerms = _categoryCache[_selectedCategory]!;
         } else {
-          tempTerms = tempTerms.where((term) => term.category == _selectedCategory).toList();
+          // 청크 단위로 처리하여 성능 향상
+          if (_selectedCategory == TermCategory.bookmarked) {
+            tempTerms = _filterInChunks(_allTerms, (term) => term.isBookmarked);
+          } else {
+            tempTerms = _filterInChunks(_allTerms, (term) => term.category == _selectedCategory);
+          }
+          _categoryCache[_selectedCategory!] = tempTerms;
         }
       }
 
-      // Apply search filter
+      // Apply search filter with chunked processing
       if (_searchQuery.isNotEmpty) {
         final lowerQuery = _searchQuery.toLowerCase();
-        tempTerms = tempTerms.where((term) {
+        tempTerms = _filterInChunks(tempTerms, (term) {
           return term.term.toLowerCase().contains(lowerQuery) ||
                  term.definition.toLowerCase().contains(lowerQuery) ||
                  term.tags.any((tag) => tag.toLowerCase().contains(lowerQuery));
-        }).toList();
+        });
       }
 
       _filteredTerms = tempTerms;
+      
+      // 캐시 저장 (최대 50개까지만 저장하여 메모리 절약)
+      if (_searchCache.length < 50) {
+        _searchCache[cacheKey] = List.from(_filteredTerms);
+      }
     } catch (e, stackTrace) {
       final error = ErrorService.createUnknownError(e, stackTrace);
       ErrorService.logError(error);
@@ -132,26 +331,55 @@ class TermProvider extends ChangeNotifier {
     }
   }
 
+  // 청크 단위로 필터링하여 성능 향상
+  List<Term> _filterInChunks(List<Term> terms, bool Function(Term) predicate) {
+    const int chunkSize = 50;
+    List<Term> result = [];
+    
+    for (int i = 0; i < terms.length; i += chunkSize) {
+      final chunk = terms.skip(i).take(chunkSize);
+      result.addAll(chunk.where(predicate));
+    }
+    
+    return result;
+  }
+
   Future<bool> addTerm(Term term) async {
     try {
       _clearError();
       
-      // Validation
-      if (term.term.trim().isEmpty) {
-        final error = ErrorService.createValidationError('term', 'Term cannot be empty');
+      // Enhanced validation with sanitization
+      final termValidation = ValidationUtils.validateTermInput(term.term);
+      if (termValidation != null) {
+        final error = ErrorService.createValidationError('term', termValidation);
         _setError(error.userMessage, error);
         return false;
       }
       
-      if (term.definition.trim().isEmpty) {
-        final error = ErrorService.createValidationError('definition', 'Definition cannot be empty');
+      final definitionValidation = ValidationUtils.validateDefinitionInput(term.definition);
+      if (definitionValidation != null) {
+        final error = ErrorService.createValidationError('definition', definitionValidation);
         _setError(error.userMessage, error);
         return false;
       }
       
-      final success = await DatabaseService.addTerm(term);
+      // Sanitize input data
+      final sanitizedTerm = Term(
+        termId: term.termId,
+        term: ValidationUtils.sanitizeString(term.term),
+        definition: ValidationUtils.sanitizeString(term.definition),
+        category: term.category,
+        example: ValidationUtils.sanitizeString(term.example),
+        tags: ValidationUtils.validateAndSanitizeTags(term.tags),
+        userAdded: term.userAdded,
+        isBookmarked: term.isBookmarked,
+      );
+      
+      final success = await DatabaseService.addTerm(sanitizedTerm);
       if (success) {
         _allTerms = DatabaseService.getAllTerms();
+        _allTerms = KoreanSortUtils.sortTermsKoreanEnglish(_allTerms);
+        _invalidateCache();
         _applyFilters();
         notifyListeners();
         return true;
@@ -180,6 +408,8 @@ class TermProvider extends ChangeNotifier {
       final success = await DatabaseService.deleteTerm(termId);
       if (success) {
         _allTerms = DatabaseService.getAllTerms();
+        _allTerms = KoreanSortUtils.sortTermsKoreanEnglish(_allTerms);
+        _invalidateCache();
         _applyFilters();
         notifyListeners();
         return true;
@@ -215,6 +445,8 @@ class TermProvider extends ChangeNotifier {
       final success = await DatabaseService.updateTerm(_allTerms[termIndex]);
       
       if (success) {
+        // 북마크 캐시 즉시 업데이트
+        _updateBookmarkCache();
         _applyFilters();
         notifyListeners();
         return true;
@@ -314,5 +546,59 @@ class TermProvider extends ChangeNotifier {
   // Retry mechanism for failed operations
   Future<void> retryLoadData() async {
     await loadData();
+  }
+  
+  // 모든 카테고리를 미리 캐싱하여 즉시 응답 보장
+  Future<void> _preloadAllCategories() async {
+    final stopwatch = Stopwatch()..start();
+    
+    try {
+      // 모든 카테고리에 대해 사전 캐싱
+      final categories = TermCategory.values.where((cat) => cat != TermCategory.other).toList();
+      
+      for (final category in categories) {
+        if (category == TermCategory.bookmarked) {
+          _categoryCache[category] = _allTerms.where((term) => term.isBookmarked).toList();
+        } else {
+          _categoryCache[category] = _allTerms.where((term) => term.category == category).toList();
+        }
+      }
+      
+      // 전체 카테고리도 캐싱 (null 키로)
+      _searchCache['null_'] = List.from(_allTerms);
+      
+      stopwatch.stop();
+      
+    } catch (e, stackTrace) {
+      final error = ErrorService.createUnknownError(e, stackTrace);
+      ErrorService.logError(error);
+    }
+  }
+
+  // 북마크 캐시만 업데이트 (다른 캐시는 유지)
+  void _updateBookmarkCache() {
+    _categoryCache[TermCategory.bookmarked] = _allTerms.where((term) => term.isBookmarked).toList();
+    
+    // 북마크 관련 검색 캐시만 제거
+    _searchCache.removeWhere((key, value) => key.contains('bookmarked'));
+  }
+
+  // 캐시 무효화 메서드
+  void _clearCache() {
+    _searchCache.clear();
+    _categoryCache.clear();
+  }
+  
+  // 데이터 변경 시 캐시 무효화
+  void _invalidateCache() {
+    _clearCache();
+  }
+  
+  @override
+  void dispose() {
+    _searchDebouncer?.cancel();
+    _isProgressiveLoading = false; // Progressive Loading 중단
+    _clearCache();
+    super.dispose();
   }
 }

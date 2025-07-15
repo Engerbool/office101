@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import '../utils/validation_utils.dart';
 
 part 'term.g.dart';
 
@@ -40,16 +41,21 @@ class Term extends HiveObject {
   });
 
   factory Term.fromJson(Map<String, dynamic> json) {
+    // JSON 검증
+    if (!ValidationUtils.validateTermJson(json)) {
+      throw ArgumentError('Invalid term JSON structure');
+    }
+    
     return Term(
-      termId: json['term_id'],
+      termId: ValidationUtils.sanitizeString(json['term_id'] ?? ''),
       category: TermCategory.values.firstWhere(
         (e) => e.name == json['category'],
         orElse: () => TermCategory.other,
       ),
-      term: json['term'],
-      definition: json['definition'],
-      example: json['example'],
-      tags: List<String>.from(json['tags'] ?? []),
+      term: ValidationUtils.sanitizeString(json['term'] ?? ''),
+      definition: ValidationUtils.sanitizeString(json['definition'] ?? ''),
+      example: ValidationUtils.sanitizeString(json['example'] ?? ''),
+      tags: ValidationUtils.sanitizeStringList(json['tags'] ?? []),
       userAdded: json['user_added'] ?? false,
       isBookmarked: json['is_bookmarked'] ?? false,
     );

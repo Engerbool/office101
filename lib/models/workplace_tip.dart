@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import '../utils/validation_utils.dart';
 
 part 'workplace_tip.g.dart';
 
@@ -19,29 +20,29 @@ class WorkplaceTip extends HiveObject {
   @HiveField(4)
   TipCategory category;
 
-  @HiveField(5)
-  int priority;
-
   WorkplaceTip({
     required this.tipId,
     required this.title,
     required this.content,
     required this.keyPoints,
     required this.category,
-    this.priority = 0,
   });
 
   factory WorkplaceTip.fromJson(Map<String, dynamic> json) {
+    // JSON 검증
+    if (!ValidationUtils.validateWorkplaceTipJson(json)) {
+      throw ArgumentError('Invalid workplace tip JSON structure');
+    }
+    
     return WorkplaceTip(
-      tipId: json['tip_id'],
-      title: json['title'],
-      content: json['content'],
-      keyPoints: List<String>.from(json['key_points'] ?? []),
+      tipId: ValidationUtils.sanitizeString(json['tip_id'] ?? ''),
+      title: ValidationUtils.sanitizeString(json['title'] ?? ''),
+      content: ValidationUtils.sanitizeString(json['content'] ?? ''),
+      keyPoints: ValidationUtils.sanitizeStringList(json['key_points'] ?? []),
       category: TipCategory.values.firstWhere(
         (e) => e.name == json['category'],
         orElse: () => TipCategory.general,
       ),
-      priority: json['priority'] ?? 0,
     );
   }
 
@@ -52,7 +53,6 @@ class WorkplaceTip extends HiveObject {
       'content': content,
       'key_points': keyPoints,
       'category': category.name,
-      'priority': priority,
     };
   }
 }
@@ -60,32 +60,37 @@ class WorkplaceTip extends HiveObject {
 @HiveType(typeId: 5)
 enum TipCategory {
   @HiveField(0)
-  schedule, // 일정관리
+  basic_attitude, // 기본 자세
 
   @HiveField(1)
-  report, // 보고스킬
+  reporting, // 보고
 
   @HiveField(2)
-  meeting, // 회의참석
+  todo_management, // 할 일 관리
 
   @HiveField(3)
   communication, // 커뮤니케이션
 
   @HiveField(4)
+  self_growth, // 자기 성장
+
+  @HiveField(5)
   general, // 일반
 }
 
 extension TipCategoryExtension on TipCategory {
   String get displayName {
     switch (this) {
-      case TipCategory.schedule:
-        return '일정관리';
-      case TipCategory.report:
-        return '보고스킬';
-      case TipCategory.meeting:
-        return '회의참석';
+      case TipCategory.basic_attitude:
+        return '기본 자세';
+      case TipCategory.reporting:
+        return '보고';
+      case TipCategory.todo_management:
+        return '할 일 관리';
       case TipCategory.communication:
         return '커뮤니케이션';
+      case TipCategory.self_growth:
+        return '자기 성장';
       case TipCategory.general:
         return '일반';
     }

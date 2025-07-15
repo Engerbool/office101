@@ -113,24 +113,6 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          if (tip.priority == 1) ...[
-                            SizedBox(width: 8),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: Color(0xFFFF7043).withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text(
-                                '중요',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color(0xFFFF7043),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
                         ],
                       ),
                     ],
@@ -339,14 +321,16 @@ ${tip.keyPoints.asMap().entries.map((entry) => '${entry.key + 1}. ${entry.value}
 
   IconData _getCategoryIcon() {
     switch (tip.category) {
-      case TipCategory.schedule:
-        return Icons.schedule;
-      case TipCategory.report:
+      case TipCategory.basic_attitude:
+        return Icons.person_outline;
+      case TipCategory.reporting:
         return Icons.assignment_turned_in;
-      case TipCategory.meeting:
-        return Icons.groups;
+      case TipCategory.todo_management:
+        return Icons.check_box_outlined;
       case TipCategory.communication:
         return Icons.forum;
+      case TipCategory.self_growth:
+        return Icons.trending_up;
       case TipCategory.general:
         return Icons.work;
     }
@@ -354,14 +338,16 @@ ${tip.keyPoints.asMap().entries.map((entry) => '${entry.key + 1}. ${entry.value}
 
   Color _getCategoryColor() {
     switch (tip.category) {
-      case TipCategory.schedule:
+      case TipCategory.basic_attitude:
         return Color(0xFF5A8DEE);
-      case TipCategory.report:
+      case TipCategory.reporting:
         return Color(0xFF42A5F5);
-      case TipCategory.meeting:
+      case TipCategory.todo_management:
         return Color(0xFF66BB6A);
       case TipCategory.communication:
         return Color(0xFFFFCA28);
+      case TipCategory.self_growth:
+        return Color(0xFFAB47BC);
       case TipCategory.general:
         return Color(0xFF78909C);
     }

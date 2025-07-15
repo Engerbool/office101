@@ -1,33 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import '../services/error_service.dart';
 
 class ThemeProvider extends ChangeNotifier {
   static const String _themeKey = 'isDarkMode';
-  late Box _settingsBox;
+  Box? _settingsBox;
   bool _isDarkMode = false;
+  bool _isInitialized = false;
 
   bool get isDarkMode => _isDarkMode;
+  bool get isInitialized => _isInitialized;
 
   ThemeProvider() {
     _loadTheme();
   }
 
   Future<void> _loadTheme() async {
-    _settingsBox = await Hive.openBox('settings');
-    _isDarkMode = _settingsBox.get(_themeKey, defaultValue: false);
-    notifyListeners();
+    try {
+      _settingsBox = await Hive.openBox('settings');
+      _isDarkMode = _settingsBox!.get(_themeKey, defaultValue: false);
+      _isInitialized = true;
+      notifyListeners();
+    } catch (e, stackTrace) {
+      final error = ErrorService.createDatabaseError('Loading theme settings', e, stackTrace);
+      ErrorService.logError(error);
+      
+      // 기본값으로 폴백
+      _isDarkMode = false;
+      _isInitialized = true;
+      notifyListeners();
+    }
   }
 
   Future<void> toggleTheme() async {
-    _isDarkMode = !_isDarkMode;
-    await _settingsBox.put(_themeKey, _isDarkMode);
-    notifyListeners();
+    if (!_isInitialized) {
+      final error = ErrorService.createDatabaseError('Theme provider not initialized', null, null);
+      ErrorService.logError(error);
+      return;
+    }
+    
+    try {
+      _isDarkMode = !_isDarkMode;
+      await _settingsBox?.put(_themeKey, _isDarkMode);
+      notifyListeners();
+    } catch (e, stackTrace) {
+      // 실패 시 상태 되돌리기
+      _isDarkMode = !_isDarkMode;
+      
+      final error = ErrorService.createDatabaseError('Toggling theme', e, stackTrace);
+      ErrorService.logError(error);
+      
+      notifyListeners();
+    }
   }
 
   Future<void> setTheme(bool isDark) async {
-    _isDarkMode = isDark;
-    await _settingsBox.put(_themeKey, _isDarkMode);
-    notifyListeners();
+    if (!_isInitialized) {
+      final error = ErrorService.createDatabaseError('Theme provider not initialized', null, null);
+      ErrorService.logError(error);
+      return;
+    }
+    
+    try {
+      final oldTheme = _isDarkMode;
+      _isDarkMode = isDark;
+      await _settingsBox?.put(_themeKey, _isDarkMode);
+      notifyListeners();
+    } catch (e, stackTrace) {
+      // 실패 시 상태 되돌리기
+      _isDarkMode = !isDark;
+      
+      final error = ErrorService.createDatabaseError('Setting theme', e, stackTrace);
+      ErrorService.logError(error);
+      
+      notifyListeners();
+    }
   }
 
   ThemeData get lightTheme => ThemeData(

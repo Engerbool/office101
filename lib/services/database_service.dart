@@ -4,6 +4,7 @@ import 'dart:convert';
 import '../models/term.dart';
 import '../models/email_template.dart';
 import '../models/workplace_tip.dart';
+import '../utils/validation_utils.dart';
 import 'error_service.dart';
 
 class DatabaseService {
@@ -80,54 +81,128 @@ class DatabaseService {
       int totalTermsLoaded = 0;
 
       for (String filePath in categoryFiles) {
-        try {
-          final String jsonString = await rootBundle.loadString(filePath);
-          final Map<String, dynamic> data = json.decode(jsonString);
-          
-          if (!data.containsKey('terms')) {
-            print('Warning: Invalid JSON structure in $filePath: missing "terms" key');
-            continue;
-          }
-          
-          final List<dynamic> termsList = data['terms'];
-          
-          if (termsList.isEmpty) {
-            print('Warning: No terms found in $filePath');
-            continue;
-          }
+        bool fileLoaded = false;
+        int retryCount = 0;
+        const maxRetries = 3;
+        
+        while (!fileLoaded && retryCount < maxRetries) {
+          try {
+            final String jsonString = await rootBundle.loadString(filePath);
+            final Map<String, dynamic>? data = ValidationUtils.safeJsonDecode(jsonString);
+            
+            if (data == null) {
+              final error = ErrorService.createDataError('Invalid JSON format in $filePath');
+              ErrorService.logError(error);
+              break; // JSON 파싱 실패는 재시도 불필요
+            }
+            
+            if (!data.containsKey('terms')) {
+              final error = ErrorService.createDataError('Invalid JSON structure in $filePath: missing "terms" key');
+              ErrorService.logError(error);
+              break; // 구조적 문제는 재시도 불필요
+            }
+            
+            final List<dynamic> termsList = data['terms'];
+            
+            if (termsList.isEmpty) {
+              final error = ErrorService.createDataError('No terms found in $filePath');
+              ErrorService.logError(error);
+              break; // 빈 데이터는 재시도 불필요
+            }
 
-          int fileTermsLoaded = 0;
-          for (var termData in termsList) {
-            try {
-              final term = Term.fromJson(termData);
-              await _termBox.put(term.termId, term);
-              fileTermsLoaded++;
-            } catch (e) {
-              print('Error parsing term data in $filePath: $termData, error: $e');
-              continue; // 개별 항목 파싱 실패 시 계속 진행
+            int fileTermsLoaded = 0;
+            for (var termData in termsList) {
+              try {
+                final term = Term.fromJson(termData);
+                await _termBox.put(term.termId, term);
+                fileTermsLoaded++;
+              } catch (e, stackTrace) {
+                final error = ErrorService.createDataError('Error parsing term data in $filePath: $termData', e, stackTrace);
+                ErrorService.logError(error);
+                continue; // 개별 항목 파싱 실패 시 계속 진행
+              }
+            }
+            
+            totalTermsLoaded += fileTermsLoaded;
+            print('Successfully loaded $fileTermsLoaded terms from $filePath');
+            fileLoaded = true;
+          } catch (e, stackTrace) {
+            retryCount++;
+            final error = ErrorService.createDataError('Error loading file $filePath (attempt $retryCount/$maxRetries)', e, stackTrace);
+            ErrorService.logError(error);
+            
+            if (retryCount < maxRetries) {
+              // 재시도 전 잠시 대기
+              await Future.delayed(Duration(milliseconds: 500 * retryCount));
+            } else {
+              // 최종 실패 시 에러 로깅
+              final finalError = ErrorService.createDataError('Failed to load $filePath after $maxRetries attempts', e, stackTrace);
+              ErrorService.logError(finalError);
             }
           }
-          
-          totalTermsLoaded += fileTermsLoaded;
-          print('Successfully loaded $fileTermsLoaded terms from $filePath');
-        } catch (e) {
-          print('Error loading file $filePath: $e');
-          continue; // 개별 파일 로딩 실패 시 계속 진행
         }
       }
       
       print('Successfully loaded total $totalTermsLoaded terms from ${categoryFiles.length} category files');
+      
+      // 최소한의 데이터도 로드되지 않았을 경우 기본 데이터 제공
+      if (totalTermsLoaded == 0) {
+        await _loadFallbackTerms();
+      }
     } catch (e, stackTrace) {
       final error = ErrorService.createFileSystemError('Loading terms from assets', e, stackTrace);
       ErrorService.logError(error);
-      rethrow;
+      
+      // 전체 로딩 실패 시 기본 데이터 제공
+      await _loadFallbackTerms();
+    }
+  }
+  
+  static Future<void> _loadFallbackTerms() async {
+    try {
+      // 기본 필수 용어들 제공
+      final fallbackTerms = [
+        Term(
+          termId: 'fallback_1',
+          term: '회사',
+          definition: '사업을 목적으로 설립된 조직',
+          category: TermCategory.business,
+          example: '우리 회사는 IT 서비스를 제공합니다.',
+          tags: ['기본', '회사'],
+          userAdded: false,
+        ),
+        Term(
+          termId: 'fallback_2',
+          term: '부서',
+          definition: '회사 내에서 특정 업무를 담당하는 조직 단위',
+          category: TermCategory.business,
+          example: '마케팅 부서에서 근무하고 있습니다.',
+          tags: ['기본', '조직'],
+          userAdded: false,
+        ),
+      ];
+      
+      for (final term in fallbackTerms) {
+        await _termBox.put(term.termId, term);
+      }
+      
+      print('Loaded ${fallbackTerms.length} fallback terms');
+    } catch (e, stackTrace) {
+      final error = ErrorService.createDataError('Loading fallback terms', e, stackTrace);
+      ErrorService.logError(error);
     }
   }
 
   static Future<void> _loadEmailTemplatesFromAssets() async {
     try {
       final String jsonString = await rootBundle.loadString('assets/data/email_templates.json');
-      final Map<String, dynamic> data = json.decode(jsonString);
+      final Map<String, dynamic>? data = ValidationUtils.safeJsonDecode(jsonString);
+      
+      if (data == null) {
+        final error = ErrorService.createDataError('Invalid JSON format in email_templates.json');
+        ErrorService.logError(error);
+        return;
+      }
       
       if (!data.containsKey('templates')) {
         throw Exception('Invalid JSON structure: missing "templates" key');
@@ -161,7 +236,13 @@ class DatabaseService {
   static Future<void> _loadWorkplaceTipsFromAssets() async {
     try {
       final String jsonString = await rootBundle.loadString('assets/data/workplace_tips.json');
-      final Map<String, dynamic> data = json.decode(jsonString);
+      final Map<String, dynamic>? data = ValidationUtils.safeJsonDecode(jsonString);
+      
+      if (data == null) {
+        final error = ErrorService.createDataError('Invalid JSON format in workplace_tips.json');
+        ErrorService.logError(error);
+        return;
+      }
       
       if (!data.containsKey('tips')) {
         throw Exception('Invalid JSON structure: missing "tips" key');

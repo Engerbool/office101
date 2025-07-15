@@ -1295,6 +1295,66 @@
         "영업",
         "수요창출"
       ]
+    },
+    {
+      "term_id": "marketing_109",
+      "category": "marketing",
+      "term": "인플루언서",
+      "definition": "소셜미디어에서 큰 영향력을 가진 사람으로 마케팅에 활용되는 인물",
+      "example": "인플루언서와 협업해서 제품을 홍보했습니다.",
+      "tags": [
+        "소셜미디어",
+        "영향력",
+        "홍보"
+      ]
+    },
+    {
+      "term_id": "marketing_110",
+      "category": "marketing",
+      "term": "CTR",
+      "definition": "Click Through Rate의 약자로 광고 클릭률을 의미",
+      "example": "이번 캠페인의 CTR이 평소보다 높게 나타났습니다.",
+      "tags": [
+        "클릭률",
+        "광고",
+        "측정"
+      ]
+    },
+    {
+      "term_id": "marketing_111",
+      "category": "marketing",
+      "term": "바이럴",
+      "definition": "콘텐츠나 정보가 입소문을 통해 빠르게 퍼지는 현상",
+      "example": "우리 광고가 바이럴을 타면서 인지도가 급상승했습니다.",
+      "tags": [
+        "입소문",
+        "확산",
+        "인지도"
+      ]
+    },
+    {
+      "term_id": "marketing_112",
+      "category": "marketing",
+      "term": "랜딩페이지",
+      "definition": "광고를 클릭했을 때 연결되는 특정 목적의 웹페이지",
+      "example": "캠페인 성과를 높이기 위해 랜딩페이지를 최적화했습니다.",
+      "tags": [
+        "웹페이지",
+        "광고",
+        "전환"
+      ]
+    },
+    {
+      "term_id": "marketing_113",
+      "category": "marketing",
+      "term": "A/B테스트",
+      "definition": "두 가지 버전을 비교해서 더 효과적인 것을 찾는 실험 방법",
+      "example": "이메일 제목을 A/B테스트해서 오픈율이 높은 것을 선택했습니다.",
+      "tags": [
+        "실험",
+        "비교",
+        "최적화"
+      ]
     }
   ]
 }

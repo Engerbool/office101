@@ -65,6 +65,16 @@ class ErrorService {
     );
   }
 
+  static AppError createDataError(String operation, [dynamic error, StackTrace? stackTrace]) {
+    return AppError(
+      message: 'Data processing failed: $operation - $error',
+      userMessage: '데이터 처리 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.',
+      type: ErrorType.database,
+      originalError: error,
+      stackTrace: stackTrace,
+    );
+  }
+
   static AppError createNetworkError(String operation, dynamic error, [StackTrace? stackTrace]) {
     String userMessage = '네트워크 연결을 확인하고 다시 시도해주세요.';
     

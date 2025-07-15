@@ -22,14 +22,13 @@ class WorkplaceTipAdapter extends TypeAdapter<WorkplaceTip> {
       content: fields[2] as String,
       keyPoints: (fields[3] as List).cast<String>(),
       category: fields[4] as TipCategory,
-      priority: fields[5] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, WorkplaceTip obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.tipId)
       ..writeByte(1)
@@ -39,9 +38,7 @@ class WorkplaceTipAdapter extends TypeAdapter<WorkplaceTip> {
       ..writeByte(3)
       ..write(obj.keyPoints)
       ..writeByte(4)
-      ..write(obj.category)
-      ..writeByte(5)
-      ..write(obj.priority);
+      ..write(obj.category);
   }
 
   @override
@@ -63,37 +60,42 @@ class TipCategoryAdapter extends TypeAdapter<TipCategory> {
   TipCategory read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return TipCategory.schedule;
+        return TipCategory.basic_attitude;
       case 1:
-        return TipCategory.report;
+        return TipCategory.reporting;
       case 2:
-        return TipCategory.meeting;
+        return TipCategory.todo_management;
       case 3:
         return TipCategory.communication;
       case 4:
+        return TipCategory.self_growth;
+      case 5:
         return TipCategory.general;
       default:
-        return TipCategory.schedule;
+        return TipCategory.basic_attitude;
     }
   }
 
   @override
   void write(BinaryWriter writer, TipCategory obj) {
     switch (obj) {
-      case TipCategory.schedule:
+      case TipCategory.basic_attitude:
         writer.writeByte(0);
         break;
-      case TipCategory.report:
+      case TipCategory.reporting:
         writer.writeByte(1);
         break;
-      case TipCategory.meeting:
+      case TipCategory.todo_management:
         writer.writeByte(2);
         break;
       case TipCategory.communication:
         writer.writeByte(3);
         break;
-      case TipCategory.general:
+      case TipCategory.self_growth:
         writer.writeByte(4);
+        break;
+      case TipCategory.general:
+        writer.writeByte(5);
         break;
     }
   }

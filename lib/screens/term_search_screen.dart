@@ -5,6 +5,7 @@ import '../providers/theme_provider.dart';
 import '../widgets/autocomplete_search_bar.dart';
 import '../widgets/term_list_widget.dart';
 import '../widgets/error_display_widget.dart';
+import '../widgets/performance_indicator.dart';
 import '../models/term.dart';
 import 'term_detail_screen.dart';
 
@@ -61,12 +62,21 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
             children: [
               Padding(
                 padding: EdgeInsets.all(16.0),
-                child: AutocompleteSearchBar(
-                  controller: _searchController,
-                  onSearch: (query) {
-                    Provider.of<TermProvider>(context, listen: false)
-                        .searchTerms(query);
+                child: SearchPerformanceWidget(
+                  resultCount: Provider.of<TermProvider>(context).filteredTerms.length,
+                  onSearch: (query) async {
+                    final termProvider = Provider.of<TermProvider>(context, listen: false);
+                    termProvider.searchTerms(query);
+                    
+                    // 검색 완료까지 대기 (디바운싱 고려)
+                    await Future.delayed(Duration(milliseconds: 350));
                   },
+                  child: AutocompleteSearchBar(
+                    controller: _searchController,
+                    onSearch: (query) {
+                      Provider.of<TermProvider>(context, listen: false)
+                          .searchTerms(query);
+                    },
                   onTermSelected: (term) {
                     // 용어가 선택되면 상세 화면으로 이동
                     Navigator.push(
@@ -75,8 +85,9 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
                         builder: (context) => TermDetailScreen(term: term),
                       ),
                     );
-                  },
-                  hintText: '검색할 용어를 입력하세요...',
+                    },
+                    hintText: '검색할 용어를 입력하세요...',
+                  ),
                 ),
               ),
               Expanded(

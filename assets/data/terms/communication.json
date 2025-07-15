@@ -431,6 +431,66 @@
         "신청",
         "처리"
       ]
+    },
+    {
+      "term_id": "communication_037",
+      "category": "communication",
+      "term": "퍼실리테이션",
+      "definition": "회의나 토론에서 원활한 진행을 돕는 역할이나 기법",
+      "example": "팀장님이 퍼실리테이션을 통해 회의를 효율적으로 진행했습니다.",
+      "tags": [
+        "회의",
+        "진행",
+        "효율"
+      ]
+    },
+    {
+      "term_id": "communication_038",
+      "category": "communication",
+      "term": "아이스브레이킹",
+      "definition": "긴장된 분위기를 풀고 참여자들이 편안해지도록 하는 활동",
+      "example": "회의 시작 전에 아이스브레이킹 시간을 가졌습니다.",
+      "tags": [
+        "분위기",
+        "긴장완화",
+        "참여"
+      ]
+    },
+    {
+      "term_id": "communication_039",
+      "category": "communication",
+      "term": "피드백",
+      "definition": "상대방의 행동이나 성과에 대한 의견이나 조언",
+      "example": "프레젠테이션 후 상사로부터 건설적인 피드백을 받았습니다.",
+      "tags": [
+        "의견",
+        "조언",
+        "개선"
+      ]
+    },
+    {
+      "term_id": "communication_040",
+      "category": "communication",
+      "term": "네트워킹",
+      "definition": "업무상 도움이 될 수 있는 인맥을 쌓는 활동",
+      "example": "컨퍼런스에서 네트워킹을 통해 좋은 인맥을 만들었습니다.",
+      "tags": [
+        "인맥",
+        "관계",
+        "연결"
+      ]
+    },
+    {
+      "term_id": "communication_041",
+      "category": "communication",
+      "term": "오프더레코드",
+      "definition": "공식적이지 않은 비공개 대화나 정보",
+      "example": "오프더레코드로 말씀드리면 다음 달에 조직개편이 있을 예정입니다.",
+      "tags": [
+        "비공개",
+        "비공식",
+        "내부정보"
+      ]
     }
   ]
 }

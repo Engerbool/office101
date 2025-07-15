@@ -719,6 +719,66 @@
         "프로세스",
         "전략"
       ]
+    },
+    {
+      "term_id": "business_061",
+      "category": "business",
+      "term": "ROI",
+      "definition": "Return on Investment의 약자로 투자수익률을 의미",
+      "example": "이 프로젝트의 ROI는 예상보다 높게 나왔습니다.",
+      "tags": [
+        "수익률",
+        "투자",
+        "성과"
+      ]
+    },
+    {
+      "term_id": "business_062",
+      "category": "business",
+      "term": "스케일업",
+      "definition": "기업이 성장하면서 규모를 확대하는 것",
+      "example": "스타트업에서 스케일업 단계로 진입했습니다.",
+      "tags": [
+        "성장",
+        "확대",
+        "규모"
+      ]
+    },
+    {
+      "term_id": "business_063",
+      "category": "business",
+      "term": "와이어프레임",
+      "definition": "웹사이트나 앱의 구조를 간단한 선으로 표현한 설계도",
+      "example": "UI 디자인 전에 와이어프레임부터 만들어보겠습니다.",
+      "tags": [
+        "설계",
+        "구조",
+        "기획"
+      ]
+    },
+    {
+      "term_id": "business_064",
+      "category": "business",
+      "term": "피벗",
+      "definition": "기존 사업 방향을 바꾸어 새로운 전략으로 전환하는 것",
+      "example": "시장 반응을 보고 피벗을 결정했습니다.",
+      "tags": [
+        "전환",
+        "변화",
+        "전략"
+      ]
+    },
+    {
+      "term_id": "business_065",
+      "category": "business",
+      "term": "데드라인",
+      "definition": "업무나 프로젝트를 완료해야 하는 마감일",
+      "example": "이번 프로젝트 데드라인이 다음 주 금요일입니다.",
+      "tags": [
+        "마감",
+        "일정",
+        "완료"
+      ]
     }
   ]
 }
