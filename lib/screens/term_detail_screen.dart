@@ -5,6 +5,7 @@ import '../models/term.dart';
 import '../providers/term_provider.dart';
 import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
+import '../constants/category_colors.dart';
 
 class TermDetailScreen extends StatelessWidget {
   final Term term;
@@ -100,14 +101,14 @@ class TermDetailScreen extends StatelessWidget {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: _getCategoryColor().withOpacity(0.1),
+                color: CategoryColors.getCategoryBackgroundColor(term.category),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Text(
                 term.category.displayName,
                 style: TextStyle(
                   fontSize: 12,
-                  color: _getCategoryColor(),
+                  color: CategoryColors.getCategoryColor(term.category),
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -176,7 +177,7 @@ class TermDetailScreen extends StatelessWidget {
                 Icon(
                   Icons.format_quote,
                   size: 24,
-                  color: Color(0xFF5A8DEE).withOpacity(0.6),
+                  color: Color(0xFF5A8DEE).withAlpha(153),
                 ),
                 SizedBox(width: 12),
                 Expanded(
@@ -224,14 +225,14 @@ class TermDetailScreen extends StatelessWidget {
                 return Container(
                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
-                    color: themeProvider.textColor.withOpacity(0.1),
+                    color: themeProvider.textColor.withAlpha(26),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Text(
                     '#$tag',
                     style: TextStyle(
                       fontSize: 14,
-                      color: themeProvider.textColor.withOpacity(0.8),
+                      color: themeProvider.textColor.withAlpha(204),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -269,12 +270,12 @@ class TermDetailScreen extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: _getCategoryColor().withOpacity(0.1),
+                    color: CategoryColors.getCategoryBackgroundColor(term.category),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
                     _getCategoryIcon(),
-                    color: _getCategoryColor(),
+                    color: CategoryColors.getCategoryColor(term.category),
                     size: 24,
                   ),
                 ),
@@ -368,7 +369,4 @@ ${term.example.isNotEmpty ? '예시: ${term.example}' : ''}
     }
   }
 
-  Color _getCategoryColor() {
-    return Color(0xFF5A8DEE); // 모든 카테고리를 파란색으로 통일
-  }
 }

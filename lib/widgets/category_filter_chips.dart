@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../models/term.dart';
 import '../providers/term_provider.dart';
 import '../providers/theme_provider.dart';
-import 'neumorphic_container.dart';
 
 class CategoryFilterChips extends StatefulWidget {
   @override
@@ -125,7 +124,7 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
                       gradient: LinearGradient(
                         colors: [
                           themeProvider.backgroundColor,
-                          themeProvider.backgroundColor.withOpacity(0),
+                          themeProvider.backgroundColor.withAlpha(0),
                         ],
                         stops: [0.0, 1.0],
                       ),
@@ -144,7 +143,7 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          themeProvider.backgroundColor.withOpacity(0),
+                          themeProvider.backgroundColor.withAlpha(0),
                           themeProvider.backgroundColor,
                         ],
                         stops: [0.0, 1.0],
@@ -182,19 +181,19 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
             boxShadow: isSelected
                 ? [
                     BoxShadow(
-                      color: Color(0xFF5A8DEE).withOpacity(0.3),
+                      color: Color(0xFF5A8DEE).withAlpha(77),
                       offset: Offset(0, 2),
                       blurRadius: 8,
                     ),
                   ]
                 : [
                     BoxShadow(
-                      color: themeProvider.shadowColor.withOpacity(0.3),
+                      color: themeProvider.shadowColor.withAlpha(77),
                       offset: Offset(2, 2),
                       blurRadius: 4,
                     ),
                     BoxShadow(
-                      color: themeProvider.highlightColor.withOpacity(0.8),
+                      color: themeProvider.highlightColor.withAlpha(204),
                       offset: Offset(-2, -2),
                       blurRadius: 4,
                     ),
@@ -207,7 +206,7 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
               fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
               color: isSelected 
                   ? Colors.white
-                  : themeProvider.textColor.withOpacity(0.7),
+                  : themeProvider.textColor.withAlpha(179),
             ),
           ),
         ),
@@ -215,28 +214,4 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
     );
   }
 
-  Color _getCategoryColor(TermCategory? category) {
-    if (category == null) return Color(0xFF5A8DEE);
-    
-    switch (category) {
-      case TermCategory.approval:
-        return Color(0xFF5A8DEE);
-      case TermCategory.business:
-        return Color(0xFF42A5F5);
-      case TermCategory.marketing:
-        return Color(0xFF66BB6A);
-      case TermCategory.it:
-        return Color(0xFFFF7043);
-      case TermCategory.hr:
-        return Color(0xFFAB47BC);
-      case TermCategory.communication:
-        return Color(0xFFFFCA28);
-      case TermCategory.time:
-        return Color(0xFFEF5350);
-      case TermCategory.other:
-        return Color(0xFF78909C);
-      case TermCategory.bookmarked:
-        return Color(0xFFFFCA28);
-    }
-  }
 }

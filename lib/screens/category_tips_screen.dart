@@ -6,6 +6,7 @@ import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
 import '../widgets/error_display_widget.dart';
 import 'workplace_tip_detail_screen.dart';
+import '../constants/category_colors.dart';
 
 class CategoryTipsScreen extends StatelessWidget {
   final TipCategory category;
@@ -74,12 +75,12 @@ class CategoryTipsScreen extends StatelessWidget {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: _getCategoryColor().withOpacity(0.1),
+                color: CategoryColors.getTipCategoryBackgroundColor(category),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
                 _getCategoryIcon(),
-                color: _getCategoryColor(),
+                color: CategoryColors.getTipCategoryColor(category),
                 size: 28,
               ),
             ),
@@ -101,7 +102,7 @@ class CategoryTipsScreen extends StatelessWidget {
                     '총 ${tipCount}개의 꿀팁이 있습니다',
                     style: TextStyle(
                       fontSize: 14,
-                      color: themeProvider.subtitleColor.withOpacity(0.7),
+                      color: themeProvider.subtitleColor.withAlpha(179),
                     ),
                   ),
                 ],
@@ -148,7 +149,7 @@ class CategoryTipsScreen extends StatelessWidget {
                     Icon(
                       Icons.arrow_forward_ios,
                       size: 16,
-                      color: _getCategoryColor(),
+                      color: CategoryColors.getTipCategoryColor(category),
                     ),
                   ],
                 ),
@@ -157,7 +158,7 @@ class CategoryTipsScreen extends StatelessWidget {
                   tip.content,
                   style: TextStyle(
                     fontSize: 14,
-                    color: themeProvider.subtitleColor.withOpacity(0.8),
+                    color: themeProvider.subtitleColor.withAlpha(204),
                     height: 1.5,
                   ),
                   maxLines: 3,
@@ -168,7 +169,7 @@ class CategoryTipsScreen extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: _getCategoryColor().withOpacity(0.05),
+                      color: CategoryColors.getTipCategoryColor(category).withAlpha(13),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -176,14 +177,14 @@ class CategoryTipsScreen extends StatelessWidget {
                         Icon(
                           Icons.lightbulb_outline,
                           size: 16,
-                          color: _getCategoryColor(),
+                          color: CategoryColors.getTipCategoryColor(category),
                         ),
                         SizedBox(width: 8),
                         Text(
                           '${tip.keyPoints.length}개의 핵심 포인트',
                           style: TextStyle(
                             fontSize: 12,
-                            color: _getCategoryColor(),
+                            color: CategoryColors.getTipCategoryColor(category),
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -212,7 +213,7 @@ class CategoryTipsScreen extends StatelessWidget {
                 Icon(
                   Icons.lightbulb_outline,
                   size: 64,
-                  color: _getCategoryColor().withOpacity(0.6),
+                  color: CategoryColors.getTipCategoryColor(category).withAlpha(153),
                 ),
                 SizedBox(height: 16),
                 Text(
@@ -229,7 +230,7 @@ class CategoryTipsScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
-                    color: themeProvider.textColor.withOpacity(0.7),
+                    color: themeProvider.textColor.withAlpha(179),
                     height: 1.4,
                   ),
                 ),
@@ -258,20 +259,4 @@ class CategoryTipsScreen extends StatelessWidget {
     }
   }
 
-  Color _getCategoryColor() {
-    switch (category) {
-      case TipCategory.basic_attitude:
-        return Color(0xFF5A8DEE);
-      case TipCategory.reporting:
-        return Color(0xFF42A5F5);
-      case TipCategory.todo_management:
-        return Color(0xFF66BB6A);
-      case TipCategory.communication:
-        return Color(0xFFFF7043);
-      case TipCategory.self_growth:
-        return Color(0xFFAB47BC);
-      case TipCategory.general:
-        return Color(0xFF78909C);
-    }
-  }
 }

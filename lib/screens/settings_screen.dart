@@ -180,7 +180,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Color(0xFF5A8DEE).withOpacity(0.1),
+                  color: Color(0xFF5A8DEE).withAlpha(26),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
@@ -207,7 +207,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       subtitle,
                       style: TextStyle(
                         fontSize: 14,
-                        color: themeProvider.subtitleColor.withOpacity(0.6),
+                        color: themeProvider.subtitleColor.withAlpha(153),
                       ),
                     ),
                   ],
@@ -218,7 +218,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Icon(
                   Icons.arrow_forward_ios,
                   size: 16,
-                  color: themeProvider.textColor.withOpacity(0.4),
+                  color: themeProvider.textColor.withAlpha(102),
                 ),
             ],
           ),

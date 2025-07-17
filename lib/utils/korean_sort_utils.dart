@@ -1,6 +1,12 @@
 import '../models/term.dart';
 
 class KoreanSortUtils {
+  // 초성 추출 캐시
+  static final Map<String, String> _initialSoundCache = {};
+  static final Map<String, String> _sortKeyCache = {};
+  
+  // 캐시 크기 제한
+  static const int _maxCacheSize = 1000;
   // 한글 초성 매핑
   static const Map<String, String> _choseongMap = {
     'ㄱ': 'ㄱ', 'ㄴ': 'ㄴ', 'ㄷ': 'ㄷ', 'ㄹ': 'ㄹ', 'ㅁ': 'ㅁ', 'ㅂ': 'ㅂ', 'ㅅ': 'ㅅ',
@@ -15,12 +21,19 @@ class KoreanSortUtils {
     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
   ];
 
-  /// 문자열의 첫 번째 문자에서 초성 추출
+  /// 문자열의 첫 번째 문자에서 초성 추출 (캐싱 적용)
   static String getInitialSound(String text) {
     if (text.isEmpty) return '#';
     
+    // 캐시에서 확인
+    if (_initialSoundCache.containsKey(text)) {
+      return _initialSoundCache[text]!;
+    }
+    
     final firstChar = text[0];
     final charCode = firstChar.codeUnitAt(0);
+    
+    String result = '#';
     
     // 한글 완성형 문자 범위 (가-힣)
     if (charCode >= 0xAC00 && charCode <= 0xD7A3) {
@@ -30,40 +43,82 @@ class KoreanSortUtils {
       
       if (choseongIndex >= 0 && choseongIndex < choseongList.length) {
         final choseong = choseongList[choseongIndex];
-        return _choseongMap[choseong] ?? choseong;
+        result = _choseongMap[choseong] ?? choseong;
       }
     }
-    
     // 영어 대문자 변환
-    if (RegExp(r'[a-zA-Z]').hasMatch(firstChar)) {
-      return firstChar.toUpperCase();
+    else if (RegExp(r'[a-zA-Z]').hasMatch(firstChar)) {
+      result = firstChar.toUpperCase();
     }
     
-    // 숫자나 기타 문자
-    return '#';
+    // 캐시에 저장 (크기 제한 적용)
+    if (_initialSoundCache.length < _maxCacheSize) {
+      _initialSoundCache[text] = result;
+    }
+    
+    return result;
   }
 
-  /// 용어 리스트를 한글-영어 순으로 정렬
+  /// 용어 리스트를 한글-영어 순으로 정렬 (캐싱 적용)
   static List<Term> sortTermsKoreanEnglish(List<Term> terms) {
     final sortedTerms = List<Term>.from(terms);
     
-    sortedTerms.sort((a, b) {
-      final aInitial = getInitialSound(a.term);
-      final bInitial = getInitialSound(b.term);
-      
-      // 인덱스 리스트에서의 순서로 비교
-      final aIndex = indexList.indexOf(aInitial);
-      final bIndex = indexList.indexOf(bInitial);
-      
-      // 같은 초성이거나 인덱스에 없는 경우 문자열 비교
-      if (aIndex == bIndex || aIndex == -1 || bIndex == -1) {
-        return a.term.compareTo(b.term);
+    // 정렬 키 미리 계산하여 캐싱
+    final sortKeys = <Term, String>{};
+    for (final term in sortedTerms) {
+      if (_sortKeyCache.containsKey(term.term)) {
+        sortKeys[term] = _sortKeyCache[term.term]!;
+      } else {
+        final sortKey = _computeSortKey(term.term);
+        sortKeys[term] = sortKey;
+        
+        // 캐시에 저장
+        if (_sortKeyCache.length < _maxCacheSize) {
+          _sortKeyCache[term.term] = sortKey;
+        }
       }
-      
-      return aIndex.compareTo(bIndex);
+    }
+    
+    sortedTerms.sort((a, b) {
+      final aKey = sortKeys[a]!;
+      final bKey = sortKeys[b]!;
+      return aKey.compareTo(bKey);
     });
     
     return sortedTerms;
+  }
+  
+  /// 정렬 키 계산
+  static String _computeSortKey(String term) {
+    final initial = getInitialSound(term);
+    final indexInList = indexList.indexOf(initial);
+    
+    // 인덱스를 3자리 패딩 + 원본 문자열로 정렬 키 생성
+    final paddedIndex = indexInList.toString().padLeft(3, '0');
+    return '${paddedIndex}_${term}';
+  }
+  
+  /// 용어 목록에 대한 초성 미리 계산 (성능 최적화)
+  static void precomputeInitialSounds(List<Term> terms) {
+    for (final term in terms) {
+      getInitialSound(term.term);
+    }
+  }
+  
+  /// 캐시 정리
+  static void clearCache() {
+    _initialSoundCache.clear();
+    _sortKeyCache.clear();
+  }
+  
+  /// 캐시 사용률 정보
+  static Map<String, dynamic> getCacheInfo() {
+    return {
+      'initialSoundCache': _initialSoundCache.length,
+      'sortKeyCache': _sortKeyCache.length,
+      'maxCacheSize': _maxCacheSize,
+      'usage': ((_initialSoundCache.length + _sortKeyCache.length) / (_maxCacheSize * 2) * 100).toStringAsFixed(1),
+    };
   }
 
   /// 인덱스별로 용어 그룹핑

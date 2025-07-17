@@ -244,7 +244,6 @@ class ErrorService {
       case ErrorType.validation:
         return Icons.error_outline;
       case ErrorType.unknown:
-      default:
         return Icons.warning;
     }
   }
@@ -260,7 +259,6 @@ class ErrorService {
       case ErrorType.validation:
         return Colors.amber.shade600;
       case ErrorType.unknown:
-      default:
         return Colors.red.shade600;
     }
   }

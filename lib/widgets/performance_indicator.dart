@@ -54,7 +54,7 @@ class PerformanceIndicator extends StatelessWidget {
             child: CircularProgressIndicator(
               strokeWidth: 2,
               valueColor: AlwaysStoppedAnimation<Color>(
-                themeProvider.textColor.withOpacity(0.6),
+                themeProvider.textColor.withAlpha(153),
               ),
             ),
           ),
@@ -62,7 +62,7 @@ class PerformanceIndicator extends StatelessWidget {
           Text(
             operation ?? '검색 중...',
             style: TextStyle(
-              color: themeProvider.textColor.withOpacity(0.6),
+              color: themeProvider.textColor.withAlpha(153),
               fontSize: 12,
               fontStyle: FontStyle.italic,
             ),
@@ -78,13 +78,13 @@ class PerformanceIndicator extends StatelessWidget {
         Icon(
           Icons.search,
           size: 14,
-          color: themeProvider.textColor.withOpacity(0.6),
+          color: themeProvider.textColor.withAlpha(153),
         ),
         SizedBox(width: 4),
         Text(
           '${resultCount}개 결과',
           style: TextStyle(
-            color: themeProvider.textColor.withOpacity(0.6),
+            color: themeProvider.textColor.withAlpha(153),
             fontSize: 12,
             fontWeight: FontWeight.w500,
           ),
@@ -105,13 +105,13 @@ class PerformanceIndicator extends StatelessWidget {
         Icon(
           icon,
           size: 14,
-          color: themeProvider.textColor.withOpacity(0.6),
+          color: themeProvider.textColor.withAlpha(153),
         ),
         SizedBox(width: 4),
         Text(
           durationText,
           style: TextStyle(
-            color: themeProvider.textColor.withOpacity(0.6),
+            color: themeProvider.textColor.withAlpha(153),
             fontSize: 12,
             fontWeight: FontWeight.w500,
           ),
@@ -148,29 +148,6 @@ class SearchPerformanceWidget extends StatefulWidget {
 class _SearchPerformanceWidgetState extends State<SearchPerformanceWidget> {
   Duration? _lastSearchDuration;
   bool _isSearching = false;
-  String _lastQuery = '';
-
-  void _performSearch(String query) async {
-    if (query == _lastQuery) return;
-    
-    setState(() {
-      _isSearching = true;
-      _lastQuery = query;
-    });
-
-    final stopwatch = Stopwatch()..start();
-    
-    if (widget.onSearch != null) {
-      await widget.onSearch!(query);
-    }
-    
-    stopwatch.stop();
-    
-    setState(() {
-      _isSearching = false;
-      _lastSearchDuration = stopwatch.elapsed;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -151,7 +151,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
               decoration: InputDecoration(
                 hintText: '용어를 입력하세요',
                 hintStyle: TextStyle(
-                  color: themeProvider.textColor.withOpacity(0.5),
+                  color: themeProvider.textColor.withAlpha(128),
                 ),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.all(16),
@@ -195,7 +195,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
               decoration: InputDecoration(
                 hintText: '용어의 정의를 입력하세요',
                 hintStyle: TextStyle(
-                  color: themeProvider.textColor.withOpacity(0.5),
+                  color: themeProvider.textColor.withAlpha(128),
                 ),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.all(16),
@@ -240,7 +240,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
               decoration: InputDecoration(
                 hintText: '용어를 사용한 예시를 입력하세요 (선택사항)',
                 hintStyle: TextStyle(
-                  color: themeProvider.textColor.withOpacity(0.5),
+                  color: themeProvider.textColor.withAlpha(128),
                 ),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.all(16),
@@ -328,7 +328,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
               decoration: InputDecoration(
                 hintText: '태그를 쉼표로 구분하여 입력하세요 (예: 업무, 보고)',
                 hintStyle: TextStyle(
-                  color: themeProvider.textColor.withOpacity(0.5),
+                  color: themeProvider.textColor.withAlpha(128),
                 ),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.all(16),
@@ -370,7 +370,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: themeProvider.textColor.withOpacity(0.6),
+                      color: themeProvider.textColor.withAlpha(153),
                     ),
                   ),
                 ] else ...[

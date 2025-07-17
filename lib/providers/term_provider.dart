@@ -7,6 +7,7 @@ import '../services/database_service.dart';
 import '../services/error_service.dart';
 import '../utils/validation_utils.dart';
 import '../utils/korean_sort_utils.dart';
+import '../utils/lru_cache.dart';
 
 class TermProvider extends ChangeNotifier {
   List<Term> _allTerms = [];
@@ -22,16 +23,14 @@ class TermProvider extends ChangeNotifier {
   
   // 성능 최적화를 위한 변수들
   Timer? _searchDebouncer;
-  final Map<String, List<Term>> _searchCache = {};
-  final Map<TermCategory, List<Term>> _categoryCache = {};
-  String? _lastSearchQuery;
-  TermCategory? _lastSelectedCategory;
+  final LRUCache<String, List<Term>> _searchCache = LRUCache(maxSize: 50);
+  final LRUCache<TermCategory, List<Term>> _categoryCache = LRUCache(maxSize: 20);
+  Set<TermCategory> _changedCategories = {};
   
   // Progressive Loading을 위한 변수들
   bool _isProgressiveLoading = false;
   int _loadedItemCount = 0;
   static const int _initialLoadCount = 10;  // 초기 로딩 수 (즉시 표시)
-  static const int _loadChunkSize = 50;     // 이후 청크 크기
 
   // Getters
   List<Term> get allTerms => _allTerms;
@@ -143,15 +142,16 @@ class TermProvider extends ChangeNotifier {
       }
       
       // 캐시된 데이터가 있으면 Progressive Loading 적용
-      if (_categoryCache.containsKey(category)) {
-        _startProgressiveLoading(_categoryCache[category]!);
+      final cachedCategory = _categoryCache.get(category);
+      if (cachedCategory != null) {
+        _startProgressiveLoading(cachedCategory);
         return;
       }
       
       // 캐시가 없는 경우에만 필터링 수행 (북마크는 동적이므로)
       if (category == TermCategory.bookmarked) {
         final bookmarked = _allTerms.where((term) => term.isBookmarked).toList();
-        _categoryCache[category] = bookmarked;
+        _categoryCache.put(category, bookmarked);
         _startProgressiveLoading(bookmarked);
       } else {
         // 다른 카테고리는 이미 캐시되어 있어야 함
@@ -197,11 +197,25 @@ class TermProvider extends ChangeNotifier {
     }
   }
 
+  // 적응형 청크 크기 계산 (성능 최적화)
+  int _getAdaptiveChunkSize(int remainingCount) {
+    // 데이터셋 크기에 따른 적응형 청크 크기
+    if (remainingCount <= 100) {
+      return 25; // 작은 데이터셋: 작은 청크
+    } else if (remainingCount <= 500) {
+      return 50; // 중간 데이터셋: 기본 청크
+    } else if (remainingCount <= 1000) {
+      return 100; // 큰 데이터셋: 큰 청크
+    } else {
+      return 150; // 매우 큰 데이터셋: 최대 청크
+    }
+  }
+
   // 나머지 아이템들을 점진적으로 로딩
   Future<void> _loadRemainingItemsProgressively() async {
     try {
       int iterationCount = 0;
-      const maxIterations = 50; // 무한 루프 방지
+      const maxIterations = 20; // 무한 루프 방지 (50 -> 20으로 최적화)
       
       while (_isProgressiveLoading && 
              _loadedItemCount < _filteredTerms.length && 
@@ -219,7 +233,9 @@ class TermProvider extends ChangeNotifier {
           break;
         }
         
-        final nextChunkSize = remainingCount > _loadChunkSize ? _loadChunkSize : remainingCount;
+        // 대용량 데이터셋에 대한 청크 크기 최적화
+        final adaptiveChunkSize = _getAdaptiveChunkSize(remainingCount);
+        final nextChunkSize = remainingCount > adaptiveChunkSize ? adaptiveChunkSize : remainingCount;
         
         _loadedItemCount += nextChunkSize;
         _loadedItemCount = _loadedItemCount.clamp(0, _filteredTerms.length);
@@ -286,8 +302,9 @@ class TermProvider extends ChangeNotifier {
       final cacheKey = '${_selectedCategory?.toString() ?? 'null'}_${_searchQuery}';
       
       // 캐시에서 확인
-      if (_searchCache.containsKey(cacheKey)) {
-        _filteredTerms = _searchCache[cacheKey]!;
+      final cachedResult = _searchCache.get(cacheKey);
+      if (cachedResult != null) {
+        _filteredTerms = cachedResult;
         return;
       }
       
@@ -295,8 +312,9 @@ class TermProvider extends ChangeNotifier {
 
       // Apply category filter with enhanced caching
       if (_selectedCategory != null) {
-        if (_categoryCache.containsKey(_selectedCategory)) {
-          tempTerms = _categoryCache[_selectedCategory]!;
+        final cachedCategory = _categoryCache.get(_selectedCategory!);
+        if (cachedCategory != null) {
+          tempTerms = cachedCategory;
         } else {
           // 청크 단위로 처리하여 성능 향상
           if (_selectedCategory == TermCategory.bookmarked) {
@@ -304,7 +322,7 @@ class TermProvider extends ChangeNotifier {
           } else {
             tempTerms = _filterInChunks(_allTerms, (term) => term.category == _selectedCategory);
           }
-          _categoryCache[_selectedCategory!] = tempTerms;
+          _categoryCache.put(_selectedCategory!, tempTerms);
         }
       }
 
@@ -320,10 +338,8 @@ class TermProvider extends ChangeNotifier {
 
       _filteredTerms = tempTerms;
       
-      // 캐시 저장 (최대 50개까지만 저장하여 메모리 절약)
-      if (_searchCache.length < 50) {
-        _searchCache[cacheKey] = List.from(_filteredTerms);
-      }
+      // LRU 캐시에 저장
+      _searchCache.put(cacheKey, List.from(_filteredTerms));
     } catch (e, stackTrace) {
       final error = ErrorService.createUnknownError(e, stackTrace);
       ErrorService.logError(error);
@@ -558,14 +574,14 @@ class TermProvider extends ChangeNotifier {
       
       for (final category in categories) {
         if (category == TermCategory.bookmarked) {
-          _categoryCache[category] = _allTerms.where((term) => term.isBookmarked).toList();
+          _categoryCache.put(category, _allTerms.where((term) => term.isBookmarked).toList());
         } else {
-          _categoryCache[category] = _allTerms.where((term) => term.category == category).toList();
+          _categoryCache.put(category, _allTerms.where((term) => term.category == category).toList());
         }
       }
       
       // 전체 카테고리도 캐싱 (null 키로)
-      _searchCache['null_'] = List.from(_allTerms);
+      _searchCache.put('null_', List.from(_allTerms));
       
       stopwatch.stop();
       
@@ -577,7 +593,7 @@ class TermProvider extends ChangeNotifier {
 
   // 북마크 캐시만 업데이트 (다른 캐시는 유지)
   void _updateBookmarkCache() {
-    _categoryCache[TermCategory.bookmarked] = _allTerms.where((term) => term.isBookmarked).toList();
+    _categoryCache.put(TermCategory.bookmarked, _allTerms.where((term) => term.isBookmarked).toList());
     
     // 북마크 관련 검색 캐시만 제거
     _searchCache.removeWhere((key, value) => key.contains('bookmarked'));
@@ -587,12 +603,21 @@ class TermProvider extends ChangeNotifier {
   void _clearCache() {
     _searchCache.clear();
     _categoryCache.clear();
+    _changedCategories.clear();
   }
   
-  // 데이터 변경 시 캐시 무효화
-  void _invalidateCache() {
-    _clearCache();
+  // 선택적 캐시 무효화 - 특정 카테고리만 또는 전체
+  void _invalidateCache({TermCategory? specificCategory}) {
+    if (specificCategory != null) {
+      _categoryCache.remove(specificCategory);
+      _searchCache.removeWhere((key, _) => key.contains(specificCategory.name));
+      _changedCategories.add(specificCategory);
+    } else {
+      // 전체 캐시 무효화
+      _clearCache();
+    }
   }
+  
   
   @override
   void dispose() {

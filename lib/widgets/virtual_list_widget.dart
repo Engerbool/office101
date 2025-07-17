@@ -108,14 +108,14 @@ class _VirtualListWidgetState extends State<VirtualListWidget> {
               Icon(
                 Icons.search_off,
                 size: 64,
-                color: themeProvider.textColor.withOpacity(0.3),
+                color: themeProvider.textColor.withAlpha(77),
               ),
               SizedBox(height: 16),
               Text(
                 '해당하는 용어가 없습니다',
                 style: TextStyle(
                   fontSize: 16,
-                  color: themeProvider.textColor.withOpacity(0.6),
+                  color: themeProvider.textColor.withAlpha(153),
                 ),
               ),
             ],
@@ -139,7 +139,7 @@ class _VirtualListWidgetState extends State<VirtualListWidget> {
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
                   valueColor: AlwaysStoppedAnimation<Color>(
-                    themeProvider.textColor.withOpacity(0.6),
+                    themeProvider.textColor.withAlpha(153),
                   ),
                 ),
               ),
@@ -148,7 +148,7 @@ class _VirtualListWidgetState extends State<VirtualListWidget> {
                 '더 많은 용어를 불러오는 중...',
                 style: TextStyle(
                   fontSize: 14,
-                  color: themeProvider.textColor.withOpacity(0.6),
+                  color: themeProvider.textColor.withAlpha(153),
                 ),
               ),
             ],
@@ -244,14 +244,14 @@ class OptimizedTermListWidget extends StatelessWidget {
           Icon(
             Icons.search_off,
             size: 64,
-            color: themeProvider.textColor.withOpacity(0.3),
+            color: themeProvider.textColor.withAlpha(77),
           ),
           SizedBox(height: 16),
           Text(
             '해당하는 용어가 없습니다',
             style: TextStyle(
               fontSize: 16,
-              color: themeProvider.textColor.withOpacity(0.6),
+              color: themeProvider.textColor.withAlpha(153),
             ),
           ),
         ],

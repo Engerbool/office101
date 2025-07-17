@@ -5,6 +5,7 @@ import '../providers/term_provider.dart';
 import '../models/term.dart';
 import '../services/database_service.dart';
 import 'neumorphic_container.dart';
+import '../constants/category_colors.dart';
 
 class AutocompleteSearchBar extends StatefulWidget {
   final Function(String) onSearch;
@@ -182,7 +183,7 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
                   children: [
                     Icon(
                       Icons.search,
-                      color: themeProvider.textColor.withOpacity(0.6),
+                      color: themeProvider.textColor.withAlpha(153),
                       size: 24,
                     ),
                     SizedBox(width: 12),
@@ -232,7 +233,7 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
                         decoration: InputDecoration(
                           hintText: widget.hintText ?? '용어를 검색해보세요...',
                           hintStyle: TextStyle(
-                            color: themeProvider.subtitleColor.withOpacity(0.5),
+                            color: themeProvider.subtitleColor.withAlpha(128),
                             fontSize: 16,
                           ),
                           border: InputBorder.none,
@@ -259,7 +260,7 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
                         },
                         child: Icon(
                           Icons.clear,
-                          color: themeProvider.textColor.withOpacity(0.6),
+                          color: themeProvider.textColor.withAlpha(153),
                           size: 20,
                         ),
                       ),
@@ -297,7 +298,7 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              color: themeProvider.dividerColor.withOpacity(0.1),
+              color: themeProvider.dividerColor.withAlpha(26),
               width: 1,
             ),
           ),
@@ -307,7 +308,7 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
             Icon(
               Icons.search,
               size: 16,
-              color: themeProvider.textColor.withOpacity(0.4),
+              color: themeProvider.textColor.withAlpha(102),
             ),
             SizedBox(width: 12),
             Expanded(
@@ -328,7 +329,7 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
                     term.definition,
                     style: TextStyle(
                       fontSize: 12,
-                      color: themeProvider.subtitleColor.withOpacity(0.6),
+                      color: themeProvider.subtitleColor.withAlpha(153),
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -339,14 +340,14 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: _getCategoryColor(term.category).withOpacity(0.1),
+                color: CategoryColors.getCategoryBackgroundColor(term.category),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
                 term.category.displayName,
                 style: TextStyle(
                   fontSize: 10,
-                  color: _getCategoryColor(term.category),
+                  color: CategoryColors.getCategoryColor(term.category),
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -418,26 +419,4 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
     ];
   }
 
-  Color _getCategoryColor(TermCategory category) {
-    switch (category) {
-      case TermCategory.approval:
-        return Color(0xFF5A8DEE);
-      case TermCategory.business:
-        return Color(0xFF42A5F5);
-      case TermCategory.marketing:
-        return Color(0xFF66BB6A);
-      case TermCategory.it:
-        return Color(0xFFFF7043);
-      case TermCategory.hr:
-        return Color(0xFFAB47BC);
-      case TermCategory.communication:
-        return Color(0xFFFFCA28);
-      case TermCategory.time:
-        return Color(0xFFEF5350);
-      case TermCategory.other:
-        return Color(0xFF78909C);
-      case TermCategory.bookmarked:
-        return Color(0xFFFFCA28);
-    }
-  }
 }

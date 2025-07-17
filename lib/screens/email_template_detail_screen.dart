@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../models/email_template.dart';
 import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
+import '../constants/category_colors.dart';
 
 class EmailTemplateDetailScreen extends StatelessWidget {
   final EmailTemplate template;
@@ -75,12 +76,12 @@ class EmailTemplateDetailScreen extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: _getCategoryColor().withOpacity(0.1),
+                    color: CategoryColors.getEmailCategoryBackgroundColor(template.category),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
                     _getCategoryIcon(),
-                    color: _getCategoryColor(),
+                    color: CategoryColors.getEmailCategoryColor(template.category),
                     size: 24,
                   ),
                 ),
@@ -101,14 +102,14 @@ class EmailTemplateDetailScreen extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: _getCategoryColor().withOpacity(0.1),
+                          color: CategoryColors.getEmailCategoryBackgroundColor(template.category),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           template.category.displayName,
                           style: TextStyle(
                             fontSize: 12,
-                            color: _getCategoryColor(),
+                            color: CategoryColors.getEmailCategoryColor(template.category),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -263,7 +264,7 @@ class EmailTemplateDetailScreen extends StatelessWidget {
                     color: themeProvider.backgroundColor,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: themeProvider.dividerColor.withOpacity(0.3),
+                      color: themeProvider.dividerColor.withAlpha(77),
                     ),
                   ),
                   child: Text(
@@ -339,7 +340,7 @@ class EmailTemplateDetailScreen extends StatelessWidget {
                           width: 20,
                           height: 20,
                           decoration: BoxDecoration(
-                            color: Color(0xFF5A8DEE).withOpacity(0.1),
+                            color: Color(0xFF5A8DEE).withAlpha(26),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(
@@ -450,18 +451,4 @@ ${template.tips.asMap().entries.map((entry) => '${entry.key + 1}. ${entry.value}
     }
   }
 
-  Color _getCategoryColor() {
-    switch (template.category) {
-      case EmailCategory.request:
-        return Color(0xFF5A8DEE);
-      case EmailCategory.report:
-        return Color(0xFF42A5F5);
-      case EmailCategory.meeting:
-        return Color(0xFF66BB6A);
-      case EmailCategory.apology:
-        return Color(0xFFFF7043);
-      case EmailCategory.general:
-        return Color(0xFF78909C);
-    }
-  }
 }

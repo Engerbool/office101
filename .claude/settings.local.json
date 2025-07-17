@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(flutter test:*)",
+      "Bash(flutter run:*)",
+      "Bash(npm install:*)",
+      "Bash(ccusage --help)"
+    ],
+    "deny": []
+  }
+}

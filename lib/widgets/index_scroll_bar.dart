@@ -81,14 +81,14 @@ class _IndexScrollBarState extends State<IndexScrollBar>
                 width: 32,
                 margin: EdgeInsets.only(right: 8, top: 80, bottom: 80),
                 decoration: BoxDecoration(
-                  color: Color(0xFF5A8DEE).withOpacity(0.4),
+                  color: Color(0xFF5A8DEE).withAlpha(102),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16),
                     bottomLeft: Radius.circular(16),
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
+                      color: Colors.black.withAlpha(26),
                       blurRadius: 8,
                       offset: Offset(-2, 0),
                     ),
@@ -121,7 +121,7 @@ class _IndexScrollBarState extends State<IndexScrollBar>
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: isSelected 
-                ? Colors.white.withOpacity(0.3)
+                ? Colors.white.withAlpha(77)
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(9),
           ),
@@ -132,7 +132,7 @@ class _IndexScrollBarState extends State<IndexScrollBar>
               fontWeight: isAvailable ? FontWeight.bold : FontWeight.normal,
               color: isAvailable 
                   ? (isSelected ? Colors.white : Colors.white)
-                  : Colors.white.withOpacity(0.5),
+                  : Colors.white.withAlpha(128),
             ),
           ),
         ),
@@ -179,11 +179,11 @@ class IndexIndicator extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           decoration: BoxDecoration(
-            color: Color(0xFF5A8DEE).withOpacity(0.9),
+            color: Color(0xFF5A8DEE).withAlpha(230),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: themeProvider.shadowColor.withOpacity(0.3),
+                color: themeProvider.shadowColor.withAlpha(77),
                 blurRadius: 8,
                 offset: Offset(0, 2),
               ),

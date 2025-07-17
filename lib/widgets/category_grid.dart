@@ -4,6 +4,7 @@ import '../models/term.dart';
 import '../providers/term_provider.dart';
 import '../screens/category_terms_screen.dart';
 import 'neumorphic_container.dart';
+import '../constants/category_colors.dart';
 
 class CategoryGrid extends StatelessWidget {
   @override
@@ -45,12 +46,12 @@ class CategoryGrid extends StatelessWidget {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      color: _getCategoryColor(category).withOpacity(0.1),
+                      color: CategoryColors.getCategoryBackgroundColor(category),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Icon(
                       _getCategoryIcon(category),
-                      color: _getCategoryColor(category),
+                      color: CategoryColors.getCategoryColor(category),
                       size: 28,
                     ),
                   ),
@@ -71,7 +72,7 @@ class CategoryGrid extends StatelessWidget {
                     '$termCount개 용어',
                     style: TextStyle(
                       fontSize: 12,
-                      color: Color(0xFF4F5A67).withOpacity(0.6),
+                      color: Color(0xFF4F5A67).withAlpha(153),
                     ),
                   ),
                 ],
@@ -97,6 +98,8 @@ class CategoryGrid extends StatelessWidget {
         return Icons.people;
       case TermCategory.communication:
         return Icons.chat_bubble;
+      case TermCategory.time:
+        return Icons.schedule;
       case TermCategory.other:
         return Icons.more_horiz;
       case TermCategory.bookmarked:
@@ -104,24 +107,4 @@ class CategoryGrid extends StatelessWidget {
     }
   }
 
-  Color _getCategoryColor(TermCategory category) {
-    switch (category) {
-      case TermCategory.approval:
-        return Color(0xFF5A8DEE);
-      case TermCategory.business:
-        return Color(0xFF42A5F5);
-      case TermCategory.marketing:
-        return Color(0xFF66BB6A);
-      case TermCategory.it:
-        return Color(0xFFFF7043);
-      case TermCategory.hr:
-        return Color(0xFFAB47BC);
-      case TermCategory.communication:
-        return Color(0xFFFFCA28);
-      case TermCategory.other:
-        return Color(0xFF78909C);
-      case TermCategory.bookmarked:
-        return Color(0xFFFFCA28);
-    }
-  }
 }

@@ -6,7 +6,6 @@ import '../widgets/autocomplete_search_bar.dart';
 import '../widgets/term_list_widget.dart';
 import '../widgets/error_display_widget.dart';
 import '../widgets/performance_indicator.dart';
-import '../models/term.dart';
 import 'term_detail_screen.dart';
 
 class TermSearchScreen extends StatefulWidget {
@@ -155,7 +154,7 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
             Icon(
               Icons.search,
               size: 80,
-              color: themeProvider.textColor.withOpacity(0.3),
+              color: themeProvider.textColor.withAlpha(77),
             ),
             SizedBox(height: 24),
             Text(
@@ -171,7 +170,7 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
               '궁금한 직장 용어를 검색해보세요.\n용어명, 정의, 태그로 검색할 수 있습니다.',
               style: TextStyle(
                 fontSize: 16,
-                color: themeProvider.subtitleColor.withOpacity(0.6),
+                color: themeProvider.subtitleColor.withAlpha(153),
                 height: 1.5,
               ),
               textAlign: TextAlign.center,
@@ -199,7 +198,7 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: BoxDecoration(
-            color: Color(0xFF5A8DEE).withOpacity(0.1),
+            color: Color(0xFF5A8DEE).withAlpha(26),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
@@ -221,12 +220,12 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
             icon: Icon(
               Icons.clear,
               size: 16,
-              color: themeProvider.subtitleColor.withOpacity(0.6),
+              color: themeProvider.subtitleColor.withAlpha(153),
             ),
             label: Text(
               '초기화',
               style: TextStyle(
-                color: themeProvider.subtitleColor.withOpacity(0.6),
+                color: themeProvider.subtitleColor.withAlpha(153),
               ),
             ),
           ),
@@ -244,7 +243,7 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
             Icon(
               Icons.search_off,
               size: 80,
-              color: themeProvider.textColor.withOpacity(0.3),
+              color: themeProvider.textColor.withAlpha(77),
             ),
             SizedBox(height: 24),
             Text(
@@ -260,7 +259,7 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
               '"${termProvider.searchQuery}"에 대한\n검색 결과를 찾을 수 없습니다.',
               style: TextStyle(
                 fontSize: 16,
-                color: themeProvider.subtitleColor.withOpacity(0.6),
+                color: themeProvider.subtitleColor.withAlpha(153),
                 height: 1.5,
               ),
               textAlign: TextAlign.center,
@@ -273,7 +272,7 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: themeProvider.textColor.withOpacity(0.8),
+                    color: themeProvider.textColor.withAlpha(204),
                   ),
                 ),
                 SizedBox(height: 8),
@@ -281,7 +280,7 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
                   '• 검색어의 철자가 정확한지 확인\n• 다른 키워드로 검색\n• 더 간단한 검색어 사용',
                   style: TextStyle(
                     fontSize: 13,
-                    color: themeProvider.subtitleColor.withOpacity(0.6),
+                    color: themeProvider.subtitleColor.withAlpha(153),
                     height: 1.4,
                   ),
                   textAlign: TextAlign.left,

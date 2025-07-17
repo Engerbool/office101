@@ -29,7 +29,7 @@ class SearchBarWidget extends StatelessWidget {
               children: [
                 Icon(
                   Icons.search,
-                  color: themeProvider.textColor.withOpacity(0.6),
+                  color: themeProvider.textColor.withAlpha(153),
                   size: 24,
                 ),
                 SizedBox(width: 12),
@@ -40,7 +40,7 @@ class SearchBarWidget extends StatelessWidget {
                     decoration: InputDecoration(
                       hintText: hintText ?? '용어를 검색해보세요...',
                       hintStyle: TextStyle(
-                        color: themeProvider.subtitleColor.withOpacity(0.5),
+                        color: themeProvider.subtitleColor.withAlpha(128),
                         fontSize: 16,
                       ),
                       border: InputBorder.none,
@@ -60,7 +60,7 @@ class SearchBarWidget extends StatelessWidget {
                     },
                     child: Icon(
                       Icons.clear,
-                      color: themeProvider.textColor.withOpacity(0.6),
+                      color: themeProvider.textColor.withAlpha(153),
                       size: 20,
                     ),
                   ),

@@ -62,7 +62,6 @@ class ThemeProvider extends ChangeNotifier {
     }
     
     try {
-      final oldTheme = _isDarkMode;
       _isDarkMode = isDark;
       await _settingsBox?.put(_themeKey, _isDarkMode);
       notifyListeners();
@@ -123,6 +122,7 @@ class ThemeProvider extends ChangeNotifier {
   Color get backgroundColor => _isDarkMode ? const Color(0xFF1A1A1A) : const Color(0xFFEBF0F5);
   Color get cardColor => _isDarkMode ? const Color(0xFF2A2A2A) : const Color(0xFFEBF0F5);
   Color get textColor => _isDarkMode ? const Color(0xFFE5E5E5) : const Color(0xFF4F5A67);
+  Color get secondaryTextColor => _isDarkMode ? const Color(0xFFB0B0B0) : const Color(0xFF6B7280);
   Color get subtitleColor => _isDarkMode ? const Color(0xFFB0B0B0) : const Color(0xFF4F5A67);
   Color get shadowColor => _isDarkMode ? const Color(0xFF000000) : const Color(0xFFA6B4C4);
   Color get highlightColor => _isDarkMode ? const Color(0xFF3A3A3A) : const Color(0xFFFFFFFF);

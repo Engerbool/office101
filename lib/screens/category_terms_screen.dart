@@ -4,6 +4,7 @@ import '../models/term.dart';
 import '../providers/term_provider.dart';
 import '../widgets/term_list_widget.dart';
 import '../widgets/error_display_widget.dart';
+import '../constants/category_colors.dart';
 
 class CategoryTermsScreen extends StatelessWidget {
   final TermCategory category;
@@ -70,12 +71,12 @@ class CategoryTermsScreen extends StatelessWidget {
           width: 48,
           height: 48,
           decoration: BoxDecoration(
-            color: _getCategoryColor().withOpacity(0.1),
+            color: CategoryColors.getCategoryBackgroundColor(category),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Icon(
             _getCategoryIcon(),
-            color: _getCategoryColor(),
+            color: CategoryColors.getCategoryColor(category),
             size: 28,
           ),
         ),
@@ -97,7 +98,7 @@ class CategoryTermsScreen extends StatelessWidget {
                 '$termCount개의 용어',
                 style: TextStyle(
                   fontSize: 14,
-                  color: Color(0xFF4F5A67).withOpacity(0.6),
+                  color: Color(0xFF4F5A67).withAlpha(153),
                 ),
               ),
             ],
@@ -130,28 +131,6 @@ class CategoryTermsScreen extends StatelessWidget {
     }
   }
 
-  Color _getCategoryColor() {
-    switch (category) {
-      case TermCategory.approval:
-        return Color(0xFF5A8DEE);
-      case TermCategory.business:
-        return Color(0xFF42A5F5);
-      case TermCategory.marketing:
-        return Color(0xFF66BB6A);
-      case TermCategory.it:
-        return Color(0xFFFF7043);
-      case TermCategory.hr:
-        return Color(0xFFAB47BC);
-      case TermCategory.communication:
-        return Color(0xFFFFCA28);
-      case TermCategory.time:
-        return Color(0xFFEF5350);
-      case TermCategory.bookmarked:
-        return Color(0xFFFFB74D);
-      case TermCategory.other:
-        return Color(0xFF78909C);
-    }
-  }
   
   Widget _buildEmptyCategoryState(BuildContext context) {
     return Center(
@@ -164,13 +143,13 @@ class CategoryTermsScreen extends StatelessWidget {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: _getCategoryColor().withOpacity(0.1),
+                color: CategoryColors.getCategoryBackgroundColor(category),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Icon(
                 _getCategoryIcon(),
                 size: 40,
-                color: _getCategoryColor(),
+                color: CategoryColors.getCategoryColor(category),
               ),
             ),
             SizedBox(height: 24),
@@ -190,7 +169,7 @@ class CategoryTermsScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,
-                color: Color(0xFF4F5A67).withOpacity(0.7),
+                color: Color(0xFF4F5A67).withAlpha(179),
                 height: 1.4,
               ),
             ),

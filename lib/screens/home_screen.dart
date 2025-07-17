@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/term_provider.dart';
-import '../models/term.dart';
 import '../widgets/neumorphic_container.dart';
 import '../widgets/search_bar_widget.dart';
 import '../widgets/category_grid.dart';
@@ -79,7 +78,7 @@ class HomeScreen extends StatelessWidget {
               '직장생활이 처음이신가요?\n여기서 필요한 모든 정보를 찾아보세요!',
               style: TextStyle(
                 fontSize: 16,
-                color: Color(0xFF4F5A67).withOpacity(0.8),
+                color: Color(0xFF4F5A67).withAlpha(204),
                 height: 1.5,
               ),
             ),
@@ -182,7 +181,7 @@ class HomeScreen extends StatelessWidget {
                 subtitle,
                 style: TextStyle(
                   fontSize: 12,
-                  color: Color(0xFF4F5A67).withOpacity(0.7),
+                  color: Color(0xFF4F5A67).withAlpha(179),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -279,7 +278,7 @@ class HomeScreen extends StatelessWidget {
             Icon(
               Icons.library_books_outlined,
               size: 64,
-              color: Color(0xFF5A8DEE).withOpacity(0.6),
+              color: Color(0xFF5A8DEE).withAlpha(153),
             ),
             SizedBox(height: 16),
             Text(
@@ -296,7 +295,7 @@ class HomeScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,
-                color: Color(0xFF4F5A67).withOpacity(0.7),
+                color: Color(0xFF4F5A67).withAlpha(179),
                 height: 1.4,
               ),
             ),

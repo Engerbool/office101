@@ -42,24 +42,24 @@ class NeumorphicContainer extends StatelessWidget {
         boxShadow: isPressed
             ? [
                 BoxShadow(
-                  color: effectiveShadowColor.withOpacity(0.2),
+                  color: effectiveShadowColor.withAlpha(51),
                   offset: Offset(2, 2),
                   blurRadius: depth,
                 ),
                 BoxShadow(
-                  color: effectiveHighlightColor.withOpacity(0.7),
+                  color: effectiveHighlightColor.withAlpha(179),
                   offset: Offset(-2, -2),
                   blurRadius: depth,
                 ),
               ]
             : [
                 BoxShadow(
-                  color: effectiveShadowColor.withOpacity(0.3),
+                  color: effectiveShadowColor.withAlpha(77),
                   offset: Offset(depth, depth),
                   blurRadius: depth * 2,
                 ),
                 BoxShadow(
-                  color: effectiveHighlightColor.withOpacity(0.8),
+                  color: effectiveHighlightColor.withAlpha(204),
                   offset: Offset(-depth, -depth),
                   blurRadius: depth * 2,
                 ),

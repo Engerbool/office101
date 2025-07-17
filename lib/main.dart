@@ -7,8 +7,6 @@ import 'services/database_service.dart';
 import 'services/error_service.dart';
 import 'providers/term_provider.dart';
 import 'providers/theme_provider.dart';
-import 'screens/main_navigation_screen.dart';
-import 'screens/landing_screen.dart';
 import 'screens/splash_screen.dart';
 
 void main() async {

@@ -6,6 +6,7 @@ import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
 import '../widgets/error_display_widget.dart';
 import 'category_tips_screen.dart';
+import '../constants/category_colors.dart';
 
 class WorkplaceTipsScreen extends StatelessWidget {
   @override
@@ -67,7 +68,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
           '궁금한 분야를 선택해서 맞춤 꿀팁을 확인해보세요',
           style: TextStyle(
             fontSize: 14,
-            color: themeProvider.subtitleColor.withOpacity(0.7),
+            color: themeProvider.subtitleColor.withAlpha(179),
           ),
         ),
         SizedBox(height: 24),
@@ -99,7 +100,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
                 Icon(
                   Icons.lightbulb_outline,
                   size: 64,
-                  color: Color(0xFF5A8DEE).withOpacity(0.6),
+                  color: Color(0xFF5A8DEE).withAlpha(153),
                 ),
                 SizedBox(height: 16),
                 Text(
@@ -116,7 +117,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
-                    color: themeProvider.textColor.withOpacity(0.7),
+                    color: themeProvider.textColor.withAlpha(179),
                     height: 1.4,
                   ),
                 ),
@@ -169,12 +170,12 @@ class WorkplaceTipsScreen extends StatelessWidget {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: _getCategoryColor(category).withOpacity(0.1),
+                  color: CategoryColors.getTipCategoryBackgroundColor(category),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
                   _getCategoryIcon(category),
-                  color: _getCategoryColor(category),
+                  color: CategoryColors.getTipCategoryColor(category),
                   size: 24,
                 ),
               ),
@@ -196,7 +197,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
                       '${tips.length}개의 꿀팁',
                       style: TextStyle(
                         fontSize: 14,
-                        color: themeProvider.subtitleColor.withOpacity(0.7),
+                        color: themeProvider.subtitleColor.withAlpha(179),
                       ),
                     ),
                   ],
@@ -205,7 +206,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
               Icon(
                 Icons.arrow_forward_ios,
                 size: 16,
-                color: themeProvider.subtitleColor.withOpacity(0.4),
+                color: themeProvider.subtitleColor.withAlpha(102),
               ),
             ],
           ),
@@ -232,21 +233,5 @@ class WorkplaceTipsScreen extends StatelessWidget {
     }
   }
 
-  Color _getCategoryColor(TipCategory category) {
-    switch (category) {
-      case TipCategory.basic_attitude:
-        return Color(0xFF5A8DEE);
-      case TipCategory.reporting:
-        return Color(0xFF42A5F5);
-      case TipCategory.todo_management:
-        return Color(0xFF66BB6A);
-      case TipCategory.communication:
-        return Color(0xFFFF7043);
-      case TipCategory.self_growth:
-        return Color(0xFFAB47BC);
-      case TipCategory.general:
-        return Color(0xFF78909C);
-    }
-  }
 
 }

@@ -1,6 +1,5 @@
 import 'package:hive/hive.dart';
 import 'package:flutter/services.dart';
-import 'dart:convert';
 import '../models/term.dart';
 import '../models/email_template.dart';
 import '../models/workplace_tip.dart';

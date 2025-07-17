@@ -6,14 +6,10 @@ import '../providers/term_provider.dart';
 import '../providers/theme_provider.dart';
 import '../models/term.dart';
 import '../widgets/neumorphic_container.dart';
-import '../widgets/search_bar_widget.dart';
 import '../widgets/autocomplete_search_bar.dart';
 import '../widgets/category_filter_chips.dart';
-import '../widgets/term_list_widget.dart';
 import '../widgets/index_scroll_bar.dart';
 import '../widgets/error_display_widget.dart';
-import '../widgets/performance_indicator.dart';
-import '../utils/korean_sort_utils.dart';
 import 'term_search_screen.dart';
 import 'term_detail_screen.dart';
 import 'add_term_screen.dart';
@@ -323,11 +319,11 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
                                 width: 48,
                                 height: 48,
                                 decoration: BoxDecoration(
-                                  color: Color(0xFF5A8DEE).withOpacity(0.9),
+                                  color: Color(0xFF5A8DEE).withAlpha(230),
                                   borderRadius: BorderRadius.circular(24),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withOpacity(0.2),
+                                      color: Colors.black.withAlpha(51),
                                       blurRadius: 8,
                                       offset: Offset(0, 2),
                                     ),
@@ -350,46 +346,6 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
           ),
         );
       },
-    );
-  }
-
-  Widget _buildWelcomeSection() {
-    return NeumorphicContainer(
-      child: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.book,
-                  color: Color(0xFF5A8DEE),
-                  size: 28,
-                ),
-                SizedBox(width: 12),
-                Text(
-                  '용어사전',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF4F5A67),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 8),
-            Text(
-              '모르는 직장 용어를 쉽게 찾아보세요!\n카테고리별 검색으로 더 빠르게 찾을 수 있습니다.',
-              style: TextStyle(
-                fontSize: 16,
-                color: Color(0xFF4F5A67).withOpacity(0.8),
-                height: 1.5,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -545,7 +501,7 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
-                                color: Color(0xFF5A8DEE).withOpacity(0.1),
+                                color: Color(0xFF5A8DEE).withAlpha(26),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Text(

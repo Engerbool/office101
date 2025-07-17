@@ -6,6 +6,7 @@ import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
 import '../widgets/error_display_widget.dart';
 import 'workplace_tip_detail_screen.dart';
+import '../constants/category_colors.dart';
 
 class WorkplaceTipsScreen extends StatelessWidget {
   @override
@@ -81,7 +82,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
                 Icon(
                   Icons.lightbulb_outline,
                   size: 64,
-                  color: Color(0xFF5A8DEE).withOpacity(0.6),
+                  color: Color(0xFF5A8DEE).withAlpha(153),
                 ),
                 SizedBox(height: 16),
                 Text(
@@ -98,7 +99,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
-                    color: themeProvider.textColor.withOpacity(0.7),
+                    color: themeProvider.textColor.withAlpha(179),
                     height: 1.4,
                   ),
                 ),
@@ -108,15 +109,16 @@ class WorkplaceTipsScreen extends StatelessWidget {
                     onPressed: () {
                       Provider.of<TermProvider>(context, listen: false).retryLoadData();
                     },
-                  icon: Icon(
-                    Icons.refresh,
-                    color: Color(0xFF5A8DEE),
-                  ),
-                  label: Text(
-                    '다시 시도',
-                    style: TextStyle(
+                    icon: Icon(
+                      Icons.refresh,
                       color: Color(0xFF5A8DEE),
-                      fontWeight: FontWeight.bold,
+                    ),
+                    label: Text(
+                      '다시 시도',
+                      style: TextStyle(
+                        color: Color(0xFF5A8DEE),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -144,12 +146,12 @@ class WorkplaceTipsScreen extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: _getCategoryColor(category).withOpacity(0.1),
+                    color: CategoryColors.getTipCategoryBackgroundColor(category),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
                     _getCategoryIcon(category),
-                    color: _getCategoryColor(category),
+                    color: CategoryColors.getTipCategoryColor(category),
                     size: 24,
                   ),
                 ),
@@ -170,7 +172,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
                         '${tips.length}개 팁',
                         style: TextStyle(
                           fontSize: 14,
-                          color: themeProvider.subtitleColor.withOpacity(0.6),
+                          color: themeProvider.subtitleColor.withAlpha(153),
                         ),
                       ),
                     ],
@@ -204,7 +206,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
             color: themeProvider.backgroundColor,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: themeProvider.dividerColor.withOpacity(0.3),
+              color: themeProvider.dividerColor.withAlpha(77),
             ),
           ),
           child: Column(
@@ -229,7 +231,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
                 tip.content,
                 style: TextStyle(
                   fontSize: 14,
-                  color: themeProvider.subtitleColor.withOpacity(0.7),
+                  color: themeProvider.subtitleColor.withAlpha(179),
                   height: 1.4,
                 ),
                 maxLines: 3,
@@ -282,25 +284,11 @@ class WorkplaceTipsScreen extends StatelessWidget {
         return Icons.check_box_outlined;
       case TipCategory.communication:
         return Icons.forum;
+      case TipCategory.self_growth:
+        return Icons.trending_up;
       case TipCategory.general:
         return Icons.work;
     }
   }
 
-  Color _getCategoryColor(TipCategory category) {
-    switch (category) {
-      case TipCategory.basic_attitude:
-        return Color(0xFF5A8DEE);
-      case TipCategory.reporting:
-        return Color(0xFF42A5F5);
-      case TipCategory.todo_management:
-        return Color(0xFF66BB6A);
-      case TipCategory.communication:
-        return Color(0xFFFFCA28);
-      case TipCategory.self_growth:
-        return Color(0xFFAB47BC);
-      case TipCategory.general:
-        return Color(0xFF78909C);
-    }
-  }
 }

@@ -5,6 +5,7 @@ import '../providers/term_provider.dart';
 import '../providers/theme_provider.dart';
 import '../utils/haptic_utils.dart';
 import '../screens/term_detail_screen.dart';
+import '../constants/category_colors.dart';
 import 'neumorphic_container.dart';
 
 class SwipeableTermCard extends StatefulWidget {
@@ -133,7 +134,7 @@ class _SwipeableTermCardState extends State<SwipeableTermCard>
     return Container(
       height: widget.isCompact ? 80 : 120,
       decoration: BoxDecoration(
-        color: widget.term.isBookmarked ? Colors.red.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
+        color: widget.term.isBookmarked ? Colors.red.withAlpha(26) : Colors.orange.withAlpha(26),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -169,17 +170,21 @@ class _SwipeableTermCardState extends State<SwipeableTermCard>
   }
 
   Widget _buildTermCard(BuildContext context, ThemeProvider themeProvider) {
-    return GestureDetector(
-      onTap: () async {
-        await HapticUtils.lightTap();
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => TermDetailScreen(term: widget.term),
-          ),
-        );
-      },
-      child: NeumorphicContainer(
+    return Semantics(
+      label: '${widget.term.term} 용어 카드',
+      hint: '탭하여 자세한 정보를 확인하거나, 오른쪽으로 스와이프하여 북마크를 ${widget.term.isBookmarked ? "해제" : "추가"}할 수 있습니다',
+      button: true,
+      child: GestureDetector(
+        onTap: () async {
+          await HapticUtils.lightTap();
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TermDetailScreen(term: widget.term),
+            ),
+          );
+        },
+        child: NeumorphicContainer(
         backgroundColor: themeProvider.cardColor,
         shadowColor: themeProvider.shadowColor,
         highlightColor: themeProvider.highlightColor,
@@ -209,14 +214,14 @@ class _SwipeableTermCardState extends State<SwipeableTermCard>
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: _getCategoryColor(widget.term.category).withOpacity(0.1),
+                        color: CategoryColors.getCategoryBackgroundColor(widget.term.category),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
                         _getCategoryName(widget.term.category),
                         style: TextStyle(
                           fontSize: 10,
-                          color: _getCategoryColor(widget.term.category),
+                          color: CategoryColors.getCategoryColor(widget.term.category),
                           fontWeight: FontWeight.w500,
                         ),
                         maxLines: 1,
@@ -255,31 +260,10 @@ class _SwipeableTermCardState extends State<SwipeableTermCard>
           ),
         ),
       ),
+    ),
     );
   }
 
-  Color _getCategoryColor(TermCategory category) {
-    switch (category) {
-      case TermCategory.business:
-        return Color(0xFF5A8DEE);
-      case TermCategory.marketing:
-        return Color(0xFFFF6B6B);
-      case TermCategory.it:
-        return Color(0xFF4ECDC4);
-      case TermCategory.hr:
-        return Color(0xFFFFE66D);
-      case TermCategory.communication:
-        return Color(0xFFA8E6CF);
-      case TermCategory.approval:
-        return Color(0xFFFFB3BA);
-      case TermCategory.time:
-        return Color(0xFFB5EAD7);
-      case TermCategory.other:
-        return Color(0xFF78909C);
-      case TermCategory.bookmarked:
-        return Color(0xFFFFCA28);
-    }
-  }
 
   String _getCategoryName(TermCategory category) {
     switch (category) {

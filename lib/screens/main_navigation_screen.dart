@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/term_provider.dart';
 import '../providers/theme_provider.dart';
 import '../utils/haptic_utils.dart';
 import '../widgets/neumorphic_container.dart';
@@ -52,7 +51,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         color: themeProvider.backgroundColor,
         boxShadow: [
           BoxShadow(
-            color: themeProvider.shadowColor.withOpacity(0.3),
+            color: themeProvider.shadowColor.withAlpha(77),
             offset: Offset(0, -2),
             blurRadius: 8,
           ),
@@ -109,43 +108,49 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   }) {
     final isSelected = _currentIndex == index;
     
-    return GestureDetector(
-      onTap: () async {
-        await HapticUtils.navigation();
-        setState(() {
-          _currentIndex = index;
-        });
-      },
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 200),
-        child: NeumorphicContainer(
-          isPressed: isSelected,
-          borderRadius: 20,
-          depth: isSelected ? 2 : 4,
-          backgroundColor: themeProvider.cardColor,
-          shadowColor: themeProvider.shadowColor,
-          highlightColor: themeProvider.highlightColor,
-          child: Container(
-            width: 80,
-            height: 64,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  icon,
-                  size: 24,
-                  color: isSelected ? color : themeProvider.textColor.withOpacity(0.6),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  label,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                    color: isSelected ? color : themeProvider.textColor.withOpacity(0.6),
+    return Semantics(
+      label: '$label 탭',
+      hint: isSelected ? '현재 선택된 탭입니다' : '탭하여 $label 화면으로 이동',
+      button: true,
+      selected: isSelected,
+      child: GestureDetector(
+        onTap: () async {
+          await HapticUtils.navigation();
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 200),
+          child: NeumorphicContainer(
+            isPressed: isSelected,
+            borderRadius: 20,
+            depth: isSelected ? 2 : 4,
+            backgroundColor: themeProvider.cardColor,
+            shadowColor: themeProvider.shadowColor,
+            highlightColor: themeProvider.highlightColor,
+            child: Container(
+              width: 80,
+              height: 64,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    icon,
+                    size: 24,
+                    color: isSelected ? color : themeProvider.textColor.withAlpha(153),
                   ),
-                ),
-              ],
+                  SizedBox(height: 4),
+                  Text(
+                    label,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      color: isSelected ? color : themeProvider.textColor.withAlpha(153),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

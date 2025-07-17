@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../models/workplace_tip.dart';
 import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
+import '../constants/category_colors.dart';
 
 class WorkplaceTipDetailScreen extends StatelessWidget {
   final WorkplaceTip tip;
@@ -73,12 +74,12 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: _getCategoryColor().withOpacity(0.1),
+                    color: CategoryColors.getTipCategoryBackgroundColor(tip.category),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
                     _getCategoryIcon(),
-                    color: _getCategoryColor(),
+                    color: CategoryColors.getTipCategoryColor(tip.category),
                     size: 24,
                   ),
                 ),
@@ -101,14 +102,14 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
-                              color: _getCategoryColor().withOpacity(0.1),
+                              color: CategoryColors.getTipCategoryBackgroundColor(tip.category),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
                               tip.category.displayName,
                               style: TextStyle(
                                 fontSize: 12,
-                                color: _getCategoryColor(),
+                                color: CategoryColors.getTipCategoryColor(tip.category),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -201,7 +202,6 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
                 ...tip.keyPoints.asMap().entries.map((entry) {
-                  final index = entry.key;
                   final point = entry.value;
                   return Padding(
                     padding: EdgeInsets.only(bottom: 12),
@@ -271,12 +271,12 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: _getCategoryColor().withOpacity(0.1),
+                    color: CategoryColors.getTipCategoryBackgroundColor(tip.category),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
                     _getCategoryIcon(),
-                    color: _getCategoryColor(),
+                    color: CategoryColors.getTipCategoryColor(tip.category),
                     size: 24,
                   ),
                 ),
@@ -336,20 +336,4 @@ ${tip.keyPoints.asMap().entries.map((entry) => '${entry.key + 1}. ${entry.value}
     }
   }
 
-  Color _getCategoryColor() {
-    switch (tip.category) {
-      case TipCategory.basic_attitude:
-        return Color(0xFF5A8DEE);
-      case TipCategory.reporting:
-        return Color(0xFF42A5F5);
-      case TipCategory.todo_management:
-        return Color(0xFF66BB6A);
-      case TipCategory.communication:
-        return Color(0xFFFFCA28);
-      case TipCategory.self_growth:
-        return Color(0xFFAB47BC);
-      case TipCategory.general:
-        return Color(0xFF78909C);
-    }
-  }
 }
