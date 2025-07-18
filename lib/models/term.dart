@@ -45,7 +45,7 @@ class Term extends HiveObject {
     if (!ValidationUtils.validateTermJson(json)) {
       throw ArgumentError('Invalid term JSON structure');
     }
-    
+
     return Term(
       termId: ValidationUtils.sanitizeString(json['term_id'] ?? ''),
       category: TermCategory.values.firstWhere(

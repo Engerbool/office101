@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
+import 'dart:io' show Platform;
+import '../utils/platform_utils.dart';
 import '../models/term.dart';
 import '../providers/term_provider.dart';
 import '../providers/theme_provider.dart';
 import '../widgets/neumorphic_container.dart';
+import '../utils/material_snackbar.dart';
+import '../utils/ios_icons.dart';
+import '../widgets/ios_navigation.dart';
+import '../utils/ios_dynamic_type.dart';
+import '../utils/haptic_utils.dart';
 import '../constants/category_colors.dart';
 
 class TermDetailScreen extends StatelessWidget {
@@ -18,37 +27,26 @@ class TermDetailScreen extends StatelessWidget {
       builder: (context, themeProvider, child) {
         return Scaffold(
           backgroundColor: themeProvider.backgroundColor,
-          appBar: AppBar(
-            title: Text(
-              '용어 상세',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: themeProvider.textColor,
-              ),
-            ),
-            backgroundColor: themeProvider.backgroundColor,
-            elevation: 0,
-            iconTheme: IconThemeData(color: themeProvider.textColor),
-            actions: [
-              Consumer<TermProvider>(
-                builder: (context, termProvider, child) {
-                  return IconButton(
-                    icon: Icon(
-                      term.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-                      color: term.isBookmarked ? Color(0xFFFFCA28) : themeProvider.textColor,
+          appBar: (!kIsWeb && PlatformUtils.isIOS)
+              ? IOSNavigationBar(
+                  title: '용어 상세',
+                  backgroundColor: themeProvider.backgroundColor,
+                  automaticallyImplyLeading: true,
+                  actions: _buildActions(context, themeProvider),
+                ) as PreferredSizeWidget?
+              : AppBar(
+                  title: Text(
+                    '용어 상세',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: themeProvider.textColor,
                     ),
-                    onPressed: () {
-                      termProvider.toggleBookmark(term.termId);
-                    },
-                  );
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.share),
-                onPressed: () => _shareTerm(context),
-              ),
-            ],
-          ),
+                  ),
+                  backgroundColor: themeProvider.backgroundColor,
+                  elevation: 0,
+                  iconTheme: IconThemeData(color: themeProvider.textColor),
+                  actions: _buildActions(context, themeProvider),
+                ),
           body: SingleChildScrollView(
             padding: EdgeInsets.all(16.0),
             child: Column(
@@ -270,7 +268,8 @@ class TermDetailScreen extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: CategoryColors.getCategoryBackgroundColor(term.category),
+                    color: CategoryColors.getCategoryBackgroundColor(
+                        term.category),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
@@ -325,6 +324,69 @@ class TermDetailScreen extends StatelessWidget {
     );
   }
 
+  List<Widget> _buildActions(BuildContext context, ThemeProvider themeProvider) {
+    return [
+      Consumer<TermProvider>(
+        builder: (context, termProvider, child) {
+          return Semantics(
+            label: term.isBookmarked ? '북마크 제거' : '북마크 추가',
+            hint: term.isBookmarked 
+                ? '현재 북마크되어 있습니다. 탭하여 북마크를 제거하세요'
+                : '북마크에 추가하려면 탭하세요',
+            button: true,
+            child: IconButton(
+              icon: Icon(
+                term.isBookmarked
+                    ? ((!kIsWeb && PlatformUtils.isIOS) ? IOSIcons.getIcon('bookmark') : Icons.bookmark)
+                    : ((!kIsWeb && PlatformUtils.isIOS) ? IOSIcons.getIcon('bookmark_border') : Icons.bookmark_border),
+                color: term.isBookmarked
+                    ? Color(0xFFFFCA28)
+                    : themeProvider.textColor,
+              ),
+              onPressed: () async {
+                if (!kIsWeb && PlatformUtils.isIOS) {
+                  await HapticUtils.lightTap();
+                }
+                
+                final wasBookmarked = term.isBookmarked;
+                termProvider.toggleBookmark(term.termId);
+                
+                // Material 스낵바로 피드백
+                if (wasBookmarked) {
+                  MaterialSnackBar.showUndo(
+                    context,
+                    message: '북마크에서 제거되었습니다',
+                    onUndo: () {
+                      termProvider.toggleBookmark(term.termId);
+                    },
+                  );
+                } else {
+                  MaterialSnackBar.showSuccess(
+                    context,
+                    message: '북마크에 추가되었습니다',
+                    actionLabel: '보기',
+                    onAction: () {
+                      Navigator.pushNamed(context, '/bookmarks');
+                    },
+                  );
+                }
+              },
+            ),
+          );
+        },
+      ),
+      Semantics(
+        label: '공유하기',
+        hint: '용어 정의를 다른 앱으로 공유하려면 탭하세요',
+        button: true,
+        child: IconButton(
+          icon: Icon((!kIsWeb && PlatformUtils.isIOS) ? IOSIcons.getIcon('share') : Icons.share),
+          onPressed: () => _shareTerm(context),
+        ),
+      ),
+    ];
+  }
+
   void _shareTerm(BuildContext context) {
     final shareText = '''
 ${term.term}
@@ -334,10 +396,11 @@ ${term.definition}
 ${term.example.isNotEmpty ? '예시: ${term.example}' : ''}
 
 - 직장생활은 처음이라 앱에서 공유
-    '''.trim();
+    '''
+        .trim();
 
     Clipboard.setData(ClipboardData(text: shareText));
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('용어 정보가 클립보드에 복사되었습니다'),
@@ -347,6 +410,31 @@ ${term.example.isNotEmpty ? '예시: ${term.example}' : ''}
   }
 
   IconData _getCategoryIcon() {
+    // iOS 플랫폼에서 iOS 아이콘 사용
+    if (!kIsWeb && PlatformUtils.isIOS) {
+      switch (term.category) {
+        case TermCategory.approval:
+          return IOSIcons.getIcon('settings');
+        case TermCategory.business:
+          return IOSIcons.getIcon('book');
+        case TermCategory.marketing:
+          return IOSIcons.getIcon('lightbulb');
+        case TermCategory.it:
+          return IOSIcons.getIcon('settings');
+        case TermCategory.hr:
+          return IOSIcons.getIcon('settings');
+        case TermCategory.communication:
+          return IOSIcons.getIcon('email');
+        case TermCategory.time:
+          return IOSIcons.getIcon('settings');
+        case TermCategory.other:
+          return IOSIcons.getIcon('settings');
+        case TermCategory.bookmarked:
+          return IOSIcons.getIcon('bookmark');
+      }
+    }
+    
+    // Android 기본 아이콘
     switch (term.category) {
       case TermCategory.approval:
         return Icons.approval;
@@ -368,5 +456,4 @@ ${term.example.isNotEmpty ? '예시: ${term.example}' : ''}
         return Icons.bookmark;
     }
   }
-
 }

@@ -4,21 +4,23 @@ class ValidationUtils {
   // 문자열 sanitization
   static String sanitizeString(String input) {
     if (input.isEmpty) return input;
-    
+
     // HTML 태그 제거
     String sanitized = input.replaceAll(RegExp(r'<[^>]*>'), '');
-    
+
     // 스크립트 태그 제거
-    sanitized = sanitized.replaceAll(RegExp(r'<script[^>]*>.*?</script>', 
-        caseSensitive: false, multiLine: true), '');
-    
+    sanitized = sanitized.replaceAll(
+        RegExp(r'<script[^>]*>.*?</script>',
+            caseSensitive: false, multiLine: true),
+        '');
+
     // 위험한 문자 이스케이프
     sanitized = sanitized.replaceAll(RegExp(r'[<>"]'), '');
     sanitized = sanitized.replaceAll("'", "");
-    
+
     // 연속된 공백 정리
     sanitized = sanitized.replaceAll(RegExp(r'\s+'), ' ').trim();
-    
+
     return sanitized;
   }
 
@@ -183,16 +185,17 @@ class ValidationUtils {
     if (input.trim().isEmpty) {
       return '입력값이 비어있습니다.';
     }
-    
+
     if (input.length > 200) {
       return '입력값이 너무 깁니다. (최대 200자)';
     }
-    
+
     // 위험한 패턴 검사
-    if (RegExp(r'<script|javascript:|data:|vbscript:', caseSensitive: false).hasMatch(input)) {
+    if (RegExp(r'<script|javascript:|data:|vbscript:', caseSensitive: false)
+        .hasMatch(input)) {
       return '허용되지 않는 내용이 포함되어 있습니다.';
     }
-    
+
     return null;
   }
 
@@ -201,16 +204,17 @@ class ValidationUtils {
     if (input.trim().isEmpty) {
       return '정의가 비어있습니다.';
     }
-    
+
     if (input.length > 2000) {
       return '정의가 너무 깁니다. (최대 2000자)';
     }
-    
+
     // 위험한 패턴 검사
-    if (RegExp(r'<script|javascript:|data:|vbscript:', caseSensitive: false).hasMatch(input)) {
+    if (RegExp(r'<script|javascript:|data:|vbscript:', caseSensitive: false)
+        .hasMatch(input)) {
       return '허용되지 않는 내용이 포함되어 있습니다.';
     }
-    
+
     return null;
   }
 

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'dart:io' show Platform;
+import '../utils/platform_utils.dart';
 import '../widgets/neumorphic_container.dart';
 import '../providers/theme_provider.dart';
+import '../utils/responsive_breakpoints.dart';
+import '../widgets/ios_navigation.dart';
+import '../utils/haptic_utils.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -10,7 +16,6 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _notificationsEnabled = true;
-  double _fontSize = 16.0;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       builder: (context, themeProvider, child) {
         return Scaffold(
           backgroundColor: themeProvider.backgroundColor,
-          appBar: _buildAppBar(themeProvider),
+          appBar: PlatformUtils.isIOS ? IOSNavigationBar(title: '설정') : _buildAppBar(themeProvider),
           body: SingleChildScrollView(
             padding: EdgeInsets.all(16),
             child: Column(
@@ -31,53 +36,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   icon: Icons.notifications,
                   title: '알림 설정',
                   subtitle: '새로운 콘텐츠 업데이트 알림',
-                  trailing: Switch(
-                    value: _notificationsEnabled,
-                    onChanged: (value) {
-                      setState(() {
-                        _notificationsEnabled = value;
-                      });
-                    },
-                    activeColor: Color(0xFF5A8DEE),
-                  ),
+                  trailing: PlatformUtils.isIOS
+                      ? CupertinoSwitch(
+                          value: _notificationsEnabled,
+                          onChanged: (value) async {
+                            await HapticUtils.toggleSwitch();
+                            setState(() {
+                              _notificationsEnabled = value;
+                            });
+                          },
+                          activeTrackColor: Color(0xFF5A8DEE),
+                        )
+                      : Switch(
+                          value: _notificationsEnabled,
+                          onChanged: (value) {
+                            setState(() {
+                              _notificationsEnabled = value;
+                            });
+                          },
+                          activeTrackColor: Color(0xFF5A8DEE),
+                        ),
                 ),
                 SizedBox(height: 16),
-                _buildSettingItem(
-                  themeProvider: themeProvider,
-                  icon: Icons.dark_mode,
-                  title: '다크 모드',
-                  subtitle: '어두운 테마 사용',
-                  trailing: Switch(
-                    value: themeProvider.isDarkMode,
-                    onChanged: (value) {
-                      themeProvider.toggleTheme();
-                    },
-                    activeColor: Color(0xFF5A8DEE),
-                  ),
-                ),
-                SizedBox(height: 16),
-                _buildSettingItem(
-                  themeProvider: themeProvider,
-                  icon: Icons.text_fields,
-                  title: '글자 크기',
-                  subtitle: '앱 전체 글자 크기 조정',
-                  trailing: Container(
-                    width: 120,
-                    child: Slider(
-                      value: _fontSize,
-                      min: 12.0,
-                      max: 20.0,
-                      divisions: 8,
-                      label: _fontSize.round().toString(),
-                      onChanged: (value) {
-                        setState(() {
-                          _fontSize = value;
-                        });
-                      },
-                      activeColor: Color(0xFF5A8DEE),
-                    ),
-                  ),
-                ),
+                _buildThemeSettingItem(themeProvider),
                 SizedBox(height: 32),
                 _buildSectionTitle('정보', themeProvider),
                 SizedBox(height: 16),
@@ -130,6 +111,133 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  Widget _buildThemeSettingItem(ThemeProvider themeProvider) {
+    return NeumorphicContainer(
+      borderRadius: ResponsiveValues<double>(
+        mobile: 16.0,
+        tablet: 18.0,
+        desktop: 20.0,
+      ),
+      depth: ResponsiveValues<double>(
+        mobile: 4.0,
+        tablet: 5.0,
+        desktop: 6.0,
+      ),
+      backgroundColor: themeProvider.cardColor,
+      shadowColor: themeProvider.shadowColor,
+      highlightColor: themeProvider.highlightColor,
+      child: Container(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF5A8DEE).withAlpha(26),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    Icons.palette,
+                    size: 24,
+                    color: Color(0xFF5A8DEE),
+                  ),
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '테마 설정',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: themeProvider.textColor,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        '앱 테마를 선택하세요',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: themeProvider.subtitleColor.withAlpha(153),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
+            ...AppThemeMode.values.map((mode) => _buildThemeOption(
+              themeProvider: themeProvider,
+              mode: mode,
+              isSelected: themeProvider.themeMode == mode,
+            )),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildThemeOption({
+    required ThemeProvider themeProvider,
+    required AppThemeMode mode,
+    required bool isSelected,
+  }) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 8),
+      child: GestureDetector(
+        onTap: () => themeProvider.setThemeMode(mode),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          decoration: BoxDecoration(
+            color: isSelected 
+                ? Color(0xFF5A8DEE).withAlpha(26)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(12),
+            border: isSelected 
+                ? Border.all(color: Color(0xFF5A8DEE), width: 2)
+                : null,
+          ),
+          child: Row(
+            children: [
+              Icon(
+                mode.icon,
+                size: 20,
+                color: isSelected 
+                    ? Color(0xFF5A8DEE)
+                    : themeProvider.textColor.withAlpha(153),
+              ),
+              SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  mode.displayName,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                    color: isSelected 
+                        ? Color(0xFF5A8DEE)
+                        : themeProvider.textColor,
+                  ),
+                ),
+              ),
+              if (isSelected)
+                Icon(
+                  Icons.check_circle,
+                  size: 18,
+                  color: Color(0xFF5A8DEE),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   PreferredSizeWidget _buildAppBar(ThemeProvider themeProvider) {
     return AppBar(
       backgroundColor: themeProvider.backgroundColor,
@@ -168,8 +276,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return GestureDetector(
       onTap: onTap,
       child: NeumorphicContainer(
-        borderRadius: 16,
-        depth: 4,
+        borderRadius: ResponsiveValues<double>(
+          mobile: 16.0,
+          tablet: 18.0,
+          desktop: 20.0,
+        ),
+        depth: ResponsiveValues<double>(
+          mobile: 4.0,
+          tablet: 5.0,
+          desktop: 6.0,
+        ),
         backgroundColor: themeProvider.cardColor,
         shadowColor: themeProvider.shadowColor,
         highlightColor: themeProvider.highlightColor,
@@ -284,7 +400,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text('피드백'),
-        content: Text('개선 사항이나 버그 신고는 앱 스토어 리뷰를 통해 제안해주세요. 더 나은 앱을 만들기 위해 노력하겠습니다.'),
+        content:
+            Text('개선 사항이나 버그 신고는 앱 스토어 리뷰를 통해 제안해주세요. 더 나은 앱을 만들기 위해 노력하겠습니다.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -318,5 +435,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ],
       ),
     );
+  }
+
+  String _getIOSIconName(IconData icon) {
+    if (icon == Icons.notifications) return 'notifications';
+    if (icon == Icons.info) return 'info';
+    if (icon == Icons.help) return 'help';
+    if (icon == Icons.feedback) return 'feedback';
+    if (icon == Icons.refresh) return 'refresh';
+    return 'help'; // default
   }
 }

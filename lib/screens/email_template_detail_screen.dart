@@ -9,7 +9,8 @@ import '../constants/category_colors.dart';
 class EmailTemplateDetailScreen extends StatelessWidget {
   final EmailTemplate template;
 
-  const EmailTemplateDetailScreen({Key? key, required this.template}) : super(key: key);
+  const EmailTemplateDetailScreen({Key? key, required this.template})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -76,12 +77,14 @@ class EmailTemplateDetailScreen extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: CategoryColors.getEmailCategoryBackgroundColor(template.category),
+                    color: CategoryColors.getEmailCategoryBackgroundColor(
+                        template.category),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
                     _getCategoryIcon(),
-                    color: CategoryColors.getEmailCategoryColor(template.category),
+                    color:
+                        CategoryColors.getEmailCategoryColor(template.category),
                     size: 24,
                   ),
                 ),
@@ -100,16 +103,19 @@ class EmailTemplateDetailScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 4),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: CategoryColors.getEmailCategoryBackgroundColor(template.category),
+                          color: CategoryColors.getEmailCategoryBackgroundColor(
+                              template.category),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           template.category.displayName,
                           style: TextStyle(
                             fontSize: 12,
-                            color: CategoryColors.getEmailCategoryColor(template.category),
+                            color: CategoryColors.getEmailCategoryColor(
+                                template.category),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -424,10 +430,11 @@ ${template.body}
 ${template.tips.asMap().entries.map((entry) => '${entry.key + 1}. ${entry.value}').join('\n')}
 
 - 직장생활은 처음이라 앱에서 제공
-    '''.trim();
+    '''
+        .trim();
 
     Clipboard.setData(ClipboardData(text: templateText));
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('이메일 템플릿이 클립보드에 복사되었습니다'),
@@ -450,5 +457,4 @@ ${template.tips.asMap().entries.map((entry) => '${entry.key + 1}. ${entry.value}
         return Icons.email;
     }
   }
-
 }

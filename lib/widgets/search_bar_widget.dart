@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
+import '../utils/responsive_helper.dart';
+import '../utils/responsive_breakpoints.dart';
 import 'neumorphic_container.dart';
 
 class SearchBarWidget extends StatelessWidget {
@@ -23,49 +25,83 @@ class SearchBarWidget extends StatelessWidget {
           backgroundColor: themeProvider.cardColor,
           shadowColor: themeProvider.shadowColor,
           highlightColor: themeProvider.highlightColor,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.search,
-                  color: themeProvider.textColor.withAlpha(153),
-                  size: 24,
+          padding: ResponsiveValues<EdgeInsets>(
+            mobile: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+            tablet: EdgeInsets.symmetric(horizontal: 20.0, vertical: 6.0),
+            desktop: EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+          ),
+          child: Row(
+            children: [
+              ResponsiveIcon(
+                Icons.search,
+                color: themeProvider.textColor.withAlpha(153),
+                size: ResponsiveValues<double>(
+                  mobile: 24,
+                  tablet: 26,
+                  desktop: 28,
                 ),
-                SizedBox(width: 12),
-                Expanded(
-                  child: TextField(
-                    controller: controller,
-                    onSubmitted: onSearch,
-                    decoration: InputDecoration(
-                      hintText: hintText ?? '용어를 검색해보세요...',
-                      hintStyle: TextStyle(
-                        color: themeProvider.subtitleColor.withAlpha(128),
-                        fontSize: 16,
+              ),
+              ResponsiveSizedBox.width(
+                ResponsiveValues<double>(
+                  mobile: 12,
+                  tablet: 14,
+                  desktop: 16,
+                ),
+              ),
+              Expanded(
+                child: ResponsiveBuilder(
+                  builder: (context, deviceType) {
+                    return TextField(
+                      controller: controller,
+                      onSubmitted: onSearch,
+                      decoration: InputDecoration(
+                        hintText: hintText ?? '용어를 검색해보세요...',
+                        hintStyle: TextStyle(
+                          color: themeProvider.subtitleColor.withAlpha(128),
+                          fontSize: ResponsiveValues<double>(
+                            mobile: 16,
+                            tablet: 17,
+                            desktop: 18,
+                          ).getValue(deviceType),
+                        ),
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: ResponsiveValues<double>(
+                            mobile: 12.0,
+                            tablet: 14.0,
+                            desktop: 16.0,
+                          ).getValue(deviceType),
+                        ),
                       ),
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(vertical: 12.0),
-                    ),
-                    style: TextStyle(
-                      color: themeProvider.textColor,
-                      fontSize: 16,
+                      style: TextStyle(
+                        color: themeProvider.textColor,
+                        fontSize: ResponsiveValues<double>(
+                          mobile: 16,
+                          tablet: 17,
+                          desktop: 18,
+                        ).getValue(deviceType),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              if (controller?.text.isNotEmpty == true)
+                GestureDetector(
+                  onTap: () {
+                    controller?.clear();
+                    onSearch('');
+                  },
+                  child: ResponsiveIcon(
+                    Icons.clear,
+                    color: themeProvider.textColor.withAlpha(153),
+                    size: ResponsiveValues<double>(
+                      mobile: 20,
+                      tablet: 22,
+                      desktop: 24,
                     ),
                   ),
                 ),
-                if (controller?.text.isNotEmpty == true)
-                  GestureDetector(
-                    onTap: () {
-                      controller?.clear();
-                      onSearch('');
-                    },
-                    child: Icon(
-                      Icons.clear,
-                      color: themeProvider.textColor.withAlpha(153),
-                      size: 20,
-                    ),
-                  ),
-              ],
-            ),
+            ],
           ),
         );
       },

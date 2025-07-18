@@ -1,11 +1,18 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
+import 'dart:io' show Platform;
+import '../utils/platform_utils.dart';
 import '../providers/term_provider.dart';
 import '../providers/theme_provider.dart';
 import '../models/term.dart';
 import '../widgets/neumorphic_container.dart';
+import '../utils/responsive_breakpoints.dart';
+import '../utils/ios_icons.dart';
+import '../utils/haptic_utils.dart';
 import '../widgets/autocomplete_search_bar.dart';
 import '../widgets/category_filter_chips.dart';
 import '../widgets/index_scroll_bar.dart';
@@ -23,13 +30,13 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
   final TextEditingController _searchController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _termsListKey = GlobalKey();
-  
+
   bool _showIndexBar = false;
   bool _showScrollToTopButton = false;
   List<String> _availableIndexes = [];
   Timer? _hideTimer;
   Timer? _hideScrollToTopTimer;
-  
+
   // ScrollView Observer 컨트롤러
   late ListObserverController _observerController;
 
@@ -51,7 +58,7 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
 
   void _onScroll() {
     if (!_scrollController.hasClients) return;
-    
+
     // 스크롤 위치에 따라 맨 위로 버튼 표시/숨김
     final showScrollToTop = _scrollController.offset > 300;
     if (_showScrollToTopButton != showScrollToTop) {
@@ -59,17 +66,17 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
         _showScrollToTopButton = showScrollToTop;
       });
     }
-    
+
     // 스크롤 중이면 인덱스 바 표시
     if (!_showIndexBar) {
       setState(() {
         _showIndexBar = true;
       });
     }
-    
+
     // 기존 타이머 취소 (스크롤 중에는 숨김 타이머 무효화)
     _hideTimer?.cancel();
-    
+
     // 스크롤이 멈춘 후 2초 뒤에 인덱스 바 숨기기
     _hideTimer = Timer(Duration(seconds: 2), () {
       if (mounted) {
@@ -86,22 +93,22 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
     if (termProvider.isProgressiveLoading) {
       return; // Progressive Loading 중에는 스크롤 이동 불가
     }
-    
+
     // 현재 표시된 용어 목록 가져오기
-    final termsToShow = termProvider.selectedCategory != null 
+    final termsToShow = termProvider.selectedCategory != null
         ? termProvider.getTermsByCategory(termProvider.selectedCategory!)
-        : (termProvider.searchQuery.isNotEmpty 
-            ? termProvider.filteredTerms 
+        : (termProvider.searchQuery.isNotEmpty
+            ? termProvider.filteredTerms
             : termProvider.allTerms);
-    
+
     // 해당 인덱스로 시작하는 첫 번째 단어 찾기
     final targetIndex = _findFirstTermIndexForCharacter(termsToShow, index);
-    
+
     if (targetIndex != -1 && targetIndex < termsToShow.length) {
       // 해당 인덱스 위치로 스크롤
       _scrollToTermIndex(targetIndex);
     }
-    
+
     // 인덱스 클릭 시 타이머 설정 (비주얼 피드백용)
     _hideTimer?.cancel();
     _hideTimer = Timer(Duration(seconds: 1), () {
@@ -112,7 +119,6 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
       }
     });
   }
-  
 
   void _scrollToTop() {
     _scrollController.animateTo(
@@ -120,7 +126,7 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
       duration: Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
-    
+
     setState(() {
       _showScrollToTopButton = false;
     });
@@ -133,7 +139,7 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
     if (result != -1) {
       return result;
     }
-    
+
     // 해당 문자가 없으면 다음 문자들 순서대로 검색
     final nextCharacters = _getNextCharacters(character);
     for (final nextChar in nextCharacters) {
@@ -142,7 +148,7 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
         return result;
       }
     }
-    
+
     return -1; // 모든 문자에서 찾지 못함
   }
 
@@ -151,7 +157,7 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
     for (int i = 0; i < terms.length; i++) {
       final term = terms[i];
       final firstChar = term.term.isNotEmpty ? term.term[0] : '';
-      
+
       // 한글 초성 체크
       if (character == '#') {
         // 숫자나 특수문자로 시작하는 경우
@@ -176,42 +182,124 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
 
   // 다음 문자들 목록 가져오기
   List<String> _getNextCharacters(String character) {
-    const allCharacters = ['#', 'ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ', 
-                          'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    
+    const allCharacters = [
+      '#',
+      'ㄱ',
+      'ㄴ',
+      'ㄷ',
+      'ㄹ',
+      'ㅁ',
+      'ㅂ',
+      'ㅅ',
+      'ㅇ',
+      'ㅈ',
+      'ㅊ',
+      'ㅋ',
+      'ㅌ',
+      'ㅍ',
+      'ㅎ',
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'W',
+      'X',
+      'Y',
+      'Z'
+    ];
+
     final currentIndex = allCharacters.indexOf(character);
     if (currentIndex == -1 || currentIndex >= allCharacters.length - 1) {
       return []; // 현재 문자가 없거나 마지막 문자인 경우
     }
-    
+
     // 현재 문자 다음부터 끝까지 반환
     return allCharacters.sublist(currentIndex + 1);
   }
 
   // 한글 자음인지 체크
   bool _isKoreanConsonant(String char) {
-    const koreanConsonants = ['ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'];
+    const koreanConsonants = [
+      'ㄱ',
+      'ㄴ',
+      'ㄷ',
+      'ㄹ',
+      'ㅁ',
+      'ㅂ',
+      'ㅅ',
+      'ㅇ',
+      'ㅈ',
+      'ㅊ',
+      'ㅋ',
+      'ㅌ',
+      'ㅍ',
+      'ㅎ'
+    ];
     return koreanConsonants.contains(char);
   }
 
   // 한글 문자의 초성 추출
   String _getKoreanInitial(String char) {
     if (char.isEmpty) return '';
-    
+
     final code = char.codeUnitAt(0);
     if (code >= 0xAC00 && code <= 0xD7A3) {
       // 한글 완성형 문자인 경우
       final initialIndex = ((code - 0xAC00) ~/ 588);
-      const initials = ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'];
+      const initials = [
+        'ㄱ',
+        'ㄲ',
+        'ㄴ',
+        'ㄷ',
+        'ㄸ',
+        'ㄹ',
+        'ㅁ',
+        'ㅂ',
+        'ㅃ',
+        'ㅅ',
+        'ㅆ',
+        'ㅇ',
+        'ㅈ',
+        'ㅉ',
+        'ㅊ',
+        'ㅋ',
+        'ㅌ',
+        'ㅍ',
+        'ㅎ'
+      ];
       if (initialIndex < initials.length) {
         // 쌍자음을 단자음으로 변환
         switch (initials[initialIndex]) {
-          case 'ㄲ': return 'ㄱ';
-          case 'ㄸ': return 'ㄷ';
-          case 'ㅃ': return 'ㅂ';
-          case 'ㅆ': return 'ㅅ';
-          case 'ㅉ': return 'ㅈ';
-          default: return initials[initialIndex];
+          case 'ㄲ':
+            return 'ㄱ';
+          case 'ㄸ':
+            return 'ㄷ';
+          case 'ㅃ':
+            return 'ㅂ';
+          case 'ㅆ':
+            return 'ㅅ';
+          case 'ㅉ':
+            return 'ㅈ';
+          default:
+            return initials[initialIndex];
         }
       }
     }
@@ -231,11 +319,53 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
       });
       return;
     }
-    
+
     // 비주얼 용도로만 사용 - 실제 로직은 제거
     // 임시 인덱스 리스트 생성 (비주얼 표시용)
-    _availableIndexes = ['#', 'ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    
+    _availableIndexes = [
+      '#',
+      'ㄱ',
+      'ㄴ',
+      'ㄷ',
+      'ㄹ',
+      'ㅁ',
+      'ㅂ',
+      'ㅅ',
+      'ㅇ',
+      'ㅈ',
+      'ㅊ',
+      'ㅋ',
+      'ㅌ',
+      'ㅍ',
+      'ㅎ',
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'W',
+      'X',
+      'Y',
+      'Z'
+    ];
+
     // 인덱스 바 상태는 스크롤 이벤트에서만 관리 (강제 숨김 제거)
   }
 
@@ -244,14 +374,15 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
     return Consumer2<TermProvider, ThemeProvider>(
       builder: (context, termProvider, themeProvider, child) {
         // 검색창이 비어있는데 TermProvider에 검색 쿼리가 있다면 필터 초기화 (일관성 유지)
-        if (termProvider.searchQuery.isNotEmpty && _searchController.text.isEmpty) {
+        if (termProvider.searchQuery.isNotEmpty &&
+            _searchController.text.isEmpty) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (mounted) {
               termProvider.clearFilters();
             }
           });
         }
-        
+
         return Scaffold(
           backgroundColor: themeProvider.backgroundColor,
           body: LoadingErrorWidget(
@@ -267,10 +398,13 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+                      padding:
+                          const EdgeInsets.only(top: 16, left: 16, right: 16),
                       child: Row(
                         children: [
-                          Expanded(child: _buildQuickSearchSection(context, themeProvider)),
+                          Expanded(
+                              child: _buildQuickSearchSection(
+                                  context, themeProvider)),
                           SizedBox(width: 12),
                           _buildAddButton(context, themeProvider),
                         ],
@@ -300,7 +434,7 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
                       isVisible: _showIndexBar,
                     ),
                   ),
-                
+
                 // 맨 위로 버튼
                 if (_showScrollToTopButton)
                   Positioned(
@@ -312,7 +446,12 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
                         opacity: _showScrollToTopButton ? 1.0 : 0.0,
                         duration: Duration(milliseconds: 300),
                         child: GestureDetector(
-                          onTap: _scrollToTop,
+                          onTap: () async {
+                            if (!kIsWeb && PlatformUtils.isIOS) {
+                              await HapticUtils.lightTap();
+                            }
+                            _scrollToTop();
+                          },
                           child: Consumer<ThemeProvider>(
                             builder: (context, themeProvider, child) {
                               return Container(
@@ -330,7 +469,7 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
                                   ],
                                 ),
                                 child: Icon(
-                                  Icons.keyboard_arrow_up,
+                                  (!kIsWeb && PlatformUtils.isIOS) ? IOSIcons.getIcon('expand_less') : Icons.keyboard_arrow_up,
                                   color: Colors.white,
                                   size: 28,
                                 ),
@@ -349,7 +488,8 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
     );
   }
 
-  Widget _buildQuickSearchSection(BuildContext context, ThemeProvider themeProvider) {
+  Widget _buildQuickSearchSection(
+      BuildContext context, ThemeProvider themeProvider) {
     return AutocompleteSearchBar(
       controller: _searchController,
       onSearch: (query) {
@@ -375,14 +515,21 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
 
   Widget _buildAddButton(BuildContext context, ThemeProvider themeProvider) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        if (!kIsWeb && PlatformUtils.isIOS) {
+          await HapticUtils.lightTap();
+        }
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => AddTermScreen()),
         );
       },
       child: NeumorphicContainer(
-        borderRadius: 20,
+        borderRadius: ResponsiveValues<double>(
+          mobile: 20.0,
+          tablet: 22.0,
+          desktop: 24.0,
+        ),
         backgroundColor: themeProvider.cardColor,
         shadowColor: themeProvider.shadowColor,
         highlightColor: themeProvider.highlightColor,
@@ -390,7 +537,7 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
           width: 48,
           height: 48,
           child: Icon(
-            Icons.add,
+            (!kIsWeb && PlatformUtils.isIOS) ? IOSIcons.getIcon('add') : Icons.add,
             color: Color(0xFF5A8DEE),
             size: 24,
           ),
@@ -401,19 +548,45 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
 
   Widget _buildFilteredTermsSection(TermProvider termProvider) {
     List<Term> termsToShow;
-    
+
     if (termProvider.selectedCategory != null) {
-      termsToShow = termProvider.getTermsByCategory(termProvider.selectedCategory!);
+      termsToShow =
+          termProvider.getTermsByCategory(termProvider.selectedCategory!);
     } else {
       // 전체 카테고리 선택 시: 검색어와 로컬 검색 컨트롤러 모두 확인
-      if (termProvider.searchQuery.isNotEmpty && _searchController.text.isNotEmpty) {
+      if (termProvider.searchQuery.isNotEmpty &&
+          _searchController.text.isNotEmpty) {
         termsToShow = termProvider.filteredTerms;
       } else {
         termsToShow = termProvider.allTerms;
       }
     }
-    
+
     if (termsToShow.isEmpty) {
+      // 북마크 카테고리일 때 특별한 빈 상태 처리
+      if (termProvider.selectedCategory == TermCategory.bookmarked) {
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                (!kIsWeb && PlatformUtils.isIOS) ? IOSIcons.getIcon('bookmark_border') : Icons.bookmark_border,
+                size: 64,
+                color: themeProvider.textColor.withValues(alpha: 0.6),
+              ),
+              SizedBox(height: 16),
+              Text(
+                '북마크가 없습니다',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: themeProvider.textColor,
+                ),
+              ),
+            ],
+          ),
+        );
+      }
       return SizedBox();
     }
 
@@ -443,19 +616,19 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
 
   List<Widget> _buildIndexedTermsList(TermProvider termProvider) {
     List<Widget> widgets = [];
-    
+
     // 로직 제거 - 단순히 전체 용어 리스트만 표시
-    final termsToShow = termProvider.selectedCategory != null 
+    final termsToShow = termProvider.selectedCategory != null
         ? termProvider.getTermsByCategory(termProvider.selectedCategory!)
-        : (termProvider.searchQuery.isNotEmpty 
-            ? termProvider.filteredTerms 
+        : (termProvider.searchQuery.isNotEmpty
+            ? termProvider.filteredTerms
             : termProvider.allTerms);
-    
+
     // 인덱스 섹션 없이 단순 리스트로 표시
     for (final term in termsToShow) {
       widgets.add(_buildTermCard(term, termProvider));
     }
-    
+
     return widgets;
   }
 
@@ -491,7 +664,9 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                color: themeProvider.isDarkMode ? themeProvider.textColor : Colors.black,
+                                color: themeProvider.isDarkMode
+                                    ? themeProvider.textColor
+                                    : Colors.black,
                               ),
                             ),
                           ),
@@ -499,7 +674,8 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
                           // 카테고리 표시 (전체 카테고리에서만)
                           if (termProvider.selectedCategory == null)
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
                                 color: Color(0xFF5A8DEE).withAlpha(26),
                                 borderRadius: BorderRadius.circular(12),
@@ -524,8 +700,12 @@ class _TermsTabScreenState extends State<TermsTabScreen> {
                       child: Container(
                         padding: EdgeInsets.all(4),
                         child: Icon(
-                          term.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-                          color: term.isBookmarked ? Color(0xFF5A8DEE) : Colors.grey,
+                          term.isBookmarked
+                              ? ((!kIsWeb && PlatformUtils.isIOS) ? IOSIcons.getIcon('bookmark') : Icons.bookmark)
+                              : ((!kIsWeb && PlatformUtils.isIOS) ? IOSIcons.getIcon('bookmark_border') : Icons.bookmark_border),
+                          color: term.isBookmarked
+                              ? Color(0xFF5A8DEE)
+                              : Colors.grey,
                           size: 22,
                         ),
                       ),

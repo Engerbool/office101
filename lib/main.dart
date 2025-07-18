@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
@@ -7,11 +8,13 @@ import 'services/database_service.dart';
 import 'services/error_service.dart';
 import 'providers/term_provider.dart';
 import 'providers/theme_provider.dart';
+import 'utils/material_colors.dart';
+import 'utils/platform_utils.dart';
 import 'screens/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Global error handling
   FlutterError.onError = (FlutterErrorDetails details) {
     final error = ErrorService.createUnknownError(
@@ -19,25 +22,31 @@ void main() async {
       details.stack,
     );
     ErrorService.logError(error);
-    
+
     // In debug mode, show the error
     if (kDebugMode) {
       FlutterError.presentError(details);
     }
   };
-  
+
   try {
     print('Main: Starting app initialization');
-    await Hive.initFlutter();
+    
+    // 병렬 초기화로 속도 개선
+    await Future.wait([
+      Hive.initFlutter(),
+      Future.delayed(Duration.zero), // 다른 초기화 작업이 추가될 수 있음
+    ]);
     print('Main: Hive initialized');
+    
     await DatabaseService.initialize();
     print('Main: DatabaseService initialized');
-    
+
     runApp(MyApp());
   } catch (e, stackTrace) {
     final error = ErrorService.createUnknownError(e, stackTrace);
     ErrorService.logError(error);
-    
+
     // Show error app
     runApp(ErrorApp(error: error));
   }
@@ -70,6 +79,14 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   }
 
   @override
+  void didChangePlatformBrightness() {
+    super.didChangePlatformBrightness();
+    // 시스템 테마 변경 감지
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    themeProvider.onSystemThemeChanged();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
@@ -78,32 +95,65 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
-          return MaterialApp(
-            title: '',
-            theme: themeProvider.lightTheme,
-            darkTheme: themeProvider.darkTheme,
-            themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-            home: SplashScreen(),
-            builder: (context, widget) {
-              // Global error boundary
-              ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
-                return _buildErrorWidget(context, errorDetails);
-              };
-              return widget ?? Container();
-            },
-          );
+          // ThemeProvider에 현재 컨텍스트 설정
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            themeProvider.setContext(context);
+          });
+          
+          if (PlatformUtils.isIOS) {
+            return CupertinoApp(
+              title: '직장생활은 처음이라',
+              theme: themeProvider.cupertinoTheme,
+              home: SplashScreen(),
+              builder: (context, widget) {
+                // Global error boundary
+                ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
+                  return _buildErrorWidget(context, errorDetails);
+                };
+                return widget ?? Container();
+              },
+            );
+          } else {
+            return MaterialApp(
+              title: '직장생활은 처음이라',
+              theme: MaterialTheme.lightTheme(),
+              darkTheme: MaterialTheme.darkTheme(),
+              themeMode: _getThemeMode(themeProvider),
+              home: SplashScreen(),
+              builder: (context, widget) {
+                // Global error boundary
+                ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
+                  return _buildErrorWidget(context, errorDetails);
+                };
+                return widget ?? Container();
+              },
+            );
+          }
         },
       ),
     );
   }
-  
-  Widget _buildErrorWidget(BuildContext context, FlutterErrorDetails errorDetails) {
+
+  /// 테마 모드 결정
+  ThemeMode _getThemeMode(ThemeProvider themeProvider) {
+    switch (themeProvider.themeMode) {
+      case AppThemeMode.system:
+        return ThemeMode.system;
+      case AppThemeMode.light:
+        return ThemeMode.light;
+      case AppThemeMode.dark:
+        return ThemeMode.dark;
+    }
+  }
+
+  Widget _buildErrorWidget(
+      BuildContext context, FlutterErrorDetails errorDetails) {
     final error = ErrorService.createUnknownError(
       errorDetails.exception,
       errorDetails.stack,
     );
     ErrorService.logError(error);
-    
+
     return Material(
       child: Container(
         color: Colors.red.shade50,
@@ -112,9 +162,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              Icons.error_outline,
+              PlatformUtils.isIOS ? CupertinoIcons.exclamationmark_circle : Icons.error_outline,
               size: 64,
-              color: Colors.red.shade600,
+              color: PlatformUtils.isIOS ? CupertinoColors.systemRed : Colors.red.shade600,
             ),
             const SizedBox(height: 16),
             Text(
@@ -144,9 +194,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 // Error app for critical initialization failures
 class ErrorApp extends StatelessWidget {
   final AppError error;
-  
+
   const ErrorApp({Key? key, required this.error}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -160,9 +210,9 @@ class ErrorApp extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.error_outline,
+                  PlatformUtils.isIOS ? CupertinoIcons.exclamationmark_circle : Icons.error_outline,
                   size: 72,
-                  color: Colors.red.shade600,
+                  color: PlatformUtils.isIOS ? CupertinoColors.systemRed : Colors.red.shade600,
                 ),
                 const SizedBox(height: 24),
                 Text(

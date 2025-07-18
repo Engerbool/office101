@@ -27,11 +27,11 @@ class ErrorDisplayWidget extends StatelessWidget {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
         final errorInfo = _getErrorInfo();
-        
+
         if (isCompact) {
           return _buildCompactError(context, themeProvider, errorInfo);
         }
-        
+
         return Center(
           child: Padding(
             padding: const EdgeInsets.all(24),
@@ -47,17 +47,17 @@ class ErrorDisplayWidget extends StatelessWidget {
                 Text(
                   errorInfo.title,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: themeProvider.textColor,
-                    fontWeight: FontWeight.bold,
-                  ),
+                        color: themeProvider.textColor,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   errorInfo.message,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: themeProvider.secondaryTextColor,
-                  ),
+                        color: themeProvider.subtitleColor,
+                      ),
                 ),
                 if (errorInfo.suggestion != null) ...[
                   const SizedBox(height: 8),
@@ -82,9 +82,10 @@ class ErrorDisplayWidget extends StatelessWidget {
                         Expanded(
                           child: Text(
                             errorInfo.suggestion!,
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: themeProvider.textColor,
-                            ),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: themeProvider.textColor,
+                                    ),
                           ),
                         ),
                       ],
@@ -112,14 +113,14 @@ class ErrorDisplayWidget extends StatelessWidget {
                       Icon(
                         Icons.wifi_off,
                         size: 16,
-                        color: themeProvider.secondaryTextColor,
+                        color: themeProvider.subtitleColor,
                       ),
                       const SizedBox(width: 4),
                       Text(
                         '오프라인 모드',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: themeProvider.secondaryTextColor,
-                        ),
+                              color: themeProvider.subtitleColor,
+                            ),
                       ),
                     ],
                   ),
@@ -132,7 +133,8 @@ class ErrorDisplayWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildCompactError(BuildContext context, ThemeProvider themeProvider, ErrorInfo errorInfo) {
+  Widget _buildCompactError(
+      BuildContext context, ThemeProvider themeProvider, ErrorInfo errorInfo) {
     return Container(
       padding: const EdgeInsets.all(12),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -160,16 +162,16 @@ class ErrorDisplayWidget extends StatelessWidget {
                 Text(
                   errorInfo.title,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: themeProvider.textColor,
-                    fontWeight: FontWeight.w600,
-                  ),
+                        color: themeProvider.textColor,
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   errorInfo.message,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: themeProvider.secondaryTextColor,
-                  ),
+                        color: themeProvider.subtitleColor,
+                      ),
                 ),
               ],
             ),
@@ -283,10 +285,11 @@ class ErrorBoundaryWidget extends StatelessWidget {
         if (termProvider.hasError) {
           return ErrorDisplayWidget(
             errorMessage: termProvider.errorMessage,
-            onRetry: onRetry ?? () {
-              termProvider.clearError();
-              termProvider.retryLoadData();
-            },
+            onRetry: onRetry ??
+                () {
+                  termProvider.clearError();
+                  termProvider.retryLoadData();
+                },
           );
         }
         return child;

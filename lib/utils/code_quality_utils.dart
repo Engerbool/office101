@@ -15,7 +15,7 @@ class CodeQualityUtils {
     }
     return value;
   }
-  
+
   /// 범위 검사
   static T ensureInRange<T extends num>(T value, T min, T max, String context) {
     if (value < min || value > max) {
@@ -24,11 +24,12 @@ class CodeQualityUtils {
         name: 'CodeQualityUtils',
         level: 1000,
       );
-      throw ArgumentError('Value $value is out of range [$min, $max] in $context');
+      throw ArgumentError(
+          'Value $value is out of range [$min, $max] in $context');
     }
     return value;
   }
-  
+
   /// 빈 문자열 검사
   static String ensureNotEmpty(String? value, String context) {
     if (value == null || value.isEmpty) {
@@ -41,7 +42,7 @@ class CodeQualityUtils {
     }
     return value;
   }
-  
+
   /// 리스트 빈 값 검사
   static List<T> ensureNotEmptyList<T>(List<T>? value, String context) {
     if (value == null || value.isEmpty) {
@@ -54,7 +55,7 @@ class CodeQualityUtils {
     }
     return value;
   }
-  
+
   /// 조건 검사
   static void ensureCondition(bool condition, String message, String context) {
     if (!condition) {
@@ -66,7 +67,7 @@ class CodeQualityUtils {
       throw ArgumentError('Condition failed in $context: $message');
     }
   }
-  
+
   /// 타입 안전성 검사
   static T ensureType<T>(dynamic value, String context) {
     if (value is! T) {
@@ -75,7 +76,8 @@ class CodeQualityUtils {
         name: 'CodeQualityUtils',
         level: 1000,
       );
-      throw ArgumentError('Type mismatch in $context: expected ${T.toString()}, got ${value.runtimeType}');
+      throw ArgumentError(
+          'Type mismatch in $context: expected ${T.toString()}, got ${value.runtimeType}');
     }
     return value;
   }
@@ -85,26 +87,27 @@ class CodeQualityUtils {
 class InputValidator {
   /// 이메일 형식 검증
   static bool isValidEmail(String email) {
-    return RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(email);
+    return RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+        .hasMatch(email);
   }
-  
+
   /// 한국어 텍스트 검증
   static bool isValidKoreanText(String text) {
     // 한글, 영어, 숫자, 기본 특수문자 허용
     return RegExp(r'^[가-힣a-zA-Z0-9\s\-_.,!?()]+$').hasMatch(text);
   }
-  
+
   /// 용어 ID 검증
   static bool isValidTermId(String termId) {
     // 알파벳, 숫자, 하이픈, 언더스코어만 허용
     return RegExp(r'^[a-zA-Z0-9_-]+$').hasMatch(termId);
   }
-  
+
   /// 텍스트 길이 검증
   static bool isValidLength(String text, int minLength, int maxLength) {
     return text.length >= minLength && text.length <= maxLength;
   }
-  
+
   /// 위험한 문자 검증
   static bool containsDangerousCharacters(String text) {
     // 스크립트 태그, SQL 인젝션 패턴 등
@@ -120,16 +123,16 @@ class InputValidator {
       r'DELETE.*FROM',
       r'DROP.*TABLE',
     ];
-    
+
     for (final pattern in dangerousPatterns) {
       if (RegExp(pattern, caseSensitive: false).hasMatch(text)) {
         return true;
       }
     }
-    
+
     return false;
   }
-  
+
   /// 입력값 정규화
   static String normalizeInput(String input) {
     return input
@@ -148,11 +151,11 @@ class PerformanceValidator {
     String context,
   ) async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
       final result = await function();
       stopwatch.stop();
-      
+
       if (stopwatch.elapsed > maxDuration) {
         developer.log(
           'Performance warning: $context took ${stopwatch.elapsed.inMilliseconds}ms (max: ${maxDuration.inMilliseconds}ms)',
@@ -160,7 +163,7 @@ class PerformanceValidator {
           level: 900,
         );
       }
-      
+
       return result;
     } catch (e) {
       stopwatch.stop();
@@ -173,9 +176,10 @@ class PerformanceValidator {
       rethrow;
     }
   }
-  
+
   /// 메모리 사용량 검증
-  static void validateMemoryUsage(int currentBytes, int maxBytes, String context) {
+  static void validateMemoryUsage(
+      int currentBytes, int maxBytes, String context) {
     if (currentBytes > maxBytes) {
       developer.log(
         'Memory warning: $context is using ${(currentBytes / 1024 / 1024).toStringAsFixed(2)}MB (max: ${(maxBytes / 1024 / 1024).toStringAsFixed(2)}MB)',
@@ -184,13 +188,14 @@ class PerformanceValidator {
       );
     }
   }
-  
+
   /// 캐시 효율성 검증
   static void validateCacheEfficiency(int hits, int misses, String context) {
     final total = hits + misses;
     if (total > 0) {
       final hitRate = hits / total;
-      if (hitRate < 0.7) { // 70% 미만의 캐시 효율성
+      if (hitRate < 0.7) {
+        // 70% 미만의 캐시 효율성
         developer.log(
           'Cache efficiency warning: $context has ${(hitRate * 100).toStringAsFixed(1)}% hit rate',
           name: 'PerformanceValidator',
@@ -213,7 +218,7 @@ class DebugUtils {
       );
     }
   }
-  
+
   /// 객체 상태 덤프
   static void dumpObjectState(Object object, String context) {
     if (kDebugMode) {
@@ -224,7 +229,7 @@ class DebugUtils {
       );
     }
   }
-  
+
   /// 함수 호출 추적
   static T traceFunction<T>(T Function() function, String functionName) {
     if (kDebugMode) {
@@ -246,7 +251,7 @@ class DebugUtils {
       return function();
     }
   }
-  
+
   /// 비동기 함수 호출 추적
   static Future<T> traceFunctionAsync<T>(
     Future<T> Function() function,
@@ -282,10 +287,10 @@ extension SafeList<T> on List<T> {
     }
     return null;
   }
-  
+
   /// 안전한 첫 번째 요소 접근
   T? get safeFirst => isEmpty ? null : first;
-  
+
   /// 안전한 마지막 요소 접근
   T? get safeLast => isEmpty ? null : last;
 }
@@ -295,7 +300,7 @@ extension SafeMap<K, V> on Map<K, V> {
   V getOrDefault(K key, V defaultValue) {
     return this[key] ?? defaultValue;
   }
-  
+
   /// 안전한 키 접근 (널 허용)
   V? safeGet(K key) {
     return this[key];

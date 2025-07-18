@@ -41,7 +41,7 @@ class EmailTemplate extends HiveObject {
     if (!ValidationUtils.validateEmailTemplateJson(json)) {
       throw ArgumentError('Invalid email template JSON structure');
     }
-    
+
     return EmailTemplate(
       templateId: ValidationUtils.sanitizeString(json['template_id'] ?? ''),
       title: ValidationUtils.sanitizeString(json['title'] ?? ''),

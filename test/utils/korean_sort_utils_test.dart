@@ -90,9 +90,9 @@ void main() {
           userAdded: false,
         ),
       ];
-      
+
       final sortedTerms = KoreanSortUtils.sortTermsKoreanEnglish(unsortedTerms);
-      
+
       expect(sortedTerms[0].term, equals('가족'));
       expect(sortedTerms[1].term, equals('나무'));
       expect(sortedTerms[2].term, equals('하늘'));

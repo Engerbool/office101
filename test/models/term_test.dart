@@ -39,7 +39,7 @@ void main() {
 
       // JSON으로 변환
       final json = originalTerm.toJson();
-      
+
       // JSON에서 다시 객체로 변환
       final deserializedTerm = Term.fromJson(json);
 
@@ -85,11 +85,11 @@ void main() {
       );
 
       expect(term.isBookmarked, equals(false));
-      
+
       // 북마크 상태 변경
       term.isBookmarked = true;
       expect(term.isBookmarked, equals(true));
-      
+
       // 다시 변경
       term.isBookmarked = false;
       expect(term.isBookmarked, equals(false));

@@ -11,14 +11,15 @@ import '../constants/category_colors.dart';
 class CategoryTipsScreen extends StatelessWidget {
   final TipCategory category;
 
-  const CategoryTipsScreen({Key? key, required this.category}) : super(key: key);
+  const CategoryTipsScreen({Key? key, required this.category})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Consumer2<TermProvider, ThemeProvider>(
       builder: (context, termProvider, themeProvider, child) {
         final tips = termProvider.getWorkplaceTipsByCategory(category);
-        
+
         return Scaffold(
           backgroundColor: themeProvider.backgroundColor,
           appBar: AppBar(
@@ -40,22 +41,24 @@ class CategoryTipsScreen extends StatelessWidget {
               termProvider.clearError();
               termProvider.retryLoadData();
             },
-            child: tips.isEmpty 
-              ? _buildEmptyState(themeProvider)
-              : SingleChildScrollView(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildCategoryHeader(themeProvider, tips.length),
-                      SizedBox(height: 24),
-                      ...tips.map((tip) => Padding(
-                        padding: EdgeInsets.only(bottom: 16),
-                        child: _buildTipCard(tip, themeProvider),
-                      )).toList(),
-                    ],
+            child: tips.isEmpty
+                ? _buildEmptyState(themeProvider)
+                : SingleChildScrollView(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildCategoryHeader(themeProvider, tips.length),
+                        SizedBox(height: 24),
+                        ...tips
+                            .map((tip) => Padding(
+                                  padding: EdgeInsets.only(bottom: 16),
+                                  child: _buildTipCard(tip, themeProvider),
+                                ))
+                            .toList(),
+                      ],
+                    ),
                   ),
-                ),
           ),
         );
       },
@@ -169,7 +172,8 @@ class CategoryTipsScreen extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: CategoryColors.getTipCategoryColor(category).withAlpha(13),
+                      color: CategoryColors.getTipCategoryColor(category)
+                          .withAlpha(13),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -213,7 +217,8 @@ class CategoryTipsScreen extends StatelessWidget {
                 Icon(
                   Icons.lightbulb_outline,
                   size: 64,
-                  color: CategoryColors.getTipCategoryColor(category).withAlpha(153),
+                  color: CategoryColors.getTipCategoryColor(category)
+                      .withAlpha(153),
                 ),
                 SizedBox(height: 16),
                 Text(
@@ -258,5 +263,4 @@ class CategoryTipsScreen extends StatelessWidget {
         return Icons.lightbulb_outline;
     }
   }
-
 }

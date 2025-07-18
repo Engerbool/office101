@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class NeumorphicShadowCache {
   static final Map<String, List<BoxShadow>> _shadowCache = {};
   static const int _maxCacheSize = 100;
-  
+
   /// 캐시된 그림자 가져오기 또는 생성
   static List<BoxShadow> getShadows({
     required Color shadowColor,
@@ -23,17 +23,17 @@ class NeumorphicShadowCache {
       blurRadius: blurRadius,
       spreadRadius: spreadRadius,
     );
-    
+
     // 캐시에서 확인
     if (_shadowCache.containsKey(key)) {
       return _shadowCache[key]!;
     }
-    
+
     // 캐시 크기 관리
     if (_shadowCache.length >= _maxCacheSize) {
       _evictOldestEntry();
     }
-    
+
     // 새로운 그림자 생성
     final shadows = _createShadows(
       shadowColor: shadowColor,
@@ -43,13 +43,13 @@ class NeumorphicShadowCache {
       blurRadius: blurRadius,
       spreadRadius: spreadRadius,
     );
-    
+
     // 캐시에 저장
     _shadowCache[key] = shadows;
-    
+
     return shadows;
   }
-  
+
   /// 그림자 캐시 키 생성
   static String _generateKey({
     required Color shadowColor,
@@ -61,7 +61,7 @@ class NeumorphicShadowCache {
   }) {
     return '${shadowColor.r}_${shadowColor.g}_${shadowColor.b}_${shadowColor.a}_${highlightColor.r}_${highlightColor.g}_${highlightColor.b}_${highlightColor.a}_${depth}_${isPressed}_${blurRadius}_${spreadRadius}';
   }
-  
+
   /// 실제 그림자 생성
   static List<BoxShadow> _createShadows({
     required Color shadowColor,
@@ -101,7 +101,7 @@ class NeumorphicShadowCache {
       ];
     }
   }
-  
+
   /// 가장 오래된 캐시 항목 제거
   static void _evictOldestEntry() {
     if (_shadowCache.isNotEmpty) {
@@ -109,12 +109,12 @@ class NeumorphicShadowCache {
       _shadowCache.remove(firstKey);
     }
   }
-  
+
   /// 캐시 정리
   static void clearCache() {
     _shadowCache.clear();
   }
-  
+
   /// 캐시 상태 정보
   static Map<String, dynamic> getCacheInfo() {
     return {
@@ -140,7 +140,7 @@ class OptimizedNeumorphicContainer extends StatelessWidget {
   final double blurRadius;
   final double spreadRadius;
   final VoidCallback? onTap;
-  
+
   const OptimizedNeumorphicContainer({
     Key? key,
     required this.child,
@@ -163,7 +163,7 @@ class OptimizedNeumorphicContainer extends StatelessWidget {
     final effectiveBackgroundColor = backgroundColor ?? theme.cardColor;
     final effectiveShadowColor = shadowColor ?? Colors.black;
     final effectiveHighlightColor = highlightColor ?? Colors.white;
-    
+
     // 캐시된 그림자 사용
     final shadows = NeumorphicShadowCache.getShadows(
       shadowColor: effectiveShadowColor,
@@ -173,7 +173,7 @@ class OptimizedNeumorphicContainer extends StatelessWidget {
       blurRadius: blurRadius,
       spreadRadius: spreadRadius,
     );
-    
+
     return Container(
       margin: margin,
       child: GestureDetector(

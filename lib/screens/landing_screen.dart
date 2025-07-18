@@ -15,7 +15,7 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   void initState() {
     super.initState();
-    
+
     // 3초 후 자동으로 메인 화면으로 이동
     _navigationTimer = Timer(Duration(seconds: 3), () {
       if (mounted) {
@@ -54,7 +54,7 @@ class _LandingScreenState extends State<LandingScreen> {
                   fit: BoxFit.contain,
                 ),
               ),
-              
+
               // 앱 제목 (이미지 위에 겹침)
               Center(
                 child: Column(

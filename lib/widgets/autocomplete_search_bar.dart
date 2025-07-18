@@ -36,26 +36,28 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
     super.initState();
     _controller = widget.controller ?? TextEditingController();
     _focusNode = FocusNode();
-    
+
     _focusNode.addListener(_onFocusChanged);
-    
+
     // TermProvider 초기화를 강제로 트리거
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final termProvider = Provider.of<TermProvider>(context, listen: false);
-      
+
       // TermProvider가 아직 로딩 중이지 않으면 강제로 로딩 시작
       if (!termProvider.isLoading && termProvider.allTerms.isEmpty) {
         termProvider.loadData();
       }
-      
+
       // 초기 텍스트가 있는지 확인
       if (_controller.text.isNotEmpty) {
         // 초기 텍스트가 있으면 자동완성 수행
         final value = _controller.text;
         if (value.isNotEmpty) {
-          _suggestions = _getAllTerms().where((term) => 
-            term.term.toLowerCase().contains(value.toLowerCase())
-          ).take(5).toList();
+          _suggestions = _getAllTerms()
+              .where((term) =>
+                  term.term.toLowerCase().contains(value.toLowerCase()))
+              .take(5)
+              .toList();
           _showSuggestions = _suggestions.isNotEmpty;
         }
       }
@@ -79,13 +81,13 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
       if (terms.isNotEmpty) {
         return terms;
       }
-      
+
       // DatabaseService가 실패하면 TermProvider에서 시도
       final termProvider = Provider.of<TermProvider>(context, listen: false);
       if (termProvider.allTerms.isNotEmpty) {
         return termProvider.allTerms;
       }
-      
+
       // 모든 실제 데이터가 실패하면 테스트 데이터 사용
       return _getTestTerms();
     } catch (e) {
@@ -133,8 +135,6 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
     }
   }
 
-
-
   void _onFocusChanged() {
     if (!_focusNode.hasFocus) {
       // 포커스를 잃으면 잠시 후 자동완성 숨기기 (사용자가 항목을 선택할 시간 제공)
@@ -150,9 +150,11 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
       final value = _controller.text;
       if (value.isNotEmpty) {
         setState(() {
-          _suggestions = _getAllTerms().where((term) => 
-            term.term.toLowerCase().contains(value.toLowerCase())
-          ).take(5).toList();
+          _suggestions = _getAllTerms()
+              .where((term) =>
+                  term.term.toLowerCase().contains(value.toLowerCase()))
+              .take(5)
+              .toList();
           _showSuggestions = _suggestions.isNotEmpty;
         });
       }
@@ -188,32 +190,38 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
                     ),
                     SizedBox(width: 12),
                     Expanded(
-                      child: TextField(
-                        controller: _controller,
-                        focusNode: _focusNode,
+                      child: Semantics(
+                        label: '\uc6a9\uc5b4 \uac80\uc0c9',
+                        hint: '\uac80\uc0c9\ud558\uace0 \uc2f6\uc740 \uc6a9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694. \uc790\ub3d9\uc644\uc131 \uc81c\uc548\uc774 \ud45c\uc2dc\ub429\ub2c8\ub2e4',
+                        textField: true,
+                        child: TextField(
+                          controller: _controller,
+                          focusNode: _focusNode,
                         onChanged: (value) {
                           if (value.isNotEmpty) {
                             setState(() {
                               final allTerms = _getAllTerms();
                               final queryLower = value.toLowerCase();
-                              
+
                               // 검색 결과 필터링
-                              final matches = allTerms.where((term) => 
-                                term.term.toLowerCase().contains(queryLower)
-                              ).toList();
-                              
+                              final matches = allTerms
+                                  .where((term) => term.term
+                                      .toLowerCase()
+                                      .contains(queryLower))
+                                  .toList();
+
                               // 우선순위별로 정렬 (시작하는 것 우선)
                               matches.sort((a, b) {
                                 final aLower = a.term.toLowerCase();
                                 final bLower = b.term.toLowerCase();
                                 final aStarts = aLower.startsWith(queryLower);
                                 final bStarts = bLower.startsWith(queryLower);
-                                
+
                                 if (aStarts && !bStarts) return -1;
                                 if (!aStarts && bStarts) return 1;
                                 return a.term.compareTo(b.term);
                               });
-                              
+
                               _suggestions = matches.take(5).toList();
                               _showSuggestions = _suggestions.isNotEmpty;
                             });
@@ -243,25 +251,31 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
                           color: themeProvider.textColor,
                           fontSize: 16,
                         ),
+                        ),
                       ),
                     ),
                     if (_controller.text.isNotEmpty)
-                      GestureDetector(
-                        onTap: () {
-                          _controller.clear();
-                          // clear 후 상태 초기화
-                          setState(() {
-                            _suggestions = [];
-                            _showSuggestions = false;
-                          });
-                          // X 버튼을 누를 때는 onSearch를 호출하지 않음
-                          // 단순히 텍스트만 지우고 포커스 유지
-                          _focusNode.requestFocus();
-                        },
-                        child: Icon(
-                          Icons.clear,
-                          color: themeProvider.textColor.withAlpha(153),
-                          size: 20,
+                      Semantics(
+                        label: '\uac80\uc0c9\uc5b4 \uc9c0\uc6b0\uae30',
+                        hint: '\uc785\ub825\ud55c \uac80\uc0c9\uc5b4\ub97c \uc9c0\uc6b0\ub824\uba74 \ud0ed\ud558\uc138\uc694',
+                        button: true,
+                        child: GestureDetector(
+                          onTap: () {
+                            _controller.clear();
+                            // clear 후 상태 초기화
+                            setState(() {
+                              _suggestions = [];
+                              _showSuggestions = false;
+                            });
+                            // X 버튼을 누를 때는 onSearch를 호출하지 않음
+                            // 단순히 텍스트만 지우고 포커스 유지
+                            _focusNode.requestFocus();
+                          },
+                          child: Icon(
+                            Icons.clear,
+                            color: themeProvider.textColor.withAlpha(153),
+                            size: 20,
+                          ),
                         ),
                       ),
                   ],
@@ -358,7 +372,8 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
     );
   }
 
-  List<TextSpan> _buildHighlightedText(String text, String query, ThemeProvider themeProvider) {
+  List<TextSpan> _buildHighlightedText(
+      String text, String query, ThemeProvider themeProvider) {
     if (query.isEmpty) {
       return [
         TextSpan(
@@ -418,5 +433,4 @@ class _AutocompleteSearchBarState extends State<AutocompleteSearchBar> {
         ),
     ];
   }
-
 }

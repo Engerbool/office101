@@ -17,7 +17,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
   final _definitionController = TextEditingController();
   final _exampleController = TextEditingController();
   final _tagsController = TextEditingController();
-  
+
   TermCategory _selectedCategory = TermCategory.other;
   bool _isSaving = false;
 
@@ -33,7 +33,7 @@ class _AddTermScreenState extends State<AddTermScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -56,7 +56,8 @@ class _AddTermScreenState extends State<AddTermScreen> {
                       height: 20,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF5A8DEE)),
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(Color(0xFF5A8DEE)),
                       ),
                     ),
                   ),
@@ -361,7 +362,8 @@ class _AddTermScreenState extends State<AddTermScreen> {
                     height: 24,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF5A8DEE)),
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(Color(0xFF5A8DEE)),
                     ),
                   ),
                   SizedBox(width: 12),
@@ -410,12 +412,12 @@ class _AddTermScreenState extends State<AddTermScreen> {
       // Input validation
       final termText = _termController.text.trim();
       final definitionText = _definitionController.text.trim();
-      
+
       if (termText.isEmpty) {
         showErrorSnackBar(context, '용어를 입력해주세요.');
         return;
       }
-      
+
       if (definitionText.isEmpty) {
         showErrorSnackBar(context, '정의를 입력해주세요.');
         return;
@@ -448,11 +450,11 @@ class _AddTermScreenState extends State<AddTermScreen> {
       // 용어 저장
       final termProvider = Provider.of<TermProvider>(context, listen: false);
       final success = await termProvider.addTerm(newTerm);
-      
+
       if (success) {
         // 성공 메시지 표시
         showSuccessSnackBar(context, '용어가 성공적으로 추가되었습니다!');
-        
+
         // 화면 닫기
         Navigator.pop(context);
       } else {

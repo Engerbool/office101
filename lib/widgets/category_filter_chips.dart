@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import '../models/term.dart';
 import '../providers/term_provider.dart';
 import '../providers/theme_provider.dart';
+import '../utils/responsive_helper.dart';
+import '../utils/responsive_breakpoints.dart';
 
 class CategoryFilterChips extends StatefulWidget {
   @override
@@ -18,7 +20,7 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-    
+
     // 초기 상태에서 오른쪽 그라데이션만 표시
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _updateGradients();
@@ -50,16 +52,16 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
     }
   }
 
-  // 자동 스크롤 기능 제거됨 - 사용자 선택 위치 유지
-  // void _scrollToSelectedChip(TermCategory? selectedCategory) {
-  //   // 더 이상 사용하지 않음 - 카테고리 선택 시 스크롤 위치 유지
-  // }
   @override
   Widget build(BuildContext context) {
     return Consumer2<TermProvider, ThemeProvider>(
       builder: (context, termProvider, themeProvider, child) {
-        return Container(
-          height: 50, // 고정 높이 지정
+        return ResponsiveContainer(
+          height: ResponsiveValues<double>(
+            mobile: 50,
+            tablet: 56,
+            desktop: 64,
+          ),
           child: Stack(
             children: [
               // 메인 스크롤 영역 (Scrollable로 마우스 휠 지원)
@@ -71,47 +73,66 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
                   controller: _scrollController,
                   scrollDirection: Axis.horizontal,
                   physics: BouncingScrollPhysics(), // 부드러운 스크롤 효과
-                  padding: EdgeInsets.symmetric(horizontal: 16), // 좌우 패딩
-                  child: Row(
-                  children: [
-                    _buildFilterChip(
-                      context,
-                      termProvider,
-                      themeProvider,
-                      '전체',
-                      null,
-                      termProvider.selectedCategory == null,
-                    ),
-                    SizedBox(width: 8),
-                    _buildFilterChip(
-                      context,
-                      termProvider,
-                      themeProvider,
-                      '북마크',
-                      TermCategory.bookmarked,
-                      termProvider.selectedCategory == TermCategory.bookmarked,
-                    ),
-                    SizedBox(width: 8),
-                    ...TermCategory.values.where((category) => category != TermCategory.other && category != TermCategory.bookmarked).map((category) {
+                  padding: ResponsiveValues<EdgeInsets>(
+                    mobile: EdgeInsets.symmetric(horizontal: 16),
+                    tablet: EdgeInsets.symmetric(horizontal: 20),
+                    desktop: EdgeInsets.symmetric(horizontal: 24),
+                  ).getValueFromContext(context),
+                  child: ResponsiveBuilder(
+                    builder: (context, deviceType) {
+                      final chipSpacing = ResponsiveValues<double>(
+                        mobile: 8,
+                        tablet: 10,
+                        desktop: 12,
+                      ).getValue(deviceType);
+
                       return Row(
                         children: [
                           _buildFilterChip(
                             context,
                             termProvider,
                             themeProvider,
-                            category.displayName,
-                            category,
-                            termProvider.selectedCategory == category,
+                            '전체',
+                            null,
+                            termProvider.selectedCategory == null,
                           ),
-                          SizedBox(width: 8),
+                          SizedBox(width: chipSpacing),
+                          _buildFilterChip(
+                            context,
+                            termProvider,
+                            themeProvider,
+                            '북마크',
+                            TermCategory.bookmarked,
+                            termProvider.selectedCategory ==
+                                TermCategory.bookmarked,
+                          ),
+                          SizedBox(width: chipSpacing),
+                          ...TermCategory.values
+                              .where((category) =>
+                                  category != TermCategory.other &&
+                                  category != TermCategory.bookmarked)
+                              .map((category) {
+                            return Row(
+                              children: [
+                                _buildFilterChip(
+                                  context,
+                                  termProvider,
+                                  themeProvider,
+                                  category.displayName,
+                                  category,
+                                  termProvider.selectedCategory == category,
+                                ),
+                                SizedBox(width: chipSpacing),
+                              ],
+                            );
+                          }).toList(),
                         ],
                       );
-                    }).toList(),
-                    ],
+                    },
                   ),
                 ),
               ),
-              
+
               // 왼쪽 페이드 그라데이션
               if (_showLeftGradient)
                 Positioned(
@@ -119,7 +140,11 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
                   top: 0,
                   bottom: 0,
                   child: Container(
-                    width: 20,
+                    width: ResponsiveValues<double>(
+                      mobile: 20,
+                      tablet: 24,
+                      desktop: 28,
+                    ).getValueFromContext(context),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -131,7 +156,7 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
                     ),
                   ),
                 ),
-              
+
               // 오른쪽 페이드 그라데이션
               if (_showRightGradient)
                 Positioned(
@@ -139,7 +164,11 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
                   top: 0,
                   bottom: 0,
                   child: Container(
-                    width: 20,
+                    width: ResponsiveValues<double>(
+                      mobile: 20,
+                      tablet: 24,
+                      desktop: 28,
+                    ).getValueFromContext(context),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -173,11 +202,21 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
       },
       child: AnimatedContainer(
         duration: Duration(milliseconds: 200),
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        child: ResponsiveContainer(
+          padding: ResponsiveValues<EdgeInsetsGeometry>(
+            mobile: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            tablet: EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+            desktop: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+          ),
           decoration: BoxDecoration(
             color: isSelected ? Color(0xFF5A8DEE) : themeProvider.cardColor,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(
+              ResponsiveValues<double>(
+                mobile: 20,
+                tablet: 22,
+                desktop: 24,
+              ).getValueFromContext(context),
+            ),
             boxShadow: isSelected
                 ? [
                     BoxShadow(
@@ -199,19 +238,20 @@ class _CategoryFilterChipsState extends State<CategoryFilterChips> {
                     ),
                   ],
           ),
-          child: Text(
+          child: ResponsiveText(
             label,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-              color: isSelected 
-                  ? Colors.white
-                  : themeProvider.textColor.withAlpha(179),
+            fontSize: ResponsiveValues<double>(
+              mobile: 14,
+              tablet: 15,
+              desktop: 16,
             ),
+            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            color: isSelected
+                ? Colors.white
+                : themeProvider.textColor.withAlpha(179),
           ),
         ),
       ),
     );
   }
-
 }

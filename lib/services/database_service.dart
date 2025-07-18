@@ -20,14 +20,19 @@ class DatabaseService {
       }
 
       print('DatabaseService: Starting initialization');
-      
+
       // Adapter 등록
       if (!Hive.isAdapterRegistered(0)) Hive.registerAdapter(TermAdapter());
-      if (!Hive.isAdapterRegistered(1)) Hive.registerAdapter(TermCategoryAdapter());
-      if (!Hive.isAdapterRegistered(2)) Hive.registerAdapter(EmailTemplateAdapter());
-      if (!Hive.isAdapterRegistered(3)) Hive.registerAdapter(EmailCategoryAdapter());
-      if (!Hive.isAdapterRegistered(4)) Hive.registerAdapter(WorkplaceTipAdapter());
-      if (!Hive.isAdapterRegistered(5)) Hive.registerAdapter(TipCategoryAdapter());
+      if (!Hive.isAdapterRegistered(1))
+        Hive.registerAdapter(TermCategoryAdapter());
+      if (!Hive.isAdapterRegistered(2))
+        Hive.registerAdapter(EmailTemplateAdapter());
+      if (!Hive.isAdapterRegistered(3))
+        Hive.registerAdapter(EmailCategoryAdapter());
+      if (!Hive.isAdapterRegistered(4))
+        Hive.registerAdapter(WorkplaceTipAdapter());
+      if (!Hive.isAdapterRegistered(5))
+        Hive.registerAdapter(TipCategoryAdapter());
 
       // Box 열기
       _termBox = await Hive.openBox<Term>('terms');
@@ -36,11 +41,13 @@ class DatabaseService {
 
       print('DatabaseService: Boxes opened, loading initial data');
       await _loadInitialData();
-      
+
       _isInitialized = true;
-      print('DatabaseService: Initialization complete, terms count: ${_termBox.length}');
+      print(
+          'DatabaseService: Initialization complete, terms count: ${_termBox.length}');
     } catch (e, stackTrace) {
-      final error = ErrorService.createDatabaseError('Database initialization', e, stackTrace);
+      final error = ErrorService.createDatabaseError(
+          'Database initialization', e, stackTrace);
       ErrorService.logError(error);
       rethrow;
     }
@@ -58,7 +65,8 @@ class DatabaseService {
         await _loadWorkplaceTipsFromAssets();
       }
     } catch (e, stackTrace) {
-      final error = ErrorService.createDatabaseError('Loading initial data', e, stackTrace);
+      final error = ErrorService.createDatabaseError(
+          'Loading initial data', e, stackTrace);
       ErrorService.logError(error);
       rethrow;
     }
@@ -83,28 +91,32 @@ class DatabaseService {
         bool fileLoaded = false;
         int retryCount = 0;
         const maxRetries = 3;
-        
+
         while (!fileLoaded && retryCount < maxRetries) {
           try {
             final String jsonString = await rootBundle.loadString(filePath);
-            final Map<String, dynamic>? data = ValidationUtils.safeJsonDecode(jsonString);
-            
+            final Map<String, dynamic>? data =
+                ValidationUtils.safeJsonDecode(jsonString);
+
             if (data == null) {
-              final error = ErrorService.createDataError('Invalid JSON format in $filePath');
+              final error = ErrorService.createDataError(
+                  'Invalid JSON format in $filePath');
               ErrorService.logError(error);
               break; // JSON 파싱 실패는 재시도 불필요
             }
-            
+
             if (!data.containsKey('terms')) {
-              final error = ErrorService.createDataError('Invalid JSON structure in $filePath: missing "terms" key');
+              final error = ErrorService.createDataError(
+                  'Invalid JSON structure in $filePath: missing "terms" key');
               ErrorService.logError(error);
               break; // 구조적 문제는 재시도 불필요
             }
-            
+
             final List<dynamic> termsList = data['terms'];
-            
+
             if (termsList.isEmpty) {
-              final error = ErrorService.createDataError('No terms found in $filePath');
+              final error =
+                  ErrorService.createDataError('No terms found in $filePath');
               ErrorService.logError(error);
               break; // 빈 데이터는 재시도 불필요
             }
@@ -116,47 +128,58 @@ class DatabaseService {
                 await _termBox.put(term.termId, term);
                 fileTermsLoaded++;
               } catch (e, stackTrace) {
-                final error = ErrorService.createDataError('Error parsing term data in $filePath: $termData', e, stackTrace);
+                final error = ErrorService.createDataError(
+                    'Error parsing term data in $filePath: $termData',
+                    e,
+                    stackTrace);
                 ErrorService.logError(error);
                 continue; // 개별 항목 파싱 실패 시 계속 진행
               }
             }
-            
+
             totalTermsLoaded += fileTermsLoaded;
             print('Successfully loaded $fileTermsLoaded terms from $filePath');
             fileLoaded = true;
           } catch (e, stackTrace) {
             retryCount++;
-            final error = ErrorService.createDataError('Error loading file $filePath (attempt $retryCount/$maxRetries)', e, stackTrace);
+            final error = ErrorService.createDataError(
+                'Error loading file $filePath (attempt $retryCount/$maxRetries)',
+                e,
+                stackTrace);
             ErrorService.logError(error);
-            
+
             if (retryCount < maxRetries) {
               // 재시도 전 잠시 대기
               await Future.delayed(Duration(milliseconds: 500 * retryCount));
             } else {
               // 최종 실패 시 에러 로깅
-              final finalError = ErrorService.createDataError('Failed to load $filePath after $maxRetries attempts', e, stackTrace);
+              final finalError = ErrorService.createDataError(
+                  'Failed to load $filePath after $maxRetries attempts',
+                  e,
+                  stackTrace);
               ErrorService.logError(finalError);
             }
           }
         }
       }
-      
-      print('Successfully loaded total $totalTermsLoaded terms from ${categoryFiles.length} category files');
-      
+
+      print(
+          'Successfully loaded total $totalTermsLoaded terms from ${categoryFiles.length} category files');
+
       // 최소한의 데이터도 로드되지 않았을 경우 기본 데이터 제공
       if (totalTermsLoaded == 0) {
         await _loadFallbackTerms();
       }
     } catch (e, stackTrace) {
-      final error = ErrorService.createFileSystemError('Loading terms from assets', e, stackTrace);
+      final error = ErrorService.createFileSystemError(
+          'Loading terms from assets', e, stackTrace);
       ErrorService.logError(error);
-      
+
       // 전체 로딩 실패 시 기본 데이터 제공
       await _loadFallbackTerms();
     }
   }
-  
+
   static Future<void> _loadFallbackTerms() async {
     try {
       // 기본 필수 용어들 제공
@@ -180,35 +203,39 @@ class DatabaseService {
           userAdded: false,
         ),
       ];
-      
+
       for (final term in fallbackTerms) {
         await _termBox.put(term.termId, term);
       }
-      
+
       print('Loaded ${fallbackTerms.length} fallback terms');
     } catch (e, stackTrace) {
-      final error = ErrorService.createDataError('Loading fallback terms', e, stackTrace);
+      final error =
+          ErrorService.createDataError('Loading fallback terms', e, stackTrace);
       ErrorService.logError(error);
     }
   }
 
   static Future<void> _loadEmailTemplatesFromAssets() async {
     try {
-      final String jsonString = await rootBundle.loadString('assets/data/email_templates.json');
-      final Map<String, dynamic>? data = ValidationUtils.safeJsonDecode(jsonString);
-      
+      final String jsonString =
+          await rootBundle.loadString('assets/data/email_templates.json');
+      final Map<String, dynamic>? data =
+          ValidationUtils.safeJsonDecode(jsonString);
+
       if (data == null) {
-        final error = ErrorService.createDataError('Invalid JSON format in email_templates.json');
+        final error = ErrorService.createDataError(
+            'Invalid JSON format in email_templates.json');
         ErrorService.logError(error);
         return;
       }
-      
+
       if (!data.containsKey('templates')) {
         throw Exception('Invalid JSON structure: missing "templates" key');
       }
-      
+
       final List<dynamic> templatesList = data['templates'];
-      
+
       if (templatesList.isEmpty) {
         print('Warning: No email templates found in assets');
         return;
@@ -223,10 +250,11 @@ class DatabaseService {
           continue;
         }
       }
-      
+
       print('Successfully loaded ${_emailBox.length} email templates');
     } catch (e, stackTrace) {
-      final error = ErrorService.createFileSystemError('Loading email templates from assets', e, stackTrace);
+      final error = ErrorService.createFileSystemError(
+          'Loading email templates from assets', e, stackTrace);
       ErrorService.logError(error);
       rethrow;
     }
@@ -234,21 +262,24 @@ class DatabaseService {
 
   static Future<void> _loadWorkplaceTipsFromAssets() async {
     try {
-      final String jsonString = await rootBundle.loadString('assets/data/workplace_tips.json');
-      final Map<String, dynamic>? data = ValidationUtils.safeJsonDecode(jsonString);
-      
+      final String jsonString =
+          await rootBundle.loadString('assets/data/workplace_tips.json');
+      final Map<String, dynamic>? data =
+          ValidationUtils.safeJsonDecode(jsonString);
+
       if (data == null) {
-        final error = ErrorService.createDataError('Invalid JSON format in workplace_tips.json');
+        final error = ErrorService.createDataError(
+            'Invalid JSON format in workplace_tips.json');
         ErrorService.logError(error);
         return;
       }
-      
+
       if (!data.containsKey('tips')) {
         throw Exception('Invalid JSON structure: missing "tips" key');
       }
-      
+
       final List<dynamic> tipsList = data['tips'];
-      
+
       if (tipsList.isEmpty) {
         print('Warning: No workplace tips found in assets');
         return;
@@ -263,10 +294,11 @@ class DatabaseService {
           continue;
         }
       }
-      
+
       print('Successfully loaded ${_tipBox.length} workplace tips');
     } catch (e, stackTrace) {
-      final error = ErrorService.createFileSystemError('Loading workplace tips from assets', e, stackTrace);
+      final error = ErrorService.createFileSystemError(
+          'Loading workplace tips from assets', e, stackTrace);
       ErrorService.logError(error);
       rethrow;
     }
@@ -277,10 +309,12 @@ class DatabaseService {
     try {
       _ensureInitialized();
       final terms = _termBox.values.toList();
-      print('DatabaseService: getAllTerms called, returning ${terms.length} terms');
+      print(
+          'DatabaseService: getAllTerms called, returning ${terms.length} terms');
       return terms;
     } catch (e, stackTrace) {
-      final error = ErrorService.createDatabaseError('Getting all terms', e, stackTrace);
+      final error =
+          ErrorService.createDatabaseError('Getting all terms', e, stackTrace);
       ErrorService.logError(error);
       return [];
     }
@@ -289,9 +323,12 @@ class DatabaseService {
   static List<Term> getTermsByCategory(TermCategory category) {
     try {
       _ensureInitialized();
-      return _termBox.values.where((term) => term.category == category).toList();
+      return _termBox.values
+          .where((term) => term.category == category)
+          .toList();
     } catch (e, stackTrace) {
-      final error = ErrorService.createDatabaseError('Getting terms by category', e, stackTrace);
+      final error = ErrorService.createDatabaseError(
+          'Getting terms by category', e, stackTrace);
       ErrorService.logError(error);
       return [];
     }
@@ -300,19 +337,20 @@ class DatabaseService {
   static List<Term> searchTerms(String query) {
     try {
       _ensureInitialized();
-      
+
       if (query.trim().isEmpty) {
         return getAllTerms();
       }
-      
+
       final lowerQuery = query.toLowerCase().trim();
       return _termBox.values.where((term) {
         return term.term.toLowerCase().contains(lowerQuery) ||
-               term.definition.toLowerCase().contains(lowerQuery) ||
-               term.tags.any((tag) => tag.toLowerCase().contains(lowerQuery));
+            term.definition.toLowerCase().contains(lowerQuery) ||
+            term.tags.any((tag) => tag.toLowerCase().contains(lowerQuery));
       }).toList();
     } catch (e, stackTrace) {
-      final error = ErrorService.createDatabaseError('Searching terms', e, stackTrace);
+      final error =
+          ErrorService.createDatabaseError('Searching terms', e, stackTrace);
       ErrorService.logError(error);
       return [];
     }
@@ -321,15 +359,16 @@ class DatabaseService {
   static Future<bool> addTerm(Term term) async {
     try {
       _ensureInitialized();
-      
+
       if (term.termId.trim().isEmpty) {
         throw Exception('Term ID cannot be empty');
       }
-      
+
       await _termBox.put(term.termId, term);
       return true;
     } catch (e, stackTrace) {
-      final error = ErrorService.createDatabaseError('Adding term', e, stackTrace);
+      final error =
+          ErrorService.createDatabaseError('Adding term', e, stackTrace);
       ErrorService.logError(error);
       return false;
     }
@@ -338,19 +377,20 @@ class DatabaseService {
   static Future<bool> deleteTerm(String termId) async {
     try {
       _ensureInitialized();
-      
+
       if (termId.trim().isEmpty) {
         throw Exception('Term ID cannot be empty');
       }
-      
+
       if (!_termBox.containsKey(termId)) {
         throw Exception('Term with ID "$termId" not found');
       }
-      
+
       await _termBox.delete(termId);
       return true;
     } catch (e, stackTrace) {
-      final error = ErrorService.createDatabaseError('Deleting term', e, stackTrace);
+      final error =
+          ErrorService.createDatabaseError('Deleting term', e, stackTrace);
       ErrorService.logError(error);
       return false;
     }
@@ -359,19 +399,20 @@ class DatabaseService {
   static Future<bool> updateTerm(Term term) async {
     try {
       _ensureInitialized();
-      
+
       if (term.termId.trim().isEmpty) {
         throw Exception('Term ID cannot be empty');
       }
-      
+
       if (!_termBox.containsKey(term.termId)) {
         throw Exception('Term with ID "${term.termId}" not found');
       }
-      
+
       await _termBox.put(term.termId, term);
       return true;
     } catch (e, stackTrace) {
-      final error = ErrorService.createDatabaseError('Updating term', e, stackTrace);
+      final error =
+          ErrorService.createDatabaseError('Updating term', e, stackTrace);
       ErrorService.logError(error);
       return false;
     }
@@ -383,18 +424,23 @@ class DatabaseService {
       _ensureInitialized();
       return _emailBox.values.toList();
     } catch (e, stackTrace) {
-      final error = ErrorService.createDatabaseError('Getting all email templates', e, stackTrace);
+      final error = ErrorService.createDatabaseError(
+          'Getting all email templates', e, stackTrace);
       ErrorService.logError(error);
       return [];
     }
   }
 
-  static List<EmailTemplate> getEmailTemplatesByCategory(EmailCategory category) {
+  static List<EmailTemplate> getEmailTemplatesByCategory(
+      EmailCategory category) {
     try {
       _ensureInitialized();
-      return _emailBox.values.where((template) => template.category == category).toList();
+      return _emailBox.values
+          .where((template) => template.category == category)
+          .toList();
     } catch (e, stackTrace) {
-      final error = ErrorService.createDatabaseError('Getting email templates by category', e, stackTrace);
+      final error = ErrorService.createDatabaseError(
+          'Getting email templates by category', e, stackTrace);
       ErrorService.logError(error);
       return [];
     }
@@ -406,7 +452,8 @@ class DatabaseService {
       _ensureInitialized();
       return _tipBox.values.toList();
     } catch (e, stackTrace) {
-      final error = ErrorService.createDatabaseError('Getting all workplace tips', e, stackTrace);
+      final error = ErrorService.createDatabaseError(
+          'Getting all workplace tips', e, stackTrace);
       ErrorService.logError(error);
       return [];
     }
@@ -417,7 +464,8 @@ class DatabaseService {
       _ensureInitialized();
       return _tipBox.values.where((tip) => tip.category == category).toList();
     } catch (e, stackTrace) {
-      final error = ErrorService.createDatabaseError('Getting workplace tips by category', e, stackTrace);
+      final error = ErrorService.createDatabaseError(
+          'Getting workplace tips by category', e, stackTrace);
       ErrorService.logError(error);
       return [];
     }
@@ -432,16 +480,18 @@ class DatabaseService {
         _isInitialized = false;
       }
     } catch (e, stackTrace) {
-      final error = ErrorService.createDatabaseError('Closing database', e, stackTrace);
+      final error =
+          ErrorService.createDatabaseError('Closing database', e, stackTrace);
       ErrorService.logError(error);
     }
   }
-  
+
   static void _ensureInitialized() {
     if (!_isInitialized) {
-      throw Exception('DatabaseService not initialized. Call initialize() first.');
+      throw Exception(
+          'DatabaseService not initialized. Call initialize() first.');
     }
   }
-  
+
   static bool get isInitialized => _isInitialized;
 }

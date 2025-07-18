@@ -9,7 +9,8 @@ import '../constants/category_colors.dart';
 class WorkplaceTipDetailScreen extends StatelessWidget {
   final WorkplaceTip tip;
 
-  const WorkplaceTipDetailScreen({Key? key, required this.tip}) : super(key: key);
+  const WorkplaceTipDetailScreen({Key? key, required this.tip})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,8 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: CategoryColors.getTipCategoryBackgroundColor(tip.category),
+                    color: CategoryColors.getTipCategoryBackgroundColor(
+                        tip.category),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
@@ -100,16 +102,20 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
                       Row(
                         children: [
                           Container(
-                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
-                              color: CategoryColors.getTipCategoryBackgroundColor(tip.category),
+                              color:
+                                  CategoryColors.getTipCategoryBackgroundColor(
+                                      tip.category),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
                               tip.category.displayName,
                               style: TextStyle(
                                 fontSize: 12,
-                                color: CategoryColors.getTipCategoryColor(tip.category),
+                                color: CategoryColors.getTipCategoryColor(
+                                    tip.category),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -271,7 +277,8 @@ class WorkplaceTipDetailScreen extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: CategoryColors.getTipCategoryBackgroundColor(tip.category),
+                    color: CategoryColors.getTipCategoryBackgroundColor(
+                        tip.category),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
@@ -307,10 +314,11 @@ ${tip.content}
 ${tip.keyPoints.asMap().entries.map((entry) => '${entry.key + 1}. ${entry.value}').join('\n')}
 
 - 직장생활은 처음이라 앱에서 공유
-    '''.trim();
+    '''
+        .trim();
 
     Clipboard.setData(ClipboardData(text: shareText));
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('팁이 클립보드에 복사되었습니다'),
@@ -335,5 +343,4 @@ ${tip.keyPoints.asMap().entries.map((entry) => '${entry.key + 1}. ${entry.value}
         return Icons.work;
     }
   }
-
 }

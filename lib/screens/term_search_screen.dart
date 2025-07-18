@@ -24,7 +24,7 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
   void initState() {
     super.initState();
     _searchController = TextEditingController(text: widget.initialQuery ?? '');
-    
+
     if (widget.initialQuery != null && widget.initialQuery!.isNotEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Provider.of<TermProvider>(context, listen: false)
@@ -62,11 +62,13 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
               Padding(
                 padding: EdgeInsets.all(16.0),
                 child: SearchPerformanceWidget(
-                  resultCount: Provider.of<TermProvider>(context).filteredTerms.length,
+                  resultCount:
+                      Provider.of<TermProvider>(context).filteredTerms.length,
                   onSearch: (query) async {
-                    final termProvider = Provider.of<TermProvider>(context, listen: false);
+                    final termProvider =
+                        Provider.of<TermProvider>(context, listen: false);
                     termProvider.searchTerms(query);
-                    
+
                     // 검색 완료까지 대기 (디바운싱 고려)
                     await Future.delayed(Duration(milliseconds: 350));
                   },
@@ -76,14 +78,14 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
                       Provider.of<TermProvider>(context, listen: false)
                           .searchTerms(query);
                     },
-                  onTermSelected: (term) {
-                    // 용어가 선택되면 상세 화면으로 이동
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TermDetailScreen(term: term),
-                      ),
-                    );
+                    onTermSelected: (term) {
+                      // 용어가 선택되면 상세 화면으로 이동
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TermDetailScreen(term: term),
+                        ),
+                      );
                     },
                     hintText: '검색할 용어를 입력하세요...',
                   ),
@@ -92,8 +94,9 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
               Expanded(
                 child: Consumer<TermProvider>(
                   builder: (context, termProvider, child) {
-                    print('TermSearchScreen: Building with ${termProvider.allTerms.length} terms, loading: ${termProvider.isLoading}');
-                    
+                    print(
+                        'TermSearchScreen: Building with ${termProvider.allTerms.length} terms, loading: ${termProvider.isLoading}');
+
                     // 에러 상태 체크
                     if (termProvider.hasError) {
                       return ErrorDisplayWidget(
@@ -108,11 +111,11 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
                         },
                       );
                     }
-                    
-                    if (termProvider.searchQuery.isEmpty) {
+
+                    if (termProvider.searchQuery.isEmpty && termProvider.selectedCategory == null) {
                       return _buildInitialState(themeProvider);
                     }
-                    
+
                     // 검색 결과가 없는 경우
                     if (termProvider.filteredTerms.isEmpty) {
                       return _buildNoResultsState(termProvider, themeProvider);
@@ -123,12 +126,14 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _buildSearchResultsHeader(termProvider, themeProvider),
+                          _buildSearchResultsHeader(
+                              termProvider, themeProvider),
                           SizedBox(height: 16),
                           Expanded(
                             child: TermListWidget(
                               terms: termProvider.filteredTerms,
                               showCategory: true,
+                              currentCategory: termProvider.selectedCategory,
                             ),
                           ),
                         ],
@@ -181,9 +186,10 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
     );
   }
 
-  Widget _buildSearchResultsHeader(TermProvider termProvider, ThemeProvider themeProvider) {
+  Widget _buildSearchResultsHeader(
+      TermProvider termProvider, ThemeProvider themeProvider) {
     final resultCount = termProvider.filteredTerms.length;
-    
+
     return Row(
       children: [
         Text(
@@ -232,8 +238,9 @@ class _TermSearchScreenState extends State<TermSearchScreen> {
       ],
     );
   }
-  
-  Widget _buildNoResultsState(TermProvider termProvider, ThemeProvider themeProvider) {
+
+  Widget _buildNoResultsState(
+      TermProvider termProvider, ThemeProvider themeProvider) {
     return Center(
       child: Padding(
         padding: EdgeInsets.all(32.0),

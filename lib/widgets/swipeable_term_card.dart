@@ -66,7 +66,7 @@ class _SwipeableTermCardState extends State<SwipeableTermCard>
 
     final double delta = details.primaryDelta! / context.size!.width;
     _dragExtent += delta;
-    
+
     if (_dragExtent < 0) _dragExtent = 0;
     if (_dragExtent > 1) _dragExtent = 1;
 
@@ -78,7 +78,7 @@ class _SwipeableTermCardState extends State<SwipeableTermCard>
     _dragUnderway = false;
 
     final double velocity = details.primaryVelocity! / context.size!.width;
-    
+
     if (velocity.abs() >= _kMinFlingVelocity) {
       // 빠른 스와이프
       if (velocity > 0) {
@@ -98,11 +98,11 @@ class _SwipeableTermCardState extends State<SwipeableTermCard>
 
   void _performSwipeAction() async {
     await HapticUtils.swipeAction();
-    
+
     // 북마크 토글
     Provider.of<TermProvider>(context, listen: false)
         .toggleBookmark(widget.term.termId);
-    
+
     // 애니메이션 리셋
     _controller.animateTo(0.0);
     _dragExtent = 0;
@@ -111,7 +111,7 @@ class _SwipeableTermCardState extends State<SwipeableTermCard>
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    
+
     return GestureDetector(
       onHorizontalDragStart: _handleDragStart,
       onHorizontalDragUpdate: _handleDragUpdate,
@@ -134,7 +134,9 @@ class _SwipeableTermCardState extends State<SwipeableTermCard>
     return Container(
       height: widget.isCompact ? 80 : 120,
       decoration: BoxDecoration(
-        color: widget.term.isBookmarked ? Colors.red.withAlpha(26) : Colors.orange.withAlpha(26),
+        color: widget.term.isBookmarked
+            ? Colors.red.withAlpha(26)
+            : Colors.orange.withAlpha(26),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -146,7 +148,9 @@ class _SwipeableTermCardState extends State<SwipeableTermCard>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  widget.term.isBookmarked ? Icons.bookmark_remove : Icons.bookmark_add,
+                  widget.term.isBookmarked
+                      ? Icons.bookmark_remove
+                      : Icons.bookmark_add,
                   color: widget.term.isBookmarked ? Colors.red : Colors.orange,
                   size: 24,
                 ),
@@ -154,7 +158,8 @@ class _SwipeableTermCardState extends State<SwipeableTermCard>
                 Text(
                   widget.term.isBookmarked ? '북마크\n해제' : '북마크\n추가',
                   style: TextStyle(
-                    color: widget.term.isBookmarked ? Colors.red : Colors.orange,
+                    color:
+                        widget.term.isBookmarked ? Colors.red : Colors.orange,
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
@@ -172,7 +177,8 @@ class _SwipeableTermCardState extends State<SwipeableTermCard>
   Widget _buildTermCard(BuildContext context, ThemeProvider themeProvider) {
     return Semantics(
       label: '${widget.term.term} 용어 카드',
-      hint: '탭하여 자세한 정보를 확인하거나, 오른쪽으로 스와이프하여 북마크를 ${widget.term.isBookmarked ? "해제" : "추가"}할 수 있습니다',
+      hint:
+          '탭하여 자세한 정보를 확인하거나, 오른쪽으로 스와이프하여 북마크를 ${widget.term.isBookmarked ? "해제" : "추가"}할 수 있습니다',
       button: true,
       child: GestureDetector(
         onTap: () async {
@@ -185,85 +191,87 @@ class _SwipeableTermCardState extends State<SwipeableTermCard>
           );
         },
         child: NeumorphicContainer(
-        backgroundColor: themeProvider.cardColor,
-        shadowColor: themeProvider.shadowColor,
-        highlightColor: themeProvider.highlightColor,
-        child: Container(
-          height: widget.isCompact ? 80 : 120,
-          padding: EdgeInsets.all(widget.isCompact ? 12.0 : 14.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.term.term,
-                      style: TextStyle(
-                        fontSize: widget.isCompact ? 16 : 18,
-                        fontWeight: FontWeight.bold,
-                        color: themeProvider.textColor,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Flexible(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: CategoryColors.getCategoryBackgroundColor(widget.term.category),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+          backgroundColor: themeProvider.cardColor,
+          shadowColor: themeProvider.shadowColor,
+          highlightColor: themeProvider.highlightColor,
+          child: Container(
+            height: widget.isCompact ? 80 : 120,
+            padding: EdgeInsets.all(widget.isCompact ? 12.0 : 14.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
                       child: Text(
-                        _getCategoryName(widget.term.category),
+                        widget.term.term,
                         style: TextStyle(
-                          fontSize: 10,
-                          color: CategoryColors.getCategoryColor(widget.term.category),
-                          fontWeight: FontWeight.w500,
+                          fontSize: widget.isCompact ? 16 : 18,
+                          fontWeight: FontWeight.bold,
+                          color: themeProvider.textColor,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
+                    Flexible(
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: CategoryColors.getCategoryBackgroundColor(
+                              widget.term.category),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          _getCategoryName(widget.term.category),
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: CategoryColors.getCategoryColor(
+                                widget.term.category),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: widget.isCompact ? 4 : 6),
+                if (!widget.isCompact)
+                  Flexible(
+                    child: Text(
+                      widget.term.definition,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: themeProvider.subtitleColor,
+                        height: 1.3,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ],
-              ),
-              SizedBox(height: widget.isCompact ? 4 : 6),
-              if (!widget.isCompact)
-                Flexible(
-                  child: Text(
+                if (widget.isCompact)
+                  Text(
                     widget.term.definition,
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 12,
                       color: themeProvider.subtitleColor,
                       height: 1.3,
                     ),
-                    maxLines: 2,
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                ),
-              if (widget.isCompact)
-                Text(
-                  widget.term.definition,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: themeProvider.subtitleColor,
-                    height: 1.3,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-    ),
     );
   }
-
 
   String _getCategoryName(TermCategory category) {
     switch (category) {

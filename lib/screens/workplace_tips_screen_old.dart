@@ -23,7 +23,8 @@ class WorkplaceTipsScreen extends StatelessWidget {
               termProvider.retryLoadData();
             },
             child: SingleChildScrollView(
-              padding: EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
+              padding:
+                  EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -37,27 +38,31 @@ class WorkplaceTipsScreen extends StatelessWidget {
     );
   }
 
-
-  Widget _buildCategoriesSection(TermProvider termProvider, ThemeProvider themeProvider) {
+  Widget _buildCategoriesSection(
+      TermProvider termProvider, ThemeProvider themeProvider) {
     // 전체 직장생활 팁이 비어있는지 확인
-    if (termProvider.workplaceTips.isEmpty && !termProvider.isLoading && !termProvider.hasError) {
+    if (termProvider.workplaceTips.isEmpty &&
+        !termProvider.isLoading &&
+        !termProvider.hasError) {
       return _buildEmptyTipsState(themeProvider);
     }
-    
+
     final availableCategories = TipCategory.values.where((category) {
       return termProvider.getWorkplaceTipsByCategory(category).isNotEmpty;
     }).toList();
-    
-    if (availableCategories.isEmpty && !termProvider.isLoading && !termProvider.hasError) {
+
+    if (availableCategories.isEmpty &&
+        !termProvider.isLoading &&
+        !termProvider.hasError) {
       return _buildEmptyTipsState(themeProvider);
     }
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...availableCategories.map((category) {
           final tips = termProvider.getWorkplaceTipsByCategory(category);
-          
+
           return Column(
             children: [
               _buildCategoryCard(category, tips, themeProvider),
@@ -68,7 +73,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
       ],
     );
   }
-  
+
   Widget _buildEmptyTipsState(ThemeProvider themeProvider) {
     return Center(
       child: Padding(
@@ -107,7 +112,8 @@ class WorkplaceTipsScreen extends StatelessWidget {
                 Builder(
                   builder: (context) => TextButton.icon(
                     onPressed: () {
-                      Provider.of<TermProvider>(context, listen: false).retryLoadData();
+                      Provider.of<TermProvider>(context, listen: false)
+                          .retryLoadData();
                     },
                     icon: Icon(
                       Icons.refresh,
@@ -130,7 +136,8 @@ class WorkplaceTipsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryCard(TipCategory category, List<WorkplaceTip> tips, ThemeProvider themeProvider) {
+  Widget _buildCategoryCard(TipCategory category, List<WorkplaceTip> tips,
+      ThemeProvider themeProvider) {
     return NeumorphicContainer(
       backgroundColor: themeProvider.cardColor,
       shadowColor: themeProvider.shadowColor,
@@ -146,7 +153,8 @@ class WorkplaceTipsScreen extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: CategoryColors.getTipCategoryBackgroundColor(category),
+                    color:
+                        CategoryColors.getTipCategoryBackgroundColor(category),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
@@ -290,5 +298,4 @@ class WorkplaceTipsScreen extends StatelessWidget {
         return Icons.work;
     }
   }
-
 }

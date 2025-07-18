@@ -33,7 +33,7 @@ class WorkplaceTip extends HiveObject {
     if (!ValidationUtils.validateWorkplaceTipJson(json)) {
       throw ArgumentError('Invalid workplace tip JSON structure');
     }
-    
+
     return WorkplaceTip(
       tipId: ValidationUtils.sanitizeString(json['tip_id'] ?? ''),
       title: ValidationUtils.sanitizeString(json['title'] ?? ''),

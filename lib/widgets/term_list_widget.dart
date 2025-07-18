@@ -5,6 +5,8 @@ import '../providers/term_provider.dart';
 import '../providers/theme_provider.dart';
 import '../screens/term_detail_screen.dart';
 import '../utils/haptic_utils.dart';
+import '../utils/responsive_helper.dart';
+import '../utils/responsive_breakpoints.dart';
 import 'neumorphic_container.dart';
 import 'swipeable_term_card.dart';
 
@@ -13,6 +15,7 @@ class TermListWidget extends StatelessWidget {
   final bool isCompact;
   final bool showCategory;
   final bool isSelfContained; // New parameter
+  final TermCategory? currentCategory; // Track current category for context-aware empty states
 
   const TermListWidget({
     Key? key,
@@ -20,6 +23,7 @@ class TermListWidget extends StatelessWidget {
     this.isCompact = false,
     this.showCategory = false,
     this.isSelfContained = false, // Default to false
+    this.currentCategory, // Optional category context
   }) : super(key: key);
 
   @override
@@ -28,29 +32,43 @@ class TermListWidget extends StatelessWidget {
       builder: (context, themeProvider, termProvider, child) {
         // Progressive Loading 중이면 progressiveFilteredTerms 사용
         // 단, isSelfContained가 true인 경우 (인덱스 섹션)에는 전달받은 terms 사용
-        final displayTerms = (termProvider.isProgressiveLoading && !isSelfContained) 
-            ? termProvider.progressiveFilteredTerms 
-            : terms;
-        
+        final displayTerms =
+            (termProvider.isProgressiveLoading && !isSelfContained)
+                ? termProvider.progressiveFilteredTerms
+                : terms;
+
         if (displayTerms.isEmpty) {
-          return _buildEmptyState(themeProvider);
+          return _buildEmptyState(themeProvider, termProvider);
         }
 
-        Widget listView = ListView.separated(
-          padding: EdgeInsets.zero,
-          physics: isSelfContained ? NeverScrollableScrollPhysics() : BouncingScrollPhysics(),
-          shrinkWrap: isSelfContained,
-          itemCount: displayTerms.length,
-          separatorBuilder: (context, index) => SizedBox(height: 12),
-          itemBuilder: (context, index) {
-            final term = displayTerms[index];
-            // 100개 이상일 때는 간단한 카드로 성능 향상
-            if (displayTerms.length > 100 && index > 50) {
-              return _buildLightweightCard(term, themeProvider, context);
-            }
-            return SwipeableTermCard(
-              term: term,
-              isCompact: isCompact,
+        Widget listView = ResponsiveBuilder(
+          builder: (context, deviceType) {
+            final itemSpacing = ResponsiveValues<double>(
+              mobile: 12,
+              tablet: 14,
+              desktop: 16,
+            ).getValue(deviceType);
+
+            return ListView.separated(
+              padding: EdgeInsets.zero,
+              physics: isSelfContained
+                  ? NeverScrollableScrollPhysics()
+                  : BouncingScrollPhysics(),
+              shrinkWrap: isSelfContained,
+              itemCount: displayTerms.length,
+              separatorBuilder: (context, index) =>
+                  SizedBox(height: itemSpacing),
+              itemBuilder: (context, index) {
+                final term = displayTerms[index];
+                // 100개 이상일 때는 간단한 카드로 성능 향상
+                if (displayTerms.length > 100 && index > 50) {
+                  return _buildLightweightCard(term, themeProvider, context);
+                }
+                return SwipeableTermCard(
+                  term: term,
+                  isCompact: isCompact,
+                );
+              },
             );
           },
         );
@@ -60,47 +78,176 @@ class TermListWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildEmptyState(ThemeProvider themeProvider) {
-    return NeumorphicContainer(
-      backgroundColor: themeProvider.cardColor,
-      shadowColor: themeProvider.shadowColor,
-      highlightColor: themeProvider.highlightColor,
-      child: Padding(
-        padding: EdgeInsets.all(32.0),
-        child: Column(
-          children: [
-            Icon(
-              Icons.search_off,
-              size: 64,
-              color: themeProvider.textColor.withAlpha(77),
+  Widget _buildEmptyState(ThemeProvider themeProvider, TermProvider termProvider) {
+    // Context-aware empty state based on current category and search query
+    if (currentCategory == TermCategory.bookmarked) {
+      return _buildBookmarkEmptyState(themeProvider);
+    } else if (termProvider.searchQuery.isNotEmpty) {
+      return _buildSearchEmptyState(themeProvider);
+    } else {
+      return _buildDefaultEmptyState(themeProvider);
+    }
+  }
+
+  Widget _buildBookmarkEmptyState(ThemeProvider themeProvider) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ResponsiveIcon(
+            Icons.bookmark_border,
+            size: ResponsiveValues<double>(
+              mobile: 64,
+              tablet: 72,
+              desktop: 80,
             ),
-            SizedBox(height: 16),
-            Text(
-              '검색 결과가 없습니다',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: themeProvider.textColor,
-              ),
+            color: themeProvider.subtitleColor.withAlpha(128),
+          ),
+          ResponsiveSizedBox.height(
+            ResponsiveValues<double>(
+              mobile: 16,
+              tablet: 20,
+              desktop: 24,
             ),
-            SizedBox(height: 8),
-            Text(
-              '다른 검색어를 시도해보세요',
-              style: TextStyle(
-                fontSize: 14,
-                color: themeProvider.subtitleColor.withAlpha(153),
-              ),
+          ),
+          ResponsiveText(
+            '북마크가 없습니다',
+            fontSize: ResponsiveValues<double>(
+              mobile: 18,
+              tablet: 20,
+              desktop: 22,
             ),
-          ],
-        ),
+            fontWeight: FontWeight.w600,
+            color: themeProvider.textColor,
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildLightweightCard(Term term, ThemeProvider themeProvider, BuildContext context) {
+  Widget _buildSearchEmptyState(ThemeProvider themeProvider) {
+    return NeumorphicContainer(
+      backgroundColor: themeProvider.cardColor,
+      shadowColor: themeProvider.shadowColor,
+      highlightColor: themeProvider.highlightColor,
+      padding: ResponsiveValues<EdgeInsets>(
+        mobile: EdgeInsets.all(32.0),
+        tablet: EdgeInsets.all(36.0),
+        desktop: EdgeInsets.all(40.0),
+      ),
+      child: Column(
+        children: [
+          ResponsiveIcon(
+            Icons.search_off,
+            size: ResponsiveValues<double>(
+              mobile: 64,
+              tablet: 72,
+              desktop: 80,
+            ),
+            color: themeProvider.subtitleColor.withAlpha(128),
+          ),
+          ResponsiveSizedBox.height(
+            ResponsiveValues<double>(
+              mobile: 16,
+              tablet: 20,
+              desktop: 24,
+            ),
+          ),
+          ResponsiveText(
+            '검색 결과가 없습니다',
+            fontSize: ResponsiveValues<double>(
+              mobile: 18,
+              tablet: 20,
+              desktop: 22,
+            ),
+            fontWeight: FontWeight.w600,
+            color: themeProvider.textColor,
+          ),
+          ResponsiveSizedBox.height(
+            ResponsiveValues<double>(
+              mobile: 8,
+              tablet: 10,
+              desktop: 12,
+            ),
+          ),
+          ResponsiveText(
+            '다른 검색어를 시도해보세요',
+            fontSize: ResponsiveValues<double>(
+              mobile: 14,
+              tablet: 15,
+              desktop: 16,
+            ),
+            color: themeProvider.subtitleColor,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDefaultEmptyState(ThemeProvider themeProvider) {
+    return NeumorphicContainer(
+      backgroundColor: themeProvider.cardColor,
+      shadowColor: themeProvider.shadowColor,
+      highlightColor: themeProvider.highlightColor,
+      padding: ResponsiveValues<EdgeInsets>(
+        mobile: EdgeInsets.all(32.0),
+        tablet: EdgeInsets.all(36.0),
+        desktop: EdgeInsets.all(40.0),
+      ),
+      child: Column(
+        children: [
+          ResponsiveIcon(
+            Icons.info_outline,
+            size: ResponsiveValues<double>(
+              mobile: 64,
+              tablet: 72,
+              desktop: 80,
+            ),
+            color: themeProvider.subtitleColor.withAlpha(128),
+          ),
+          ResponsiveSizedBox.height(
+            ResponsiveValues<double>(
+              mobile: 16,
+              tablet: 20,
+              desktop: 24,
+            ),
+          ),
+          ResponsiveText(
+            '표시할 용어가 없습니다',
+            fontSize: ResponsiveValues<double>(
+              mobile: 18,
+              tablet: 20,
+              desktop: 22,
+            ),
+            fontWeight: FontWeight.w600,
+            color: themeProvider.textColor,
+          ),
+          ResponsiveSizedBox.height(
+            ResponsiveValues<double>(
+              mobile: 8,
+              tablet: 10,
+              desktop: 12,
+            ),
+          ),
+          ResponsiveText(
+            '다른 카테고리를 선택해보세요',
+            fontSize: ResponsiveValues<double>(
+              mobile: 14,
+              tablet: 15,
+              desktop: 16,
+            ),
+            color: themeProvider.subtitleColor,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLightweightCard(
+      Term term, ThemeProvider themeProvider, BuildContext context) {
     return GestureDetector(
-      onTap: () async {
-        await HapticUtils.lightTap();
+      onTap: () {
+        HapticUtils.lightTap();
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -108,69 +255,50 @@ class TermListWidget extends StatelessWidget {
           ),
         );
       },
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 4),
-        padding: EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: themeProvider.cardColor,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: themeProvider.dividerColor.withAlpha(77),
-            width: 1,
-          ),
+      child: NeumorphicContainer(
+        backgroundColor: themeProvider.cardColor,
+        shadowColor: themeProvider.shadowColor,
+        highlightColor: themeProvider.highlightColor,
+        padding: ResponsiveValues<EdgeInsets>(
+          mobile: EdgeInsets.all(12.0),
+          tablet: EdgeInsets.all(14.0),
+          desktop: EdgeInsets.all(16.0),
         ),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    term.term,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: themeProvider.textColor,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    term.definition,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: themeProvider.subtitleColor,
-                      height: 1.2,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
+            ResponsiveText(
+              term.term,
+              fontSize: ResponsiveValues<double>(
+                mobile: 16,
+                tablet: 17,
+                desktop: 18,
+              ),
+              fontWeight: FontWeight.bold,
+              color: themeProvider.textColor,
+            ),
+            ResponsiveSizedBox.height(
+              ResponsiveValues<double>(
+                mobile: 6,
+                tablet: 8,
+                desktop: 10,
               ),
             ),
-            SizedBox(width: 8),
-            GestureDetector(
-              onTap: () async {
-                await HapticUtils.bookmarkToggle();
-                Provider.of<TermProvider>(context, listen: false)
-                    .toggleBookmark(term.termId);
-              },
-              child: Container(
-                padding: EdgeInsets.all(8),
-                child: Icon(
-                  term.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-                  color: term.isBookmarked 
-                      ? Color(0xFFFFCA28) 
-                      : themeProvider.textColor.withAlpha(102),
-                  size: 18,
-                ),
+            ResponsiveText(
+              term.definition,
+              fontSize: ResponsiveValues<double>(
+                mobile: 13,
+                tablet: 14,
+                desktop: 15,
               ),
+              color: themeProvider.subtitleColor,
+              height: 1.4,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
       ),
     );
   }
-
 }

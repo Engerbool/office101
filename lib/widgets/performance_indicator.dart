@@ -36,7 +36,7 @@ class PerformanceIndicator extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           if (resultCount != null) _buildResultCount(themeProvider),
-          if (searchDuration != null || loadDuration != null) 
+          if (searchDuration != null || loadDuration != null)
             _buildDurationInfo(themeProvider),
         ],
       ),
@@ -99,7 +99,7 @@ class PerformanceIndicator extends StatelessWidget {
 
     final durationText = _formatDuration(duration);
     final icon = searchDuration != null ? Icons.timer : Icons.download;
-    
+
     return Row(
       children: [
         Icon(
@@ -142,7 +142,8 @@ class SearchPerformanceWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SearchPerformanceWidgetState createState() => _SearchPerformanceWidgetState();
+  _SearchPerformanceWidgetState createState() =>
+      _SearchPerformanceWidgetState();
 }
 
 class _SearchPerformanceWidgetState extends State<SearchPerformanceWidget> {
@@ -178,7 +179,8 @@ class LoadingPerformanceWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _LoadingPerformanceWidgetState createState() => _LoadingPerformanceWidgetState();
+  _LoadingPerformanceWidgetState createState() =>
+      _LoadingPerformanceWidgetState();
 }
 
 class _LoadingPerformanceWidgetState extends State<LoadingPerformanceWidget> {
@@ -193,21 +195,21 @@ class _LoadingPerformanceWidgetState extends State<LoadingPerformanceWidget> {
 
   void _performLoad() async {
     if (widget.onLoad == null) return;
-    
+
     setState(() {
       _isLoading = true;
     });
 
     final stopwatch = Stopwatch()..start();
-    
+
     try {
       await widget.onLoad!();
     } catch (e) {
       // 에러 처리는 상위에서 담당
     }
-    
+
     stopwatch.stop();
-    
+
     if (mounted) {
       setState(() {
         _isLoading = false;
@@ -252,23 +254,23 @@ class PerformanceMetrics {
 
   Duration? getAverageSearchTime() {
     if (_searchTimes.isEmpty) return null;
-    
+
     final total = _searchTimes.values.fold<int>(
-      0, 
+      0,
       (sum, duration) => sum + duration.inMilliseconds,
     );
-    
+
     return Duration(milliseconds: total ~/ _searchTimes.length);
   }
 
   Duration? getAverageLoadTime() {
     if (_loadTimes.isEmpty) return null;
-    
+
     final total = _loadTimes.values.fold<int>(
-      0, 
+      0,
       (sum, duration) => sum + duration.inMilliseconds,
     );
-    
+
     return Duration(milliseconds: total ~/ _loadTimes.length);
   }
 
@@ -276,7 +278,8 @@ class PerformanceMetrics {
     return {
       'avgSearchTime': getAverageSearchTime()?.inMilliseconds,
       'avgLoadTime': getAverageLoadTime()?.inMilliseconds,
-      'searchCount': _searchCounts.values.fold<int>(0, (sum, count) => sum + count),
+      'searchCount':
+          _searchCounts.values.fold<int>(0, (sum, count) => sum + count),
       'uniqueSearches': _searchTimes.length,
       'loadOperations': _loadTimes.length,
     };

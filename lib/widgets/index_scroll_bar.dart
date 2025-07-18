@@ -41,7 +41,7 @@ class _IndexScrollBarState extends State<IndexScrollBar>
       parent: _animationController,
       curve: Curves.easeInOut,
     ));
-    
+
     // 초기에 바로 표시
     if (widget.isVisible) {
       _animationController.forward();
@@ -67,7 +67,7 @@ class _IndexScrollBarState extends State<IndexScrollBar>
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    
+
     return AnimatedBuilder(
       animation: _fadeAnimation,
       builder: (context, child) {
@@ -112,7 +112,7 @@ class _IndexScrollBarState extends State<IndexScrollBar>
     return KoreanSortUtils.indexList.map((index) {
       final isAvailable = widget.availableIndexes.contains(index);
       final isSelected = _selectedIndex == index;
-      
+
       return GestureDetector(
         onTap: isAvailable ? () => _onIndexTap(index) : null,
         child: Container(
@@ -120,9 +120,7 @@ class _IndexScrollBarState extends State<IndexScrollBar>
           height: 18,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: isSelected 
-                ? Colors.white.withAlpha(77)
-                : Colors.transparent,
+            color: isSelected ? Colors.white.withAlpha(77) : Colors.transparent,
             borderRadius: BorderRadius.circular(9),
           ),
           child: Text(
@@ -130,7 +128,7 @@ class _IndexScrollBarState extends State<IndexScrollBar>
             style: TextStyle(
               fontSize: 10,
               fontWeight: isAvailable ? FontWeight.bold : FontWeight.normal,
-              color: isAvailable 
+              color: isAvailable
                   ? (isSelected ? Colors.white : Colors.white)
                   : Colors.white.withAlpha(128),
             ),
@@ -144,10 +142,10 @@ class _IndexScrollBarState extends State<IndexScrollBar>
     setState(() {
       _selectedIndex = index;
     });
-    
+
     // 콜백 함수 호출 (스크롤 이동 기능)
     widget.onIndexSelected(index);
-    
+
     // 선택 상태를 잠시 후 해제 (비주얼 피드백용)
     Future.delayed(Duration(milliseconds: 500), () {
       if (mounted) {

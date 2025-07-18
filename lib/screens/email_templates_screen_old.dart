@@ -23,7 +23,8 @@ class EmailTemplatesScreen extends StatelessWidget {
               termProvider.retryLoadData();
             },
             child: SingleChildScrollView(
-              padding: EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
+              padding:
+                  EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -37,27 +38,31 @@ class EmailTemplatesScreen extends StatelessWidget {
     );
   }
 
-
-  Widget _buildCategoriesSection(TermProvider termProvider, ThemeProvider themeProvider) {
+  Widget _buildCategoriesSection(
+      TermProvider termProvider, ThemeProvider themeProvider) {
     // 전체 이메일 템플릿이 비어있는지 확인
-    if (termProvider.emailTemplates.isEmpty && !termProvider.isLoading && !termProvider.hasError) {
+    if (termProvider.emailTemplates.isEmpty &&
+        !termProvider.isLoading &&
+        !termProvider.hasError) {
       return _buildEmptyTemplatesState(themeProvider);
     }
-    
+
     final availableCategories = EmailCategory.values.where((category) {
       return termProvider.getEmailTemplatesByCategory(category).isNotEmpty;
     }).toList();
-    
-    if (availableCategories.isEmpty && !termProvider.isLoading && !termProvider.hasError) {
+
+    if (availableCategories.isEmpty &&
+        !termProvider.isLoading &&
+        !termProvider.hasError) {
       return _buildEmptyTemplatesState(themeProvider);
     }
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...availableCategories.map((category) {
           final templates = termProvider.getEmailTemplatesByCategory(category);
-          
+
           return Column(
             children: [
               _buildCategoryCard(category, templates, themeProvider),
@@ -68,7 +73,7 @@ class EmailTemplatesScreen extends StatelessWidget {
       ],
     );
   }
-  
+
   Widget _buildEmptyTemplatesState(ThemeProvider themeProvider) {
     return Center(
       child: Padding(
@@ -107,7 +112,8 @@ class EmailTemplatesScreen extends StatelessWidget {
                 Builder(
                   builder: (context) => TextButton.icon(
                     onPressed: () {
-                      Provider.of<TermProvider>(context, listen: false).retryLoadData();
+                      Provider.of<TermProvider>(context, listen: false)
+                          .retryLoadData();
                     },
                     icon: Icon(
                       Icons.refresh,
@@ -130,7 +136,8 @@ class EmailTemplatesScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryCard(EmailCategory category, List<EmailTemplate> templates, ThemeProvider themeProvider) {
+  Widget _buildCategoryCard(EmailCategory category,
+      List<EmailTemplate> templates, ThemeProvider themeProvider) {
     return NeumorphicContainer(
       backgroundColor: themeProvider.cardColor,
       shadowColor: themeProvider.shadowColor,
@@ -146,7 +153,8 @@ class EmailTemplatesScreen extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: CategoryColors.getEmailCategoryBackgroundColor(category),
+                    color: CategoryColors.getEmailCategoryBackgroundColor(
+                        category),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
@@ -181,21 +189,25 @@ class EmailTemplatesScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 16),
-            ...templates.map((template) => _buildTemplateItem(template, themeProvider)).toList(),
+            ...templates
+                .map((template) => _buildTemplateItem(template, themeProvider))
+                .toList(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTemplateItem(EmailTemplate template, ThemeProvider themeProvider) {
+  Widget _buildTemplateItem(
+      EmailTemplate template, ThemeProvider themeProvider) {
     return Builder(
       builder: (context) => GestureDetector(
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => EmailTemplateDetailScreen(template: template),
+              builder: (context) =>
+                  EmailTemplateDetailScreen(template: template),
             ),
           );
         },
@@ -271,5 +283,4 @@ class EmailTemplatesScreen extends StatelessWidget {
         return Icons.email;
     }
   }
-
 }

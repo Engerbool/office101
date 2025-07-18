@@ -23,7 +23,8 @@ class WorkplaceTipsScreen extends StatelessWidget {
               termProvider.retryLoadData();
             },
             child: SingleChildScrollView(
-              padding: EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
+              padding:
+                  EdgeInsets.only(top: 50, left: 16, right: 16, bottom: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -37,21 +38,25 @@ class WorkplaceTipsScreen extends StatelessWidget {
     );
   }
 
-
-  Widget _buildCategoriesSection(TermProvider termProvider, ThemeProvider themeProvider) {
+  Widget _buildCategoriesSection(
+      TermProvider termProvider, ThemeProvider themeProvider) {
     // 전체 직장생활 팁이 비어있는지 확인
-    if (termProvider.workplaceTips.isEmpty && !termProvider.isLoading && !termProvider.hasError) {
+    if (termProvider.workplaceTips.isEmpty &&
+        !termProvider.isLoading &&
+        !termProvider.hasError) {
       return _buildEmptyTipsState(themeProvider);
     }
-    
+
     final availableCategories = TipCategory.values.where((category) {
       return termProvider.getWorkplaceTipsByCategory(category).isNotEmpty;
     }).toList();
-    
-    if (availableCategories.isEmpty && !termProvider.isLoading && !termProvider.hasError) {
+
+    if (availableCategories.isEmpty &&
+        !termProvider.isLoading &&
+        !termProvider.hasError) {
       return _buildEmptyTipsState(themeProvider);
     }
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -77,7 +82,8 @@ class WorkplaceTipsScreen extends StatelessWidget {
           return Column(
             children: [
               Builder(
-                builder: (context) => _buildCategoryListCard(context, category, tips, themeProvider),
+                builder: (context) => _buildCategoryListCard(
+                    context, category, tips, themeProvider),
               ),
               SizedBox(height: 12),
             ],
@@ -86,7 +92,7 @@ class WorkplaceTipsScreen extends StatelessWidget {
       ],
     );
   }
-  
+
   Widget _buildEmptyTipsState(ThemeProvider themeProvider) {
     return Center(
       child: Padding(
@@ -125,7 +131,8 @@ class WorkplaceTipsScreen extends StatelessWidget {
                 Builder(
                   builder: (context) => TextButton.icon(
                     onPressed: () {
-                      Provider.of<TermProvider>(context, listen: false).retryLoadData();
+                      Provider.of<TermProvider>(context, listen: false)
+                          .retryLoadData();
                     },
                     icon: Icon(
                       Icons.refresh,
@@ -148,7 +155,8 @@ class WorkplaceTipsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryListCard(BuildContext context, TipCategory category, List<WorkplaceTip> tips, ThemeProvider themeProvider) {
+  Widget _buildCategoryListCard(BuildContext context, TipCategory category,
+      List<WorkplaceTip> tips, ThemeProvider themeProvider) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -215,7 +223,6 @@ class WorkplaceTipsScreen extends StatelessWidget {
     );
   }
 
-
   IconData _getCategoryIcon(TipCategory category) {
     switch (category) {
       case TipCategory.basic_attitude:
@@ -232,6 +239,4 @@ class WorkplaceTipsScreen extends StatelessWidget {
         return Icons.lightbulb_outline;
     }
   }
-
-
 }
